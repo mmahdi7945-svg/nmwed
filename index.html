@@ -1,394 +1,139 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>آرمیتا و سهیل — دعوت‌نامه عروسی</title>
-  <meta name="description" content="با افتخار شما را به جشن پیوند آرمیتا و سهیل دعوت می‌کنیم." />
-  <meta name="theme-color" content="#F6F1E7" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دعوت‌نامه اختصاصی نرگس و مهدی</title>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;700&family=Playfair+Display:ital,wght@0,600;1,600&family=Great+Vibes&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #c5a059;
+            --dark-glass: rgba(15, 15, 15, 0.4);
+            --border-glass: rgba(255, 255, 255, 0.1);
+        }
 
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="آرمیتا و سهیل — دعوت‌نامه عروسی" />
-  <meta property="og:description" content="با افتخار شما را به جشن پیوند آرمیتا و سهیل دعوت می‌کنیم." />
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            background: radial-gradient(circle at top right, #2a2520, #0a0a0a);
+            color: #fff;
+            font-family: 'Vazirmatn', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            overflow-x: hidden;
+        }
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Gulzar&family=Vazirmatn:wght@200;300;400;500;600;700&display=swap"
-    rel="stylesheet" />
-  <link rel="stylesheet" href="./styles.css" />
+        .container {
+            width: 100%;
+            max-width: 450px;
+            padding: 20px;
+            position: relative;
+        }
+
+        /* --- افکت شیشه‌ای پیشرفته --- */
+        .glass-card {
+            background: var(--dark-glass);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-glass);
+            border-radius: 30px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            margin-bottom: 25px;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* --- انیمیشن ورود سکانسی --- */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .fade-in-up.active { opacity: 1; transform: translateY(0); }
+
+        /* --- تایمر لوکس --- */
+        .timer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            text-align: center;
+        }
+        .timer-box {
+            background: rgba(255,255,255,0.05);
+            padding: 15px 5px;
+            border-radius: 15px;
+            border: 1px solid var(--gold);
+        }
+        .timer-num { font-family: 'Playfair Display'; font-size: 1.5rem; color: var(--gold); }
+        .timer-label { font-size: 0.7rem; opacity: 0.7; }
+
+        /* --- دکمه‌های درخشان --- */
+        .btn-fancy {
+            width: 100%;
+            padding: 18px;
+            border: none;
+            border-radius: 20px;
+            background: linear-gradient(45deg, #b8860b, #daa520);
+            color: #000;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(218, 165, 32, 0.3);
+            transition: 0.3s;
+        }
+        .btn-fancy:hover { transform: scale(1.02); filter: brightness(1.2); }
+
+        h1 { font-family: 'Great Vibes'; font-size: 3.5rem; color: var(--gold); text-align: center; margin-bottom: 10px; }
+    </style>
 </head>
-
 <body>
-  <!-- ====== بافت کاغذی روی کل صفحه ====== -->
-  <div class="grain" aria-hidden="true"></div>
-  <div class="petals" id="petals" aria-hidden="true"></div>
 
-  <!-- ====== پرده‌ی ورودی ====== -->
-  <div class="curtain" id="curtain">
-    <div class="curtain__inner">
-      <svg class="curtain__mark" viewBox="0 0 60 60" aria-hidden="true">
-        <path d="M30 4 L38 22 L56 30 L38 38 L30 56 L22 38 L4 30 L22 22 Z" />
-      </svg>
-      <span class="curtain__text">دعوت‌نامه در حال گشوده شدن…</span>
+<div class="container">
+    <!-- هدر -->
+    <div class="fade-in-up">
+        <h1>نرگس و مهدی</h1>
+        <p style="text-align: center; opacity: 0.8;">به جشن پیوند ما خوش آمدید</p>
     </div>
-  </div>
 
-  <!-- ====== ناوبری ====== -->
-  <header class="nav" id="nav">
-    <div class="nav__wrap">
-      <a class="nav__brand" href="#hero" aria-label="خانه">
-        <span class="nav__brand-a">آ</span>
-        <span class="nav__brand-amp">&amp;</span>
-        <span class="nav__brand-b">س</span>
-      </a>
-
-      <nav class="nav__links" aria-label="منوی اصلی">
-        <a href="#story">داستان ما</a>
-        <a href="#events">مراسم</a>
-        <a href="#gallery">گالری</a>
-        <a href="#wishes">دفتر آرزوها</a>
-      </nav>
-
-      <a class="nav__cta" href="#rsvp">اعلام حضور</a>
-
-      <button class="nav__burger" id="burger" type="button" aria-label="منو" aria-expanded="false">
-        <span></span><span></span>
-      </button>
+    <!-- تایمر -->
+    <div class="glass-card fade-in-up" style="transition-delay: 0.2s;">
+        <div class="timer-grid">
+            <div class="timer-box"><div class="timer-num" id="d">00</div><div class="timer-label">روز</div></div>
+            <div class="timer-box"><div class="timer-num" id="h">00</div><div class="timer-label">ساعت</div></div>
+            <div class="timer-box"><div class="timer-num" id="m">00</div><div class="timer-label">دقیقه</div></div>
+            <div class="timer-box"><div class="timer-num" id="s">00</div><div class="timer-label">ثانیه</div></div>
+        </div>
     </div>
-  </header>
 
-  <div class="drawer" id="drawer" aria-hidden="true">
-    <nav class="drawer__links">
-      <a href="#story">داستان ما</a>
-      <a href="#events">مراسم</a>
-      <a href="#gallery">گالری</a>
-      <a href="#wishes">دفتر آرزوها</a>
-      <a href="#rsvp" class="drawer__cta">اعلام حضور</a>
-    </nav>
-  </div>
-
-  <main>
-    <!-- ====== هیرو ====== -->
-    <section class="hero" id="hero">
-      <div class="hero__frame" aria-hidden="true"></div>
-
-      <div class="hero__inner">
-        <p class="eyebrow reveal">
-          <span class="eyebrow__line"></span>
-          به جشن پیوندمان دعوتید
-          <span class="eyebrow__line"></span>
-        </p>
-
-        <div class="hero__arch reveal" data-delay="1">
-          <div class="hero__arch-outline" aria-hidden="true"></div>
-          <img
-            src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&w=900&q=80"
-            alt="آرمیتا و سهیل" loading="eager" />
-        </div>
-
-        <h1 class="hero__names">
-          <span class="hero__name reveal" data-delay="2">آرمیتا</span>
-          <span class="hero__amp reveal" data-delay="3">&amp;</span>
-          <span class="hero__name reveal" data-delay="4">سهیل</span>
-        </h1>
-
-        <div class="hero__date reveal" data-delay="5">
-          <span class="rule"></span>
-          <div class="hero__date-text">
-            <strong>جمعه ۲۴ مهر ۱۴۰۴</strong>
-            <em>16 · 10 · 2026 — تهران</em>
-          </div>
-          <span class="rule"></span>
-        </div>
-
-        <a class="scroll-cue reveal" data-delay="6" href="#countdown" aria-label="ادامه">
-          <span class="scroll-cue__line"></span>
-        </a>
-      </div>
-    </section>
-
-    <!-- ====== شمارش معکوس ====== -->
-    <section class="count" id="countdown">
-      <div class="count__bg" aria-hidden="true"></div>
-      <div class="shell">
-        <p class="eyebrow eyebrow--light reveal">
-          <span class="eyebrow__line"></span>
-          تا آغاز یک زندگی
-          <span class="eyebrow__line"></span>
-        </p>
-
-        <div class="count__grid" id="countdown-grid">
-          <div class="count__cell reveal" data-delay="1">
-            <span class="count__num" data-unit="days">۰۰</span>
-            <span class="count__label">روز</span>
-          </div>
-          <div class="count__cell reveal" data-delay="2">
-            <span class="count__num" data-unit="hours">۰۰</span>
-            <span class="count__label">ساعت</span>
-          </div>
-          <div class="count__cell reveal" data-delay="3">
-            <span class="count__num" data-unit="minutes">۰۰</span>
-            <span class="count__label">دقیقه</span>
-          </div>
-          <div class="count__cell reveal" data-delay="4">
-            <span class="count__num" data-unit="seconds">۰۰</span>
-            <span class="count__label">ثانیه</span>
-          </div>
-        </div>
-
-        <button class="btn btn--ghost reveal" data-delay="5" id="ics-btn" type="button">
-          افزودن به تقویم
-        </button>
-      </div>
-    </section>
-
-    <!-- ====== داستان ما ====== -->
-    <section class="story" id="story">
-      <div class="shell">
-        <header class="sec-head reveal">
-          <span class="sec-head__kicker">Our Story</span>
-          <h2 class="sec-head__title">داستان ما</h2>
-          <p class="sec-head__sub">سه فصل کوتاه از راهی که ما را به اینجا رساند</p>
-        </header>
-
-        <div class="story__grid">
-          <div class="story__media reveal">
-            <div class="story__photo story__photo--tall">
-              <img
-                src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=800&q=80"
-                alt="لحظه‌ای از ما" loading="lazy" />
-            </div>
-            <div class="story__photo story__photo--short">
-              <img
-                src="https://images.unsplash.com/photo-1478146896981-b80fe463b330?auto=format&fit=crop&w=700&q=80"
-                alt="گل‌های مراسم" loading="lazy" />
-            </div>
-            <span class="story__stamp">Since 1400</span>
-          </div>
-
-          <ol class="timeline">
-            <li class="timeline__item reveal" data-delay="1">
-              <span class="timeline__year">۱۴۰۰</span>
-              <h3>اولین نگاه</h3>
-              <p>
-                در یک عصر پاییزی و در کتاب‌فروشی کوچکی نزدیک میدان، دستمان به یک کتاب رسید.
-                کتاب را او برداشت و گفتگو تا بسته شدن مغازه ادامه پیدا کرد.
-              </p>
-            </li>
-            <li class="timeline__item reveal" data-delay="2">
-              <span class="timeline__year">۱۴۰۲</span>
-              <h3>سفر شمال</h3>
-              <p>
-                جاده‌ی مه‌گرفته، یک فلاسک چای و آهنگی که هزار بار تکرارش کردیم.
-                همان‌جا فهمیدیم بقیه‌ی راه را باید کنار هم برویم.
-              </p>
-            </li>
-            <li class="timeline__item reveal" data-delay="3">
-              <span class="timeline__year">۱۴۰۴</span>
-              <h3>بله‌ی همیشگی</h3>
-              <p>
-                زیر نور شمع‌های بالکن خانه، حلقه‌ای کوچک و یک پرسش ساده؛
-                و پاسخی که مسیر زندگی هر دویمان را روشن کرد.
-              </p>
-            </li>
-          </ol>
-        </div>
-      </div>
-    </section>
-
-    <!-- ====== مراسم ====== -->
-    <section class="events" id="events">
-      <div class="shell">
-        <header class="sec-head reveal">
-          <span class="sec-head__kicker">The Celebration</span>
-          <h2 class="sec-head__title">جزئیات مراسم</h2>
-          <p class="sec-head__sub">حضور شما بزرگ‌ترین هدیه برای ماست</p>
-        </header>
-
-        <div class="events__grid">
-          <article class="ecard reveal">
-            <div class="ecard__arch">
-              <img
-                src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=800&q=80"
-                alt="مراسم عقد" loading="lazy" />
-            </div>
-            <h3 class="ecard__title">آیین عقد</h3>
-            <span class="ecard__ornament" aria-hidden="true"></span>
-            <dl class="ecard__meta">
-              <div><dt>تاریخ</dt><dd>جمعه ۲۴ مهر ۱۴۰۴</dd></div>
-              <div><dt>ساعت</dt><dd>۱۶:۰۰ تا ۱۸:۳۰</dd></div>
-              <div><dt>مکان</dt><dd>باغ تالار نیاوران، سالن آیینه</dd></div>
-            </dl>
-            <p class="ecard__note">لطفاً نیم‌ساعت پیش از شروع تشریف بیاورید.</p>
-            <a class="btn btn--line" href="https://maps.google.com/?q=Niavaran+Tehran" target="_blank"
-              rel="noopener">مشاهده روی نقشه</a>
-          </article>
-
-          <article class="ecard reveal" data-delay="2">
-            <div class="ecard__arch">
-              <img
-                src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80"
-                alt="جشن عروسی" loading="lazy" />
-            </div>
-            <h3 class="ecard__title">جشن عروسی</h3>
-            <span class="ecard__ornament" aria-hidden="true"></span>
-            <dl class="ecard__meta">
-              <div><dt>تاریخ</dt><dd>جمعه ۲۴ مهر ۱۴۰۴</dd></div>
-              <div><dt>ساعت</dt><dd>۱۹:۳۰ تا ۲۴:۰۰</dd></div>
-              <div><dt>مکان</dt><dd>باغ تالار نیاوران، تراس بزرگ</dd></div>
-            </dl>
-            <p class="ecard__note">پذیرایی شام از ساعت ۲۱:۰۰ آغاز می‌شود.</p>
-            <a class="btn btn--line" href="https://maps.google.com/?q=Niavaran+Tehran" target="_blank"
-              rel="noopener">مشاهده روی نقشه</a>
-          </article>
-        </div>
-
-        <ul class="notes">
-          <li class="reveal"><span>۰۱</span><p>رنگ پیشنهادی لباس مهمانان: کرم، زیتونی و طلایی کم‌رنگ.</p></li>
-          <li class="reveal" data-delay="1"><span>۰۲</span><p>پارکینگ اختصاصی در ضلع شرقی باغ در نظر گرفته شده است.</p></li>
-          <li class="reveal" data-delay="2"><span>۰۳</span><p>عکاسی رسمی انجام می‌شود؛ لطفاً هنگام آیین عقد از فلاش استفاده نکنید.</p></li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- ====== گالری ====== -->
-    <section class="gallery" id="gallery">
-      <div class="shell">
-        <header class="sec-head reveal">
-          <span class="sec-head__kicker">Moments</span>
-          <h2 class="sec-head__title">گالری تصاویر</h2>
-          <p class="sec-head__sub">تکه‌هایی از روزهایی که با هم گذراندیم</p>
-        </header>
-      </div>
-
-      <div class="gallery__grid" id="gallery-grid">
-        <button class="gtile gtile--a reveal" type="button" data-src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1600&q=85">
-          <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=700&q=80" alt="لحظه‌ای از مراسم" loading="lazy" />
-        </button>
-        <button class="gtile gtile--b reveal" data-delay="1" type="button" data-src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?auto=format&fit=crop&w=1600&q=85">
-          <img src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?auto=format&fit=crop&w=700&q=80" alt="تزیین گل" loading="lazy" />
-        </button>
-        <button class="gtile gtile--c reveal" data-delay="2" type="button" data-src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&w=1600&q=85">
-          <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&w=700&q=80" alt="حلقه‌ها" loading="lazy" />
-        </button>
-        <button class="gtile gtile--d reveal" data-delay="1" type="button" data-src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=1600&q=85">
-          <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=700&q=80" alt="عروس" loading="lazy" />
-        </button>
-        <button class="gtile gtile--e reveal" data-delay="2" type="button" data-src="https://images.unsplash.com/photo-1525258946800-98cfd641d0de?auto=format&fit=crop&w=1600&q=85">
-          <img src="https://images.unsplash.com/photo-1525258946800-98cfd641d0de?auto=format&fit=crop&w=700&q=80" alt="جزئیات مراسم" loading="lazy" />
-        </button>
-        <button class="gtile gtile--f reveal" data-delay="3" type="button" data-src="https://images.unsplash.com/photo-1591604466107-ec97de577aff?auto=format&fit=crop&w=1600&q=85">
-          <img src="https://images.unsplash.com/photo-1591604466107-ec97de577aff?auto=format&fit=crop&w=700&q=80" alt="میز پذیرایی" loading="lazy" />
-        </button>
-      </div>
-    </section>
-
-    <!-- ====== اعلام حضور ====== -->
-    <section class="rsvp" id="rsvp">
-      <div class="shell shell--narrow">
-        <header class="sec-head sec-head--light reveal">
-          <span class="sec-head__kicker">R.S.V.P</span>
-          <h2 class="sec-head__title">اعلام حضور</h2>
-          <p class="sec-head__sub">تا ۱۵ مهر ۱۴۰۴ پاسخ خود را برای ما بفرستید</p>
-        </header>
-
-        <form class="form reveal" id="rsvp-form" novalidate>
-          <div class="field">
-            <label for="f-name">نام و نام خانوادگی</label>
-            <input id="f-name" name="name" type="text" autocomplete="name" placeholder="مثلاً نگار موسوی" required />
-          </div>
-
-          <div class="field">
-            <label for="f-phone">شماره تماس</label>
-            <input id="f-phone" name="phone" type="tel" inputmode="tel" placeholder="۰۹۱۲۰۰۰۰۰۰۰" />
-          </div>
-
-          <fieldset class="field field--full">
-            <legend>در مراسم حضور خواهید داشت؟</legend>
-            <div class="choice">
-              <label><input type="radio" name="attending" value="بله" checked /><span>بله، با کمال میل</span></label>
-              <label><input type="radio" name="attending" value="خیر" /><span>متأسفانه نمی‌توانم</span></label>
-            </div>
-          </fieldset>
-
-          <div class="field">
-            <label for="f-guests">تعداد همراهان</label>
-            <select id="f-guests" name="guests">
-              <option value="۰">بدون همراه</option>
-              <option value="۱">۱ نفر</option>
-              <option value="۲">۲ نفر</option>
-              <option value="۳">۳ نفر</option>
-              <option value="۴">۴ نفر و بیشتر</option>
-            </select>
-          </div>
-
-          <div class="field">
-            <label for="f-meal">ترجیح پذیرایی</label>
-            <select id="f-meal" name="meal">
-              <option value="عادی">عادی</option>
-              <option value="گیاهی">گیاهی</option>
-              <option value="بدون گلوتن">بدون گلوتن</option>
-            </select>
-          </div>
-
-          <div class="field field--full">
-            <label for="f-msg">پیام برای عروس و داماد (اختیاری)</label>
-            <textarea id="f-msg" name="message" rows="4" placeholder="هرچه دوست دارید بنویسید…"></textarea>
-          </div>
-
-          <button class="btn btn--solid" type="submit">ثبت پاسخ</button>
-          <p class="form__status" id="rsvp-status" role="status"></p>
-        </form>
-      </div>
-    </section>
-
-    <!-- ====== دفتر آرزوها ====== -->
-    <section class="wishes" id="wishes">
-      <div class="shell">
-        <header class="sec-head reveal">
-          <span class="sec-head__kicker">Guestbook</span>
-          <h2 class="sec-head__title">دفتر آرزوها</h2>
-          <p class="sec-head__sub">یک جمله بنویسید تا برای همیشه نگهش داریم</p>
-        </header>
-
-        <form class="wishes__form reveal" id="wish-form">
-          <input id="wish-name" type="text" placeholder="نام شما" maxlength="30" required />
-          <input id="wish-text" type="text" placeholder="آرزوی شما برای ما…" maxlength="140" required />
-          <button class="btn btn--solid btn--sm" type="submit">ثبت</button>
-        </form>
-
-        <div class="wishes__list" id="wishes-list"></div>
-      </div>
-    </section>
-  </main>
-
-  <!-- ====== فوتر ====== -->
-  <footer class="foot">
-    <div class="shell">
-      <svg class="foot__mark" viewBox="0 0 60 60" aria-hidden="true">
-        <path d="M30 4 L38 22 L56 30 L38 38 L30 56 L22 38 L4 30 L22 22 Z" />
-      </svg>
-      <p class="foot__names">آرمیتا &amp; سهیل</p>
-      <p class="foot__thanks">
-        از اینکه در این روز کنار ما هستید سپاسگزاریم.<br />
-        منتظر دیدارتان می‌مانیم.
-      </p>
-      <p class="foot__meta">۲۴ مهر ۱۴۰۴ · تهران</p>
+    <!-- کارت اطلاعات -->
+    <div class="glass-card fade-in-up" style="transition-delay: 0.4s;">
+        <h2 style="margin-bottom: 15px; font-family: 'Playfair Display';">زمان و مکان</h2>
+        <p>پنج‌شنبه ۲۴ مهر ۱۴۰۵</p>
+        <p style="color: var(--gold);">تهران، باغ تالار مجلل</p>
     </div>
-  </footer>
 
-  <!-- ====== لایت‌باکس ====== -->
-  <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-label="نمایش تصویر">
-    <button class="lightbox__close" id="lb-close" type="button" aria-label="بستن">&times;</button>
-    <button class="lightbox__nav lightbox__nav--prev" id="lb-prev" type="button" aria-label="قبلی">&#8250;</button>
-    <img class="lightbox__img" id="lb-img" src="" alt="" />
-    <button class="lightbox__nav lightbox__nav--next" id="lb-next" type="button" aria-label="بعدی">&#8249;</button>
-  </div>
+    <button class="btn-fancy fade-in-up" style="transition-delay: 0.6s;">ثبت حضور در واتساپ</button>
+</div>
 
-  <script crossorigin="anonymous" src="//unpkg.com/same-runtime/dist/index.global.js"></script>
-  <script src="./script.js"></script>
+<script>
+    // منطق تایمر
+    function update() {
+        const target = new Date('2026-10-16T19:00:00').getTime();
+        const now = new Date().getTime();
+        const diff = target - now;
+        document.getElementById('d').innerText = Math.floor(diff / (1000*60*60*24));
+        document.getElementById('h').innerText = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+        document.getElementById('m').innerText = Math.floor((diff % (1000*60*60)) / (1000*60));
+        document.getElementById('s').innerText = Math.floor((diff % (1000*60)) / 1000);
+    }
+    setInterval(update, 1000);
+
+    // اسکرول انیمیشن
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('active'); });
+    });
+    document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
+</script>
 </body>
-
 </html>
