@@ -2,526 +2,325 @@
 <html lang="fa" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>جشن ازدواج نرگس و مهدی</title>
-  
-  <!-- فونت‌های گوگل و وزیر -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>جشن عقد نرگس و مهدی</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Great+Vibes&family=Vazirmatn:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Great+Vibes&family=Vazirmatn:wght@300;400;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --bg-cream: #F4EFE6;
-      --card-bg: #FAF6EE;
-      --text-dark: #2C2117;
-      --text-muted: #796859;
-      --accent-brown: #5A4331;
-      --accent-wine: #873E3E;
-      --border-light: rgba(44, 33, 23, 0.15);
+      --white: #FDFCF9;
+      --glass: rgba(255,255,255,0.55);
+      --silver: rgba(200,200,205,0.35);
+      --text-dark: #4A4440;
+      --text-muted: #9A918A;
+      --gold-line: rgba(150,140,130,0.35);
       --font-serif: 'Cormorant Garamond', serif;
       --font-script: 'Great Vibes', cursive;
       --font-fa: 'Vazirmatn', sans-serif;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      -webkit-tap-highlight-color: transparent;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
     body {
-      background-color: var(--bg-cream);
-      color: var(--text-dark);
       font-family: var(--font-fa);
-      display: flex;
-      justify-content: center;
+      color: var(--text-dark);
       min-height: 100vh;
-      line-height: 1.6;
-    }
-
-    .container {
-      width: 100%;
-      max-width: 440px;
-      background-color: var(--card-bg);
-      min-height: 100vh;
-      box-shadow: 0 0 35px rgba(44, 33, 23, 0.08);
-      position: relative;
-      padding-bottom: 70px;
+      /* پس‌زمینه شیشه‌ای محو */
+      background: linear-gradient(160deg, #ffffff 0%, #f7f4ef 40%, #efeae2 100%);
       overflow-x: hidden;
     }
 
-    /* دکوراتیو خطوط و قلب‌ها */
-    .divider-wrap {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      margin: 20px auto;
-      width: 80%;
+    /* ===== نقل و نبات‌های معلق در پس‌زمینه ===== */
+    .floating-bg {
+      position: fixed; inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
     }
-    .divider-line {
-      flex: 1;
-      height: 1px;
-      background-color: var(--border-light);
+    .candy {
+      position: absolute;
+      width: 34px; height: 34px;
+      border-radius: 50% 50% 50% 5px;
+      background: radial-gradient(circle at 35% 30%, #ffffff, #efe6da 60%, #e2d5c5);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.06), inset -3px -3px 6px rgba(180,160,140,0.25);
+      opacity: 0.75;
+      animation: floatCandy 9s ease-in-out infinite;
     }
-    .divider-heart {
-      color: var(--accent-wine);
-      font-size: 14px;
+    .candy::after {
+      content: '';
+      position: absolute; inset: 6px;
+      border-radius: inherit;
+      border: 1px dashed rgba(180,160,140,0.5);
     }
-
-    /* بخش اول: هدر و نام‌ها */
-    .header-section {
-      text-align: center;
-      padding: 40px 20px 20px;
-    }
-    .main-script-title {
-      font-family: var(--font-script);
-      font-size: 42px;
-      color: var(--text-dark);
-      letter-spacing: 1px;
-      line-height: 1.2;
-    }
-    .sub-tagline {
-      font-family: var(--font-serif);
-      font-size: 13px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      margin-top: 8px;
+    @keyframes floatCandy {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-22px) rotate(8deg); }
     }
 
-    /* کادر عکس اصلی */
-    .main-photo-wrap {
-      padding: 10px 24px;
+    /* ===== اسپلش اسکرین ===== */
+    #splash {
+      position: fixed; inset: 0; z-index: 10000;
+      background: #FDFCF9;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      transition: opacity 1s ease, visibility 1s;
     }
+    #splash.hidden { opacity: 0; visibility: hidden; }
+    .splash-names { font-family: var(--font-script); font-size: 46px; color: var(--text-dark); }
+    .splash-sub { font-family: var(--font-serif); letter-spacing: 4px; font-size: 12px; color: var(--text-muted); margin-top: 10px; text-transform: uppercase; }
+    .splash-heart { color: #b0a89e; font-size: 18px; margin-top: 16px; animation: beat 1.4s infinite; }
+    @keyframes beat { 0%,100%{transform:scale(1)} 50%{transform:scale(1.25)} }
+
+    /* ===== موزیک ===== */
+    #bg-music { display: none; }
+    .music-btn {
+      position: fixed; top: 16px; left: 16px; z-index: 9000;
+      width: 42px; height: 42px; border-radius: 50%;
+      border: 1px solid var(--gold-line);
+      background: var(--glass); backdrop-filter: blur(8px);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 17px; cursor: pointer; color: var(--text-dark);
+    }
+
+    /* ===== کانتینر اصلی ===== */
+    .container {
+      position: relative; z-index: 1;
+      max-width: 430px; margin: 0 auto;
+      padding-bottom: 60px;
+    }
+
+    /* ===== انیمیشن اسکرول دوطرفه ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(45px);
+      transition: opacity 0.9s ease, transform 0.9s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ===== هدر ===== */
+    .header-section { text-align: center; padding: 55px 20px 15px; }
+    .main-script-title { font-family: var(--font-script); font-size: 44px; }
+    .sub-tagline { font-family: var(--font-serif); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--text-muted); margin-top: 8px; }
+
+    .divider-wrap { display: flex; align-items: center; gap: 12px; width: 70%; margin: 18px auto; }
+    .divider-line { flex: 1; height: 1px; background: var(--gold-line); }
+    .divider-heart { color: #b0a89e; font-size: 13px; }
+
+    /* ===== عکس اصلی ===== */
+    .main-photo-wrap { padding: 8px 24px; }
     .photo-frame {
-      width: 100%;
-      height: 380px;
-      border-radius: 12px;
-      overflow: hidden;
-      border: 1px solid var(--border-light);
-      position: relative;
+      width: 100%; height: 370px;
+      border-radius: 14px; overflow: hidden;
+      box-shadow: 0 14px 34px rgba(90,80,70,0.15);
+      border: 5px solid rgba(255,255,255,0.7);
     }
-    .photo-frame img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
+    .photo-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-    /* بخش تاریخ و شمارش */
-    .date-section {
-      text-align: center;
-      padding: 25px 20px;
-    }
-    .section-label {
-      font-family: var(--font-serif);
-      font-size: 12px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--text-muted);
-    }
+    /* ===== تاریخ ===== */
+    .date-section { text-align: center; padding: 28px 20px; }
+    .section-label { font-family: var(--font-serif); font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--text-muted); }
     .date-box {
-      margin: 12px auto;
-      display: inline-block;
-      border-top: 1px solid var(--border-light);
-      border-bottom: 1px solid var(--border-light);
-      padding: 10px 30px;
+      display: inline-block; margin: 14px auto;
+      border-top: 1px solid var(--gold-line);
+      border-bottom: 1px solid var(--gold-line);
+      padding: 12px 34px;
     }
-    .date-box .day-number {
-      font-family: var(--font-serif);
-      font-size: 34px;
-      font-weight: 600;
-      color: var(--text-dark);
-      line-height: 1.1;
-    }
-    .date-box .month-year {
-      font-size: 14px;
-      color: var(--text-muted);
-      font-weight: 300;
-    }
-    .invitation-text {
-      font-size: 14px;
-      color: var(--accent-brown);
-      max-width: 320px;
-      margin: 15px auto 0;
-      font-weight: 300;
-    }
+    .day-number { font-family: var(--font-serif); font-size: 36px; font-weight: 600; }
+    .month-year { font-size: 14px; color: var(--text-muted); font-weight: 300; }
+    .invitation-text { font-size: 14px; color: var(--text-muted); max-width: 300px; margin: 12px auto 0; font-weight: 300; line-height: 2; }
 
-    /* تایم‌لاین روز مراسم */
-    .timeline-section {
-      padding: 30px 30px 40px;
-      position: relative;
-    }
-    .timeline-title {
-      font-family: var(--font-serif);
-      font-size: 20px;
-      text-align: center;
-      font-style: italic;
-      color: var(--text-dark);
-      margin-bottom: 25px;
-    }
-    .timeline-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 24px;
-      position: relative;
-    }
-    .timeline-time {
-      font-family: var(--font-serif);
-      font-size: 18px;
-      font-weight: 600;
-      color: var(--text-dark);
-      width: 80px;
-    }
-    .timeline-node {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: var(--text-dark);
-      position: relative;
-    }
-    .timeline-desc {
-      font-size: 14px;
-      color: var(--text-muted);
-      width: 130px;
-      text-align: left;
-      font-family: var(--font-serif);
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
+    /* ===== تایم‌لاین ===== */
+    .timeline-section { padding: 25px 34px 35px; }
+    .timeline-title { font-family: var(--font-serif); font-style: italic; font-size: 20px; text-align: center; margin-bottom: 24px; }
+    .timeline-item { display: flex; align-items: center; justify-content: space-between; margin-bottom: 22px; }
+    .timeline-time { font-family: var(--font-serif); font-size: 18px; font-weight: 600; width: 75px; }
+    .timeline-node { width: 9px; height: 9px; border-radius: 50%; background: var(--text-dark); }
+    .timeline-desc { font-size: 13px; color: var(--text-muted); width: 130px; text-align: left; letter-spacing: 1px; }
 
-    /* بخش مکان و نقشه */
+    /* ===== مکان ===== */
     .venue-section {
-      text-align: center;
-      padding: 30px 24px;
-      background: rgba(44, 33, 23, 0.02);
-      border-top: 1px solid var(--border-light);
-      border-bottom: 1px solid var(--border-light);
+      text-align: center; padding: 32px 24px;
+      background: var(--glass); backdrop-filter: blur(10px);
+      border-top: 1px solid var(--gold-line);
+      border-bottom: 1px solid var(--gold-line);
     }
-    .venue-title {
-      font-family: var(--font-serif);
-      font-size: 24px;
-      font-style: italic;
-      margin-bottom: 6px;
-    }
-    .venue-name {
-      font-weight: 600;
-      font-size: 16px;
-      color: var(--text-dark);
-      margin-top: 10px;
-    }
-    .venue-address {
-      font-size: 13px;
-      color: var(--text-muted);
-      margin-bottom: 20px;
-    }
+    .venue-title { font-family: var(--font-serif); font-style: italic; font-size: 23px; }
+    .venue-name { font-weight: 600; font-size: 16px; margin-top: 10px; }
+    .venue-address { font-size: 13px; color: var(--text-muted); margin-bottom: 20px; }
     .outline-btn {
-      display: inline-block;
-      border: 1px solid var(--text-dark);
-      background: transparent;
-      padding: 11px 32px;
-      font-family: var(--font-serif);
-      font-size: 13px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--text-dark);
-      cursor: pointer;
-      border-radius: 4px;
-      transition: all 0.25s ease;
+      border: 1px solid var(--text-dark); background: transparent;
+      padding: 11px 34px; font-family: var(--font-serif);
+      font-size: 13px; letter-spacing: 3px; text-transform: uppercase;
+      cursor: pointer; border-radius: 5px; transition: all .25s;
     }
-    .outline-btn:hover {
-      background: var(--text-dark);
-      color: var(--bg-cream);
-    }
+    .outline-btn:hover { background: var(--text-dark); color: var(--white); }
 
-    /* بخش درس‌کد (لباس و پالت رنگی) */
-    .dress-code-section {
-      text-align: center;
-      padding: 35px 24px;
-    }
-    .dress-title {
-      font-family: var(--font-serif);
-      font-size: 22px;
-      font-style: italic;
-    }
-    .dress-desc {
-      font-size: 13px;
-      color: var(--text-muted);
-      margin: 8px 0 20px;
-    }
-    .palette-row {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-    }
-    .palette-circle {
-      width: 26px;
-      height: 26px;
-      border-radius: 50%;
-      box-shadow: inset 0 0 0 1px rgba(0,0,0,0.1);
-    }
+    /* ===== درس‌کد ===== */
+    .dress-code-section { text-align: center; padding: 35px 24px; }
+    .dress-title { font-family: var(--font-serif); font-style: italic; font-size: 22px; }
+    .dress-desc { font-size: 13px; color: var(--text-muted); margin: 8px 0 20px; }
+    .palette-row { display: flex; justify-content: center; gap: 12px; }
+    .palette-circle { width: 26px; height: 26px; border-radius: 50%; box-shadow: inset 0 0 0 1px rgba(0,0,0,0.08); }
 
-    /* بخش فرم تیره ثبت حضور (RSVP) */
-    .form-wrapper {
-      padding: 20px 20px 40px;
+    /* ===== فرم نقره‌ای شفاف ===== */
+    .form-wrapper { padding: 18px 20px 40px; }
+    .silver-form-card {
+      background: linear-gradient(145deg, rgba(215,215,220,0.45), rgba(235,235,238,0.3));
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(255,255,255,0.65);
+      border-radius: 24px; padding: 34px 24px; text-align: center;
+      box-shadow: 0 14px 34px rgba(120,115,110,0.14);
     }
-    .dark-form-card {
-      background: var(--text-dark);
-      color: var(--bg-cream);
-      border-radius: 24px;
-      padding: 35px 24px;
-      text-align: center;
-      position: relative;
+    .form-title-script { font-family: var(--font-serif); font-style: italic; font-size: 20px; margin-bottom: 20px; color: var(--text-dark); }
+    .input-group { text-align: right; margin-bottom: 18px; }
+    .input-group label { display: block; font-size: 12px; margin-bottom: 6px; color: var(--text-muted); }
+    .glass-input {
+      width: 100%; background: rgba(255,255,255,0.5);
+      border: 1px solid rgba(255,255,255,0.8); border-radius: 8px;
+      padding: 11px 14px; font-family: var(--font-fa);
+      font-size: 14px; color: var(--text-dark); outline: none;
     }
-    .form-title-script {
-      font-family: var(--font-serif);
-      font-size: 20px;
-      font-style: italic;
-      letter-spacing: 1px;
-      margin-bottom: 20px;
-    }
-    .input-group {
-      text-align: right;
-      margin-bottom: 18px;
-    }
-    .input-group label {
-      display: block;
-      font-size: 12px;
-      margin-bottom: 6px;
-      color: #D3C7B8;
-      font-weight: 300;
-    }
-    .dark-input {
-      width: 100%;
-      background: transparent;
-      border: 1px solid rgba(244, 239, 230, 0.35);
-      border-radius: 6px;
-      padding: 10px 14px;
-      color: var(--bg-cream);
-      font-family: var(--font-fa);
-      font-size: 14px;
-      outline: none;
-    }
-    .dark-input:focus {
-      border-color: var(--bg-cream);
-    }
+    .glass-input:focus { border-color: var(--text-dark); }
     .guest-counter {
-      display: flex;
-      align-items: center;
-      border: 1px solid rgba(244, 239, 230, 0.35);
-      border-radius: 6px;
-      overflow: hidden;
-      margin-bottom: 22px;
+      display: flex; align-items: center;
+      background: rgba(255,255,255,0.5);
+      border: 1px solid rgba(255,255,255,0.8);
+      border-radius: 8px; overflow: hidden;
     }
-    .counter-btn {
-      flex: 1;
-      background: transparent;
-      border: none;
-      color: var(--bg-cream);
-      font-size: 18px;
-      padding: 8px 0;
-      cursor: pointer;
-    }
-    .counter-val {
-      flex: 1.5;
-      text-align: center;
-      font-size: 15px;
-      font-weight: 600;
-      border-left: 1px solid rgba(244, 239, 230, 0.2);
-      border-right: 1px solid rgba(244, 239, 230, 0.2);
-      padding: 8px 0;
-    }
+    .counter-btn { flex: 1; background: transparent; border: none; font-size: 18px; padding: 9px 0; cursor: pointer; color: var(--text-dark); }
+    .counter-val { flex: 1.5; text-align: center; font-size: 15px; font-weight: 600; border-left: 1px solid rgba(255,255,255,0.7); border-right: 1px solid rgba(255,255,255,0.7); padding: 9px 0; }
     .form-submit-btn {
-      width: 100%;
-      background: var(--bg-cream);
-      color: var(--text-dark);
-      border: none;
-      padding: 12px 0;
-      border-radius: 6px;
-      font-family: var(--font-serif);
-      font-size: 14px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      font-weight: 600;
-      cursor: pointer;
-      transition: opacity 0.2s;
-    }
-    .form-submit-btn:hover {
-      opacity: 0.9;
+      width: 100%; background: var(--text-dark); color: var(--white);
+      border: none; padding: 12px 0; border-radius: 8px;
+      font-family: var(--font-serif); font-size: 14px;
+      letter-spacing: 3px; text-transform: uppercase; cursor: pointer;
     }
 
-    /* پاپ‌آپ نقشه و اپلیکیشن‌ها */
+    /* ===== پاپ‌آپ نقشه ===== */
     .popup-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(44, 33, 23, 0.7);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-      backdrop-filter: blur(4px);
+      position: fixed; inset: 0; z-index: 9999;
+      background: rgba(74,68,64,0.55); backdrop-filter: blur(5px);
+      display: none; align-items: center; justify-content: center;
     }
     .popup-box {
-      background: var(--bg-cream);
-      max-width: 360px;
-      width: 88%;
-      border-radius: 18px;
-      padding: 30px 20px;
-      position: relative;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-      text-align: center;
-      border: 1px solid var(--border-light);
+      background: rgba(255,255,255,0.92); backdrop-filter: blur(12px);
+      max-width: 350px; width: 88%; border-radius: 18px;
+      padding: 30px 20px; text-align: center; position: relative;
+      border: 1px solid rgba(255,255,255,0.8);
+      box-shadow: 0 20px 45px rgba(0,0,0,0.2);
     }
-    .popup-close {
-      position: absolute;
-      top: 12px;
-      left: 16px;
-      font-size: 26px;
-      cursor: pointer;
-      color: var(--text-dark);
-      line-height: 1;
-    }
-    .popup-title {
-      font-size: 16px;
-      font-weight: 600;
-      color: var(--text-dark);
-      margin-bottom: 22px;
-    }
-    .map-apps-row {
-      display: flex;
-      justify-content: center;
-      gap: 18px;
-    }
-    .app-link-card {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-      text-decoration: none;
-    }
+    .popup-close { position: absolute; top: 10px; left: 16px; font-size: 26px; cursor: pointer; color: var(--text-dark); }
+    .popup-title { font-size: 15px; font-weight: 600; margin-bottom: 22px; }
+    .map-apps-row { display: flex; justify-content: center; gap: 20px; }
+    .app-link-card { display: flex; flex-direction: column; align-items: center; gap: 8px; text-decoration: none; }
     .app-circle {
-      width: 56px;
-      height: 56px;
-      background: var(--card-bg);
-      border: 1px solid var(--border-light);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.06);
-      transition: transform 0.2s ease;
+      width: 56px; height: 56px; border-radius: 50%;
+      background: #fff; border: 1px solid rgba(0,0,0,0.08);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 5px 12px rgba(0,0,0,0.08); transition: transform .2s;
     }
-    .app-circle img {
-      width: 30px;
-      height: 30px;
-      object-fit: contain;
-    }
-    .app-link-card:hover .app-circle {
-      transform: translateY(-3px);
-    }
-    .app-name {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text-dark);
-    }
+    .app-circle img { width: 30px; height: 30px; object-fit: contain; }
+    .app-link-card:hover .app-circle { transform: translateY(-3px); }
+    .app-name { font-size: 13px; font-weight: 600; color: var(--text-dark); }
+
+    /* ===== بخش پایانی ===== */
+    .ending-section { text-align: center; padding: 30px 24px 10px; }
+    .ending-script { font-family: var(--font-script); font-size: 30px; color: var(--text-dark); line-height: 1.6; }
   </style>
 </head>
 <body>
 
+  <!-- ====== اسپلش ====== -->
+  <div id="splash">
+    <div class="splash-names">Narges & Mahdi</div>
+    <div class="splash-sub">Wedding Invitation</div>
+    <div class="splash-heart">♥</div>
+  </div>
+
+  <!-- ====== موزیک پس‌زمینه ====== -->
+  <audio id="bg-music" loop src="Videos/intro.mp4"></audio>
+  <button class="music-btn" id="musicBtn">♪</button>
+
+  <!-- ====== نقل و نبات‌های معلق ====== -->
+  <div class="floating-bg">
+    <div class="candy" style="top:12%; right:8%;  animation-delay:0s;"></div>
+    <div class="candy" style="top:28%; left:6%;   animation-delay:1.5s; width:26px; height:26px;"></div>
+    <div class="candy" style="top:45%; right:12%; animation-delay:3s;"></div>
+    <div class="candy" style="top:62%; left:10%;  animation-delay:0.8s; width:28px; height:28px;"></div>
+    <div class="candy" style="top:78%; right:6%;  animation-delay:2.2s;"></div>
+    <div class="candy" style="top:90%; left:14%;  animation-delay:4s; width:24px; height:24px;"></div>
+  </div>
+
   <div class="container">
-    
-    <!-- بخش معرفی و اسم‌ها -->
-    <header class="header-section">
+
+    <!-- هدر -->
+    <header class="header-section reveal">
       <div class="main-script-title">Narges & Mahdi</div>
-      <div class="sub-tagline">Wedding Invitation</div>
-      <div class="divider-wrap">
-        <div class="divider-line"></div>
-        <div class="divider-heart">♥</div>
-        <div class="divider-line"></div>
-      </div>
+      <div class="sub-tagline">Wedding Ceremony</div>
+      <div class="divider-wrap"><div class="divider-line"></div><div class="divider-heart">♥</div><div class="divider-line"></div></div>
     </header>
 
-    <!-- عکس اصلی دو نفره -->
-    <div class="main-photo-wrap">
+    <!-- عکس اصلی — آدرسش رو عوض کن -->
+    <div class="main-photo-wrap reveal">
       <div class="photo-frame">
-        <!-- اگر عکسی روی گیت‌هاب داری اسمش رو اینجا بذار -->
-        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80" alt="عروس و داماد">
+        <img src="couple.jpg" alt="نرگس و مهدی">
       </div>
     </div>
 
-    <!-- تاریخ و دعوت‌نامه -->
-    <section class="date-section">
+    <!-- تاریخ -->
+    <section class="date-section reveal">
       <div class="section-label">Wedding Day</div>
       <div class="date-box">
         <div class="day-number">۲۴</div>
-        <div class="month-year">اردیبهشت ماه ۱۴۰۵</div>
+        <div class="month-year">اردیبهشت ۱۴۰۵</div>
       </div>
-      <p class="invitation-text">
-        حضورتان در این روز قشنگ، دلگرمی آغاز مسیر مشترک ما خواهد بود.
-      </p>
+      <p class="invitation-text">حضور گرم شما، زینت‌بخش آغاز زندگی مشترک ماست.</p>
     </section>
 
-    <!-- تایم‌لاین برنامه عروسی -->
-    <section class="timeline-section">
-      <div class="timeline-title">Event Schedule</div>
-      
-      <div class="timeline-item">
-        <div class="timeline-time">۱۸:۳۰</div>
-        <div class="timeline-node"></div>
-        <div class="timeline-desc">ورود مهمانان</div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-time">۲۰:۰۰</div>
-        <div class="timeline-node"></div>
-        <div class="timeline-desc">مراسم عقد و جشن</div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-time">۲۱:۳۰</div>
-        <div class="timeline-node"></div>
-        <div class="timeline-desc">صرف شام</div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-time">۲۳:۳۰</div>
-        <div class="timeline-node"></div>
-        <div class="timeline-desc">پایان مراسم</div>
-      </div>
+    <!-- تایم‌لاین -->
+    <section class="timeline-section reveal">
+      <div class="timeline-title">برنامه مراسم</div>
+      <div class="timeline-item"><div class="timeline-time">۱۸:۳۰</div><div class="timeline-node"></div><div class="timeline-desc">پذیرش مهمانان</div></div>
+      <div class="timeline-item"><div class="timeline-time">۲۰:۰۰</div><div class="timeline-node"></div><div class="timeline-desc">عقدکنان و جشن</div></div>
+      <div class="timeline-item"><div class="timeline-time">۲۱:۳۰</div><div class="timeline-node"></div><div class="timeline-desc">صرف شام</div></div>
+      <div class="timeline-item"><div class="timeline-time">۲۳:۳۰</div><div class="timeline-node"></div><div class="timeline-desc">پایان مراسم</div></div>
     </section>
 
-    <!-- مکان و مسیریابی -->
-    <section class="venue-section">
+    <!-- مکان -->
+    <section class="venue-section reveal">
       <div class="venue-title">Where Everything Happens</div>
       <div class="venue-name">باغ تالار مجلل ارم</div>
-      <div class="venue-address">کیلومتر ۵ جاده فراهان، اراک</div>
-      <button class="outline-btn" id="openMapBtn">OPEN MAP</button>
+      <div class="venue-address">اراک، کیلومتر ۵ جاده فراهان</div>
+      <button class="outline-btn" id="openMapBtn">Open Map</button>
     </section>
 
-    <!-- درس‌کد و رنگ لباس -->
-    <section class="dress-code-section">
+    <!-- درس‌کد -->
+    <section class="dress-code-section reveal">
       <div class="dress-title">Dress Code</div>
-      <div class="dress-desc">پالت رنگی پیشنهادی برای همراهی با ثبت لحظات</div>
+      <div class="dress-desc">پالت رنگی هماهنگ با تم سفید و نقره‌ای مراسم</div>
       <div class="palette-row">
-        <div class="palette-circle" style="background: #2C2117;"></div>
-        <div class="palette-circle" style="background: #796859;"></div>
-        <div class="palette-circle" style="background: #B5A490;"></div>
-        <div class="palette-circle" style="background: #DCCFBF;"></div>
-        <div class="palette-circle" style="background: #F4EFE6;"></div>
+        <div class="palette-circle" style="background:#4A4440;"></div>
+        <div class="palette-circle" style="background:#9A918A;"></div>
+        <div class="palette-circle" style="background:#C9C9CD;"></div>
+        <div class="palette-circle" style="background:#EDE9E2;"></div>
+        <div class="palette-circle" style="background:#FDFCF9;"></div>
       </div>
     </section>
 
-    <!-- فرم حضور و غیاب RSVP -->
-    <div class="form-wrapper">
-      <div class="dark-form-card">
+    <!-- فرم نقره‌ای -->
+    <div class="form-wrapper reveal">
+      <div class="silver-form-card">
         <div class="form-title-script">Please Complete The Form</div>
-        
         <div class="input-group">
           <label>نام و نام خانوادگی</label>
-          <input type="text" class="dark-input" placeholder="مثال: علی رضایی">
+          <input type="text" class="glass-input" placeholder="مثال: علی رضایی">
         </div>
-
         <div class="input-group">
           <label>تعداد همراهان</label>
           <div class="guest-counter">
@@ -530,78 +329,79 @@
             <button type="button" class="counter-btn" id="plusBtn">+</button>
           </div>
         </div>
-
-        <button type="button" class="form-submit-btn" onclick="alert('پاسخ شما با موفقیت ثبت شد.')">SEND</button>
+        <button type="button" class="form-submit-btn" onclick="alert('پاسخ شما ثبت شد؛ منتظرتان هستیم!')">Send</button>
       </div>
     </div>
 
+    <!-- پایانی -->
+    <section class="ending-section reveal">
+      <div class="ending-script">We are waiting for you,<br>dear ones!</div>
+    </section>
+
   </div>
 
-  <!-- مودال پاپ‌آپ مسیریابی -->
+  <!-- پاپ‌آپ نقشه -->
   <div class="popup-overlay" id="mapPopup">
     <div class="popup-box">
       <div class="popup-close" id="closeMapBtn">&times;</div>
       <div class="popup-title">مسیریابی با اپلیکیشن</div>
       <div class="map-apps-row">
-        <a href="https://balad.ir/p/5HvNwijWgpQLam" target="_blank" rel="noopener" class="app-link-card">
-          <div class="app-circle">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/b/ba/Balad.png" alt="بلد">
-          </div>
+        <a href="https://balad.ir/p/5HvNwijWgpQLam" target="_blank" class="app-link-card">
+          <div class="app-circle"><img src="https://upload.wikimedia.org/wikipedia/commons/b/ba/Balad.png" alt="بلد"></div>
           <span class="app-name">بلد</span>
         </a>
-        <a href="https://nshn.ir/7bvg9J2xGkQI" target="_blank" rel="noopener" class="app-link-card">
-          <div class="app-circle">
-            <img src="https://neshan.org/static/img/neshan-logo.png" alt="نشان">
-          </div>
+        <a href="https://nshn.ir/7bvg9J2xGkQI" target="_blank" class="app-link-card">
+          <div class="app-circle"><img src="https://neshan.org/static/img/neshan-logo.png" alt="نشان"></div>
           <span class="app-name">نشان</span>
         </a>
-        <a href="https://www.google.com/maps?q=34.117263,49.669758" target="_blank" rel="noopener" class="app-link-card">
-          <div class="app-circle">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/Google_Maps_Logo.png" alt="گوگل مپ">
-          </div>
+        <a href="https://www.google.com/maps?q=34.117263,49.669758" target="_blank" class="app-link-card">
+          <div class="app-circle"><img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/Google_Maps_Logo.png" alt="گوگل مپ"></div>
           <span class="app-name">گوگل مپ</span>
         </a>
       </div>
     </div>
   </div>
 
-  <!-- اسکریپت‌های تعاملی -->
   <script>
-    // پاپ‌آپ نقشه
-    const openMap = document.getElementById('openMapBtn');
-    const closeMap = document.getElementById('closeMapBtn');
-    const mapPopup = document.getElementById('mapPopup');
+    /* ===== اسپلش ===== */
+    window.addEventListener('load', () => {
+      setTimeout(() => document.getElementById('splash').classList.add('hidden'), 2200);
+    });
 
-    if (openMap && mapPopup) {
-      openMap.addEventListener('click', () => mapPopup.style.display = 'flex');
-    }
-    if (closeMap && mapPopup) {
-      closeMap.addEventListener('click', () => mapPopup.style.display = 'none');
-    }
-    if (mapPopup) {
-      mapPopup.addEventListener('click', (e) => {
-        if (e.target === mapPopup) mapPopup.style.display = 'none';
-      });
-    }
+    /* ===== موزیک ===== */
+    const music = document.getElementById('bg-music');
+    const musicBtn = document.getElementById('musicBtn');
+    let isPlaying = false;
+    musicBtn.addEventListener('click', () => {
+      if (isPlaying) { music.pause(); musicBtn.textContent = '♪'; }
+      else { music.play(); musicBtn.textContent = '❚❚'; }
+      isPlaying = !isPlaying;
+    });
 
-    // شمارنده تعداد مهمان در فرم
-    let count = 1;
-    const guestDisplay = document.getElementById('guestCount');
-    const plusBtn = document.getElementById('plusBtn');
-    const minusBtn = document.getElementById('minusBtn');
-
-    if (plusBtn && minusBtn && guestDisplay) {
-      plusBtn.addEventListener('click', () => {
-        count++;
-        guestDisplay.textContent = count;
-      });
-      minusBtn.addEventListener('click', () => {
-        if (count > 1) {
-          count--;
-          guestDisplay.textContent = count;
+    /* ===== انیمیشن اسکرول دوطرفه ===== */
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');   // اسکرول به پایین → ظاهر شدن
+        } else {
+          entry.target.classList.remove('visible'); // خروج از دید → محو شدن (با اسکرول مجدد دوباره میان)
         }
       });
-    }
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    /* ===== پاپ‌آپ نقشه ===== */
+    const mapPopup = document.getElementById('mapPopup');
+    document.getElementById('openMapBtn').onclick = () => mapPopup.style.display = 'flex';
+    document.getElementById('closeMapBtn').onclick = () => mapPopup.style.display = 'none';
+    mapPopup.addEventListener('click', e => { if (e.target === mapPopup) mapPopup.style.display = 'none'; });
+
+    /* ===== شمارنده مهمان ===== */
+    let count = 1;
+    const guestDisplay = document.getElementById('guestCount');
+    document.getElementById('plusBtn').onclick = () => { count++; guestDisplay.textContent = count; };
+    document.getElementById('minusBtn').onclick = () => { if (count > 1) { count--; guestDisplay.textContent = count; } };
   </script>
 </body>
 </html>
