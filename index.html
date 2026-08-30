@@ -1,782 +1,607 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>بلیط دعوت | نرگس و مهدی - ۲۴ مهر ۱۴۰۵</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>جشن ازدواج نرگس و مهدی</title>
+  
+  <!-- فونت‌های گوگل و وزیر -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Great+Vibes&family=Vazirmatn:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;900&family=Great+Vibes&family=Playfair+Display:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-cream: #F4EFE6;
+      --card-bg: #FAF6EE;
+      --text-dark: #2C2117;
+      --text-muted: #796859;
+      --accent-brown: #5A4331;
+      --accent-wine: #873E3E;
+      --border-light: rgba(44, 33, 23, 0.15);
+      --font-serif: 'Cormorant Garamond', serif;
+      --font-script: 'Great Vibes', cursive;
+      --font-fa: 'Vazirmatn', sans-serif;
+    }
 
-    <style>
-        :root {
-            --cream: #f6f1e3;
-            --cream-dark: #efe7d3;
-            --navy: #14213d;
-            --navy-dark: #0d1830;
-            --gold: #b08d3e;
-            --red-accent: #c0392b;
-        }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    body {
+      background-color: var(--bg-cream);
+      color: var(--text-dark);
+      font-family: var(--font-fa);
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+      line-height: 1.6;
+    }
 
-        body {
-            font-family: 'Vazirmatn', sans-serif;
-            background: var(--cream);
-            color: var(--navy);
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
+    .container {
+      width: 100%;
+      max-width: 440px;
+      background-color: var(--card-bg);
+      min-height: 100vh;
+      box-shadow: 0 0 35px rgba(44, 33, 23, 0.08);
+      position: relative;
+      padding-bottom: 70px;
+      overflow-x: hidden;
+    }
 
-        /* ============ اسپلش ویدیو ============ */
-        #splash-screen {
-            position: fixed; inset: 0;
-            background: #000;
-            z-index: 99999;
-            transition: opacity 0.8s ease;
-        }
-        #intro-video { width: 100%; height: 100%; object-fit: cover; display: block; }
+    /* دکوراتیو خطوط و قلب‌ها */
+    .divider-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin: 20px auto;
+      width: 80%;
+    }
+    .divider-line {
+      flex: 1;
+      height: 1px;
+      background-color: var(--border-light);
+    }
+    .divider-heart {
+      color: var(--accent-wine);
+      font-size: 14px;
+    }
 
-        .btn-skip {
-            position: absolute;
-            bottom: 30px; left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0,0,0,0.6);
-            border: 1px solid var(--cream);
-            color: var(--cream);
-            padding: 11px 26px;
-            border-radius: 30px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            font-family: 'Vazirmatn', sans-serif;
-            cursor: pointer;
-            backdrop-filter: blur(6px);
-        }
+    /* بخش اول: هدر و نام‌ها */
+    .header-section {
+      text-align: center;
+      padding: 40px 20px 20px;
+    }
+    .main-script-title {
+      font-family: var(--font-script);
+      font-size: 42px;
+      color: var(--text-dark);
+      letter-spacing: 1px;
+      line-height: 1.2;
+    }
+    .sub-tagline {
+      font-family: var(--font-serif);
+      font-size: 13px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 8px;
+    }
 
-        /* ============ موزیک ============ */
-        #music-ctrl {
-            position: fixed; top: 18px; left: 18px;
-            width: 46px; height: 46px;
-            background: var(--navy);
-            color: var(--cream);
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1.2rem;
-            cursor: pointer;
-            z-index: 900;
-            box-shadow: 0 4px 15px rgba(20,33,61,0.4);
-            border: 2px solid var(--gold);
-        }
-        #music-ctrl.playing { animation: spin 4s linear infinite; }
-        @keyframes spin { to { transform: rotate(360deg); } }
+    /* کادر عکس اصلی */
+    .main-photo-wrap {
+      padding: 10px 24px;
+    }
+    .photo-frame {
+      width: 100%;
+      height: 380px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border-light);
+      position: relative;
+    }
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
 
-        /* ============ بلیط (Ticket) ============ */
-        .page-wrap {
-            max-width: 420px;
-            margin: 0 auto;
-            padding: 25px 15px 60px;
-            display: flex;
-            flex-direction: column;
-            gap: 22px;
-        }
+    /* بخش تاریخ و شمارش */
+    .date-section {
+      text-align: center;
+      padding: 25px 20px;
+    }
+    .section-label {
+      font-family: var(--font-serif);
+      font-size: 12px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .date-box {
+      margin: 12px auto;
+      display: inline-block;
+      border-top: 1px solid var(--border-light);
+      border-bottom: 1px solid var(--border-light);
+      padding: 10px 30px;
+    }
+    .date-box .day-number {
+      font-family: var(--font-serif);
+      font-size: 34px;
+      font-weight: 600;
+      color: var(--text-dark);
+      line-height: 1.1;
+    }
+    .date-box .month-year {
+      font-size: 14px;
+      color: var(--text-muted);
+      font-weight: 300;
+    }
+    .invitation-text {
+      font-size: 14px;
+      color: var(--accent-brown);
+      max-width: 320px;
+      margin: 15px auto 0;
+      font-weight: 300;
+    }
 
-        .ticket {
-            background: var(--cream);
-            border: 1px solid #d8ceac;
-            border-radius: 6px;
-            box-shadow: 0 10px 30px rgba(20,33,61,0.18);
-            position: relative;
-            overflow: hidden;
-        }
+    /* تایم‌لاین روز مراسم */
+    .timeline-section {
+      padding: 30px 30px 40px;
+      position: relative;
+    }
+    .timeline-title {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      text-align: center;
+      font-style: italic;
+      color: var(--text-dark);
+      margin-bottom: 25px;
+    }
+    .timeline-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      position: relative;
+    }
+    .timeline-time {
+      font-family: var(--font-serif);
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text-dark);
+      width: 80px;
+    }
+    .timeline-node {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--text-dark);
+      position: relative;
+    }
+    .timeline-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      width: 130px;
+      text-align: left;
+      font-family: var(--font-serif);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
 
-        /* لبه‌های دندانه‌دار بلیط */
-        .ticket::before, .ticket::after {
-            content: '';
-            position: absolute;
-            left: 0; right: 0;
-            height: 12px;
-            background-image: radial-gradient(circle at 6px -4px, transparent 8px, var(--cream) 9px);
-            background-size: 14px 12px;
-            background-repeat: repeat-x;
-            z-index: 2;
-        }
-        .ticket::before { top: 0; }
-        .ticket::after { bottom: 0; transform: rotate(180deg); }
+    /* بخش مکان و نقشه */
+    .venue-section {
+      text-align: center;
+      padding: 30px 24px;
+      background: rgba(44, 33, 23, 0.02);
+      border-top: 1px solid var(--border-light);
+      border-bottom: 1px solid var(--border-light);
+    }
+    .venue-title {
+      font-family: var(--font-serif);
+      font-size: 24px;
+      font-style: italic;
+      margin-bottom: 6px;
+    }
+    .venue-name {
+      font-weight: 600;
+      font-size: 16px;
+      color: var(--text-dark);
+      margin-top: 10px;
+    }
+    .venue-address {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+    .outline-btn {
+      display: inline-block;
+      border: 1px solid var(--text-dark);
+      background: transparent;
+      padding: 11px 32px;
+      font-family: var(--font-serif);
+      font-size: 13px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-dark);
+      cursor: pointer;
+      border-radius: 4px;
+      transition: all 0.25s ease;
+    }
+    .outline-btn:hover {
+      background: var(--text-dark);
+      color: var(--bg-cream);
+    }
 
-        .ticket-inner { padding: 34px 22px 30px; }
+    /* بخش درس‌کد (لباس و پالت رنگی) */
+    .dress-code-section {
+      text-align: center;
+      padding: 35px 24px;
+    }
+    .dress-title {
+      font-family: var(--font-serif);
+      font-size: 22px;
+      font-style: italic;
+    }
+    .dress-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin: 8px 0 20px;
+    }
+    .palette-row {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+    }
+    .palette-circle {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,0.1);
+    }
 
-        /* هدر بلیط */
-        .ticket-label {
-            text-align: center;
-            letter-spacing: 6px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: var(--navy);
-            text-transform: uppercase;
-        }
-        .ticket-dashes {
-            border: none;
-            border-top: 2px dashed #c9bfa0;
-            margin: 12px 0;
-        }
+    /* بخش فرم تیره ثبت حضور (RSVP) */
+    .form-wrapper {
+      padding: 20px 20px 40px;
+    }
+    .dark-form-card {
+      background: var(--text-dark);
+      color: var(--bg-cream);
+      border-radius: 24px;
+      padding: 35px 24px;
+      text-align: center;
+      position: relative;
+    }
+    .form-title-script {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      font-style: italic;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+    }
+    .input-group {
+      text-align: right;
+      margin-bottom: 18px;
+    }
+    .input-group label {
+      display: block;
+      font-size: 12px;
+      margin-bottom: 6px;
+      color: #D3C7B8;
+      font-weight: 300;
+    }
+    .dark-input {
+      width: 100%;
+      background: transparent;
+      border: 1px solid rgba(244, 239, 230, 0.35);
+      border-radius: 6px;
+      padding: 10px 14px;
+      color: var(--bg-cream);
+      font-family: var(--font-fa);
+      font-size: 14px;
+      outline: none;
+    }
+    .dark-input:focus {
+      border-color: var(--bg-cream);
+    }
+    .guest-counter {
+      display: flex;
+      align-items: center;
+      border: 1px solid rgba(244, 239, 230, 0.35);
+      border-radius: 6px;
+      overflow: hidden;
+      margin-bottom: 22px;
+    }
+    .counter-btn {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: var(--bg-cream);
+      font-size: 18px;
+      padding: 8px 0;
+      cursor: pointer;
+    }
+    .counter-val {
+      flex: 1.5;
+      text-align: center;
+      font-size: 15px;
+      font-weight: 600;
+      border-left: 1px solid rgba(244, 239, 230, 0.2);
+      border-right: 1px solid rgba(244, 239, 230, 0.2);
+      padding: 8px 0;
+    }
+    .form-submit-btn {
+      width: 100%;
+      background: var(--bg-cream);
+      color: var(--text-dark);
+      border: none;
+      padding: 12px 0;
+      border-radius: 6px;
+      font-family: var(--font-serif);
+      font-size: 14px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .form-submit-btn:hover {
+      opacity: 0.9;
+    }
 
-        .plane-icon { text-align: center; font-size: 1.6rem; margin: 6px 0; }
-
-        .names { text-align: center; margin: 10px 0; }
-        .names .name {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.6rem;
-            font-weight: 700;
-            letter-spacing: 3px;
-            color: var(--navy);
-            line-height: 1.15;
-        }
-        .names .amp {
-            font-family: 'Great Vibes', cursive;
-            font-size: 1.8rem;
-            color: var(--gold);
-            display: block;
-            margin: 2px 0;
-        }
-
-        /* جدول اطلاعات پرواز */
-        .flight-info {
-            border: 1px solid var(--navy);
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-        }
-        .flight-info .cell {
-            padding: 10px 12px;
-            border-bottom: 1px solid var(--navy);
-        }
-        .flight-info .cell:nth-child(odd) { border-left: 1px solid var(--navy); }
-        .flight-info .cell:nth-child(3), .flight-info .cell:nth-child(4) { border-bottom: none; }
-        .flight-info .lbl {
-            font-size: 0.62rem;
-            letter-spacing: 2px;
-            color: #7a7358;
-            font-weight: 700;
-        }
-        .flight-info .val { font-size: 0.92rem; font-weight: 700; margin-top: 3px; }
-
-        /* مهر پستی */
-        .stamp-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin: 20px 0 10px;
-        }
-        .postmark {
-            width: 78px; height: 78px;
-            border: 2px solid var(--navy);
-            border-radius: 50%;
-            display: flex; flex-direction: column;
-            align-items: center; justify-content: center;
-            font-size: 0.55rem;
-            font-weight: 700;
-            letter-spacing: 1px;
-            color: var(--navy);
-            transform: rotate(-12deg);
-            opacity: 0.85;
-        }
-        .postmark .big { font-size: 1.2rem; margin: 2px 0; }
-        .wavy {
-            flex: 1;
-            height: 20px;
-            margin: 0 14px;
-            background-image: repeating-linear-gradient(90deg, transparent, transparent 10px, var(--navy) 10px, var(--navy) 11px, transparent 11px, transparent 16px);
-            opacity: 0.35;
-        }
-        .script-note {
-            font-family: 'Great Vibes', cursive;
-            font-size: 1.5rem;
-           5rem;
-            color: var(--navy);
-        }
-
-        .boarding-tag: center;
-            letter-spacing: 5px;
-            font-size: 0.68rem;
-            font-weight: 700;
-            color: #7a7358;
-            margin-top: 6px;
-        }
-
-        /* ============ بخش‌های سرمه‌ای ============ */
-        .navy-section {
-            background: var(--navy);
-            color: var(--cream);
-            border-radius: 6px;
-            padding: 34px 22px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(20,33,61,0.25);
-            position: relative;
-        }
-        .navy-section h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            letter-spacing: 2px;
-            margin-bottom: 14px;
-        }
-        .navy-section p {
-            font-size: 0.9rem;
-            line-height: 2;
-            color: #d9d4c5;
-            font-weight: 300;
-        }
-
-        /* خط پرواز با هواپیما */
-        .flight-path {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            margin: 18px 0 6px;
-        }
-        .flight-path .line {
-            flex: 0 0 90px;
-            border-top: 1.5px dashed var(--cream);
-            opacity: 0.6;
-        }
-        .flight-path .plane { font-size: 1.1rem; transform: rotate(-90deg); }
-
-        /* عکس زوج */
-        .couple-photo {
-            width: 100%;
-            border-radius: 4px;
-            filter: sepia(0.25) contrast(0.95);
-            display: block;
-            margin-top: 18px;
-            border: 4px solid rgba(246,241,227,0.15);
-        }
-
-        /* ============ تایم‌لاین ============ */
-        .timeline-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 11px 0;
-            text-align: right;
-        }
-        .timeline-item .dot-col {
-            display: flex; flex-direction: column; align-items: center;
-            width: 16px;
-        }
-        .timeline-item .dot {
-            width: 10px; height: 10px;
-            border: 2px solid var(--cream);
-            border-radius: 50%;
-        }
-        .timeline-item .dot-col .vline {
-            width: 1.5px; height: 22px;
-            background: rgba(246,241,227,0.4);
-        }
-        .timeline-item .t-name { flex: 1; font-size: 0.92rem; }
-        .timeline-item .t-time { font-family: 'Playfair Display', serif; font-weight: 700; }
-
-        /* ============ تقویم ============ */
-        .calendar {
-            background: var(--cream);
-            border: 1px solid #d8ceac;
-            border-radius: 6px;
-            padding: 28px 18px;
-            box-shadow: 0 10px 30px rgba(20,33,61,0.18);
-        }
-        .cal-title {
-            text-align: center;
-            font-family: 'Playfair Display', serif;
-            font-size: 1.25rem;
-            letter-spacing: 3px;
-            margin-bottom: 16px;
-        }
-        .cal-grid {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 4px;
-            text-align: center;
-        }
-        .cal-grid .dow {
-            font-size: 0.72rem;
-            font-weight: 700;
-            color: #7a7358;
-            padding: 6px 0;
-        }
-        .cal-grid .day {
-            font-size: 0.85rem;
-            padding: 9px 0;
-            border-radius: 50%;
-        }
-        .cal-grid .day.wedding-day {
-            background: var(--red-accent);
-            color: #fff;
-            font-weight: 700;
-            box-shadow: 0 0 0 3px rgba(192,57,43,0.2);
-        }
-        .save-date {
-            text-align: center;
-            margin-top: 18px;
-        }
-        .save-date .lbl { font-size: 0.7rem; letter-spacing: 3px; color: #7a7358; font-weight: 700; }
-        .save-date .date {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.7rem;
-            font-weight: 700;
-            margin-top: 4px;
-        }
-        .save-date .heart { color: var(--red-accent); font-size: 1.1rem; }
-
-        /* ============ مسیریابی ============ */
-        ..1rem; }
-
-        /* ============ مسیریابی ============ */
-        .venue-section-size: 1.05rem; font-weight: 700; color: var(--gold); margin-bottom: 4px; }
-        .map-buttons { display: flex; flex-direction: column; gap: 10px; margin-top: 18px; }
-        .btn-map {
-            display: flex; align-items: center; justify-content: center; gap: 8px;
-            padding: 13px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-size: 0.92rem;
-            font-weight: 700;
-            letter-spacing: 1px;
-        }
-        .btn-map.navy-btn { background: var(--cream); color: var(--navy); }
-        .btn-map.outline-btn { border: 1.5px solid var(--cream); color: var(--cream); }
-        .btn-map:active { transform: scale(0.97); }
-
-        /* ============ RSVP ============ */
-        .rsvp-form { display: flex; flex-direction: column; gap: 12px; margin-top: 16px; text-align: right; }
-        .form-input {
-            width: 100%;
-            padding: 13px 16px;
-            background: rgba(246,241,227,0.08);
-            border: 1px solid rgba(246,241,227,0.35);
-            border-radius: 6px;
-            color: var(--cream);
-            font-family: 'Vazirmatn', sans-serif;
-            font-size: 0.95rem;
-            outline: none;
-        }
-        .form-input::placeholder { color: rgba(246,241,227,0.45); }
-        .form-input:focus { border-color: var(--gold); }
-        .btn-rsvp {
-            background: var(--gold);
-            color: #fff;
-            border: none;
-            padding: 15px;
-            border-radius: 6px;
-            font-size: 1rem;
-            font-weight: 700;
-            font-family: 'Vazirmatn', sans-serif;
-            cursor: pointer;
-            letter-spacing: 1px;
-        }
-
-        /* ============ فوتر ============ */
-        .footer-strip {
-            background: var(--cream);
-            border: 1px solid #d8ceac;
-            border-radius: 6px;
-            padding: 22px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(20,33,61,0.15);
-        }
-        .footer-strip .dest-lbl { font-size: 0.65rem; letter-spacing: 3px; color: #7a7358; font-weight: 700; }
-        .footer-strip .venue-name-lg {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.4rem; font-weight: 700; margin: 6px 0 2px;
-        }
-        .footer-strip .loc { font-size: 0.8rem; color: #7a7358; }
-
-        /* ============ انیمیشن اسکرول ============ */
-        .reveal {
-            opacity: 0;
-            transform: translateY(45px);
-            transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1);
-        }
-        .reveal.revealed { opacity: 1; transform: translateY(0); }
-    /* استایل پاپ‌آپ نقشه */
-.popup-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(20, 28, 54, 0.7);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-  backdrop-filter: blur(4px);
-}
-.popup {
-  background: #fdfaf4;
-  max-width: 400px;
-  width: 88%;
-  border-radius: 20px;
-  padding: 28px 20px;
-  position: relative;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.35);
-  border: 2px solid #1c2b4a;
-  text-align: center;
-}
-.popup-close {
-  position: absolute;
-  top: 10px;
-  left: 15px;
-  font-size: 28px;
-  cursor: pointer;
-  color: #1c2b4a;
-  line-height: 1;
-}
-.popup-title {
-  margin: 0 0 20px 0;
-  color: #1c2b4a;
-  font-size: 16px;
-  font-weight: bold;
-}
-.map-icons {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-}
-.map-icons a {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  text-decoration: none;
-}
-.icon-circle {
-  width: 58px;
-  height: 58px;
-  background: #1c2b4a;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 6px 14px rgba(0,0,0,0.2);
-  transition: transform 0.2s ease;
-}
-.icon-circle img {
-  width: 30px;
-  height: 30px;
-  object-fit: contain;
-}
-.map-icons a:hover .icon-circle {
-  transform: translateY(-4px) scale(1.05);
-}
-.map-label {
-  font-size: 13px;
-  color: #1c2b4a;
-  font-weight: bold;
-}
-
-    </style>
+    /* پاپ‌آپ نقشه و اپلیکیشن‌ها */
+    .popup-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(44, 33, 23, 0.7);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      backdrop-filter: blur(4px);
+    }
+    .popup-box {
+      background: var(--bg-cream);
+      max-width: 360px;
+      width: 88%;
+      border-radius: 18px;
+      padding: 30px 20px;
+      position: relative;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+      text-align: center;
+      border: 1px solid var(--border-light);
+    }
+    .popup-close {
+      position: absolute;
+      top: 12px;
+      left: 16px;
+      font-size: 26px;
+      cursor: pointer;
+      color: var(--text-dark);
+      line-height: 1;
+    }
+    .popup-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 22px;
+    }
+    .map-apps-row {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+    }
+    .app-link-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+    .app-circle {
+      width: 56px;
+      height: 56px;
+      background: var(--card-bg);
+      border: 1px solid var(--border-light);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+      transition: transform 0.2s ease;
+    }
+    .app-circle img {
+      width: 30px;
+      height: 30px;
+      object-fit: contain;
+    }
+    .app-link-card:hover .app-circle {
+      transform: translateY(-3px);
+    }
+    .app-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+  </style>
 </head>
 <body>
 
-    <!-- ویدیوی اسپلش -->
-    <div id="splash-screen">
-        <video id="intro-video" playsinline webkit-playsinline muted autoplay preload="auto" onended="closeSplash()">
-            <source src="intro.mp4" type="video/mp4">
-        </video>
-        <button class="btn-skip" onclick="closeSplash()">ورود به دعوت‌نامه ←</button>
+  <div class="container">
+    
+    <!-- بخش معرفی و اسم‌ها -->
+    <header class="header-section">
+      <div class="main-script-title">Narges & Mahdi</div>
+      <div class="sub-tagline">Wedding Invitation</div>
+      <div class="divider-wrap">
+        <div class="divider-line"></div>
+        <div class="divider-heart">♥</div>
+        <div class="divider-line"></div>
+      </div>
+    </header>
+
+    <!-- عکس اصلی دو نفره -->
+    <div class="main-photo-wrap">
+      <div class="photo-frame">
+        <!-- اگر عکسی روی گیت‌هاب داری اسمش رو اینجا بذار -->
+        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80" alt="عروس و داماد">
+      </div>
     </div>
 
-    <!-- موزیک -->
-    <div id="music-ctrl" onclick="toggleAudio()">🎵</div>
-    <audio id="wedding-audio" loop preload="auto" src="music.mp3"></audio>
+    <!-- تاریخ و دعوت‌نامه -->
+    <section class="date-section">
+      <div class="section-label">Wedding Day</div>
+      <div class="date-box">
+        <div class="day-number">۲۴</div>
+        <div class="month-year">اردیبهشت ماه ۱۴۰۵</div>
+      </div>
+      <p class="invitation-text">
+        حضورتان در این روز قشنگ، دلگرمی آغاز مسیر مشترک ما خواهد بود.
+      </p>
+    </section>
 
-    <div class="page-wrap">
+    <!-- تایم‌لاین برنامه عروسی -->
+    <section class="timeline-section">
+      <div class="timeline-title">Event Schedule</div>
+      
+      <div class="timeline-item">
+        <div class="timeline-time">۱۸:۳۰</div>
+        <div class="timeline-node"></div>
+        <div class="timeline-desc">ورود مهمانان</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">۲۰:۰۰</div>
+        <div class="timeline-node"></div>
+        <div class="timeline-desc">مراسم عقد و جشن</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">۲۱:۳۰</div>
+        <div class="timeline-node"></div>
+        <div class="timeline-desc">صرف شام</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-time">۲۳:۳۰</div>
+        <div class="timeline-node"></div>
+        <div class="timeline-desc">پایان مراسم</div>
+      </div>
+    </section>
 
-        <!-- ============ بلیط اصلی ============ -->
-        <div class="ticket reveal">
-            <div class="ticket-inner">
-                <div class="ticket-label">Wedding Ticket • بلیط دعوت</div>
-                <hr class="ticket-dashes">
-                <div class="plane-icon">✈</div>
+    <!-- مکان و مسیریابی -->
+    <section class="venue-section">
+      <div class="venue-title">Where Everything Happens</div>
+      <div class="venue-name">باغ تالار مجلل ارم</div>
+      <div class="venue-address">کیلومتر ۵ جاده فراهان، اراک</div>
+      <button class="outline-btn" id="openMapBtn">OPEN MAP</button>
+    </section>
 
-                <div class="names">
-                    <div class="name">نرگس</div>
-                    <span class="amp">و</span>
-                    <div class="name">مهدی</div>
-                </div>
+    <!-- درس‌کد و رنگ لباس -->
+    <section class="dress-code-section">
+      <div class="dress-title">Dress Code</div>
+      <div class="dress-desc">پالت رنگی پیشنهادی برای همراهی با ثبت لحظات</div>
+      <div class="palette-row">
+        <div class="palette-circle" style="background: #2C2117;"></div>
+        <div class="palette-circle" style="background: #796859;"></div>
+        <div class="palette-circle" style="background: #B5A490;"></div>
+        <div class="palette-circle" style="background: #DCCFBF;"></div>
+        <div class="palette-circle" style="background: #F4EFE6;"></div>
+      </div>
+    </section>
 
-                <div class="flight-info">
-                    <div class="cell">
-                        <div class="lbl">FLIGHT & DATE • پرواز</div>
-                        <div class="val">۲۴ مهر ۱۴۰۵</div>
-                    </div>
-                    <div class="cell">
-                        <div class="lbl">CLASS • کلاس</div>
-                        <div class="val">عشق ✦ First Class</div>
-                    </div>
-                    <div class="cell">
-                        <div class="lbl">DESTINATION • مقصد</div>
-                        <div class="val">خوشبختی</div>
-                    </div>
-                    <div class="cell">
-                        <div class="lbl">LOCATION • مکان</div>
-                        <div class="val">باغ تالار مجلل ارم</div>
-                    </div>
-                </div>
-
-                <div class="stamp-row">
-                    <div class="postmark">
-                        <span>نرگس ✦ مهدی</span>
-                        <span class="big">✈</span>
-                        <span>24- -2026</span>
-                    </div>
-                    <div class="wavy"></div>
-                    <div class="script-note">Are One</div>
-                </div>
-
-                <div class="boarding-tag">— BOARDING FOR LOVE —</div>
-            </div>
+    <!-- فرم حضور و غیاب RSVP -->
+    <div class="form-wrapper">
+      <div class="dark-form-card">
+        <div class="form-title-script">Please Complete The Form</div>
+        
+        <div class="input-group">
+          <label>نام و نام خانوادگی</label>
+          <input type="text" class="dark-input" placeholder="مثال: علی رضایی">
         </div>
 
-        <!-- ============ پیام دعوت ============ -->
-        <div class="navy-section reveal">
-            <h2>دعوت به بزرگ‌ترین سفر</h2>
-            <p>با کمال میل و افتخار دعوتتان می‌کنیم تا در مهم‌ترین پروازِ زندگی‌مان همراهمان باشید. حضور گرم شما زیباترین خاطره‌ی این سفر خواهد بود.</p>
-            <div class="flight-path">
-                <div class="line"></div>
-                <div class="plane">✈</div>
-                <div class="line"></div>
-            </div>
-            <img src="couple.jpg" alt="عکس زوج" class="couple-photo" onerror="this.style.display='none'">
+        <div class="input-group">
+          <label>تعداد همراهان</label>
+          <div class="guest-counter">
+            <button type="button" class="counter-btn" id="minusBtn">−</button>
+            <div class="counter-val" id="guestCount">۱</div>
+            <button type="button" class="counter-btn" id="plusBtn">+</button>
+          </div>
         </div>
 
-<!-- ============ بخش مکان مراسم و نقشه ============ -->
-<div class="navy-section venue-section reveal">
-    <h2>Venue • مکان مراسم</h2>
-    <div class="venue-name">باغ تالار مجلل ارم</div>
-    <p>اراک — ساعت ۱۹:۰۰ الی ۲۳:۳۰</p>
-
-    <!-- نقشه آنلاین -->
-    <div class="lt1-event__map" style="margin: 20px 0; border: 3px solid var(--cream); border-radius: 8px; overflow: hidden; height: 250px;">
-        <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=49.663758,34.111263,49.675758,34.123263&amp;marker=34.117263,49.669758&amp;layer=mapnik" 
-                width="100%" height="100%" frameborder="0" style="border:0;" allowfullscreen="" loading="lazy" title="نقشه‌ی محل مراسم">
-        </iframe>
+        <button type="button" class="form-submit-btn" onclick="alert('پاسخ شما با موفقیت ثبت شد.')">SEND</button>
+      </div>
     </div>
 
-    <!-- دکمه‌های مسیریابی -->
-    <div class="map-buttons">
-        <a class="btn-map navy-btn" href="https://neshan.org/maps/places/5b60e8b52ab9457d1e47b1861b7104e4#c34.117-49.675-15z-0p" target="_blank">🗺️ مسیریابی با نشان</a>
-        <a class="btn-map navy-btn" href="https://balad.ir/p/باغ-تالار-مجلل-ارم_ceremonial-services-PBoqVO7dYACB1Y" target="_blank">🧭 مسیریابی با بلد</a>
-        <a class="btn-map outline-btn" href="https://maps.google.com/maps?daddr=34.117263,49.669758" target="_blank">📍 مسیریابی با گوگل‌مپ</a>
-    </div>
-</div>
+  </div>
 
-
-        <!-- ============ تایم‌لاین ============ -->
-        <div class="navy-section reveal">
-            <h2>Timeline • برنامه مراسم</h2>
-            <div class="timeline-item">
-                <div class="dot-col"><div class="dot"></div><div class="vline"></div></div>
-                <span class="t-name">پذیرایی و اکرام مهمانان</span>
-                <span class="t-time">۱۹:۰۰</span>
-            </div>
-            <div class="timeline-item">
-                <div class="dot-col"><div class="dot"></div><div class="vline"></div></div>
-                <span class="t-name">شروع مراسم عقد و جشن</span>
-                <span class="t-time">۲۰:۳۰</span>
-            </div>
-            <div class="timeline-item">
-                <div class="dot-col"><div class="dot"></div><div class="vline"></div></div>
-                <span class="t-name">شام و شادی و پایکوبی</span>
-                <span class="t-time">۲۲:۰۰</span>
-            </div>
-            <div class="timeline-item">
-                <div class="dot-col"><div class="dot"></div></div>
-                <span class="t-name">پایان مراسم</span>
-                <span class="t-time">۲۳:۳۰</span>
-            </div>
-        </div>
-
-        <!-- ============ تقویم ============ -->
-        <div class="calendar reveal">
-            <div class="cal-title">مهر ۱۴۰۵</div>
-            <div class="cal-grid" id="cal-grid"></div>
-            <div class="save-date">
-                <div class="lbl">SAVE THE DATE</div>
-                <div class="date">۲۴ مهر ۱۴۰۵</div>
-                <div class="heart">❤</div>
-            </div>
-        </div>
-
-        <!-- ============ کد لباس ============ -->
-        <div class="navy-section reveal">
-            <h2>Dress Code • کد لباس</h2>
-            <p>لطفاً در انتخاب پوشش خود از پالت رنگی زیر الهام بگیرید.</p>
-            <div style="display:flex; justify-content:center; gap:12px; margin-top:18px;">
-                <div style="text-align:center;"><div style="width:40px;height:40px;border-radius:50%;background:#f6f1e3;border:2px solid rgba(246,241,227,0.4);"></div><div style="font-size:0.65rem;margin-top:5px;">شیری</div></div>
-                <div style="text-align:center;"><div style="width:40px;height:40px;border-radius:50%;background:#d8c9a3;"></div><div style="font-size:0.65rem;margin-top:5px;">کرم</div></div>
-                <div style="text-align:center;"><div style="width:40px;height:40px;border-radius:50%;background:#b08d3e;"></div><div style="font-size:0.65rem;margin-top:5px;">طلایی</div></div>
-                <div style="text-align:center;"><div style="width:40px;height:40px;border-radius:50%;background:#14213d;border:2px solid rgba(246,241,227,0.4);"></div><div style="font-size:0.65rem;margin-top:5px;">سرمه‌ای</div></div>
-            </div>
-        </div>
-
-        <!-- ============ RSVP ============ -->
-        <div class="navy-section reveal">
-            <h2>اعلام حضور (RSVP)</h2>
-            <p>لطفاً تا یک هفته قبل از مراسم، حضور خود را اعلام کنید.</p>
-            <form class="rsvp-form" onsubmit="submitRSVP(event)">
-                <input type="text" id="guest-name" class="form-input" placeholder="نام و نام خانوادگی" required>
-                <input type="number" id="guest-count" class="form-input" min="1" max="10" value="۱" required>
-                <button type="submit" class="btn-rsvp">✈ ثبت و ارسال در واتساپ</button>
-            </form>
-        </div>
-
-        <!-- ============ فوتر بلیط ============ -->
-        <div class="footer-strip reveal">
-            <div class="dest-lbl">DESTINATION</div>
-            <div class="venue-name-lg">باغ تالار مجلل ارم</div>
-            <div class="loc">اراک — ۲۴ مهر ۱۴۰۵</div>
-            <div style="margin-top:10px; font-family:'Great Vibes',cursive; font-size:1.6rem; color:var(--gold);">Narges & Mahdi</div>
-        </div>
-
-    </div>
-
-<script>
-    // ============ ۱. اسپلش و ورود ============
-    const audio = document.getElementById('wedding-audio');
-    const musicCtrl = document.getElementById('music-ctrl');
-    const splashScreen = document.getElementById('splash-screen');
-    let splashClosed = false;
-
-    function closeSplash() {
-        if (splashClosed) return;
-        splashClosed = true;
-
-        const video = document.getElementById('intro-video');
-        if (video) video.pause();
-
-        splashScreen.style.opacity = '0';
-        splashScreen.style.pointerEvents = 'none';
-
-        setTimeout(() => {
-            splashScreen.style.display = 'none';
-            initScrollReveal();
-        }, 800);
-
-        audio.play().then(() => {
-            musicCtrl.classList.add('playing');
-        }).catch(() => {});
-    }
-
-    // کلیک روی هر جای اسپلش = ورود (حل مشکل موبایل)
-    splashScreen.addEventListener('click', closeSplash);
-
-    // ============ ۲. موزیک ============
-    function toggleAudio() {
-        if (audio.paused) {
-            audio.play();
-            musicCtrl.classList.add('playing');
-        } else {
-            audio.pause();
-            musicCtrl.classList.remove('playing');
-        }
-    }
-
-    // ============ ۳. انیمیشن اسکرول ============
-    function initScrollReveal() {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(e => {
-                if (e.isIntersecting) {
-                    e.target.classList.add('revealed');
-                    observer.unobserve(e.target);
-                }
-            });
-        }, { threshold: 0.12 });
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-    }
-
-    // ============ ۴. تقویم مهر ۱۴۰۵ ============
-    (function buildCalendar() {
-        const grid = document.getElementById('cal-grid');
-        if (!grid) return;
-        const dows = ['ش', 'ی', 'د', 'س', 'چ', 'پ', 'ج'];
-        dows.forEach(d => {
-            const el = document.createElement('div');
-            el.className = 'dow';
-            el.textContent = d;
-            grid.appendChild(el);
-        });
-        for (let i = 0; i < 4; i++) { grid.appendChild(document.createElement('div')); }
-        for (let day = 1; day <= 30; day++) {
-            const el = document.createElement('div');
-            el.className = 'day' + (day === 24 ? ' wedding-day' : '');
-            el.textContent = day === 24 ? '۲۴ ❤' : toFa(day);
-            grid.appendChild(el);
-        }
-    })();
-
-    function toFa(n) {
-        return String(n).replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]);
-    }
-
-    // ============ ۵. RSVP واتساپ ============
-    function submitRSVP(e) {
-        e.preventDefault();
-        const name = document.getElementById('guest-name').value;
-        const count = document.getElementById('guest-count').value;
-        const phone = "989120000000"; // ← شماره واتساپ خودت را اینجا بگذار
-        const msg = encodeURIComponent(`سلام! با کمال میل در جشن نرگس و مهدی شرکت می‌کنم ✈\nنام: ${name}\nتعداد همراهان: ${count}`);
-        window.open(`https://wa.me/${phone}?text=${msg}`, '_blank');
-    }
-    // باز کردن پاپ‌آپ با کلیک روی دکمه نقشه (آیدی دکمه‌ات هر چی هست)
-const mapButton = document.getElementById('mapBtn');
-const mapModal = document.getElementById('mapPopup');
-const closeBtn = document.getElementById('popupCloseBtn');
-
-if (mapButton && mapModal) {
-  mapButton.addEventListener('click', () => {
-    mapModal.style.display = 'flex';
-  });
-}
-
-if (closeBtn && mapModal) {
-  closeBtn.addEventListener('click', () => {
-    mapModal.style.display = 'none';
-  });
-}
-
-// بستن با کلیک روی فضای بیرون کادر
-if (mapModal) {
-  mapModal.addEventListener('click', (e) => {
-    if (e.target === mapModal) {
-      mapModal.style.display = 'none';
-    }
-  });
-}
-</script>
-<!-- پاپ‌آپ نقشه و مسیریابی -->
-<div class="popup-overlay" id="mapPopup">
-  <div class="popup">
-    <div class="popup-close" id="popupCloseBtn">&times;</div>
-    <h3 class="popup-title">مسیریابی تا باغ تالار مجلل ارم</h3>
-    <div class="map-icons">
-      <a href="https://balad.ir/p/5HvNwijWgpQLam" target="_blank" rel="noopener">
-        <span class="icon-circle">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/b/ba/Balad.png" alt="بلد">
-        </span>
-        <span class="map-label">بلد</span>
-      </a>
-      <a href="https://nshn.ir/7bvg9J2xGkQI" target="_blank" rel="noopener">
-        <span class="icon-circle">
-          <img src="https://neshan.org/static/img/neshan-logo.png" alt="نشان">
-        </span>
-        <span class="map-label">نشان</span>
-      </a>
-      <a href="https://www.google.com/maps?q=34.117263,49.669758" target="_blank" rel="noopener">
-        <span class="icon-circle">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/Google_Maps_Logo.png" alt="گوگل مپ">
-        </span>
-        <span class="map-label">گوگل مپ</span>
-      </a>
+  <!-- مودال پاپ‌آپ مسیریابی -->
+  <div class="popup-overlay" id="mapPopup">
+    <div class="popup-box">
+      <div class="popup-close" id="closeMapBtn">&times;</div>
+      <div class="popup-title">مسیریابی با اپلیکیشن</div>
+      <div class="map-apps-row">
+        <a href="https://balad.ir/p/5HvNwijWgpQLam" target="_blank" rel="noopener" class="app-link-card">
+          <div class="app-circle">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/b/ba/Balad.png" alt="بلد">
+          </div>
+          <span class="app-name">بلد</span>
+        </a>
+        <a href="https://nshn.ir/7bvg9J2xGkQI" target="_blank" rel="noopener" class="app-link-card">
+          <div class="app-circle">
+            <img src="https://neshan.org/static/img/neshan-logo.png" alt="نشان">
+          </div>
+          <span class="app-name">نشان</span>
+        </a>
+        <a href="https://www.google.com/maps?q=34.117263,49.669758" target="_blank" rel="noopener" class="app-link-card">
+          <div class="app-circle">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/Google_Maps_Logo.png" alt="گوگل مپ">
+          </div>
+          <span class="app-name">گوگل مپ</span>
+        </a>
+      </div>
     </div>
   </div>
-</div>
 
+  <!-- اسکریپت‌های تعاملی -->
+  <script>
+    // پاپ‌آپ نقشه
+    const openMap = document.getElementById('openMapBtn');
+    const closeMap = document.getElementById('closeMapBtn');
+    const mapPopup = document.getElementById('mapPopup');
+
+    if (openMap && mapPopup) {
+      openMap.addEventListener('click', () => mapPopup.style.display = 'flex');
+    }
+    if (closeMap && mapPopup) {
+      closeMap.addEventListener('click', () => mapPopup.style.display = 'none');
+    }
+    if (mapPopup) {
+      mapPopup.addEventListener('click', (e) => {
+        if (e.target === mapPopup) mapPopup.style.display = 'none';
+      });
+    }
+
+    // شمارنده تعداد مهمان در فرم
+    let count = 1;
+    const guestDisplay = document.getElementById('guestCount');
+    const plusBtn = document.getElementById('plusBtn');
+    const minusBtn = document.getElementById('minusBtn');
+
+    if (plusBtn && minusBtn && guestDisplay) {
+      plusBtn.addEventListener('click', () => {
+        count++;
+        guestDisplay.textContent = count;
+      });
+      minusBtn.addEventListener('click', () => {
+        if (count > 1) {
+          count--;
+          guestDisplay.textContent = count;
+        }
+      });
+    }
+  </script>
 </body>
 </html>
