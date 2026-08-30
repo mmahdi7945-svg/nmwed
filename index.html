@@ -1,28 +1,3 @@
-دلیلش اینه که اون کد توی ارسال قبلی چند جاش خطوطش قاطی شده بود (سینتکس جاوااسکریپت و CSS خراب شده بود)، واسه همین وقتی روی دکمه «مشاهده دعوتنامه» می‌زنی، مرورگر به خطا می‌خوره و پرده‌ی ویدیو رو کنار نمی‌زنه! 
-
-علاوه بر اون، قابلیت این رو هم اضافه کردم که **اگه کاربر روی خود ویدیو هم تپ کرد یا ویدیو تموم شد، خودبه‌خود بره تو کارت دعوت** تا هیچ‌کس گیر نکنه.
-
-این کد **کاملاً تمیز، تست‌شده و بی‌نقص** رو جایگزین کن:
-
-```html
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>جشن پیوند نرگس و مهدی</title>
-<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700&family=Playfair+Display:wght@400;600&family=Great+Vibes&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<style>
-:root{
-  --bg:#fcfbfa; --primary:#2d2a26; --accent:#8b7355;
-ده‌ی ویدیو رو کنار نمی‌زنه! 
-
-علاوه بر اون، قابلیت این رو هم اضافه کردم که **اگه کاربر روی خود ویدیو هم تپ کرد یا ویدیو تموم شد، خودبه‌خود بره تو کارت دعوت** تا هیچ‌کس گیر نکنه.
-
-این کد **کاملاً تمیز، تست‌شده و بی‌نقص** رو جایگزین کن:
-
-```html
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
@@ -39,22 +14,72 @@
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 body{font-family:'Vazirmatn',sans-serif;background:#1a1816;color:var(--primary);display:flex;justify-content:center;min-height:100vh}
-.container{width:100%;max-width:440px;background255,255,.25);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.7);color:#fff;padding:12px 28px;border-radius:30px;font-size:.95rem;font-family:inherit;cursor:pointer;display:flex;align-items:center;gap:8px;box-shadow:0 4px 15px rgba(0,0,0,.3)}
+.container{width:100%;max-width:440px;background:var(--bg);box-shadow:0 0 50px rgba(0,0,0,.3);overflow-x:hidden;position:relative}
 
-/* ---------- دکمه موزیک ---------- */
-.music-toggle{position:fixed;top:20px;left:20px;width:42px;height:42px;background:rgba(255,255,255,.85);backdrop-filter:blur(8px);border:1px solid rgba(139,115,85,.2);border-radius:50%;display:none;align-items:center;justify-content:center;color:var(--accent);cursor:pointer;z-index:100;box-shadow:0 4px 12px rgba(0,0,0,.1)}
+/* ---------- اسپلش اسکرین ویدیویی ---------- */
+#splash{
+  position:fixed;top:0;left:50%;transform:translateX(-50%);
+  width:100%;max-width:440px;height:100vh;
+  background:#0d0d0d;z-index:9999;
+  display:flex;justify-content:center;align-items:center;
+  transition:opacity 0.8s ease, visibility 0.8s ease;
+}
+#splash.hidden{opacity:0;visibility:hidden;pointer-events:none}
+#introVideo{width:100%;height:100%;object-fit:cover;display:none}
+
+/* کاور اولیه قبل از لمس */
+.start-overlay{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:radial-gradient(circle, rgba(35,30,25,0.85) 0%, rgba(10,10,10,0.95) 100%);
+  color:#fff;cursor:pointer;text-align:center;padding:20px;
+}
+.start-ring{
+  width:85px;height:85px;border-radius:50%;border:2px solid rgba(197,160,89,0.8);
+  display:flex;align-items:center;justify-content:center;margin-bottom:20px;
+  animation:pulse-ring 2s infinite;background:rgba(255,255,255,0.05);
+}
+.start-ring i{font-size:28px;color:var(--gold);margin-left:4px}
+@keyframes pulse-ring{
+  0%{box-shadow:0 0 0 0 rgba(197,160,89,0.5);transform:scale(0.96)}
+  70%{box-shadow:0 0 0 20px rgba(197,160,89,0);transform:scale(1.04)}
+  100%{box-shadow:0 0 0 0 rgba(197,160,89,0);transform:scale(0.96)}
+}
+.start-overlay h2{font-family:'Great Vibes',cursive;font-size:2.8rem;color:var(--gold);margin-bottom:8px}
+.start-overlay p{font-size:0.95rem;letter-spacing:1px;opacity:0.85}
+
+/* دکمه رد شدن حین پخش ویدیو */
+.skip-btn{
+  position:absolute;bottom:35px;right:25px;
+  background:rgba(0,0,0,0.5);backdrop-filter:blur(6px);
+  border:1px solid rgba(255,255,255,0.3);color:#fff;
+  padding:8px 18px;border-radius:20px;font-size:0.8rem;
+  font-family:inherit;cursor:pointer;display:none;z-index:10;
+}
+
+/* ---------- دکمه شناور موزیک ---------- */
+.music-toggle{
+  position:fixed;top:20px;left:20px;width:42px;height:42px;
+  background:rgba(255,255,255,0.85);backdrop-filter:blur(8px);
+  border:1px solid rgba(139,115,85,.2);border-radius:50%;
+  display:none;align-items:center;justify-content:center;
+  color:var(--accent);cursor:pointer;z-index:100;box-shadow:0 4px 12px rgba(0,0,0,.1);
+}
 .music-toggle.show{display:flex}
 .music-toggle.playing{animation:pulse 2s infinite}
-@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(197,160,89,.4)}70%{box-shadow:0 0 0 12px rgba(197,160,89,0)}100%{box-shadow:0 0 0 0 rgba(197,160,89,0)}}
+@keyframes pulse{
+  0%{box-shadow:0 0 0 0 rgba(197,160,89,.4)}
+  70%{box-shadow:0 0 0 12px rgba(197,160,89,0)}
+  100%{box-shadow:0 0 0 0 rgba(197,160,89,0)}
+}
 
-/* ---------- هدر ---------- */
+/* ---------- محتوای دعوتنامه ---------- */
 header{padding:50px 25px 30px;text-align:center;background:linear-gradient(180deg,#f7f3ee,var(--bg))}
 .monogram{font-family:'Playfair Display',serif;font-size:1.8rem;color:var(--gold);letter-spacing:4px;display:inline-block;border-bottom:1px solid var(--border);padding-bottom:5px;margin-bottom:15px}
 .title-sub{font-size:.85rem;letter-spacing:2px;color:var(--muted);margin-bottom:10px}
 .couple-names{font-family:'Great Vibes','Vazirmatn',cursive;font-size:2.8rem;font-weight:400;color:var(--accent);margin:10px 0}
 .wedding-date{font-size:.95rem;color:var(--accent);font-weight:500}
 
-/* ---------- شمارش معکوس ---------- */
 .countdown-section{padding:10px 25px 30px}
 .countdown-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:25px 15px;box-shadow:var(--card);text-align:center}
 .countdown-title{font-size:.85rem;color:var(--muted);margin-bottom:18px}
@@ -63,7 +88,6 @@ header{padding:50px 25px 30px;text-align:center;background:linear-gradient(180de
 .time-number{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:600;color:var(--accent)}
 .time-label{font-size:.7rem;color:var(--muted);margin-top:6px}
 
-/* ---------- تایم‌لاین ---------- */
 .section-title{text-align:center;font-size:1.25rem;margin-bottom:25px;position:relative}
 .section-title::after{content:"";display:block;width:30px;height:2px;background:var(--gold);margin:8px auto 0}
 .timeline-section{padding:20px 25px 35px}
@@ -77,7 +101,6 @@ header{padding:50px 25px 30px;text-align:center;background:linear-gradient(180de
 .timeline-title{font-size:.95rem;font-weight:600}
 .timeline-desc{font-size:.8rem;color:var(--muted);margin-top:3px}
 
-/* ---------- مکان ---------- */
 .location-section{padding:10px 25px 35px}
 .location-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:25px 20px;text-align:center;box-shadow:var(--card)}
 .loc-icon{font-size:1.8rem;color:var(--accent);margin-bottom:12px}
@@ -85,7 +108,6 @@ header{padding:50px 25px 30px;text-align:center;background:linear-gradient(180de
 .hall-address{font-size:.85rem;color:var(--muted);line-height:1.6;margin-bottom:20px}
 .btn-map{display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;background:var(--accent);color:#fff;border-radius:12px;font-size:.9rem;font-weight:500;text-decoration:none}
 
-/* ---------- RSVP ---------- */
 .rsvp-section{padding:10px 25px 40px}
 .rsvp-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:25px 20px;box-shadow:var(--card)}
 .form-group{margin-bottom:15px}
@@ -98,27 +120,31 @@ footer{text-align:center;padding:20px 20px 40px;font-size:.8rem;color:var(--mute
 </head>
 <body>
 
-<!-- اسپلش اسکرین ویدیویی -->
+<!-- صفحه خوش‌آمد و ویدیو -->
 <div id="splash">
-  <video id="introVideo" playsinline muted autoplay onclick="enterWebsite()">
+  <div class="start-overlay" id="startOverlay" onclick="startExperience()">
+    <h2>Narges & Mahdi</h2>
+    <div class="start-ring">
+      <i class="fa-solid fa-play"></i>
+    </div>
+    <p>برای مشاهده دعوتنامه لمس کنید</p>
+  </div>
+  
+  <video id="introVideo" playsinline>
     <source src="intro.mp4" type="video/mp4">
   </video>
-  <div class="splash-overlay">
-    <p>نرگس و مهدی</p>
-    <button class="enter-btn" onclick="enterWebsite()">
-      <span>مشاهده دعوتنامه</span>
-      <i class="fa-solid fa-arrow-left"></i>
-    </button>
-  </div>
+  
+  <button class="skip-btn" id="skipBtn" onclick="openInvitation()">
+    رد کردن ویدیو <i class="fa-solid fa-chevron-left"></i>
+  </button>
 </div>
 
-<!-- دکمه موزیک -->
+<!-- دکمه موزیک شناور -->
 <div class="music-toggle" id="musicToggle" onclick="toggleAudio()">
   <i class="fa-solid fa-volume-high" id="musicIcon"></i>
 </div>
 
 <div class="container">
-
   <header>
     <div class="monogram">N & M</div>
     <div class="title-sub">به جشن پیوند ما خوش آمدید</div>
@@ -204,25 +230,38 @@ footer{text-align:center;padding:20px 20px 40px;font-size:.8rem;color:var(--mute
 </div>
 
 <script>
-// ورود به صفحه اصلی
-let entered = false;
-function enterWebsite(){
-  if(entered) return;
-  entered = true;
-  const splash = document.getElementById('splash');
-  const video = document.getElementById('introVideo');
+const video = document.getElementById('introVideo');
+const startOverlay = document.getElementById('startOverlay');
+const skipBtn = document.getElementById('skipBtn');
+const splash = document.getElementById('splash');
+
+// ۱. با لمس صفحه، ویدیو با صدا شروع به پخش می‌شود
+function startExperience() {
+  startOverlay.style.display = 'none';
+  video.style.display = 'block';
+  skipBtn.style.display = 'block';
+  
+  video.play().catch(err => {
+    // اگر به خاطر محدودیت مرورگر اجازه پخش با صدا نداد، بدون صدا پخش کند
+    video.muted = true;
+    video.play();
+  });
+}
+
+// ۲. با اتمام ویدیو خودکار وارد صفحه دعوت‌نامه می‌شود
+video.addEventListener('ended', openInvitation);
+
+// ۳. باز شدن دعوت‌نامه و ناپدید شدن ویدیو
+let isOpened = false;
+function openInvitation() {
+  if (isOpened) return;
+  isOpened = true;
   splash.classList.add('hidden');
-  if(video) video.pause();
+  video.pause();
   startMusic();
 }
 
-// وقتی ویدیو تمام شد خودکار وارد بشه
-const introVid = document.getElementById('introVideo');
-if(introVid){
-  introVid.addEventListener('ended', enterWebsite);
-}
-
-// تایمر معکوس (۲۴ مهر ۱۴۰۵ ساعت ۱۹:۰۰)
+// تایمر معکوس
 const target = new Date('2026-10-16T19:00:00+03:30').getTime();
 function updateCountdown(){
   const diff = target - new Date().getTime();
@@ -238,7 +277,7 @@ function updateCountdown(){
 setInterval(updateCountdown, 1000);
 updateCountdown();
 
-// موزیک پس‌زمینه
+// کنترل موزیک
 let audio = null;
 let isPlaying = false;
 function startMusic(){
@@ -250,52 +289,6 @@ function startMusic(){
     toggle.classList.add('show', 'playing');
     document.getElementById('musicIcon').className = 'fa-solid fa-pause';
   }).catch(() => {
-    // اگر فایل نبود یا کاربر موزیک نخواست
-    toggle.classList.add('show');
-  });
-}
-
-function toggleAudio(){
-  if(!audio) return;
-  const toggle = document.getElementById('musicToggle');
-  const icon = document.getElementById('musicIcon');
-  if(isPlaying){
-    audio.pause();
-    icon.className = 'fa-solid fa-volume-high';
-    toggle.classList.remove('playing');
-  } else {
-    audio.play();
-    icon.className = 'fa-solid fa-pause';
-    toggle.classList.add('playing');
-  }
-  isPlaying = !isPlaying;
-}
-
-// ارسال به واتساپ
-function sendRSVP(){
-  const name = document.getElementById('guestName').value.trim();
-  const count = document.getElementById('guestCount').value;
-  const msg = document.getElementById('guestMessage').value.trim();
-  if(Math.floor((diff / (1000 * 60 * 60)) % 24)).padStart(2, '0');
-  document.getElementById('minutes').innerText = String(Math.floor((diff / (1000 * 60)) % 60)).padStart(2, '0');
-  document.getElementById('seconds').innerText = String(Math.floor((diff / 1000) % 60)).padStart(2, '0');
-}
-setInterval(updateCountdown, 1000);
-updateCountdown();
-
-// موزیک پس‌زمینه
-let audio = null;
-let isPlaying = false;
-function startMusic(){
-  const toggle = document.getElementById('musicToggle');
-  audio = new Audio('music.mp3');
-  audio.loop = true;
-  audio.play().then(() => {
-    isPlaying = true;
-    toggle.classList.add('show', 'playing');
-    document.getElementById('musicIcon').className = 'fa-solid fa-pause';
-  }).catch(() => {
-    // اگر فایل نبود یا کاربر موزیک نخواست
     toggle.classList.add('show');
   });
 }
@@ -331,4 +324,3 @@ function sendRSVP(){
 </script>
 </body>
 </html>
-``
