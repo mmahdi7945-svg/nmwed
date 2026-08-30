@@ -2,10 +2,9 @@
 <html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>پیوند نرگس و مهدی | ۲۴ مهر ۱۴۰۵</title>
     
-    <!-- فونت‌ها -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,600;1,400&family=Vazirmatn:wght@300;400;500;700;800&display=swap" rel="stylesheet">
@@ -16,8 +15,8 @@
             --gold-light: #f7e7a9;
             --gold-dark: #8c6d23;
             --bg-dark: #08080a;
-            --card-bg: rgba(20, 20, 25, 0.68);
-            --card-border: rgba(212, 175, 55, 0.28);
+            --card-bg: rgba(20, 20, 25, 0.75);
+            --card-border: rgba(212, 175, 55, 0.35);
         }
 
         * {
@@ -50,122 +49,79 @@
             pointer-events: none;
         }
 
-        /* اسپلش اسکرین ویدیویی */
+        /* اسپلش اسکرین ویدیویی کاملاً تمیز */
         #splash-screen {
             position: fixed;
-            inset: 0;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
             background: #000;
-            z-index: 9999;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1), visibility 1s ease;
-        }
-
-        .video-container {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
+            z-index: 99999;
             overflow: hidden;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
         }
 
         #intro-video {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: 0.55;
-            filter: brightness(0.9) contrast(1.1);
+            display: block;
         }
 
-        .splash-overlay {
+        /* دکمه مینیمال و شیک رد کردن ویدیو */
+        .btn-skip {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.65);
+            border: 1px solid var(--gold-primary);
+            color: var(--gold-light);
+            padding: 12px 28px;
+            border-radius: 30px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            font-family: 'Vazirmatn', sans-serif;
+            cursor: pointer;
+            backdrop-filter: blur(8px);
+            z-index: 100000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-skip:active {
+            transform: translateX(-50%) scale(0.95);
+            background: rgba(212, 175, 55, 0.25);
+        }
+
+        /* محتوای اصلی */
+        .main-wrapper {
             position: relative;
-            z-index: 2;
+            z-index: 10;
+            width: 100%;
+            max-width: 440px;
+            padding: 30px 18px 70px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* کارت‌های شیشه‌ای */
+        .glass-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid var(--card-border);
+            border-radius: 26px;
+            padding: 24px 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
             text-align: center;
-            padding: 30px;
-            max-width: 420px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .splash-subtitle {
-            font-size: 0.95rem;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: var(--gold-light);
-            margin-bottom: 8px;
-            opacity: 0.85;
-        }
-
-        .splash-names {
-            font-family: 'Great Vibes', cursive;
-            font-size: 3.8rem;
-            color: var(--gold-light);
-            text-shadow: 0 0 25px rgba(212, 175, 55, 0.7);
-            margin-bottom: 25px;
-            line-height: 1.2;
-        }
-
-        .btn-enter {
-            background: linear-gradient(135deg, var(--gold-light), var(--gold-primary), var(--gold-dark));
-            color: #0d0d0e;
-            border: none;
-            padding: 16px 40px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            font-family: 'Vazirmatn', sans-serif;
-            border-radius: 50px;
-            cursor: pointer;
-            box-shadow: 0 8px 30px rgba(212, 175, 55, 0.45);
-            animation: pulse-glow 2.220px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .splash-subtitle {
-            font-size: 0.95rem;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: var(--gold-light);
-            margin-bottom: 8px;
-            opacity: 0.85;
-        }
-
-        .splash-names {
-            font-family: 'Great Vibes', cursive;
-            font-size: 3.8rem;
-            color: var(--gold-light);
-            text-shadow: 0 0 25px rgba(212, 175, 55, 0.7);
-            margin-bottom: 25px;
-            line-height: 1.2;
-        }
-
-        .btn-enter {
-            background: linear-gradient(135deg, var(--gold-light), var(--gold-primary), var(--gold-dark));
-            color: #0d0d0e;
-            border: none;
-            padding: 16px 40px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            font-family: 'Vazirmatn', sans-serif;
-            border-radius: 50px;
-            cursor: pointer;
-            box-shadow: 0 8px 30px rgba(212, 175, 55, 0.45);
-            animation: pulse-glow 2.2s infinite;
-            transition: transform 0.2s ease;
-        }
-
-        .btn-enter:active {
-            transform: scale(0.96);
-        }
-
-        @keyframes pulse-glow {
-            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7); }
-            70% { transform: scale(1.04); box-shadow: 0 0 0 16px rgba(212, 175, 55, 0); }
-            100% { transform: scale, 1);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .glass-card.revealed {
@@ -173,7 +129,7 @@
             transform: translateY(0);
         }
 
-        /* هدر اصلی */
+        /* هدر */
         .header-section h1 {
             font-family: 'Great Vibes', cursive;
             font-size: 3.6rem;
@@ -202,7 +158,6 @@
             border: 1px solid rgba(212, 175, 55, 0.35);
             border-radius: 18px;
             padding: 12px 4px;
-            position: relative;
         }
 
         .timer-val {
@@ -219,7 +174,7 @@
             margin-top: 4px;
         }
 
-        /* بخش زمان و برنامه */
+        /* برنامه مراسم */
         .timeline-item {
             display: flex;
             align-items: center;
@@ -254,7 +209,6 @@
             text-decoration: none;
             font-size: 0.9rem;
             font-weight: 500;
-            transition: all 0.2s ease;
         }
 
         .btn-map:active {
@@ -297,6 +251,28 @@
 
         .btn-rsvp {
             width: 100%;
+            background: linear-gradient(135deg, #25D366,display: block;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 14px;
+            color: #fff;
+            font-family: 'Vazirmatn', sans-serif;
+            font-size: 0.95rem;
+            outline: none;
+        }
+
+        .form-input:focus {
+            border-color: var(--gold-light);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-rsvp {
+            width: 100%;
             background: linear-gradient(135deg, #25D366, #128C7E);
             color: #fff;
             border: none;
@@ -318,32 +294,7 @@
         #music-ctrl {
             position: fixed;
             top: 20px;
-            left: 20px;
-            width: 46px;
-            height: 46px;
-            border-radius: 50%;
-            background: rgba(10, 10, 12, 0.75);
-            border: 1px solid var(--gold-primary);
-            color: var(--gold-light);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.25rem;
-            z-index: 1000;
-            cursor: pointer;
-            backdrop-filter: blur(8px);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-            transition: transform 0.3s ease;
-        }
-
-        #music-ctrl.playing {
-            animation: rotate-music 6s linear infinite;
-        }
-
-        @keyframes rotate-music {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
+            left        }
     </style>
 </head>
 <body>
@@ -351,47 +302,43 @@
     <!-- بوم ذرات طلایی -->
     <canvas id="particle-canvas"></canvas>
 
-    <!-- دکمه شناور موزیک -->
+    <!-- کنترلر شناور موزیک -->
     <div id="music-ctrl" onclick="toggleAudio()">🎵</div>
     <audio id="wedding-audio" loop preload="auto" src="music.mp3"></audio>
 
-    <!-- اسپلش اسکرین ویدیویی ورودی -->
+    <!-- ویدیوی اول (کاملاً تمیز و بدون متن اضافه) -->
     <div id="splash-screen">
-        <div class="video-container">
-            <!-- پشتیبانی از نام‌های ممکن فایل ویدیو -->
-            <video id="intro-video" playsinline webkit-playsinline muted loop autoplay preload="auto">
-                <source src="intro.mp4" type="video/mp4">
-                <source src="Videos/intro.mp4" type="video/mp4">
-            </video>
-        </div>
-        <div class="splash-overlay">
-            <span class="splash-subtitle">SAV THE DATE</span>
-            <div class="splash-names">Narges & Mahdi</div>
-            <button class="btn-enter" onclick="startExperience()">مشاهده دعوت‌نامه 💍</button>
-        </div>
+        <video id="intro-video" playsinline webkit-playsinline muted autoplay preload="auto" onended="closeSplash()">
+            <source src="intro.mp4" type="video/mp4">
+            <source src="Videos/intro.mp4" type="video/mp4">
+        </video>
+        <button class="btn-skip" onclick="closeSplash()">
+            <span>ورود به کارت دعوت</span>
+            <span>←</span>
+        </button>
     </div>
 
-    <!-- محتوای اصلی -->
+    <!-- محتوای اصلی کارت -->
     <div class="main-wrapper">
         
-        <!-- هدر -->
+        <!-- هدر نام‌ها -->
         <div class="glass-card header-section">
             <h1>Narges & Mahdi</h1>
             <p>در انتظار حضور گرم شما برای ثبت یک خاطره ماندگار</p>
         </div>
 
-        <!-- تایمر معکوس -->
+        <!-- شمارش معکوس -->
         <div class="glass-card">
             <h3 style="color: var(--gold-light); font-size: 1.05rem; margin-bottom: 5px;">شمارش معکوس تا جشن پیوند</h3>
             <div class="timer-grid">
                 <div class="timer-unit"><div class="timer-val" id="days">۰۰</div><div class="timer-tag">روز</div></div>
-                <div class="timer-unit"><div class="timer-val" id="hours">۰۰</div><div class="timer-tag">ساعت</div></div
+                <div class="timer-unit"><div class="timer-val" id="hours">۰۰</div><div class="timer-tag">ساعت</div></div>
                 <div class="timer-unit"><div class="timer-val" id="minutes">۰۰</div><div class="timer-tag">دقیقه</div></div>
                 <div class="timer-unit"><div class="timer-val" id="seconds">۰۰</div><div class="timer-tag">ثانیه</div></div>
             </div>
         </div>
 
-        <!-- جزئیات زمان و تاریخ -->
+        <!-- برنامه و جزئیات -->
         <div class="glass-card">
             <h3 style="color: var(--gold-primary); margin-bottom: 15px;">برنامه مراسم</h3>
             <div class="timeline-item">
@@ -399,7 +346,7 @@
                 <strong style="color: var(--gold-light);">پنج‌شنبه، ۲۴ مهر ۱۴۰۵</strong>
             </div>
             <div class="timeline-item">
-                <span>ساعت پذیرایی و شام:</span>
+                <span>ساعت مراسم:</span>
                 <span>۱۹:۰۰ الی ۲۳:۳۰</span>
             </div>
             <div class="timeline-item">
@@ -410,25 +357,24 @@
 
         <!-- مسیریابی -->
         <div class="glass-card">
-            <h3 style="color: var(--gold-primary); margin-bottom: 8px;">مسیریابی به باغ تالار</h3>
-            <p style="font-size: 0.88rem; color: #b5b5b5;">برای دسترسی آسان‌تر از نرم‌افزارهای زیر استفاده کنید:</p>
+            <h3 style="color: var(--gold-primary); margin-bottom: 8px;">مسیریابی به تالار</h3>
+            <p style="font-size: 0.88rem; color: #b5b5b5;">جهت سهولت در دسترسی، نرم‌افزار مورد نظر را انتخاب کنید:</p>
             <div class="map-buttons">
-                <!-- در صورت داشتن لوکیشن، لینک‌های مقصد جایگزین می‌شوند -->
-                <a href="https://nshn.ir" target="_blank" class="btn-map">🗺️ مسیریابی با نشان</a>
-                <a href="https://balad.ir" target="_blank" class="btn-map">🧭 مسیریابی با بلد</a>
-                <a href="https://maps.google.com" target="_blank" class="btn-map" style="grid-column: span 2;📍 باز کردن در گوگل مپ</a>
+                <a href="https://nshn.ir" target="_blank" class="btn-map">🗺️ نقشه نشان</a>
+                <a href="https://balad.ir" target="_blank" class="btn-map">🧭 نقشه بلد</a>
+                <a href="https://maps.google.com" target="_blank" class="btn-map" style="grid-column: span 2;">📍 گوگل مپ (Google Maps)</a>
             </div>
         </div>
 
-        <!-- فرم هوشمند RSVP و تایید حضور -->
+        <!-- فرم ثبت حضور -->
         <div class="glass-card">
             <h3 style="color: var(--gold-primary); margin-bottom: 6px;">اعلام حضور (RSVP)</h3>
-            <p style="font-size: 0.85rem; color: #aaa;">لطفاً با ثبت اطلاعات خود ما را در میزبانی بهتر یاری فرمایید.</p>
+            <p style="font-size: 0.85rem; color: #aaa;">لطفاً با ثبت نام خود ما را در هماهنگی بهتر یاری فرمایید.</p>
             
             <form class="rsvp-form" onsubmit="submitRSVP(event)">
                 <div class="form-group">
                     <label>نام و نام خانوادگی:</label>
-                    <input type="text" i="guest-name" class="form-input" placeholder="مثال: علی رضایی" required>
+                    <input type="text" id="guest-name" class="form-input" placeholder="مثال: علی رضایی" required>
                 </div>
                 <div class="form-group">
                     <label>تعداد همراهان:</label>
@@ -436,4 +382,144 @@
                 </div>
                 <button type="submit" class="btn-rsvp">
                     <span>ارسال تایید حضور در واتساپ</span>
-                    <svg width="20" height="20" fill="currentColor" viewBox="0 
+                </button>
+            </form>
+        </div>
+
+    </div>
+
+    <script>
+        // ۱. بستن ویدیو و ورود به کارت با اطمینان ۱۰۰٪
+        const audio = document.getElementById('wedding-audio');
+        const musicCtrl = document.getElementById('music-ctrl');
+        let splashClosed = false;
+
+        function closeSplash() {
+            if (splashClosed) return;
+            splashClosed = true;
+
+            const splash = document.getElementById('splash-screen');
+            const video = document.getElementById('intro-video');
+            
+            // خاموش کردن ویدیو برای مصرف کمتر باتری و اینترنت
+            if (video) {
+                video.pause();
+            }
+
+            splash.style.opacity = '0';
+            setTimeout(() => {
+                splash.style.display = 'none';
+                // اجرای انیمیشن کارت‌ها بلافاصله پس از ورود
+                revealCards();
+            }, 800);
+
+            // تلاش برای پخش خودکار موزیک با لمس کاربر
+            audio.play().then(() => {
+                musicCtrl.classList.add('playing');
+            }).catch(e => {
+                console.log("Audio requires manual interaction");
+            });
+        }
+
+        // ۲. انیمیشن باز شدن کارت‌ها
+        function revealCards() {
+            const cards = document.querySelectorAll('.glass-card');
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.classList.add('revealed');
+                }, index * 180);
+            });
+        }
+
+        // ۳. کنترل موزیک
+        function toggleAudio() {
+            if (audio.paused) {
+                audio.play();
+                musicCtrl.classList.add('playing');
+                musicCtrl.innerText = '🎵';
+            } else {
+                audio.pause();
+                musicCtrl.classList.remove('playing');
+                musicCtrl.innerText = '🔇';
+            }
+        }
+
+        // ۴. انیمیشن ذرات معلق طلایی
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() { this.reset(); }
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.8;
+                this.speedY = Math.random() * 0.4 + 0.15;
+                this.speedX = (Math.random() - 0.5) * 0.25;
+                this.opacity = Math.random() * 0.5 + 0.2;
+            }
+            update() {
+                this.y -= this.speedY;
+                this.x += this.speedX;
+                if (this.y < 0) this.y = canvas.height;
+                if (this.x < 0 || this.x > canvas.width) this.x = Math.random() * canvas.width;
+            }
+            draw() {
+                ctx.fillStyle = `rgba(212, 175, 55, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        for (let i = 0; i < 40; i++) { particles.push(new Particle()); }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => { p.update(); p.draw(); });
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+
+        // ۵. تایمر معکوس برای ۲۴ مهر ۱۴۰۵
+        function updateTimer() {
+            const targetDate = new Date('2026-10-16T19:00:00').getTime();
+            const now = new Date().getTime();
+            const diff = targetDate - now;
+
+            if (diff > 0) {
+                const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+                document.getElementById('days').innerText = d < 10 ? '0' + d : d;
+                document.getElementById('hours').innerText = h < 10 ? '0' + h : h;
+                document.getElementById('minutes').innerText = m < 10 ? '0' + m : m;
+                document.getElementById('seconds').innerText = s < 10 ? '0' + s : s;
+            }
+        }
+        setInterval(updateTimer, 1000);
+        updateTimer();
+
+        // ۶. ارسال اطلاعات فرم به واتساپ
+        function submitRSVP(e) {
+            e.preventDefault();
+            const name = document.getElementById('guest-name').value;
+            const count = document.getElementById('guest-count').value;
+            const phone = "989120000000"; // شماره واتساپ خود را اینجا تنظیم کنید
+            
+            const message = encodeURIComponent(`سلام، با کمال افتخار در جشن پیوند نرگس و مهدی شرکت می‌کنم.\nنام: ${name}\nتعداد همراهان: ${count}`);
+            window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
+        }
+    </script>
+</body>
+</html>
