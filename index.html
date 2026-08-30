@@ -1,743 +1,139 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>جشن پیوند نرگس و مهدی ✨</title>
-<!-- فونت‌های اختصاصی لوکس -->
-<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Great+Vibes&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دعوت‌نامه اختصاصی نرگس و مهدی</title>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;700&family=Playfair+Display:ital,wght@0,600;1,600&family=Great+Vibes&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #c5a059;
+            --dark-glass: rgba(15, 15, 15, 0.4);
+            --border-glass: rgba(255, 255, 255, 0.1);
+        }
 
-<style>
-:root {
-  --bg-gradient: linear-gradient(135deg, #181512 0%, #2a241e 50%, #161311 100%);
-  --gold-primary: #d4af37;
-  --gold-light: #f3e5ab;
-  --gold-dark: #aa820a;
-  --text-main: #f5f2eb;
-  --text-muted: #b8aba0;
-  --glass-bg: rgba(255, 255, 255, 0.05);
-  --glass-border: rgba(212, 175, 55, 0.22);
-  --glass-glow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-  --radius-card: 24px;
-}
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            background: radial-gradient(circle at top right, #2a2520, #0a0a0a);
+            color: #fff;
+            font-family: 'Vazirmatn', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            overflow-x: hidden;
+        }
 
-* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+        .container {
+            width: 100%;
+            max-width: 450px;
+            padding: 20px;
+            position: relative;
+        }
 
-body {
-  font-family: 'Vazirmatn', sans-serif;
-  background: #0d0b09;
-  color: var(--text-main);
-  display: flex;
-  justify-content: center;
-  min-height: 100vh;
-  overflow-x: hidden;
-  position: relative;
-}
+        /* --- افکت شیشه‌ای پیشرفته --- */
+        .glass-card {
+            background: var(--dark-glass);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-glass);
+            border-radius: 30px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            margin-bottom: 25px;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
 
-/* افکت پس‌زمینه زنده و متحرک */
-.bg-ambient {
-  position: fixed;
-  inset: 0;
-  background: var(--bg-gradient);
-  z-index: 0;
-}
-.ambient-circle {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.18;
-  animation: floatOrb 12s ease-in-out infinite alternate;
-  pointer-events: none;
-}
-.orb-1 { width: 300px; height: 300px; background: var(--gold-primary); top: 10%; left: -50px; }
-.orb-2 { width: 250px; height: 250px; background: #966f33; bottom: 20%; right: -50px; animation-delay: -5s; }
+        /* --- انیمیشن ورود سکانسی --- */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .fade-in-up.active { opacity: 1; transform: translateY(0); }
 
-@keyframes floatOrb {
-  0% { transform: translateY(0) scale(1); }
-  100% { transform: translateY(50px) scale(1.15); }
-}
+        /* --- تایمر لوکس --- */
+        .timer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            text-align: center;
+        }
+        .timer-box {
+            background: rgba(255,255,255,0.05);
+            padding: 15px 5px;
+            border-radius: 15px;
+            border: 1px solid var(--gold);
+        }
+        .timer-num { font-family: 'Playfair Display'; font-size: 1.5rem; color: var(--gold); }
+        .timer-label { font-size: 0.7rem; opacity: 0.7; }
 
-/* بوم پارتیکل‌های طلایی */
-#particles-canvas {
-  position: fixed;
-  top: 0; left: 0; width: 100%; height: 100%;
-  pointer-events: none;
-  z-index: 1;
-}
+        /* --- دکمه‌های درخشان --- */
+        .btn-fancy {
+            width: 100%;
+            padding: 18px;
+            border: none;
+            border-radius: 20px;
+            background: linear-gradient(45deg, #b8860b, #daa520);
+            color: #000;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(218, 165, 32, 0.3);
+            transition: 0.3s;
+        }
+        .btn-fancy:hover { transform: scale(1.02); filter: brightness(1.2); }
 
-/* کانتینر گوشی */
-.container {
-  width: 100%;
-  max-width: 440px;
-  min-height: 100vh;
-  position: relative;
-  z-index: 2;
-  padding-bottom: 60px;
-  background: rgba(18, 15, 13, 0.65);
-  backdrop-filter: blur(16px);
-  border-left: 1px solid rgba(212,175,55,0.1);
-  border-right: 1px solid rgba(212,175,55,0.1);
-  box-shadow: 0 0 70px rgba(0,0,0,0.8);
-}
-
-/* ---------- اسپلش اسکرین ویدیویی اختصاصی ---------- */
-#splash {
-  position: fixed;
-  top: 0; left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  max-width: 440px;
-  height: 100vh;
-  background: #080706;
-  z-index: 9999;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1), visibility 1s;
-}
-#splash.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
-#introVideo { width: 100%; height: 100%; object-fit: cover; display: none; }
-
-.start-overlay {
-  position: absolute; inset: 0;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  background: radial-gradient(circle at center, rgba(35, 28, 20, 0.9) 0%, rgba(10, 8, 7, 0.98) 100%);
-  text-align: center; padding: 25px; cursor: pointer;
-}
-.luxury-ring {
-  width: 90px; height: 90px;
-  border-radius: 50%;
-  border: 1.5px solid var(--gold-light);
-  display: flex; align-items: center; justify-content: center;
-  margin-bottom: 25px;
-  background: rgba(212, 175, 55, 0.08);
-  box-shadow: 0 0 25px rgba(212, 175, 55, 0.3);
-  animation: pulseGold 2.4s infinite;
-}
-.luxury-ring i { font-size: 28px; color: var(--gold-light); margin-left: 4px; }
-
-@keyframes pulseGold {
-  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.6); }
-  70% { transform: scale(1.05); box-shadow: 0 0 0 25px rgba(212, 175, 55, 0); }
-  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
-}
-
-.start-names {
-  font-family: 'Great Vibes', cursive;
-  font-size: 3.2rem;
-  background: linear-gradient(135deg, #fff, var(--gold-light), var(--gold-primary));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin-bottom: 8px;
-}
-.start-tip {
-  font-size: 0.95rem;
-  color: var(--text-muted);
-  letter-spacing: 1px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.skip-btn {
-  position: absolute; bottom: 35px; right: 25px;
-  background: rgba(18, 15, 13, 0.7);
-  backdrop-filter: blur(10px);
-  border: 1px solid var(--glass-border);
-  color: var(--gold-light);
-  padding: 9px 20px; border-radius: 30px;
-  font-size: 0.82rem; font-family: inherit;
-  cursor: pointer; display: none; z-index: 10;
-  transition: all 0.3s;
-}
-.skip-btn:hover { background: var(--gold-primary); color: #111; }
-
-/* دکمه موزیک شناور */
-.music-toggle {
-  position: fixed; top: 25px; left: 25px;
-  width: 44px; height: 44px;
-  background: rgba(25, 20, 15, 0.75);
-  backdrop-filter: blur(12px);
-  border: 1px solid var(--glass-border);
-  border-radius: 50%;
-  display: none; align-items: center; justify-content: center;
-  color: var(--gold-light);
-  cursor: pointer; z-index: 100;
-  box-shadow: var(--glass-glow);
-  transition: all 0.3s;
-}
-.music-toggle.show { display: flex; }
-.music-toggle.playing { animation: pulseMusic 2s infinite; }
-@keyframes pulseMusic {
-  0% { box-shadow: 0 0 0 0 rgba(212,175,55,0.4); }
-  70% { box-shadow: 0 0 0 14px rgba(212,175,55,0); }
-  100% { box-shadow: 0 0 0 0 rgba(212,175,55,0); }
-}
-
-/* انیمیشن ظاهر شدن المان‌ها هنگام اسکرول */
-.reveal {
-  opacity: 0;
-  transform: translateY(35px);
-  transition: opacity 0.9s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-.reveal.active {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* هدر لوکس */
-header {
-  padding: 60px 25px 35px;
-  text-align: center;
-  position: relative;
-}
-.monogram-badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 75px; height: 75px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(212,175,55,0.15) 0%, rgba(255,255,255,0.02) 100%);
-  border: 1px solid var(--glass-border);
-  font-family: 'Playfair Display', serif;
-  font-size: 1.6rem;
-  color: var(--gold-light);
-  margin-bottom: 20px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-}
-.sub-title {
-  font-size: 0.85rem;
-  letter-spacing: 3px;
-  color: var(--gold-primary);
-  text-transform: uppercase;
-  margin-bottom: 12px;
-  font-weight: 500;
-}
-.main-couple-title {
-  font-family: 'Great Vibes', 'Vazirmatn', cursive;
-  font-size: 3.5rem;
-  font-weight: 400;
-  background: linear-gradient(180deg, #fff 20%, var(--gold-light) 70%, var(--gold-dark) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  line-height: 1.2;
-  margin-bottom: 15px;
-}
-.date-badge {
-  display: inline-block;
-  padding: 6px 20px;
-  background: rgba(212,175,55,0.1);
-  border: 1px solid rgba(212,175,55,0.25);
-  border-radius: 30px;
-  font-size: 0.9rem;
-  color: #fff;
-  font-weight: 500;
-}
-
-/* کارت‌های شیشه‌ای مشترک */
-.glass-card {
-  background: var(--glass-bg);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-card);
-  padding: 26px 22px;
-  box-shadow: var(--glass-glow);
-  position: relative;
-  overflow: hidden;
-}
-.glass-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: -100%; width: 100%; height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.04), transparent);
-  animation: shineCard 6s infinite;
-}
-@keyframes shineCard {
-  0% { left: -100%; }
-  20% { left: 100%; }
-  100% { left: 100%; }
-}
-
-/* بخش شمارش معکوس */
-.section-pad { padding: 15px 22px 30px; }
-.card-header-title {
-  font-size: 0.9rem;
-  color: var(--text-muted);
-  text-align: center;
-  margin-bottom: 22px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-}
-.card-header-title::before, .card-header-title::after {
-  content: ''; width: 25px; height: 1px; background: rgba(212,175,55,0.3);
-}
-.timer-container {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
-}
-.timer-unit {
-  background: rgba(10, 8, 7, 0.45);
-  border: 1px solid rgba(212, 175, 55, 0.15);
-  border-radius: 16px;
-  padding: 14px 4px;
-  text-align: center;
-  transition: transform 0.3s;
-}
-.timer-unit:hover { transform: translateY(-3px); border-color: var(--gold-primary); }
-.timer-digit {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.7rem;
-  font-weight: 700;
-  color: var(--gold-light);
-  line-height: 1;
-}
-.timer-unit-label {
-  font-size: 0.7rem;
-  color: var(--text-muted);
-  margin-top: 6px;
-  font-weight: 400;
-}
-
-/* بخش تایم‌لاین */
-.luxury-title {
-  text-align: center;
-  font-size: 1.35rem;
-  font-weight: 700;
-  margin-bottom: 28px;
-  color: #fff;
-  position: relative;
-}
-.luxury-title span { color: var(--gold-light); }
-.luxury-title::after {
-  content: '❖';
-  display: block;
-  font-size: 0.8rem;
-  color: var(--gold-primary);
-  margin-top: 6px;
-}
-
-.timeline {
-  position: relative;
-  padding-right: 30px;
-}
-.timeline::before {
-  content: '';
-  position: absolute;
-  top: 15px; bottom: 15px; right: 8px;
-  width: 2px;
-  background: linear-gradient(180deg, var(--gold-primary) 0%, rgba(212,175,55,0.1) 100%);
-}
-.timeline-step {
-  position: relative;
-  margin-bottom: 24px;
-}
-.timeline-step:last-child { margin-bottom: 0; }
-.timeline-marker {
-  position: absolute;
-  right: -30px; top: 8px;
-  width: 18px; height: 18px;
-  border-radius: 50%;
-  background: #110e0b;
-  border: 2px solid var(--gold-primary);
-  box-shadow: 0 0 10px rgba(212,175,55,0.5);
-  display: flex; align-items: center; justify-content: center;
-}
-.timeline-marker::after {
-  content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--gold-light);
-}
-.timeline-inner {
-  background: rgba(20, 17, 14, 0.5);
-  border: 1px solid rgba(212,175,55,0.15);
-  border-radius: 18px;
-  padding: 16px 18px;
-  transition: all 0.3s;
-}
-.timeline-inner:hover {
-  background: rgba(30, 25, 20, 0.7);
-  border-color: rgba(212,175,55,0.4);
-}
-.step-time {
-  font-family: 'Playfair Display', serif;
-  font-size: 0.95rem;
-  color: var(--gold-light);
-  font-weight: 600;
-  margin-bottom: 4px;
-}
-.step-name { font-size: 1rem; font-weight: 600; color: #fff; }
-.step-info { font-size: 0.8rem; color: var(--text-muted); margin-top: 4px; }
-
-/* بخش لوکیشن */
-.loc-icon-wrap {
-  width: 55px; height: 55px;
-  border-radius: 50%;
-  background: rgba(212,175,55,0.1);
-  border: 1px solid var(--glass-border);
-  display: flex; align-items: center; justify-content: center;
-  margin: 0 auto 16px;
-  color: var(--gold-light);
-  font-size: 1.4rem;
-}
-.location-name { font-size: 1.15rem; font-weight: 700; color: #fff; margin-bottom: 6px; text-align: center; }
-.location-addr { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; text-align: center; margin-bottom: 22px; }
-.btn-gold {
-  display: flex; align-items: center; justify-content: center; gap: 10px;
-  width: 100%; padding: 14px;
-  background: linear-gradient(135deg, var(--gold-primary) 0%, var(--gold-dark) 100%);
-  color: #110e0b;
-  border: none; border-radius: 14px;
-  font-size: 0.92rem; font-weight: 700;
-  text-decoration: none; font-family: inherit;
-  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.25);
-  transition: all 0.3s;
-}
-.btn-gold:active { transform: scale(0.98); }
-
-/* بخش فرم RSVP */
-.form-item { margin-bottom: 18px; }
-.form-item label { display: block; font-size: 0.82rem; color: var(--text-muted); margin-bottom: 7px; }
-.glass-input {
-  width: 100%;
-  padding: 13px 16px;
-  background: rgba(10, 8, 7, 0.6);
-  border: 1px solid rgba(212,175,55,0.2);
-  border-radius: 12px;
-  color: #fff;
-  font-family: inherit;
-  font-size: 0.9rem;
-  outline: none;
-  transition: all 0.3s;
-}
-.glass-input:focus {
-  border-color: var(--gold-primary);
-  box-shadow: 0 0 15px rgba(212, 175, 55, 0.25);
-  background: rgba(15, 12, 10, 0.8);
-}
-.btn-whatsapp {
-  width: 100%; padding: 15px;
-  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
-  color: #fff; border: none; border-radius: 14px;
-  font-size: 0.95rem; font-weight: 700; font-family: inherit;
-  cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;
-  box-shadow: 0 6px 22px rgba(37, 211, 102, 0.25);
-  transition: all 0.3s;
-}
-.btn-whatsapp:active { transform: scale(0.98); }
-
-/* فوتر */
-footer {
-  text-align: center;
-  padding: 30px 20px 10px;
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  border-top: 1px solid rgba(212,175,55,0.1);
-  margin-top: 20px;
-}
-.footer-heart { color: var(--gold-primary); display: inline-block; animation: beat 1.5s infinite; }
-@keyframes beat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.25); } }
-</style>
+        h1 { font-family: 'Great Vibes'; font-size: 3.5rem; color: var(--gold); text-align: center; margin-bottom: 10px; }
+    </style>
 </head>
 <body>
 
-<div class="bg-ambient">
-  <div class="ambient-circle orb-1"></div>
-  <div class="ambient-circle orb-2"></div>
-</div>
-
-<canvas id="particles-canvas"></canvas>
-
-<!-- اسپلش اسکرین ویدیویی -->
-<div id="splash">
-  <div class="start-overlay" id="startOverlay" onclick="startExperience()">
-    <h2 class="start-names">Narges & Mahdi</h2>
-    <div class="luxury-ring">
-      <i class="fa-solid fa-play"></i>
-    </div>
-    <div class="start-tip">
-      <span>برای مشاهده کارت دعوت لمس کنید</span>
-      <i class="fa-solid fa-sparkles"></i>
-    </div>
-  </div>
-  
-  <video id="introVideo" playsinline>
-    <source src="intro.mp4" type="video/mp4">
-  </video>
-  
-  <button class="skip-btn" id="skipBtn" onclick="openInvitation()">
-    رد کردن ویدیو <i class="fa-solid fa-chevron-left"></i>
-  </button>
-</div>
-
-<!-- دکمه کنترل موزیک -->
-<div class="music-toggle" id="musicToggle" onclick="toggleAudio()">
-  <i class="fa-solid fa-volume-high" id="musicIcon"></i>
-</div>
-
 <div class="container">
-
-  <!-- هدر -->
-  <header class="reveal">
-    <div class="monogram-badge">N & M</div>
-    <div class="sub-title">جشن باهم بودنمان</div>
-    <h1 class="main-couple-title">نرگس و مهدی</h1>
-    <div class="date-badge">پنج‌شنبه، ۲۴ مهر ۱۴۰۵</div>
-  </header>
-
-  <!-- شمارش معکوس -->
-  <section class="section-pad reveal">
-    <div class="glass-card">
-      <div class="card-header-title">شمارش لحظه‌ها تا آغاز وصال</div>
-      <div class="timer-container">
-        <div class="timer-unit">
-          <div class="timer-digit" id="days">00</div>
-          <div class="timer-unit-label">روز</div>
-        </div>
-        <div class="timer-unit-label-box timer-unit">
-          <div class="timer-digit" id="hours">00</div>
-          <div class="timer-unit-label">ساعت</div>
-        </div>
-        <div class="timer-unit">
-          <div class="timer-digit" id="minutes">00</div>
-          <div class="timer-unit-label">دقیقه</div>
-        </div>
-        <div class="timer-unit">
-          <div class="timer-digit" id="seconds">00</div>
-          <div class="timer-unit-label">ثانیه</div>
-        </div>
-      </div>
+    <!-- هدر -->
+    <div class="fade-in-up">
+        <h1>نرگس و مهدی</h1>
+        <p style="text-align: center; opacity: 0.8;">به جشن پیوند ما خوش آمدید</p>
     </div>
-  </section>
 
-  <!-- برنامه مراسم -->
-  <section class="section-pad reveal">
-    <h2 class="luxury-title">برنامه <span>مراسم</span></h2>
-    <div class="timeline">
-      <div class="timeline-step">
-        <span class="timeline-marker"></span>
-        <div class="timeline-inner">
-          <div class="step-time">۱۹:۰۰</div>
-          <div class="step-name">پذیرایی و خوش‌آمدگویی</div>
-          <div class="step-info">استقبال از حضور گرم شما مهمانان گرامی</div>
+    <!-- تایمر -->
+    <div class="glass-card fade-in-up" style="transition-delay: 0.2s;">
+        <div class="timer-grid">
+            <div class="timer-box"><div class="timer-num" id="d">00</div><div class="timer-label">روز</div></div>
+            <div class="timer-box"><div class="timer-num" id="h">00</div><div class="timer-label">ساعت</div></div>
+            <div class="timer-box"><div class="timer-num" id="m">00</div><div class="timer-label">دقیقه</div></div>
+            <div class="timer-box"><div class="timer-num" id="s">00</div><div class="timer-label">ثانیه</div></div>
         </div>
-      </div>
-      <div class="timeline-step">
-        <span class="timeline-marker"></span>
-        <div class="timeline-inner">
-          <div class="step-time">۲۰:۰۰</div>
-          <div class="step-name">آغاز جشن و عقدکنان</div>
-          <div class="step-info">ثبت قشنگ‌ترین خاطره‌ها و پایکوبی</div>
-        </div>
-      </div>
-      <div class="timeline-step">
-        <span class="timeline-marker"></span>
-        <div class="timeline-inner">
-          <div class="step-time">۲۱:۳۰</div>
-          <div class="step-name">ضیافت شام</div>
-          <div class="step-info">پذیرایی شام و لحظاتی شیرین در کنار هم</div>
-        </div>
-      </div>
     </div>
-  </section>
 
-  <!-- محل برگزاری -->
-  <section class="section-pad reveal">
-    <h2 class="luxury-title">محل <span>برگزاری</span></h2>
-    <div class="glass-card">
-      <div class="loc-icon-wrap">
-        <i class="fa-solid fa-location-dot"></i>
-      </div>
-      <h3 class="location-name">باغ‌تالار تشریفاتی</h3>
-      <p class="location-addr">تهران، گرمدره، باغ تالار مجلل رویال</p>
-      <a href="https://maps.google.com" target="_blank" class="btn-gold">
-        <i class="fa-solid fa-compass"></i>
-        مسیریابی هوشمند با نشان / گوگل‌مپ
-      </a>
+    <!-- کارت اطلاعات -->
+    <div class="glass-card fade-in-up" style="transition-delay: 0.4s;">
+        <h2 style="margin-bottom: 15px; font-family: 'Playfair Display';">زمان و مکان</h2>
+        <p>پنج‌شنبه ۲۴ مهر ۱۴۰۵</p>
+        <p style="color: var(--gold);">تهران، باغ تالار مجلل</p>
     </div>
-  </section>
 
-  <!-- اعلام حضور RSVP -->
-  <section class="section-pad reveal">
-    <h2 class="luxury-title">اعلام <span>حضور</span></h2>
-    <div class="glass-card">
-      <div class="form-item">
-        <label>نام و نام خانوادگی:</label>
-        <input type="text" id="guestName" class="glass-input" placeholder="مثال: علی احمدی">
-      </div>
-      <div class="form-item">
-        <label>تعداد همراهان:</label>
-        <input type="number" id="guestCount" class="glass-input" placeholder="مثال: ۲ نفر">
-      </div>
-      <div class="form-item">
-        <label>پیام یا تبریک یادگاری:</label>
-        <textarea id="guestMessage" class="glass-input" rows="3" placeholder="یادداشتی پر از عشق برای عروس و داماد..."></textarea>
-      </div>
-      <button class="btn-whatsapp" onclick="sendRSVP()">
-        <i class="fa-brands fa-whatsapp" style="font-size: 1.2rem;"></i>
-        ارسال پاسخ و تبریک در واتساپ
-      </button>
-    </div>
-  </section>
-
-  <footer>
-    با آرزوی بهترین‌ها — منتظر حضور گرمتان هستیم <span class="footer-heart">✨</span>
-  </footer>
-
+    <button class="btn-fancy fade-in-up" style="transition-delay: 0.6s;">ثبت حضور در واتساپ</button>
 </div>
 
 <script>
-// ---------- کنترل ویدیو و اسپلش ----------
-const video = document.getElementById('introVideo');
-const startOverlay = document.getElementById('startOverlay');
-const skipBtn = document.getElementById('skipBtn');
-const splash = document.getElementById('splash');
-
-function startExperience() {
-  startOverlay.style.display = 'none';
-  video.style.display = 'block';
-  skipBtn.style.display = 'block';
-  
-  video.play().catch(() => {
-    video.muted = true;
-    video.play();
-  });
-}
-
-video.addEventListener('ended', openInvitation);
-
-let isOpened = false;
-function openInvitation() {
-  if (isOpened) return;
-  isOpened = true;
-  splash.classList.add('hidden');
-  video.pause();
-  startMusic();
-  checkScrollReveals();
-}
-
-// ---------- انیمیشن اسکرول (Scroll Reveal) ----------
-function checkScrollReveals() {
-  const reveals = document.querySelectorAll('.reveal');
-  const triggerBottom = window.innerHeight * 0.88;
-  reveals.forEach(el => {
-    const top = el.getBoundingClientRect().top;
-    if (top < triggerBottom) {
-      el.classList.add('active');
+    // منطق تایمر
+    function update() {
+        const target = new Date('2026-10-16T19:00:00').getTime();
+        const now = new Date().getTime();
+        const diff = target - now;
+        document.getElementById('d').innerText = Math.floor(diff / (1000*60*60*24));
+        document.getElementById('h').innerText = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+        document.getElementById('m').innerText = Math.floor((diff % (1000*60*60)) / (1000*60));
+        document.getElementById('s').innerText = Math.floor((diff % (1000*60)) / 1000);
     }
-  });
-}
-window.addEventListener('scroll', checkScrollReveals);
-window.addEventListener('load', checkScrollReveals);
+    setInterval(update, 1000);
 
-// ---------- تایمر معکوس (۲۴ مهر ۱۴۰۵ ساعت ۱۹:۰۰) ----------
-const targetTime = new Date('2026-10-16T19:00:00+03:30').getTime();
-function updateCountdown() {
-  const diff = targetTime - new Date().getTime();
-  if (diff <= 0) {
-    ['days','hours','minutes','seconds'].forEach(id => document.getElementById(id).innerText = '00');
-    return;
-  }
-  document.getElementById('days').innerText = String(Math.floor(diff / (1000 * 60 * 60 * 24))).padStart(2, '0');
-  document.getElementById('hours').innerText = String(Math.floor((diff / (1000 * 60 * 60)) % 24)).padStart(2, '0');
-  document.getElementById('minutes').innerText = String(Math.floor((diff / (1000 * 60)) % 60)).padStart(2, '0');
-  document.getElementById('seconds').innerText = String(Math.floor((diff / 1000) % 60)).padStart(2, '0');
-}
-setInterval(updateCountdown, 1000);
-updateCountdown();
-
-// ---------- کنترل موزیک پس‌زمینه ----------
-let audio = null;
-let isPlaying = false;
-function startMusic() {
-  const toggle = document.getElementById('musicToggle');
-  audio = new Audio('music.mp3');
-  audio.loop = true;
-  audio.play().then(() => {
-    isPlaying = true;
-    toggle.classList.add('show', 'playing');
-    document.getElementById('musicIcon').className = 'fa-solid fa-pause';
-  }).catch(() => {
-    toggle.classList.add('show');
-  });
-}
-
-function toggleAudio() {
-  if (!audio) return;
-  const toggle = document.getElementById('musicToggle');
-  const icon = document.getElementById('musicIcon');
-  if (isPlaying) {
-    audio.pause();
-    icon.className = 'fa-solid fa-volume-high';
-    toggle.classList.remove('playing');
-  } else {
-    audio.play();
-    icon.className = 'fa-solid fa-pause';
-    toggle.classList.add('playing');
-  }
-  isPlaying = !isPlaying;
-}
-
-// ---------- ارسال فرم به واتساپ ----------
-function sendRSVP() {
-  const name = document.getElementById('guestName').value.trim();
-  const count = document.getElementById('guestCount').value;
-  const msg = document.getElementById('guestMessage').value.trim();
-  if (!name) {
-    alert('لطفاً نام و نام خانوادگی خود را وارد کنید.');
-    return;
-  }
-  const text = encodeURIComponent(`سلام، من ${name} هستم 🌸\nتعداد همراهان: ${count || '1'} نفر\nیادداشت: ${msg || 'با آرزوی خوشبختی و شادی'}`);
-  window.open(`https://wa.me/989123456789?text=${text}`, '_blank');
-}
-
-// ---------- افکت ذرات طلایی معلق (Particles) ----------
-const canvas = document.getElementById('particles-canvas');
-const ctx = canvas.getContext('2d');
-let particles = [];
-
-function resizeCanvas() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-}
-window.addEventListener('resize', resizeCanvas);
-resizeCanvas();
-
-class Particle {
-  constructor() { this.reset(); }
-  reset() {
-    this.x = Math.random() * canvas.width;
-    this.y = Math.random() * canvas.height;
-    this.size = Math.random() * 2.2 + 0.6;
-    this.speedY = Math.random() * 0.4 + 0.15;
-    this.speedX = (Math.random() - 0.5) * 0.3;
-    this.opacity = Math.random() * 0.6 + 0.2;
-  }
-  update() {
-    this.y -= this.speedY;
-    this.x += this.speedX;
-    if (this.y < 0) this.y = canvas.height;
-    if (this.x < 0 || this.x > canvas.width) this.reset();
-  }
-  draw() {
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(212, 175, 55, ${this.opacity})`;
-    ctx.shadowBlur = 8;
-    ctx.shadowColor = 'rgba(212, 175, 55, 0.6)';
-    ctx.fill();
-  }
-}
-
-for (let i = 0; i < 35; i++) { particles.push(new Particle()); }
-function animateParticles() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  particles.forEach(p => { p.update(); p.draw(); });
-  requestAnimationFrame(animateParticles);
-}
-animateParticles();
+    // اسکرول انیمیشن
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('active'); });
+    });
+    document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
 </script>
 </body>
 </html>
