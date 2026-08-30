@@ -553,81 +553,94 @@
 
     </div>
 
-    <script>
-        // ============ ۱. اسپلش ============
-        const audio = document.getElementById('wedding-audio');
-        const musicCtrl = document.getElementById('music-ctrl');
-        let splashClosed = false;
+<script>
+    // ============ ۱. اسپلش و ورود ============
+    const audio = document.getElementById('wedding-audio');
+    const musicCtrl = document.getElementById('music-ctrl');
+    const splashScreen = document.getElementById('splash-screen');
+    let splashClosed = false;
 
-        function closeSplash() {
-            if (splashClosed) return;
-            splashClosed = true;
-            const splash = document.getElementById('splash-screen');
-            document.getElementById('intro-video').pause();
-            splash.style.opacity = '0';
-            setTimeout(() => { splash.style.display = 'none'; initScrollReveal(); }, 800);
-            audio.play().then(() => musicCtrl.classList.add('===========
-')).catch(() => {});
+    function closeSplash() {
+        if (splashClosed) return;
+        splashClosed = true;
+
+        const video = document.getElementById('intro-video');
+        if (video) video.pause();
+
+        splashScreen.style.opacity = '0';
+        splashScreen.style.pointerEvents = 'none';
+
+        setTimeout(() => {
+            splashScreen.style.display = 'none';
+            initScrollReveal();
+        }, 800);
+
+        audio.play().then(() => {
+            musicCtrl.classList.add('playing');
+        }).catch(() => {});
+    }
+
+    // کلیک روی هر جای اسپلش = ورود (حل مشکل موبایل)
+    splashScreen.addEventListener('click', closeSplash);
+
+    // ============ ۲. موزیک ============
+    function toggleAudio() {
+        if (audio.paused) {
+            audio.play();
+            musicCtrl.classList.add('playing');
+        } else {
+            audio.pause();
+            musicCtrl.classList.remove('playing');
         }
+    }
 
-        // ============ ۲. موزیک ============
-        function toggleAudio() {
-            if (audio.paused) {
-                audio.play();
-                musicCtrl.classList.add('playing');
-            } else {
-                audio.pause();
-                musicCtrl.classList.remove('playing');
-            }
-        }
-
-        // ============ ۳. انیمیشن اسکرول ============
-        function initScrollReveal() {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(e => {
-                    if (e.isIntersecting) {
-                        e.target.classList.add('revealed');
-                        observer.unobserve(e.target);
-                    }
-                });
-            }, { threshold: 0.12 });
-            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-        }
-
-        // ============ ۴. تقویم مهر ۱۴۰۵ ============
-        // مهر ۱۴۰۵: اول مهر = جمعه (۵ روز خالی اول بر اساس شنبه‌شروع)
-        (function buildCalendar() {
-            const grid = document.getElementById('cal-grid');
-            const dows = ['ش', 'ی', 'د', 'س', 'چ', 'پ', 'ج'];
-            dows.forEach(d => {
-                const el = document.createElement('div');
-                el.className = 'dow';
-                el.textContent = d;
-                grid.appendChild(el);
+    // ============ ۳. انیمیشن اسکرول ============
+    function initScrollReveal() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('revealed');
+                    observer.unobserve(e.target);
+                }
             });
-            // مهر ۱۴۰۵ ۳۰ روز دارد و اول آن پنج‌شنبه است (ستون پنجم)
-            for (let i = 0; i < 4; i++) { grid.appendChild(document.createElement('div')); }
-            for (let day = 1; day <= 30; day++) {
-                const el = document.createElement('div');
-                el.className = 'day' + (day === 24 ? ' wedding-day' : '');
-                el.textContent = day === 24 ? '۲۴ ❤' : toFa(day);
-                grid.appendChild(el);
-            }
-        })();
+        }, { threshold: 0.12 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    }
 
-        function toFa(n) {
-            return String(n).replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]);
+    // ============ ۴. تقویم مهر ۱۴۰۵ ============
+    (function buildCalendar() {
+        const grid = document.getElementById('cal-grid');
+        if (!grid) return;
+        const dows = ['ش', 'ی', 'د', 'س', 'چ', 'پ', 'ج'];
+        dows.forEach(d => {
+            const el = document.createElement('div');
+            el.className = 'dow';
+            el.textContent = d;
+            grid.appendChild(el);
+        });
+        for (let i = 0; i < 4; i++) { grid.appendChild(document.createElement('div')); }
+        for (let day = 1; day <= 30; day++) {
+            const el = document.createElement('div');
+            el.className = 'day' + (day === 24 ? ' wedding-day' : '');
+            el.textContent = day === 24 ? '۲۴ ❤' : toFa(day);
+            grid.appendChild(el);
         }
+    })();
 
-        // ============ ۵. RSVP واتساپ ============
-        function submitRSVP(e) {
-            e.preventDefault();
-            const name = document.getElementById('guest-name').value;
-            const count = document.getElementById('guest-count').value;
-            const phone = "989س000000"; // ← شماره واتساپ خودت را اینجا بگذار
-            const msg = encodeURIComponent(`سلام! با کمال میل در جشن نرگس و مهدی شرکت می‌کنم ✈\nنام: ${name}\nتعداد همراهان: ${count}`);
-            window.open(`https://wa.me/${phone}?text=${msg}`, '_blank');
-        }
-    </script>
+    function toFa(n) {
+        return String(n).replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]);
+    }
+
+    // ============ ۵. RSVP واتساپ ============
+    function submitRSVP(e) {
+        e.preventDefault();
+        const name = document.getElementById('guest-name').value;
+        const count = document.getElementById('guest-count').value;
+        const phone = "989120000000"; // ← شماره واتساپ خودت را اینجا بگذار
+        const msg = encodeURIComponent(`سلام! با کمال میل در جشن نرگس و مهدی شرکت می‌کنم ✈\nنام: ${name}\nتعداد همراهان: ${count}`);
+        window.open(`https://wa.me/${phone}?text=${msg}`, '_blank');
+    }
+</script>
+
 </body>
 </html>
