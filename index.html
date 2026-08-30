@@ -1,803 +1,243 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>جشن پیوند نرگس و مهدی | Narges & Mahdi</title>
-  
-  <!-- فونت‌های گوگل: فارسی وزیرمتن و انگلیسی‌های لوکس -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600&family=Vazirmatn:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
-  
-  <!-- فونت آیکون‌ها -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>جشن پیوند نرگس و مهدی</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700&family=Playfair+Display:wght@400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root{
+  --bg:#fcfbfa; --primary:#2d2a26; --accent:#8b7355;
+  --gold:#c5a059; --muted:#767069; --border:#f0eae1;
+  --card:0 15px 35px rgba(139,115,85,.08); --radius:20px;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:'Vazirmatn',sans-serif;background:#1a1816;color:var(--primary);display:flex;justify-content:center;min-height:100vh}
+.container{width:100%;max-width:440px;background:var(--bg);box-shadow:0 0 50px rgba(0,0,0,.3);overflow-x:hidden;position:relative}
 
-  <style>
-    :root {
-      --bg-main: #f9f7f4;
-      --bg-card: #ffffff;
-      --text-dark: #2c2927;
-      --text-muted: #7d7771;
-      --gold-accent: #c4a47c;
-      --gold-light: #e8ded2;
-      --border-color: #ede7df;
-      --shadow-subtle: 0 10px 30px rgba(0,0,0,0.04);
-      --font-fa: 'Vazirmatn', sans-serif;
-      --font-en-serif: 'Cormorant Garamond', serif;
-      --font-script: 'Alex Brush', cursive;
-    }
+/* ---------- Splash Screen ---------- */
+#splash{position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:440px;height:100vh;background:#000;z-index:9999;display:flex;justify-content:center;align-items:center;transition:opacity .8s,visibility .8s}
+#splash video{width:100%;height:100%;object-fit:cover}
+.splash-overlay{position:absolute;bottom:45px;left:0;width:100%;display:flex;flex-direction:column;align-items:center;gap:12px;z-index:10}
+.splash-overlay p{color:#fff;font-size:.9rem;text-shadow:0 2px 8px rgba(0,0,0,.6)}
+.enter-btn{background:rgba(255,255,255,.2);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.6);color:#fff;padding:12px 30px;border-radius:30px;font-size:.95rem;font-family:inherit;cursor:pointer;display:flex;align-items:center;gap:8px;transition:.3s}
+.enter-btn:hover{background:rgba(255,255,255,.4)}
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      -webkit-tap-highlight-color: transparent;
-    }
+/* ---------- دکمه موزیک ---------- */
+.music-toggle{position:fixed;top:20px;left:20px;width:42px;height:42px;background:rgba(255,255,255,.75);backdrop-filter:blur(8px);border:1px solid rgba(139,115,85,.2);border-radius:50%;display:none;align-items:center;justify-content:center;color:var(--accent);cursor:pointer;z-index:100}
+.music-toggle.show{display:flex}
+.music-toggle.playing{animation:pulse 2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(197,160,89,.4)}70%{box-shadow:0 0 0 12px rgba(197,160,89,0)}100%{box-shadow:0 0 0 0 rgba(197,160,89,0)}}
 
-    body {
-      background-color: #eae6e1;
-      font-family: var(--font-fa);
-      color: var(--text-dark);
-      display: flex;
-      justify-content: center;
-      min-height: 100vh;
-      line-height: 1.6;
-    }
+/* ---------- هدر ---------- */
+header{padding:55px 25px 30px;text-align:center;background:linear-gradient(180deg,#f7f3ee,var(--bg))}
+.monogram{font-family:'Playfair Display',serif;font-size:1.8rem;color:var(--gold);letter-spacing:4px;display:inline-block;border-bottom:1px solid var(--border);padding-bottom:5px;margin-bottom:15px}
+.title-sub{font-size:.85rem;letter-spacing:2px;color:var(--muted);margin-bottom:10px}
+.couple-names{font-family:'Great Vibes','Vazirmatn',cursive;font-size:2.6rem;font-weight:400;color:var(--accent);margin:10px 0}
+.wedding-date{font-size:.95rem;color:var(--accent);font-weight:500}
 
-    /* شبیه‌ساز قاب موبایل */
-    .mobile-container {
-      width: 100%;
-      max-width: 440px;
-      background: var(--bg-main);
-      min-height: 100vh;
-      position: relative;
-      overflow-x: hidden;
-      box-shadow: 0 0 40px rgba(0,0,0,0.1);
-      padding-bottom: 70px;
-    }
+/* ---------- شمارش معکوس ---------- */
+.countdown-section{padding:10px 25px 30px}
+.countdown-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:25px 15px;box-shadow:var(--card);text-align:center}
+.countdown-title{font-size:.85rem;color:var(--muted);margin-bottom:18px}
+.timer-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.time-box{background:#faf8f5;border:1px solid var(--border);padding:12px 5px;border-radius:14px}
+.time-number{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:600;color:var(--accent)}
+.time-label{font-size:.7rem;color:var(--muted);margin-top:6px}
 
-    /* دکمه شناور موزیک */
-    .music-player-floating {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      z-index: 1000;
-      width: 44px;
-      height: 44px;
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(10px);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-      border: 1px solid var(--border-color);
-      cursor: pointer;
-      color: var(--text-dark);
-      transition: all 0.3s ease;
-    }
-    .music-player-floating.playing {
-      animation: rotateDisc 5s linear infinite;
-      color: var(--gold-accent);
-    }
-    @keyframes rotateDisc {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
+/* ---------- تایم‌لاین ---------- */
+.section-title{text-align:center;font-size:1.25rem;margin-bottom:25px;position:relative}
+.section-title::after{content:"";display:block;width:30px;height:2px;background:var(--gold);margin:8px auto 0}
+.timeline-section{padding:20px 25px 35px}
+.timeline{position:relative;padding-right:25px}
+.timeline::before{content:'';position:absolute;top:10px;bottom:10px;right:4px;width:2px;background:var(--border)}
+.timeline-item{position:relative;margin-bottom:22px}
+.timeline-item:last-child{margin-bottom:0}
+.timeline-dot{position:absolute;right:-25px;top:4px;width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px #fff,0 0 0 5px var(--border)}
+.timeline-content{background:#fff;padding:15px 18px;border-radius:14px;border:1px solid var(--border)}
+.timeline-time{font-family:'Playfair Display',serif;font-size:.9rem;font-weight:600;color:var(--gold);margin-bottom:4px}
+.timeline-title{font-size:.95rem;font-weight:600}
+.timeline-desc{font-size:.8rem;color:var(--muted);margin-top:3px}
 
-    /* پترن‌های تزئینی پس‌زمینه */
-    .decor-bubble {
-      position: absolute;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(196,164,124,0.18) 0%, rgba(255,255,255,0) 70%);
-      pointer-events: none;
-      z-index: 0;
-    }
+/* ---------- مکان ---------- */
+.location-section{padding:10px 25px 35px}
+.location-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:25px 20px;text-align:center;box-shadow:var(--card)}
+.loc-icon{font-size:1.8rem;color:var(--accent);margin-bottom:12px}
+.hall-name{font-size:1.1rem;font-weight:600;margin-bottom:6px}
+.hall-address{font-size:.85rem;color:var(--muted);line-height:1.6;margin-bottom:20px}
+.btn-map{display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;background:var(--accent);color:#fff;border-radius:12px;font-size:.9rem;font-weight:500;text-decoration:none;transition:.3s}
+.btn-map:hover{background:#735e45}
 
-    /* بخش Hero / صفحه اول */
-    .hero-section {
-      min-height: 90vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 40px 20px;
-      position: relative;
-    }
+/* ---------- RSVP ---------- */
+.rsvp-section{padding:10px 25px 40px}
+.rsvp-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:25px 20px;box-shadow:var(--card)}
+.form-group{margin-bottom:15px}
+.form-group label{display:block;font-size:.8rem;color:var(--muted);margin-bottom:6px}
+.form-control{width:100%;padding:12px 14px;border:1px solid #e5ded4;border-radius:10px;font-family:inherit;font-size:.85rem-family:inherit;font-size:.85rem;background:#faf8f5;outline:none;transitionborder-color:var(--accent);background:#fff}
+.btn-submit{width:100%;padding:14px;background:#25D366;color:#fff;border:none:pointer;display:flex;align;font-size:.95rem;font-family:inherit;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:.3s}
+.btn-submit:hover{background:#1ebc5a}
 
-    .subtitle-en {
-      font-family: var(--font-en-serif);
-      font-size: 1.1rem;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      color: var(--gold-accent);
-      margin-bottom: 8px;
-    }
-
-    .names-en {
-      font-family: var(--font-en-serif);
-      font-size: 2.7rem;
-      font-weight: 400;
-      letter-spacing: 1px;
-      color: var(--text-dark);
-      line-height: 1.2;
-      margin: 15px 0;
-    }
-
-    .names-en span {
-      display: block;
-      font-family: var(--font-script);
-      font-size: 2.2rem;
-      color: var(--gold-accent);
-      margin: -6px 0;
-    }
-
-    .hero-date-badge {
-      font-family: var(--font-en-serif);
-      font-size: 1.05rem;
-      letter-spacing: 3px;
-      color: var(--text-muted);
-      border-top: 1px solid var(--border-color);
-      border-bottom: 1px solid var(--border-color);
-      padding: 6px 20px;
-      margin-top: 15px;
-    rem;
-      font-weight: 400;
-      letter-spacing: 1px;
-      color: var(--text-dark);
-      line-height: 1.2;
-      margin: 15px 0;
-    }
-
-    .names-en span {
-      display: block;
-      font-family: var(--font-script);
-      font-size: 2.2rem;
-      color: var(--gold-accent);
-      margin: -6px 0;
-    }
-
-    .hero-date-badge {
-      font-family: var(--font-en-serif);
-      font-size: 1.05rem;
-      letter-spacing: 3px;
-      color: var(--text-muted);
-      border-top: 1px solid var(--border-color);
-      border-bottom: 1px solid var(--border-color);
-      padding: 6px 20px;
-      margin-top: 15px;
-    }
-
-    .scroll-indicator {
-      position: absolute;
-      bottom: 25px;
-      font-size: 0.8rem;
-      color: var(--gold-accent);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-      animation: bounce 2s infinite;
-    }
-    @keyframes bounce {
-      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-      40% { transform: translateY(-8px); }
-      60% { transform: translateY(-4px); }
-    }
-
-    /* کارت‌های اصلی محتوا */
-    .card-box {
-      background: var(--bg-card);
-      margin: 20px;
-      padding: 30px 22px;
-      border-radius: 24px;
-      box-shadow: var(--shadow-subtle);
-      border: 1px solid rgba(237, 231, 223, 0.7: 15px 0 10px;
-    }
-
-    .cal-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .cal-number {
-      font-size: 2.8rem;
-      font-weight: 300;
-      color: var(--text-dark);
-      line-height: 1;
-      font-family: var(--font-en-serif), var(--font-fa);
-    }
-
-    .cal-label {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin-top: 4px;
-    }
-
-    .cal-divider {
-      width: 1px;
-      height: 45px;
-      background-color: var(--border-color);
-    }
-
-    .cal-year {
-      font-size: 2.2rem;
-      font-weight: 300;
-      letter-spacing: 4px;
-      color: var(--text-dark);
-      margin-top: 5px;
-      font-family: var(--font-en-serif), var(--font-fa);
-    }
-
-    .event-full-text {
-      margin-top: 15px;
-      font-size: 0.95rem;
-      color: var(--text-muted);
-      font-weight: 400;
-    }
-
-    /* تصاویر پولاروید نامتقارن */
-    .polaroid-gallery {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      margin: 25px 0 10px;
-    }
-
-    .polaroid-card {
-      background: #fff;
-      padding: 8px 8px 24px 8px;
-      border-radius: 4px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.06);
-      width: 135px;
-      transition: transform 0.3s ease;
-      border: 1px solid #f0ece6;
-    }
-
-    .polaroid-card:nth-child(1) {
-      transform: rotate(-5deg);
-    }
-    .polaroid-card:nth-child(2) {
-      transform: rotate(5deg);
-      margin-top: 15px;
-    }
-
-    .polaroid-card img {
-      width: 100%;
-      height: 140px;
-      object-fit: cover;
-      border-radius: 2px;
-      filter: grayscale(20%) sepia(8%);
-    }
-
-    /* روزشمار لایو */
-    .countdown-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 8px;
-      margin-top: 15px;
-    }
-
-    .countdown-cell {
-      background: #faf8f5;
-      padding: 12px 4px;
-      border-radius: 14px;
-      border: 1px solid var(--border-color);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .countdown-val {
-      font-size: 1.45rem;
-      font-weight: 600;
-      color: var(--text-dark);
-      font-family: 'Montserrat', var(--font-fa);
-      line-height: 1.1;
-    }
-
-    .countdown-lbl {
-      font-size: 0.65rem;
-      color: var(--text-muted);
-      margin-top: 4px;
-      text-transform: uppercase;
-    }
-
-    /* تایم لاین مدرن و مینیمال (Wedding Timeline) */
-    .timeline-wrapper {
-      position: relative;
-      padding: 20px 10px 10px;
-      margin-top: 10px;
-    }
-
-    .timeline-line {
-      position: absolute;
-      right: 50%;
-      top: 10px;
-      bottom: 10px;
-      width: 1.5px;
-      background: #dfd7cc;
-      transform: translateX(50%);
-    }
-
-    .timeline-node {
-      position: relative;
-      margin-bottom: 32px;
-      display: flex;
-      align-items: center;
-      width: 100%;
-    }
-
-    .timeline-node:last-child {
-      margin-bottom: 0;
-    }
-
-    .timeline-node.left {
-      justify-content: flex-start;
-      padding-right: calc(50% + 20px);
-      text-align: left;
-    }
-
-    .timeline-node.right {
-      justify-content: flex-end;
-      padding-left: calc(50% + 20px);
-      text-align: right;
-    }
-
-    .timeline-dot {
-      position: absolute;
-      right: 50%;
-      width: 10px;
-      height: 10px;
-      background: var(--bg-card);
-      border: 2.5px solid var(--gold-accent);
-      border-radius: 50%;
-      transform: translateX(50%);
-      z-index: 2;
-    }
-
-    .timeline-content {
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
-    }
-
-    .timeline-icon {
-      font-size: 1.3rem;
-      color: var(--gold-accent);
-      margin-bottom: 2px;
-    }
-
-    .timeline-time {
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: var(--text-dark);
-      font-family: 'Montserrat', var(--font-fa);
-    }
-
-    .timeline-title {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-    }
-
-    /* مسیریابی */
-    .location-btn-group {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-top: 20px;
-    }
-
-    .loc-btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      background: #fdfcfb;
-      border: 1px solid var(--border-color);
-      padding: 13px;
-      border-radius: 16px;
-      color: var(--text-dark);
-      text-decoration: none;
-      font-size: 0.9rem;
-      font-weight: 500;
-      transition: all 0.2s ease;
-    }
-
-    .loc-btn:hover, .loc-btn:active {
-      background: var(--gold-accent);
-      color: #fff;
-      border-color: var(--gold-accent);
-    }
-
-    /* فرم تأیید حضور (RSVP) */
-    .rsvp-form {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      margin-top: 15px;
-      text-align: right;
-    }
-
-    .form-group label {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin-bottom: 5px;
-      display: block;
-    }
-
-    .form-input, .form-select {
-      width: 100%;
-      padding: 12px 14px;
-      border-radius: 12px;
-      border: 1px solid var(--border-color);
-      background: #faf8f5;
-      font-family: var(--font-fa);
-      font-size: 0.9rem;
-      color: var(--text-dark);
-      outline: none;
-      transition: border-color 0.2s;
-    }
-
-    .form-input:focus, .form-select:focus {
-      border-color: var(--gold-accent);
-      background: #fff;
-    }
-
-    .submit-rsvp-btn {
-      background: var(--text-dark);
-      color: #fff;
-      border: none;
-      padding: 14px;
-      border-radius: 14px;
-      font-size: 0.95rem;
-      font-weight: 500;
-      font-family: var(--font-fa);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      transition: background 0.3s;
-      margin-top: 5px;
-    }
-
-    .submit-rsvp-btn:hover {
-      background: var(--gold-accent);
-    }
-
-    /* فوتر */
-    .footer-text {
-      text-align: center;
-      padding: 25px 20px;
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
-  </style>
+footer{text-align:center;padding:20px 20px 40px;font-size:.8rem;color:var(--muted)}
+</style>
 </head>
 <body>
 
-  <!-- صوت و آهنگ پس‌زمینه (لینک بدون فیلتر و سبک) -->
-  <audio id="bg-audio" loop preload="auto">
-    <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=romantic-wedding-113524.mp3" type="audio/mp3">
-  </audio>
-
-  <!-- دکمه شناور کنترل موزیک -->
-  <div class="music-player-floating" id="musicToggle" title="پخش / توقف موزیک">
-    <i class="fa-solid fa-music" id="musicIcon"></i>
+<!-- اسپلش اسکرین ویدیویی -->
+<div id="splash">
+  <video id="introVideo" playsinline muted autoplay loop>
+    <source src="intro.mp4" type="video/mp4">
+  </video>
+  <div class="splash-overlay">
+    <p>نرگس و مهدی</p>
+    <button class="enter-btn" onclick="enterWebsite()">
+      <span>مشاهده دعوتنامه</span>
+      <i class="fa-solid fa-arrow-left"></i>
+    </button>
   </div>
+</div>
 
-  <div class="mobile-container">
-    
-    <!-- المان‌های نوری زمینه -->
-    <div class="decor-bubble" style="width: 200px; height: 200px; top: -50px; left: -50px;"></div>
-    <div class="decor-bubble" style="width: 250px; height: 250px; top: 450px; right: -70px;"></div>
+<!-- دکمه موزیک -->
+<div class="music-toggle" id="musicToggle" onclick="toggleAudio()">
+  <i class="fa-solid fa-volume-high" id="musicIcon"></i>
+</div>
 
-    <!-- بخش ۱: صفحه اول / خوش‌آمدگویی سریف مدرن -->
-    <section class="hero-section">
-      <div class="subtitle-en">The Wedding Of</div>
-      <h1 class="names-en">
-        Narges
-        <span>&</span>
-        Mahdi
-      </h1>
-      <div class="hero-date-badge">16 . 10 . 2026</div>
-      
-      <div class="scroll-indicator">
-        <span>ورود به دعوت‌نامه</span>
-        <i class="fa-solid fa-angle-down"></i>
+<div class="container">
+
+  <header>
+    <div class="monogram">N & M</div>
+    <div class="title-sub">به جشن پیوند ما خوش آمدید</div>
+    <h1 class="couple-names">نرگس و مهدی</h1>
+    <div class="wedding-date">پنج‌شنبه، ۲۴ مهر ۱۴۰۵</div>
+  </header>
+
+  <section class="countdown-section">
+    <div class="countdown-card">
+      <div class="countdown-title">شمارش معکوس تا آغاز باهم بودنمان</div>
+      <div class="timer-grid">
+        <div class="time-box"><div class="time-number" id="days">00</div><div class="time-label">روز</div></div>
+        <div class="time-box"><div class="time-number" id="hours">00</div><div class="time-label">ساعت</div></div>
+        <div class="time-box"><div class="time-number" id="minutes">00</div><div class="time-label">دقیقه</div></div>
+        <div class="time-box"><div class="time-number" id="seconds">00</div><div class="time-label">ثانیه</div></div>
       </div>
-    </section>
-
-    <!-- بخش ۲: موعد دیدار عشق ما و تقویم -->
-    <section class="card-box">
-      <h2 class="section-title">موعد دیدار عشق ما</h2>
-      <span class="section-subtitle">Our Story</span>
-      
-      <!-- کادر روز و ماه -->
-      <div class="calendar-date-display">
-        <div class="cal-item">
-          <div class="cal-number">24</div>
-          <div class="cal-label">روز</div>
-        </div>
-        <div class="cal-divider"></div>
-        <div class="cal-item">
-          <div class="cal-number">07</div>
-          <div class="cal-label">ماه</div>
-        </div>
-      </div>
-      
-      <div class="cal-year">1405</div>
-
-      <p class="event-full-text">
-        جمعه ۲۴ مهر ماه ۱۴۰۵<br>
-        <strong>از ساعت ۱۹:۰۰ الی ۲۴:۰۰</strong>
-      </p>
-
-      <!-- عکس‌های آلبومی پولاروید -->
-      <div class="polaroid-gallery">
-        <div class="polaroid-card">
-          <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=400&auto=format&fit=crop&q=80" alt="عروس و داماد" />
-        </div>
-        <div class="polaroid-card">
-          <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=400&auto=format&fit=crop&q=80" alt="حلقه ازدواج" />
-        </div>
-      </div>
-    </section>
-
-    <!-- بخش ۳: روزشمار زنده -->
-    <section class="card-box">
-      <h2 class="section-title">لحظه‌شماری برای دیدار</h2>
-      <span class="section-subtitle">Count Down</span>
-
-      <div class="countdown-grid">
-        <div class="countdown-cell">
-          <span class="countdown-val" id="days">00</span>
-          <span class="countdown-lbl">روز</span>
-        </div>
-        <div class="countdown-cell">
-          <span class="countdown-val" id="hours">00</span>
-          <span class="countdown-lbl">ساعت</span>
-        </div>
-        <div class="countdown-cell">
-          <span class="countdown-val" id="minutes">00</span>
-          <span class="countdown-lbl">دقیقه</span>
-        </div>
-        <div class="countdown-cell">
-          <span class="countdown-val" id="seconds">00</span>
-          <span class="countdown-lbl">ثانیه</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- بخش ۴: تایم‌لاین مراسم (Wedding Timeline) -->
-    <section class="card-box">
-      <h2 class="section-title" style="font-family: var(--font-en-serif); font-size: 1.4rem;">Narges & Mahdi</h2>
-      <span class="section-subtitle">Wedding Timeline</span>
-
-      <div class="timeline-wrapper">
-        <div class="timeline-line"></div>
-
-        <!-- ورود مهمان‌ها -->
-        <div class="timeline-node left">
-          <div class="timeline-dot"></div>
-          <div class="timeline-content">
-            <i class="fa-solid fa-door-open timeline-icon"></i>
-            <span class="timeline-time">19:00</span>
-            <span class="timeline-title">ورود مهمانان عزیز</span>
-          </div>
-        </div>
-
-        <!-- رقص دونفره -->
-        <div class="timeline-node right">
-          <div class="timeline-dot"></div>
-          <div class="timeline-content">
-            <i class="fa-solid fa-heart timeline-icon"></i>
-            <span class="timeline-time">20:30</span>
-            <span class="timeline-title">اولین رقص عروس و داماد</span>
-          </div>
-        </div>
-
-        <!-- شام -->
-        <div class="timeline-node left">
-          <div class="timeline-dot"></div>
-          <div class="timeline-content">
-            <i class="fa-solid fa-utensils timeline-icon"></i>
-            <span class="timeline-time">21:30</span>
-            <span class="timeline-title">صرف شام</span>
-          </div>
-        </div>
-
-        <!-- برش کیک -->
-        <div class="timeline-node right">
-          <div class="timeline-dot"></div>
-          <div class="timeline-content">
-            <i class="fa-solid fa-cake-candles timeline-icon"></i>
-            <span class="timeline-time">22:45</span>
-            <span class="timeline-title">مراسم برش کیک</span>
-          </div>
-        </div>
-
-        <!-- پایکوبی -->
-        <div class="timeline-node left">
-          <div class="timeline-dot"></div>
-          <div class="timeline-content">
-            <i class="fa-solid fa-compact-disc timeline-icon"></i>
-            <span class="timeline-time">23:15</span>
-            <span class="timeline-title">موسیقی و پایکوبی</span>
-          </div>
-        </div>
-
-        <!-- پایان شب -->
-        <div class="timeline-node right">
-          <div class="timeline-dot"></div>
-          <div class="timeline-content">
-            <i class="fa-solid fa-moon timeline-icon"></i>
-            <span class="timeline-time">24:00</span>
-            <span class="timeline-title">پایان خاطره‌انگیز</span>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- بخش ۵: مسیریابی و لوکیشن -->
-    <section class="card-box">
-      <h2 class="section-title">موقعیت مکانی تالار</h2>
-      <span class="section-subtitle">Location</span>
-      
-      <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 10px;">
-        تالار و باغ پذیرایی اختصاصی<br>
-        (جهت مسیریابی آسان یکی از برنامه‌های زیر را انتخاب نمایید)
-      </p>
-
-      <div class="location-btn-group">
-        <!-- کافیست مختصات یا آدرس دلخواهت را در لینک‌های زیر جایگزین کنی -->
-        <a href="https://nshn.ir" target="_blank" class="loc-btn">
-          <i class="fa-solid fa-diamond-turn-right" style="color: #00bcd4;"></i>
-          مسیریابی با اپلیکیشن نشان
-        </a>
-        <a href="https://balad.ir" target="_blank" class="loc-btn">
-          <i class="fa-solid fa-location-dot" style="color: #4caf50;"></i>
-          مسیریابی با اپلیکیشن بلد
-        </a>
-        <a href="https://maps.google.com" target="_blank" class="loc-btn">
-          <i class="fa-brands fa-google" style="color: #ea4335;"></i>
-          مسیریابی با گوگل مپ (Google Maps)
-        </a>
-      </div>
-    </section>
-
-    <!-- بخش ۶: فرم اعلام و تأیید حضور (RSVP) -->
-    <section class="card-box">
-      <h2 class="section-title">اعلام حضور در مراسم</h2>
-      <span class="section-subtitle">R S V P</span>
-      
-      <p style="font-size: 0.85rem; color: var(--text-muted);">
-        حضور پرمهر شما روشنایی‌بخش جشن پیوند ماست. لطفاً وضعیت حضور خود را اعلام فرمایید:
-      </p>
-
-      <form class="rsvp-form" id="rsvpForm">
-        <div class="form-group">
-          <label>نام و نام خانوادگی:</label>
-          <input type="text" id="guestName" class="form-input" placeholder="مثال: علی رضایی" required />
-        </div>
-
-        <div class="form-group">
-          <label>وضعیت حضور:</label>
-          <select id="attendanceStatus" class="form-select">
-            <option value="با کمال میل حضور خواهم داشت">با افتخار شرکت می‌کنم 🤍</option>
-            <option value="متأسفانه امکان حضور ندارم">متأسفانه سعادت حضور ندارم</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label>تعداد نفرات:</label>
-          <select id="guestCount" class="form-select">
-            <option value="۱ نفر">۱ نفر</option>
-            <option value="۲ نفر">۲ نفر</option>
-            <option value="۳ نفر">۳ نفر</option>
-            <option value="۴ نفر و بیشتر">۴ نفر و بیشتر</option>
-          </select>
-        </div>
-
-        <button type="submit" class="submit-rsvp-btn">
-          <i class="fa-brands fa-whatsapp"></i>
-          ثبت و ارسال به عروس و داماد
-        </button>
-      </form>
-    </section>
-
-    <div class="footer-text">
-      با عشق و احترام 🤍<br>
-      <strong>نرگس و مهدی</strong>
     </div>
+  </section>
 
-  </div>
+  <section class="timeline-section">
+    <h2 class="section-title">برنامه مراسم</h2>
+    <div class="timeline">
+      <div class="timeline-item"><span class="timeline-dot"></span>
+        <div class="timeline-content">
+          <div class="timeline-time">۱۹:۰۰</div>
+          <div class="timeline-title">پذیرایی و خوش‌آمدگویی</div>
+          <div class="timeline-desc">استقبال از مهمانان عزیز</div>
+        </div>
+      </div>
+      <div class="timeline-item"><span class="timeline-dot"></span>
+        <div class="timeline-content">
+          <div class="timeline-time">۲۰:۰۰</div>
+          <div class="timeline-title">عقد و جشن</div>
+          <div class="timeline-desc">آغاز مراسم عقدکنان و شادی</div>
+        </div>
+      </div>
+      <div class="timeline-item"><span class="timeline-dot"></span>
+        <div class="timeline-content">
+          <div class="timeline-time">۲۱:۳۰</div>
+          <div class="timeline-title">صرف شام</div>
+          <div class="timeline-desc">پذیرایی شام و شب‌نشینی شاد</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <script>
-    // ۱. پخش خودکار موزیک با اولین لمس/اسکرول صفحه (مطابق با قوانین مرورگرها)
-    const audio = document.getElementById('bg-audio');
-    const musicBtn = document.getElementById('musicToggle');
-    const musicIcon = document.getElementById('musicIcon');
-    let isPlaying = false;
+  <section class="location-section">
+    <h2 class="section-title">محل برگزاری</h2>
+    >
+ class="location-card">
+      <i class="fa-solid fa-location-dot loc-icon"></i>
+      <h3 class="hall-name">باغ‌تالار تشریفاتی</h3>
+      <p class="hall-address">آدرس دقیق تالار را اینجا وارد کنید</p>
+      <a href="https://maps.google.com" target="_blank" class="btn-map">
+        <i class="fa-solid fa-map-location-dot"></i>
+        مسیریابی با نقشه
+      </a>
+    </div>
+  </section>
 
-    function playAudio() {
-      if (!isPlaying) {
-        audio.play().then(() => {
-          isPlaying = true;
-          musicBtn.classList.add('playing');
-        }).catch(err => {
-          console.log("Autoplay blocked, waiting for touch.");
-        });
-      }
-    }
+  <section class="rsvp-section">
+    <h2 class="section-title">اعلام حضور و پیام تبریک</h2>
+    <div class="rsvp-card">
+      <div class="form-group">
+        <label>نام و نام خانوادگی:</label>
+        <input type="text" id="guestName" class="form-control" placeholder="مثال: علی احمدی">
+      </div>
+      <div class="form-group">
+        <label>تعداد همراهان:</label>
+        <input type="number" id="guestCount" class="form-control" placeholder="مثال: 2">
+      </div>
+      <div class="form-group">
+        <label>پیام تبریک یا یادداشت:</label>
+        <textarea id="guestMessage" class="form-control" rows="3" placeholder="متن پیام شما..."></textarea>
+      </div>
+      <button class="btn-submit" onclick="sendRSVP()">
+        <i class="fa-brands fa-whatsapp"></i>
+        ارسال پاسخ در واتساپ
+      </button>
+    </div>
+  </section>
 
-    // پخش خودکار روی اولین کلیک یا اسکرول
-    document.addEventListener('click', function() { playAudio(); }, { once: true });
-    document.addEventListener('touchstart', function() { playAudio(); }, { once: true });
+  <footer>با آرزوی بهترین‌ها — منتظر حضور گرمتان هستیم 🤍</footer>
+</div>
 
-    // دکمه دستی قطع و وصل موزیک
-    musicBtn.addEventListener('click', function(e) {
-      e.stopPropagation();
-      if (isPlaying) {
-        audio.pause();
-        musicBtn.classList.remove('playing');
-        musicIcon.className = "fa-solid fa-volume-xmark";
-        isPlaying = false;
-      } else {
-        audio.play();
-        musicBtn.classList.add('playing');
-        musicIcon.className = "fa-solid fa-music";
-        isPlaying = true;
-      }
-    });
+<script>
+// ورود از اسپلش اسکرین
+function enterWebsite(){
+  const splash=document.getElementById('splash');
+  const video=document.getElementById('introVideo');
+  splash.style.opacity='0';
+  setTimeout(()=>{splash.style.display='none';video.pause();},800);
+  // شروع موزیک پس از ورود (اگر فایل موزیک آپلود کردید)
+  startMusic();
+}
 
-    // ۲. شمارش معکوس لایو تا ۲۴ مهر ۱۴۰۵ (16 اکتبر 2026 ساعت 19:00)
-    const targetDate = new Date("2026-10-16T19:00:00").getTime();
+// شمارش معکوس — ۲۴ مهر ۱۴۰۵ ساعت ۱۹:۰۰ = 16 Oct 2026 19:00 (به وقت ایران)
+const target=new Date('2026-10-16T19:00:00+03:30').getTime();
+function updateCountdown(){
+  const d=target-new Date().getTime();
+  if(d<0){['days','hours','minutes','seconds'].forEach(id=>document.getElementById(id).innerText='00');return;}
+  document.getElementById('days').innerText=String(Math.floor(d/86400000)).padStart(2,'0');
+  document.getElementById('hours').innerText=String(Math.floor(d/3600000)%24).padStart(2,'0');
+  document.getElementById('minutes').innerText=String(Math.floor(d/60000)%60).padStart(2,'0');
+  document.getElementById('seconds').innerText=String(Math.floor(d/1000)%60).padStart(2,'0');
+}
+setInterval(updateCountdown,1000);updateCountdown();
 
-    function updateCountdown() {
-      const now = new Date().getTime();
-      const difference = targetDate - now;
+// موزیک — بعداً فایل music.mp3 را آپلود کردید فعال می‌شود
+let audio=null,isPlaying=false;
+function startMusic(){
+  const toggle=document.getElementById('musicToggle');
+  toggle.classList.add('show');
+  audio=new Audio('music.mp3');audio.loop=true;
+  audio.play().then(()=>{isPlaying=true;toggle.classList.add{});
+');document.getElementById('musicIcon').className='fa-solid fa-pause';}).catch(()=>{});
+}
+function toggleAudio(){
+  const toggle=document.getElementById('musicToggle');
+  const icon=document.getElementById('musicIcon');
+  if(isPlaying){audio.pause();icon.className='fa-solid fa-volume-high';toggle.classList.remove('playing');}
+  else{audio.play();icon.className='fa-solid fa-pause';toggle.classList.add('playing');}
+  isPlaying=!isPlaying;
+}
 
-      if (difference > 0) {
-        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
-        document.getElementById('days').innerText = String(days).padStart(2, '0');
-        document.getElementById('hours').innerText = String(hours).padStart(2, '0');
-        document.getElementById('minutes').innerText = String(minutes).padStart(2, '0');
-        document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
-      } else {
-        document.getElementById('days').innerText = "00";
-        document.getElementById('hours').innerText = "00";
-        document.getElementById('minutes').innerText = "00";
-        document.getElementById('seconds').innerText = "00";
-      }
-    }
-
-    setInterval(updateCountdown, 1000);
-    updateCountdown();
-
-    // ۳. ارسال فرم حضور از طریق واتساپ
-    document.getElementById('rsvpForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const name = document.getElementById('guestName').value;
-      const status = document.getElementById('attendanceStatus').value;
-      const count = document.getElementById('guestCount').value;
-
-      const message = `سلام، دعوت جشن عروسی نرگس و مهدی عزیز 🤍\n\nنام: ${name}\nوضعیت: ${status}\nتعداد: ${count}`;
-      const whatsappNumber = "989120000000"; // شماره واتساپ خود را اینجا وارد کنید
-      
-      const url = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(message)}`;
-      window.open(url, '_blank');
-    });
-  </script>
+// ارسال RSVP به واتساپ — شماره خودت را جایگزین کن
+function sendRSVP(){
+  const name=document.getElementById('guestName').value.trim();
+  const count=document.getElementById('guestCount').value;
+  const msg=document.getElementById('guestMessage').value.trim();
+  if(!name){alert('لطفاً نام خود را وارد کنید.');return;}
+  const text=encodeURIComponent(`سلام، من ${name} هستم 🌸\nتعداد همراهان: ${count||'1'} نفر\nپیام: ${msg||'تبریک!'}`);
+  window.open(`https://wa.me/989123456789?text=${text}`,'_blank');
+}
+</script>
 </body>
 </html>
-
