@@ -1,495 +1,139 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>جشن عقد نرگس و مهدی</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دعوت‌نامه اختصاصی نرگس و مهدی</title>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;700&family=Playfair+Display:ital,wght@0,600;1,600&family=Great+Vibes&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #c5a059;
+            --dark-glass: rgba(15, 15, 15, 0.4);
+            --border-glass: rgba(255, 255, 255, 0.1);
+        }
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Great+Vibes&family=Vazirmatn:wght@300;400;600;700&display=swap" rel="stylesheet">
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            background: radial-gradient(circle at top right, #2a2520, #0a0a0a);
+            color: #fff;
+            font-family: 'Vazirmatn', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            overflow-x: hidden;
+        }
 
-  <style>
-    :root {
-      --white: #FDFCF9;
-      --glass: rgba(255,255,255,0.7);
-      --silver: rgba(200,200,205,0.35);
-      --text-dark: #3B2A1F;
-      --text-muted: #82756E;
-      --gold-line: rgba(150,140,130,0.35);
-      --font-serif: 'Cormorant Garamond', serif;
-      --font-script: 'Great Vibes', cursive;
-      --font-fa: 'Vazirmatn', sans-serif;
-    }
+        .container {
+            width: 100%;
+            max-width: 450px;
+            padding: 20px;
+            position: relative;
+        }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+        /* --- افکت شیشه‌ای پیشرفته --- */
+        .glass-card {
+            background: var(--dark-glass);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-glass);
+            border-radius: 30px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            margin-bottom: 25px;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
 
-    body {
-      font-family: var(--font-fa);
-      color: var(--text-dark);
-      min-height: 100vh;
-      background: linear-gradient(160deg, #ffffff 0%, #f7f4ef 40%, #efeae2 100%);
-      overflow-x: hidden;
-      position: relative;
-    }
+        /* --- انیمیشن ورود سکانسی --- */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .fade-in-up.active { opacity: 1; transform: translateY(0); }
 
-    /* ===== نقل و نبات‌های معلق در پس‌زمینه ===== */
-    .floating-bg {
-      position: fixed; inset: 0;
-      pointer-events: none;
-      z-index: 0;
-      overflow: hidden;
-    }
-    .candy {
-      position: absolute;
-      width: 30px; height: 30px;
-      border-radius: 50% 50% 50% 5px;
-      background: radial-gradient(circle at 35% 30%, #ffffff, #efe6da 60%, #e2d5c5);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.06), inset -3px -3px 6px rgba(180,160,140,0.25);
-      opacity: 0.7;
-      animation: floatCandy 9s ease-in-out infinite;
-    }
-    .candy::after {
-      content: '';
-      position: absolute; inset: 5px;
-      border-radius: inherit;
-      border: 1px dashed rgba(180,160,140,0.4);
-    }
-    @keyframes floatCandy {
-      0%, 100% { transform: translateY(0) rotate(0deg); }
-      50% { transform: translateY(-20px) rotate(8deg); }
-    }
+        /* --- تایمر لوکس --- */
+        .timer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            text-align: center;
+        }
+        .timer-box {
+            background: rgba(255,255,255,0.05);
+            padding: 15px 5px;
+            border-radius: 15px;
+            border: 1px solid var(--gold);
+        }
+        .timer-num { font-family: 'Playfair Display'; font-size: 1.5rem; color: var(--gold); }
+        .timer-label { font-size: 0.7rem; opacity: 0.7; }
 
-    /* ===== اسپلش اسکرین ویدیویی ===== */
-    #splash {
-      position: fixed; inset: 0; z-index: 10000;
-      background: #1a1614;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: space-between;
-      padding: 60px 20px 50px;
-      transition: opacity 0.8s ease, visibility 0.8s ease;
-      overflow: hidden;
-    }
-    #splash.hidden {
-      opacity: 0 !important;
-      visibility: hidden !important;
-      pointer-events: none !important;
-    }
-    
-    #splash-video {
-      position: absolute; inset: 0;
-      width: 100%; height: 100%;
-      object-fit: cover;
-      z-index: 1;
-      opacity: 0.9;
-    }
-    
-    .splash-content-top {
-      position: relative; z-index: 2;
-      text-align: center;
-      margin-top: 20px;
-    }
-    .splash-names {
-      font-family: var(--font-script);
-      font-size: 52px;
-      color: #ffffff;
-      text-shadow: 0 3px 12px rgba(0,0,0,0.7);
-    }
-    .splash-sub {
-      font-family: var(--font-serif);
-      letter-spacing: 4px;
-      font-size: 14px;
-      color: rgba(255,255,255,0.9);
-      text-transform: uppercase;
-      margin-top: 5px;
-      text-shadow: 0 2px 8px rgba(0,0,0,0.7);
-    }
+        /* --- دکمه‌های درخشان --- */
+        .btn-fancy {
+            width: 100%;
+            padding: 18px;
+            border: none;
+            border-radius: 20px;
+            background: linear-gradient(45deg, #b8860b, #daa520);
+            color: #000;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(218, 165, 32, 0.3);
+            transition: 0.3s;
+        }
+        .btn-fancy:hover { transform: scale(1.02); filter: brightness(1.2); }
 
-    .splash-content-bottom {
-      position: relative; z-index: 2;
-      margin-bottom: 20px;
-    }
-    .enter-btn {
-      background: rgba(255, 255, 255, 0.25);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1.5px solid rgba(255, 255, 255, 0.8);
-      color: #ffffff;
-      padding: 14px 38px;
-      border-radius: 30px;
-      font-size: 16px;
-      font-family: var(--font-fa);
-      font-weight: 600;
-      cursor: pointer;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
-      display: flex; align-items: center; gap: 10px;
-      animation: pulseBtn 2s infinite;
-    }
-    @keyframes pulseBtn {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-    }
-
-    /* دکمه شناور موزیک */
-    .music-btn {
-      position: fixed; top: 16px; left: 16px; z-index: 9000;
-      width: 44px; height: 44px; border-radius: 50%;
-      border: 1px solid var(--gold-line);
-      background: var(--glass);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 18px; cursor: pointer; color: var(--text-dark);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    }
-    .music-btn.playing { animation: spin 4s linear infinite; }
-    @keyframes spin { 100% { transform: rotate(360deg); } }
-
-    /* کانتینر اصلی */
-    .container {
-      position: relative; z-index: 1;
-      max-width: 430px; margin: 0 auto;
-      padding-bottom: 50px;
-    }
-
-    .section-card {
-      margin-bottom: 20px;
-    }
-
-    /* هدر */
-    .header-section { text-align: center; padding: 50px 20px 10px; }
-    .main-script-title { font-family: var(--font-script); font-size: 46px; color: var(--text-dark); }
-    .sub-tagline { font-family: var(--font-serif); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--text-muted); margin-top: 6px; }
-
-    .divider-wrap { display: flex; align-items: center; gap: 12px; width: 70%; margin: 16px auto; }
-    .divider-line { flex: 1; height: 1px; background: var(--gold-line); }
-    .divider-heart { color: #9A918A; font-size: 13px; }
-
-    /* عکس عروس و داماد */
-    .main-photo-wrap { padding: 5px 24px 20px; }
-    .photo-frame {
-      width: 100%; height: 380px;
-      border-radius: 16px; overflow: hidden;
-      box-shadow: 0 14px 34px rgba(90,80,70,0.12);
-      border: 4px solid #ffffff;
-      background: #eee;
-    }
-    .photo-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-    /* تاریخ */
-    .date-section { text-align: center; padding: 15px 20px 25px; }
-    .section-label { font-family: var(--font-serif); font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--text-muted); }
-    .date-box {
-      display: inline-block; margin: 12px auto;
-      border-top: 1px solid var(--gold-line);
-      border-bottom: 1px solid var(--gold-line);
-      padding: 10px 36px;
-    }
-    .day-number { font-family: var(--font-serif); font-size: 38px; font-weight: 600; line-height: 1.1; }
-    .month-year { font-size: 14px; color: var(--text-muted); font-weight: 300; }
-    .invitation-text { font-size: 14px; color: var(--text-muted); max-width: 320px; margin: 12px auto 0; font-weight: 300; line-height: 2; }
-
-    /* تایم‌لاین */
-    .timeline-section { padding: 20px 34px 30px; }
-    .timeline-title { font-family: var(--font-serif); font-style: italic; font-size: 22px; text-align: center; margin-bottom: 22px; }
-    .timeline-item { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
-    .timeline-time { font-family: var(--font-serif); font-size: 18px; font-weight: 600; width: 75px; }
-    .timeline-node { width: 8px; height: 8px; border-radius: 50%; background: var(--text-dark); }
-    .timeline-desc { font-size: 13px; color: var(--text-muted); width: 130px; text-align: left; }
-
-    /* مکان */
-    .venue-section {
-      text-align: center; padding: 32px 24px;
-      background: var(--glass);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border-top: 1px solid var(--gold-line);
-      border-bottom: 1px solid var(--gold-line);
-    }
-    .venue-title { font-family: var(--font-serif); font-style: italic; font-size: 23px; }
-    .venue-name { font-weight: 600; font-size: 16px; margin-top: 10px; }
-    .venue-address { font-size: 13px; color: var(--text-muted); margin-bottom: 20px; }
-    .outline-btn {
-      border: 1px solid var(--text-dark); background: transparent;
-      padding: 10px 32px; font-family: var(--font-serif);
-      font-size: 13px; letter-spacing: 3px; text-transform: uppercase;
-      cursor: pointer; border-radius: 6px; transition: all .25s;
-    }
-    .outline-btn:hover { background: var(--text-dark); color: var(--white); }
-
-    /* پالت لباس */
-    .dress-code-section { text-align: center; padding: 30px 24px; }
-    .dress-title { font-family: var(--font-serif); font-style: italic; font-size: 22px; }
-    .dress-desc { font-size: 13px; color: var(--text-muted); margin: 8px 0 18px; }
-    .palette-row { display: flex; justify-content: center; gap: 12px; }
-    .palette-circle { width: 28px; height: 28px; border-radius: 50%; box-shadow: inset 0 0 0 1px rgba(0,0,0,0.1); }
-
-    /* فرم RSVP */
-    .form-wrapper { padding: 15px 20px 30px; }
-    .silver-form-card {
-      background: linear-gradient(145deg, rgba(225,225,230,0.5), rgba(245,245,248,0.35));
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border: 1px solid rgba(255,255,255,0.7);
-      border-radius: 20px; padding: 30px 20px; text-align: center;
-      box-shadow: 0 14px 34px rgba(120,115,110,0.1);
-    }
-    .form-title-script { font-family: var(--font-serif); font-style: italic; font-size: 21px; margin-bottom: 18px; }
-    .input-group { text-align: right; margin-bottom: 16px; }
-    .input-group label { display: block; font-size: 12px; margin-bottom: 6px; color: var(--text-muted); }
-    .glass-input {
-      width: 100%; background: rgba(255,255,255,0.6);
-      border: 1px solid rgba(255,255,255,0.9); border-radius: 8px;
-      padding: 11px 14px; font-family: var(--font-fa);
-      font-size: 14px; color: var(--text-dark); outline: none;
-    }
-    .guest-counter {
-      display: flex; align-items: center;
-      background: rgba(255,255,255,0.6);
-      border: 1px solid rgba(255,255,255,0.9);
-      border-radius: 8px; overflow: hidden;
-    }
-    .counter-btn { flex: 1; background: transparent; border: none; font-size: 20px; padding: 8px 0; cursor: pointer; color: var(--text-dark); }
-    .counter-val { flex: 1.5; text-align: center; font-size: 15px; font-weight: 600; border-left: 1px solid rgba(255,255,255,0.8); border-right: 1px solid rgba(255,255,255,0.8); padding: 8px 0; }
-    .form-submit-btn {
-      width: 100%; background: var(--text-dark); color: var(--white);
-      border: none; padding: 12px 0; border-radius: 8px;
-      font-family: var(--font-serif); font-size: 14px;
-      letter-spacing: 3px; text-transform: uppercase; cursor: pointer; margin-top: 6px;
-    }
-
-    /* پاپ‌آپ نقشه */
-    .popup-overlay {
-      position: fixed; inset: 0; z-index: 9999;
-      background: rgba(59,42,31,0.6);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-      display: none; align-items: center; justify-content: center;
-    }
-    .popup-box {
-      background: rgba(255,255,255,0.95);
-      max-width: 340px; width: 88%; border-radius: 18px;
-      padding: 30px 20px; text-align: center; position: relative;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.25);
-    }
-    .popup-close { position: absolute; top: 8px; left: 16px; font-size: 28px; cursor: pointer; color: var(--text-dark); }
-    .popup-title { font-size: 15px; font-weight: 600; margin-bottom: 22px; }
-    .map-apps-row { display: flex; justify-content: center; gap: 20px; }
-    .app-link-card { display: flex; flex-direction: column; align-items: center; gap: 8px; text-decoration: none; }
-    .app-circle {
-      width: 56px; height: 56px; border-radius: 50%;
-      background: #ffffff; border: 1px solid rgba(0,0,0,0.08);
-      display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-    }
-    .app-circle img { width: 30px; height: 30px; object-fit: contain; }
-    .app-name { font-size: 13px; font-weight: 600; color: var(--text-dark); }
-
-    /* پایان */
-    .ending-section { text-align: center; padding: 25px 20px 20px; }
-    .ending-script { font-family: var(--font-script); font-size: 34px; color: var(--text-dark); line-height: 1.5; }
-  </style>
+        h1 { font-family: 'Great Vibes'; font-size: 3.5rem; color: var(--gold); text-align: center; margin-bottom: 10px; }
+    </style>
 </head>
 <body>
 
-  <!-- ====== اسپلش اسکرین ویدیویی ====== -->
-  <div id="splash">
-    <video id="splash-video" autoplay loop muted playsinline webkit-playsinline preload="auto">
-      <source src="Videos/intro.mp4" type="video/mp4">
-      <source src="intro.mp4" type="video/mp4">
-    </video>
-
-    <div class="splash-content-top">
-      <div class="splash-names">Narges & Mahdi</div>
-      <div class="splash-sub">Wedding Invitation</div>
+<div class="container">
+    <!-- هدر -->
+    <div class="fade-in-up">
+        <h1>نرگس و مهدی</h1>
+        <p style="text-align: center; opacity: 0.8;">به جشن پیوند ما خوش آمدید</p>
     </div>
 
-    <div class="splash-content-bottom">
-      <button class="enter-btn" id="enterBtn">
-        <span>ورود به دعوتنامه</span>
-        <span>🎵</span>
-      </button>
-    </div>
-  </div>
-
-  <!-- ====== موزیک پس‌زمینه ====== -->
-  <audio id="bg-music" loop preload="auto">
-    <source src="music.mp3" type="audio/mp3">
-    <source src="intro.mp4" type="video/mp4">
-  </audio>
-  <button class="music-btn" id="musicBtn">♪</button>
-
-  <!-- ====== نقل و نبات‌های معلق ====== -->
-  <div class="floating-bg">
-    <div class="candy" style="top:12%; right:8%;  animation-delay:0s;"></div>
-    <div class="candy" style="top:28%; left:6%;   animation-delay:1.5s; width:24px; height:24px;"></div>
-    <div class="candy" style="top:45%; right:12%; animation-delay:3s;"></div>
-    <div class="candy" style="top:62%; left:10%;  animation-delay:0.8s; width:26px; height:26px;"></div>
-    <div class="candy" style="top:78%; right:6%;  animation-delay:2.2s;"></div>
-    <div class="candy" style="top:90%; left:14%;  animation-delay:4s; width:22px; height:22px;"></div>
-  </div>
-
-  <!-- ====== محتوای اصلی کارت ====== -->
-  <div class="container">
-
-    <header class="header-section section-card">
-      <div class="main-script-title">Narges & Mahdi</div>
-      <div class="sub-tagline">Wedding Ceremony</div>
-      <div class="divider-wrap">
-        <div class="divider-line"></div>
-        <div class="divider-heart">♥</div>
-        <div class="divider-line"></div>
-      </div>
-    </header>
-
-    <div class="main-photo-wrap section-card">
-      <div class="photo-frame">
-        <img src="couple.jpg" alt="نرگس و مهدی" onerror="this.src='https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=800&auto=format&fit=crop'">
-      </div>
-    </div>
-
-    <section class="date-section section-card">
-      <div class="section-label">Wedding Day</div>
-      <div class="date-box">
-        <div class="day-number">۲۴</div>
-        <div class="month-year">اردیبهشت ۱۴۰۵</div>
-      </div>
-      <p class="invitation-text">حضور گرم شما، زینت‌بخش آغاز زندگی مشترک ماست.</p>
-    </section>
-
-    <section class="timeline-section section-card">
-      <div class="timeline-title">برنامه مراسم</div>
-      <div class="timeline-item"><div class="timeline-time">۱۸:۳۰</div><div class="timeline-node"></div><div class="timeline-desc">پذیرش مهمانان</div></div>
-      <div class="timeline-item"><div class="timeline-time">۲۰:۰۰</div><div class="timeline-node"></div><div class="timeline-desc">عقدکنان و جشن</div></div>
-      <div class="timeline-item"><div class="timeline-time">۲۱:۳۰</div><div class="timeline-node"></div><div class="timeline-desc">صرف شام</div></div>
-      <div class="timeline-item"><div class="timeline-time">۲۳:۳۰</div><div class="timeline-node"></div><div class="timeline-desc">پایان مراسم</div></div>
-    </section>
-
-    <section class="venue-section section-card">
-      <div class="venue-title">Where Everything Happens</div>
-      <div class="venue-name">باغ تالار مجلل ارم</div>
-      <div class="venue-address">اراک، کیلومتر ۵ جاده فراهان</div>
-      <button class="outline-btn" id="openMapBtn">Open Map</button>
-    </section>
-
-    <section class="dress-code-section section-card">
-      <div class="dress-title">Dress Code</div>
-      <div class="dress-desc">پالت رنگی هماهنگ با تم مراسم</div>
-      <div class="palette-row">
-        <div class="palette-circle" style="background:#3B2A1F;"></div>
-        <div class="palette-circle" style="background:#82756E;"></div>
-        <div class="palette-circle" style="background:#C9C9CD;"></div>
-        <div class="palette-circle" style="background:#EDE9E2;"></div>
-        <div class="palette-circle" style="background:#FDFCF9;"></div>
-      </div>
-    </section>
-
-    <div class="form-wrapper section-card">
-      <div class="silver-form-card">
-        <div class="form-title-script">Please Complete The Form</div>
-        <div class="input-group">
-          <label>نام و نام خانوادگی</label>
-          <input type="text" class="glass-input" placeholder="مثال: علی رضایی">
+    <!-- تایمر -->
+    <div class="glass-card fade-in-up" style="transition-delay: 0.2s;">
+        <div class="timer-grid">
+            <div class="timer-box"><div class="timer-num" id="d">00</div><div class="timer-label">روز</div></div>
+            <div class="timer-box"><div class="timer-num" id="h">00</div><div class="timer-label">ساعت</div></div>
+            <div class="timer-box"><div class="timer-num" id="m">00</div><div class="timer-label">دقیقه</div></div>
+            <div class="timer-box"><div class="timer-num" id="s">00</div><div class="timer-label">ثانیه</div></div>
         </div>
-        <div class="input-group">
-          <label>تعداد همراهان</label>
-          <div class="guest-counter">
-            <button type="button" class="counter-btn" id="minusBtn">−</button>
-            <div class="counter-val" id="guestCount">۱</div>
-            <button type="button" class="counter-btn" id="plusBtn">+</button>
-          </div>
-        </div>
-        <button type="button" class="form-submit-btn" onclick="alert('پاسخ شما با موفقیت ثبت شد!')">Send</button>
-      </div>
     </div>
 
-    <section class="ending-section section-card">
-      <div class="ending-script">We are waiting for you,<br>dear ones!</div>
-    </section>
-
-  </div>
-
-  <!-- ====== پاپ‌آپ نقشه ====== -->
-  <div class="popup-overlay" id="mapPopup">
-    <div class="popup-box">
-      <div class="popup-close" id="closeMapBtn">&times;</div>
-      <div class="popup-title">مسیریابی با اپلیکیشن</div>
-      <div class="map-apps-row">
-        <a href="https://balad.ir/p/5HvNwijWgpQLam" target="_blank" class="app-link-card">
-          <div class="app-circle"><img src="https://upload.wikimedia.org/wikipedia/commons/b/ba/Balad.png" alt="بلد"></div>
-          <span class="app-name">بلد</span>
-        </a>
-        <a href="https://nshn.ir/7bvg9J2xGkQI" target="_blank" class="app-link-card">
-          <div class="app-circle"><img src="https://neshan.org/static/img/neshan-logo.png" alt="نشان"></div>
-          <span class="app-name">نشان</span>
-        </a>
-        <a href="https://www.google.com/maps?q=34.117263,49.669758" target="_blank" class="app-link-card">
-          <div class="app-circle"><img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/Google_Maps_Logo.png" alt="گوگل مپ"></div>
-          <span class="app-name">گوگل مپ</span>
-        </a>
-      </div>
+    <!-- کارت اطلاعات -->
+    <div class="glass-card fade-in-up" style="transition-delay: 0.4s;">
+        <h2 style="margin-bottom: 15px; font-family: 'Playfair Display';">زمان و مکان</h2>
+        <p>پنج‌شنبه ۲۴ مهر ۱۴۰۵</p>
+        <p style="color: var(--gold);">تهران، باغ تالار مجلل</p>
     </div>
-  </div>
 
-  <script>
-    const splash = document.getElementById('splash');
-    const enterBtn = document.getElementById('enterBtn');
-    const splashVideo = document.getElementById('splash-video');
-    const music = document.getElementById('bg-music');
-    const musicBtn = document.getElementById('musicBtn');
-    let isPlaying = false;
+    <button class="btn-fancy fade-in-up" style="transition-delay: 0.6s;">ثبت حضور در واتساپ</button>
+</div>
 
-    // لود و پخش خودکار ویدیو
-    window.addEventListener('DOMContentLoaded', () => {
-      if (splashVideo) {
-        splashVideo.muted = true;
-        splashVideo.play().catch(() => {});
-      }
+<script>
+    // منطق تایمر
+    function update() {
+        const target = new Date('2026-10-16T19:00:00').getTime();
+        const now = new Date().getTime();
+        const diff = target - now;
+        document.getElementById('d').innerText = Math.floor(diff / (1000*60*60*24));
+        document.getElementById('h').innerText = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+        document.getElementById('m').innerText = Math.floor((diff % (1000*60*60)) / (1000*60));
+        document.getElementById('s').innerText = Math.floor((diff % (1000*60)) / 1000);
+    }
+    setInterval(update, 1000);
+
+    // اسکرول انیمیشن
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('active'); });
     });
-
-    // ورود به سایت
-    enterBtn.addEventListener('click', () => {
-      splash.classList.add('hidden');
-      if (splashVideo) {
-        splashVideo.pause();
-      }
-      
-      // پخش موزیک
-      music.play().then(() => {
-        isPlaying = true;
-        musicBtn.classList.add('playing');
-        musicBtn.textContent = '❚❚';
-      }).catch(err => {
-        console.log("Audio play blocked:", err);
-      });
-    });
-
-    // دکمه موزیک
-    musicBtn.addEventListener('click', () => {
-      if (isPlaying) {
-        music.pause();
-        musicBtn.classList.remove('playing');
-        musicBtn.textContent = '♪';
-        isPlaying = false;
-      } else {
-        music.play();
-        musicBtn.classList.add('playing');
-        musicBtn.textContent = '❚❚';
-        isPlaying = true;
-      }
-    });
-
-    // مدیریت پاپ‌آپ نقشه
-    const mapPopup = document.getElementById('mapPopup');
-    document.getElementById('openMapBtn').onclick = () => mapPopup.style.display = 'flex';
-    document.getElementById('closeMapBtn').onclick = () => mapPopup.style.display = 'none';
-    mapPopup.addEventListener('click', e => { if (e.target === mapPopup) mapPopup.style.display = 'none'; });
-
-    // شمارنده مهمان
-    let count = 1;
-    const guestDisplay = document.getElementById('guestCount');
-    document.getElementById('plusBtn').onclick = () => { count++; guestDisplay.textContent = count; };
-    document.getElementById('minusBtn').onclick = () => { if (count > 1) { count--; guestDisplay.textContent = count; } };
-  </script>
+    document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
+</script>
 </body>
 </html>
