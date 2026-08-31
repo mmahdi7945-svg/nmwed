@@ -2,138 +2,603 @@
 <html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>دعوت‌نامه اختصاصی نرگس و مهدی</title>
-    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;700&family=Playfair+Display:ital,wght@0,600;1,600&family=Great+Vibes&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>جشن پیوند نرگس و مهدی | The Wedding Invitation</title>
+    
+    <!-- فونت‌های گوگل برای استایل مجله‌ای و لوکس -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Vazirmatn:wght@300;400;500;700&display=swap" rel="stylesheet">
+
     <style>
         :root {
+            --bg-color: #fcfbf9;
+            --card-bg: #ffffff;
+            --text-main: #1f2022;
+            --text-muted: #757575;
             --gold: #c5a059;
-            --dark-glass: rgba(15, 15, 15, 0.4);
-            --border-glass: rgba(255, 255, 255, 0.1);
+            --gold-light: #e6ca85;
+            --gold-dark: #9e7d3b;
+            --border-color: rgba(197, 160, 89, 0.25);
+            --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.04);
+            --shadow-hover: 0 15px 35px rgba(197, 160, 89, 0.15);
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
         body {
-            background: radial-gradient(circle at top right, #2a2520, #0a0a0a);
-            color: #fff;
             font-family: 'Vazirmatn', sans-serif;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
+            background-color: var(--bg-color);
+            color: var(--text-main);
             overflow-x: hidden;
+            line-height: 1.8;
+            font-weight: 300;
         }
 
-        .container {
-            width: 100%;
-            max-width: 450px;
+        /* لایه پاکت انیمیشنی ورودی */
+        #envelope-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #181818;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1), visibility 1s;
+        }
+
+        .envelope-wrapper {
+            cursor: pointer;
+            text-align: center;
             padding: 20px;
+        }
+
+        .envelope {
+            width: 280px;
+            height: 180px;
+            background: #f4eee1;
+            border-radius: 6px;
             position: relative;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(197, 160, 89, 0.3);
+            transition: transform 0.4s ease;
         }
 
-        /* --- افکت شیشه‌ای پیشرفته --- */
-        .glass-card {
-            background: var(--dark-glass);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--border-glass);
-            border-radius: 30px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            margin-bottom: 25px;
-            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        .envelope:hover {
+            transform: translateY(-5px);
         }
 
-        /* --- انیمیشن ورود سکانسی --- */
-        .fade-in-up {
+        .wax-seal {
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle, #b8860b 0%, #8b6508 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            border: 2px dashed rgba(255,255,255,0.4);
+            color: #fff;
+            font-size: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(197, 160, 89, 0.4); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(197, 160, 89, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(197, 160, 89, 0); }
+        }
+
+        .open-hint {
+            color: #dcdcdc;
+            margin-top: 25px;
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+
+        /* دکمه شناور موسیقی */
+        .music-btn {
+            position: fixed;
+            bottom: 25px;
+            left: 25px;
+            width: 48px;
+            height: 48px;
+            background: white;
+            border: 1px solid var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            cursor: pointer;
+            z-index: 100;
+            transition: all 0.3s;
+        }
+
+        .music-btn.playing svg {
+            animation: rotateDisk 4s linear infinite;
+        }
+
+        @keyframes rotateDisk {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* بدنه اصلی سایت (استایل Editorial) */
+        .main-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 40px 20px;
             opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateY(20px);
+            transition: opacity 1.2s ease, transform 1.2s ease;
         }
-        .fade-in-up.active { opacity: 1; transform: translateY(0); }
 
-        /* --- تایمر لوکس --- */
-        .timer-grid {
+        .main-container.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* بخش هدر / جلد مجله‌ای */
+        .editorial-header {
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 30px;
+            margin-bottom: 40px;
+        }
+
+        .edition-tag {
+            font-size: 12px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold-dark);
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .names {
+            font-size: 38px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 5px;
+            line-height: 1.3;
+        }
+
+        .names span {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            color: var(--gold);
+            font-weight: 400;
+            font-size: 32px;
+            margin: 0 10px;
+        }
+
+        .tagline {
+            color: var(--text-muted);
+            font-size: 15px;
+            margin-top: 10px;
+        
+            padding: 30px 25px;
+            margin-bottom: 35px;
+            box-shadow: var(--shadow-soft);
+            text-align: center;
+        }
+
+        /* پخش‌کننده ویدیو */
+        .video-box {
+            position: relative;
+            width: 100%;
+            border-radius: 6px;
+            overflow: hidden;
+            background: #000;
+            margin-bottom: 35px;
+            box-shadow: var(--shadow-soft);
+        }
+
+        video {
+            width: 100%;
+            height: #000;
+            margin-bottom: 35px;
+            box-shadow: var(--shadow-soft);
+        }
+
+        video {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+        }
+
+        /* بخش تاریخ و شمارش معکوس */
+        .date-title {
+            font-size: 20px;
+            font-weight: 500;
+            margin-bottom: 20px;
+            color: var(--gold-dark);
+        }
+
+        .countdown-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 10px;
-            text-align: center;
+            margin-top: 20px;
         }
-        .timer-box {
-            background: rgba(255,255,255,0.05);
-            padding: 15px 5px;
-            border-radius: 15px;
-            border: 1px solid var(--gold);
-        }
-        .timer-num { font-family: 'Playfair Display'; font-size: 1.5rem; color: var(--gold); }
-        .timer-label { font-size: 0.7rem; opacity: 0.7; }
 
-        /* --- دکمه‌های درخشان --- */
-        .btn-fancy {
+        .count-item {
+            background: var(--bg-color);
+            padding: 12px 5px;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+        }
+
+        .count-number {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text-main);
+            display: block;
+        }
+
+        .count-label {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        /* بخش زمان‌بندی (Timeline) */
+        .timeline {
+            position: relative;
+            padding: 10px 0;
+            text-align: right;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-right: 30px;
+            margin-bottom: 25px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 6px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--gold);
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            right: 4px;
+            top: 20px;
+            width: 2px;
+            height: calc(100% + 5px);
+            background: rgba(197, 160, 89, 0.2);
+        }
+
+        .timeline-item:last-child::after {
+            display: none;
+        }
+
+        .timeline-time {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--gold-dark);
+        }
+
+        .timeline-title {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text-main);
+        }
+
+        /* دکمه‌های کنشی */
+        .btn-luxury {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             width: 100%;
-            padding: 18px;
+            padding: 15px 25px;
+            background: #1c1c1c;
+            color: #ffffff;
             border: none;
-            border-radius: 20px;
-            background: linear-gradient(45deg, #b8860b, #daa520);
-            color: #000;
-            font-weight: bold;
-            font-size: 1rem;
+            border-radius: 4px;
+            font-size: 15px;
+            font-weight: 400;
             cursor: pointer;
-            box-shadow: 0 0 20px rgba(218, 165, 32, 0.3);
-            transition: 0.3s;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
-        .btn-fancy:hover { transform: scale(1.02); filter: brightness(1.2); }
 
-        h1 { font-family: 'Great Vibes'; font-size: 3.5rem; color: var(--gold); text-align: center; margin-bottom: 10px; }
+        .btn-luxury:hover {
+            background: var(--gold-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        /* مودال مسیریابی */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px 20px;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 360px;
+            text-align: center;
+            position: relative;
+            animation: modalPop 0.3s ease;
+        }
+
+        @keyframes modalPop {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .map-option {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 20px;
+            margin: 10px 0;
+            border: 1px solid #eee;
+            border-radius: 6px;
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+
+        .map-option:hover {
+            background: #fbfbfb;
+            border-color: var(--gold);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: #999;
+        }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <!-- هدر -->
-    <div class="fade-in-up">
-        <h1>نرگس و مهدی</h1>
-        <p style="text-align: center; opacity: 0.8;">به جشن پیوند ما خوش آمدید</p>
-    </div>
+    <!-- موزیک پس‌زمینه -->
+    <audio id="bg-audio" loop preload="auto">
+        <source src="music.mp3" type="audio/mp3">
+    </audio>
 
-    <!-- تایمر -->
-    <div class="glass-card fade-in-up" style="transition-delay: 0.2s;">
-        <div class="timer-grid">
-            <div class="timer-box"><div class="timer-num" id="d">00</div><div class="timer-label">روز</div></div>
-            <div class="timer-box"><div class="timer-num" id="h">00</div><div class="timer-label">ساعت</div></div>
-            <div class="timer-box"><div class="timer-num" id="m">00</div><div class="timer-label">دقیقه</div></div>
-            <div class="timer-box"><div class="timer-num" id="s">00</div><div class="timer-label">ثانیه</div></div>
+    <!-- پاکت بازشونده ابتدایی (Wax Seal Envelope) -->
+    <div id="envelope-screen">
+        <div class="envelope-wrapper" onclick="openInvitation()">
+            <div class="envelope">
+                <div class="wax-seal">💌</div>
+            </div>
+            <p class="open-hint">برای گشودن دعوت‌نامه لمس کنید</p>
         </div>
     </div>
 
-    <!-- کارت اطلاعات -->
-    <div class="glass-card fade-in-up" style="transition-delay: 0.4s;">
-        <h2 style="margin-bottom: 15px; font-family: 'Playfair Display';">زمان و مکان</h2>
-        <p>پنج‌شنبه ۲۴ مهر ۱۴۰۵</p>
-        <p style="color: var(--gold);">تهران، باغ تالار مجلل</p>
+    <!-- دکمه شناور کنترل موزیک -->
+    <button class="music-btn" id="musicToggle" onclick="toggleAudio()" aria-label="پخش موزیک">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c5a059" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M12 2a10 10 0 0 1 10 10"></path>
+        </svg>
+    </button>
+
+    <!-- محتوای اصلی مجله‌ای -->
+    <main class="main-container" id="mainContainer">
+        
+        <!-- هدر صفحه -->
+        <header class="editorial-header">
+            <span class="edition-tag">SPECIAL INVITATION · 2026</span>
+            <h1 class="names">نرگس <span>&</span> مهدی</h1>
+            <p class="tagline">آغاز فصلی نو از زندگی مشترک</p>
+        </header>
+
+        <!-- بخش ویدیو -->
+        <section class="video-box">
+            <video id="introVideo" playsinline preload="metadata" controls poster="">
+                <source src="Videos/intro.mp4" type="video/mp4">
+                مرورگر شما از پخش ویدیو پشتیبانی نمی‌کند.
+            </video>
+        </section>
+
+        <!-- متن دعوت -->
+        <section class="editorial-card">
+            <p style="font-size: 15px; color: #444; line-height: 2;">
+                با قلبی سرشار از شادی و مهر، شما را به جشن آغاز با هم بودنمان دعوت می‌کنیم.<br>
+                حضور گرم و صمیمانه‌تان، شکوه و زیبایی این شب به‌یادماندنی را برای ما دوچندان خواهد کرد.
+            </p>
+        </section>
+
+        <!-- تاریخ و روزشمار -->
+        <section class="editorial-card">
+            <h3 class="date-title">پنج‌شنبه، ۲۵ شهریور ۱۴۰۵</h3>
+            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 15px;">شروع مراسم از ساعت ۱۹:۰۰</p>
+            
+            <div class="countdown-grid">
+                <div class="count-item">
+                    <span class="count-number" id="days">۰۰</span>
+                    <span class="count-label">روز</span>
+                </div>
+                <div class="count-item">
+                    <span class="count-number" id="hours">۰۰</span>
+                    <span class="count-label">ساعت</span>
+                </div>
+                <div class="count-item">
+                    <span class="count-number" id="minutes">۰۰</span>
+                    <span class="count-label">دقیقه</span>
+                </div>
+                <div class="count-item">
+                    <span class="count-number" id="seconds">۰۰</span>
+                    <span class="count-label">ثانیه</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- برنامه زمانی مراسم -->
+        <section class="editorial-card" style="text-align: right;">
+            <h3 class="date-title" style="text-align: center;">برنامه زمان‌بندی</h3>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-time">۱۹:۰۰</div>
+                    <div class="timeline-title">خوش‌آمدگویی و ورود مهمانان گرامی</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-time">۲۰:۳۰</div>
+                    <div class="timeline-title">مراسم عقد و ورود عروس و داماد</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-time">۲۱:۳۰</div>
+                    <div class="timeline-title">پذیرایی شام و جشن و پایکوبی</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- موقعیت و مسیریابی -->
+        <section class="editorial-card">
+            <h3 class="date-title">محل برگزاری جشن</h3>
+            <p style="font-size: 14px; margin-bottom: 20px; color: #555;">
+                تهران، تالار و باغ عمارت مجلل بهشت
+            </p>
+            <button class="btn-luxury" onclick="openMapModal()">
+                مسیریابی باغ تالار
+            </button>
+        </section>
+
+        <!-- تایید حضور (RSVP واتساپ) -->
+        <section class="editorial-card">
+            <h3 class="date-title">اعلام حضور (RSVP)</h3>
+            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 15px;">
+                لطفاً جهت برنامه‌ریزی بهتر، حضور گرمتان را به ما اطلاع دهید.
+            </p>
+            <a href="https://wa.me/989120000000?text=سلام،%20با%20کمال%20میل%20در%20جشن%20شما%20حاضر%20خواهم%20شد." target="_blank" class="btn-luxury" style="background: #25D366; color: #fff;">
+                ارسال پیام تایید در واتساپ
+            </a>
+        </section>
+
+        <footer style="text-align: center; margin-top: 40px; font-size: 12px; color: #aaa;">
+            با آرزوی شادی و سلامتی برای همه شما عزیزان ❤️
+        </footer>
+
+    </main>
+
+    <!-- مودال مسیریابی -->
+    <div class="modal" id="mapModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeMapModal()">&times;</button>
+            <h4 style="margin-bottom: 20px; font-weight: 500;">انتخاب اپلیکیشن مسیریاب</h4>
+            
+            <a href="https://neshan.org" target="_blank" class="map-option">
+                <span>مسیریابی با نشان</span>
+                <span>🗺️</span>
+            </a>
+            <a href="https://balad.ir" target="_blank" class="map-option">
+                <span>مسیریابی با بلد</span>
+                <span>📍</span>
+            </a>
+            <a href="https://maps.google.com" target="_blank" class="map-option">
+                <span>Google Maps</span>
+                <span>🌐</span>
+            </a>
+        </div>
     </div>
 
-    <button class="btn-fancy fade-in-up" style="transition-delay: 0.6s;">ثبت حضور در واتساپ</button>
-</div>
+    <!-- اسکریپت‌ها -->
+    <script>
+        const audio = document.getElementById('bg-audio');
+        const musicBtn = document.getElementById('musicToggle');
 
-<script>
-    // منطق تایمر
-    function update() {
-        const target = new Date('2026-10-16T19:00:00').getTime();
-        const now = new Date().getTime();
-        const diff = target - now;
-        document.getElementById('d').innerText = Math.floor(diff / (1000*60*60*24));
-        document.getElementById('h').innerText = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
-        document.getElementById('m').innerText = Math.floor((diff % (1000*60*60)) / (1000*60));
-        document.getElementById('s').innerText = Math.floor((diff % (1000*60)) / 1000);
-    }
-    setInterval(update, 1000);
+        // تابع باز کردن کارت و شروع تجربه
+        function openInvitation() {
+            const envelopeScreen = document.getElementById('envelope-screen');
+            const mainContainer = document.getElementById('mainContainer');
+            
+            envelopeScreen.style.opacity = '0';
+            setTimeout(() => {
+                envelopeScreen.style.visibility = 'hidden';
+                mainContainer.classList.add('visible');
+            }, 800);
 
-    // اسکرول انیمیشن
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('active'); });
-    });
-    document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
-</script>
+            // شروع پخش موزیک
+            audio.play().then(() => {
+                musicBtn.classList.add('playing');
+            }).catch(() => {
+                console.log("Autoplay prevented by browser.");
+            });
+        }
+
+        // کنترل قطع و وصل موزیک
+        function toggleAudio() {
+            if (audio.paused) {
+                audio.play();
+                musicBtn.classList.add('playing');
+            } else {
+                audio.pause();
+                musicBtn.classList.remove('playing');
+            }
+        }
+
+        // تایمر روزشمار (تاریخ پیش‌فرض: ۱۵ سپتامبر ۲۰۲۶)
+        const weddingDate = new Date("2026-09-15T19:00:00").getTime();
+
+        setInterval(function() {
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+
+            if (distance > 0) {
+                document.getElementById("days").innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
+                document.getElementById("hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                document.getElementById("minutes").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                document.getElementById("seconds").innerText = Math.floor((distance % (1000 * 60)) / 1000);
+            }
+        }, 1000);
+
+        // مدیریت مودال نقشه
+        function openMapModal() {
+            document.getElementById('mapModal').classList.add('active');
+        }
+        function closeMapModal() {
+            document.getElementById('mapModal').classList.remove('active');
+        }
+    </script>
 </body>
 </html>
