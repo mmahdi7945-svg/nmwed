@@ -1,699 +1,157 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>جشن پیوند نرگس و مهدی 💍</title>
-  
-  <!-- فونت وزیرمتن برای زیبایی تایپوگرافی فارسی -->
-  <link rel="preconnect" href="https://cdn.jsdelivr.net">
-  <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visual Video Experience</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-  <style>
-    :root {
-      --bg-cream: #fdfbf7;
-      --glass-bg: rgba(255, 255, 255, 0.72);
-      --glass-border: rgba(255, 255, 255, 0.85);
-      --gold-primary: #b89758;
-      --gold-dark: #8c6d32;
-      --text-main: #2d2a26;
-      --text-muted: #736b63;
-      --shadow-soft: 0 18px 45px rgba(184, 151, 88, 0.12);
-      --radius-lg: 28px;
-    }
+        body, html {
+            height: 100%;
+            overflow-x: hidden;
+            background-color: #000;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      -webkit-tap-highlight-color: transparent;
-    }
+        /* فعال‌سازی اسکرول نرم و چفت شدن به هر بخش */
+        .video-container {
+            height: 100vh;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+        }
 
-    body {
-      font-family: 'Vazirmatn', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: linear-gradient(145deg, #faf7f2 0%, #f4ede2 50%, #fdfbf7 100%);
-      color: var(--text-main);
-      min-height: 100vh;
-      overflow-x: hidden;
-      position: relative;
-    }
+        /* هر اسلاید یا صفحه ویدیویی */
+        .section {
+            position: relative;
+            height: 100vh;
+            width: 100vw;
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
 
-    /* ------------------- پس‌زمینه حباب‌ها (Gyroscope / Parallax) ------------------- */
-    #bubble-canvas-container {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 1;
-      overflow: hidden;
-    }
+        /* تنظیم ویدیو پس‌زمینه */
+        .bg-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            z-index: 1;
+            transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+        }
 
-    .bubble {
-      position: absolute;
-      border-radius: 50%;
-      background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.95), rgba(245, 233, 215, 0.45) 60%, rgba(184, 151, 88, 0.2) 100%);
-      box-shadow: inset -4px -4px 10px rgba(184, 151, 88, 0.18),
-                  inset 4px 4px 10px rgba(255, 255, 255, 0.9),
-                  0 8px 24px rgba(184, 151, 88, 0.08);
-      backdrop-filter: blur(3px);
-      -webkit-backdrop-filter: blur(3px);
-      border: 1px solid rgba(255, 255, 255, 0.6);
-      transition: transform 0.15s ease-out;
-      will-change: transform;
-    }
+        /* لایه تاریک یا شیشه‌ای روی ویدیو برای خوانایی بهتر */
+        .overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.7) 100%);
+            z-index: 2;
+        }
 
-    /* ------------------- اسپلش اسکرین ویدیویی ------------------- */
-    #splash-screen {
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-      background: #000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: opacity 0.8s ease, visibility 0.8s ease;
-    }
+        /* محتوای متنی و انیمیشن روی ویدیو */
+        .content {
+            position: relative;
+            z-index: 3;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
 
-    #splash-screen.hidden {
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-    }
+        /* کلاسی که هنگام دیده شدن فعال می‌شود */
+        .section.visible .content {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
-    #intro-video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+        .content h1 {
+            font-size: 2.8rem;
+            margin-bottom: 12px;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.6);
+        }
 
-    .video-hint {
-      position: absolute;
-      bottom: 40px;
-      background: rgba(0, 0, 0, 0.55);
-      color: #fff;
-      padding: 12px 24px;
-      border-radius: 40px;
-      font-size: 14px;
-      letter-spacing: 0.5px;
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      animation: pulse 2s infinite;
-      pointer-events: none;
-    }
-
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); opacity: 0.9; }
-      50% { transform: scale(1.05); opacity: 1; }
-    }
-
-    /* ------------------- دکمه کنترل موزیک ------------------- */
-    .music-btn {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      z-index: 100;
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      background: var(--glass-bg);
-      border: 1px solid var(--glass-border);
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      backdrop-filter: blur(10px);
-      transition: all 0.3s ease;
-    }
-
-    .music-btn svg {
-      width: 22px;
-      height: 22px;
-      fill: var(--gold-dark);
-      transition: transform 0.3s ease;
-    }
-
-    .music-btn.playing svg {
-      animation: spin 5s linear infinite;
-    }
-
-    @keyframes spin {
-      100% { transform: rotate(360deg); }
-    }
-
-    /* ------------------- ساختار اصلی محتوا ------------------- */
-    .page-wrapper {
-      position: relative;
-      z-index: 10;
-      max-width: 540px;
-      margin: 0 auto;
-      padding: 30px 18px 70px;
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-    }
-
-    .card {
-      background: var(--glass-bg);
-      border: 1px solid var(--glass-border);
-      border-radius: var(--radius-lg);
-      padding: 32px 24px;
-      text-align: center;
-      box-shadow: var(--shadow-soft);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-    }
-
-    /* هدر و نام زوجین */
-    .bismillah {
-      font-size: 14px;
-      color: var(--gold-primary);
-      letter-spacing: 2px;
-      margin-bottom: 12px;
-    }
-
-    .couple-title {
-      font-size: 32px;
-      font-weight: 800;
-      color: var(--text-main);
-      margin: 10px 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-    }
-
-    .couple-title span.and {
-      font-size: 22px;
-      color: var(--gold-primary);
-      font-weight: 300;
-    }
-
-    .invitation-quote {
-      font-size: 14px;
-      line-height: 1.9;
-      color: var(--text-muted);
-      margin-top: 14px;
-    }
-
-    /* شمارش معکوس */
-    .timer-container {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-      margin-top: 20px;
-    }
-
-    .timer-box {
-      background: rgba(255, 255, 255, 0.7);
-      border: 1px solid rgba(184, 151, 88, 0.2);
-      border-radius: 16px;
-      padding: 14px 6px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-    }
-
-    .timer-val {
-      font-size: 24px;
-      font-weight: 800;
-      color: var(--gold-dark);
-      line-height: 1.2;
-    }
-
-    .timer-lbl {
-      font-size: 11px;
-      color: var(--text-muted);
-      margin-top: 4px;
-    }
-
-    /* جزئیات زمان و مکان */
-    .info-item {
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      gap: 14px;
-      padding: 14px;
-      background: rgba(255, 255, 255, 0.55);
-      border-radius: 18px;
-      margin-bottom: 12px;
-      text-align: right;
-    }
-
-    .info-icon {
-      width: 42px;
-      height: 42px;
-      background: #fbf5eb;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      color: var(--gold-primary);
-    }
-
-    .btn-action {
-      background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
-      color: #fff;
-      border: none;
-      padding: 14px 28px;
-      border-radius: 40px;
-      font-size: 15px;
-      font-weight: 600;
-      cursor: pointer;
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      box-shadow: 0 8px 20px rgba(184, 151, 88, 0.3);
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-    .btn-action:active {
-      transform: scale(0.98);
-    }
-
-    /* ------------------- پاپ‌آپ مودال مسیریابی ------------------- */
-    .modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.45);
-      backdrop-filter: blur(6px);
-      z-index: 1000;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.3s ease, visibility 0.3s ease;
-      padding: 16px;
-    }
-
-    .modal-overlay.active {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .modal-sheet {
-      background: #ffffff;
-      width: 100%;
-      max-width: 480px;
-      border-radius: 28px;
-      padding: 26px 22px;
-      text-align: center;
-      transform: translateY(100%);
-      transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-
-    .modal-overlay.active .modal-sheet {
-      transform: translateY(0);
-    }
-
-    .maps-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-      margin: 22px 0 16px;
-    }
-
-    .map-btn {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-      color: var(--text-main);
-      padding: 14px 8px;
-      background: #faf7f2;
-      border-radius: 18px;
-      border: 1px solid #f0e8db;
-      transition: all 0.2s;
-    }
-
-    .map-btn:hover {
-      background: #f4ecdf;
-      transform: translateY(-2px);
-    }
-
-    .map-btn img, .map-btn .map-fallback-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
-      object-fit: cover;
-    }
-
-    /* ------------------- فرم RSVP ------------------- */
-    .rsvp-form {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      margin-top: 14px;
-      text-align: right;
-    }
-
-    .rsvp-form input, .rsvp-form select, .rsvp-form textarea {
-      width: 100%;
-      padding: 12px 16px;
-      border-radius: 14px;
-      border: 1px solid rgba(184, 151, 88, 0.25);
-      background: rgba(255, 255, 255, 0.85);
-      font-family: inherit;
-      font-size: 14px;
-      outline: none;
-      transition: border-color 0.2s;
-    }
-
-    .rsvp-form input:focus, .rsvp-form select:focus, .rsvp-form textarea:focus {
-      border-color: var(--gold-dark);
-      background: #fff;
-    }
-
-    .rsvp-status {
-      display: none;
-      padding: 12px;
-      border-radius: 12px;
-      font-size: 13px;
-      margin-top: 8px;
-      text-align: center;
-    }
-  </style>
+        .content p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+    </style>
 </head>
 <body>
 
-  <!-- حباب‌های حساس به ژیروسکوپ گوشی -->
-  <div id="bubble-canvas-container"></div>
+    <div class="video-container">
+        
+        <!-- سکشن اول -->
+        <section class="section">
+            <video class="bg-video" autoplay muted loop playsinline preload="auto">
+                <source src="video1.mp4" type="video/mp4">
+            </video>
+            <div class="overlay"></div>
+            <div class="content">
+                <h1>عنوان بخش اول</h1>
+                <p>توضیح کوتاه با انیمیشن ورود نرم</p>
+            </div>
+        </section>
 
-  <!-- اسپلش اسکرین ویدیویی ورودی -->
-  <div id="splash-screen">
-    <video id="intro-video" playsinline preload="auto">
-      <source src="intro.mp4" type="video/mp4">
-      مرورگر شما از پخش ویدیو پشتیبانی نمی‌کند.
-    </video>
-    <div class="video-hint">برای ورود لمس کنید ✨</div>
-  </div>
+        <!-- سکشن دوم -->
+        <section class="section">
+            <video class="bg-video" autoplay muted loop playsinline preload="auto">
+                <source src="video2.mp4" type="video/mp4">
+            </video>
+            <div class="overlay"></div>
+            <div class="content">
+                <h1>عنوان بخش دوم</h1>
+                <p>ویدیوی بعدی با تکرار مداوم و بدون وقفه</p>
+            </div>
+        </section>
 
-  <!-- فایل صوتی پس‌زمینه -->
-  <audio id="bg-audio" loop preload="auto">
-    <source src="music.mp3" type="audio/mp3">
-  </audio>
+        <!-- سکشن سوم -->
+        <section class="section">
+            <video class="bg-video" autoplay muted loop playsinline preload="auto">
+                <source src="video3.mp4" type="video/mp4">
+            </video>
+            <div class="overlay"></div>
+            <div class="content">
+                <h1>عنوان بخش سوم</h1>
+                <p>طراحی مدرن، روان و مبتنی بر موشن</p>
+            </div>
+        </section>
 
-  <!-- دکمه شناور موسیقی -->
-  <button class="music-btn" id="music-toggle" aria-label="پخش/توقف موزیک">
-    <svg viewBox="0 0 24 24">
-      <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
-    </svg>
-  </button>
-
-  <!-- بدنه کارت دعوت -->
-  <div class="page-wrapper">
-
-    <!-- کارت خوش‌آمدگویی و مشخصات -->
-    <header class="card">
-      <div class="bismillah">«بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ»</div>
-      <h1 class="couple-title">
-        <span>نرگس</span>
-        <span class="and">&</span>
-        <span>مهدی</span>
-      </h1>
-      <p class="invitation-quote">
-        در آستانه فصلی نو از زندگی‌مان، گرد هم می‌آییم تا پیوندمان را جشن بگیریم.<br>
-        حضورتان نوری است بر بزم شادمانی ما.
-      </p>
-    </header>
-
-    <!-- تایمر شمارش معکوس -->
-    <section class="card">
-      <h2 style="font-size: 17px; color: var(--gold-dark); margin-bottom: 8px;">لحظه‌شمار تا آغاز جشن 💍</h2>
-      <div class="timer-container" id="countdown">
-        <div class="timer-box">
-          <span class="timer-val" id="days">--</span>
-          <span class="timer-lbl">روز</span>
-        </div>
-        <div class="timer-box">
-          <span class="timer-val" id="hours">--</span>
-          <span class="timer-lbl">ساعت</span>
-        </div>
-        <div class="timer-box">
-          <span class="timer-val" id="minutes">--</span>
-          <span class="timer-lbl">دقیقه</span>
-        </div>
-        <div class="timer-box">
-          <span class="timer-val" id="seconds">--</span>
-          <span class="timer-lbl">ثانیه</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- زمان و مکان مراسم + پاپ‌آپ مسیریابی -->
-    <section class="card">
-      <div class="info-item">
-        <div class="info-icon">📅</div>
-        <div>
-          <div style="font-weight: 700; font-size: 15px;">جمعه ۲۵ مهر ماه ۱۴۰۵</div>
-          <div style="font-size: 13px; color: var(--text-muted);">از ساعت ۱۹:۰۰ الی ۲۳:۰۰</div>
-        </div>
-      </div>
-
-      <div class="info-item">
-        <div class="info-icon">📍</div>
-        <div>
-          <div style="font-weight: 700; font-size: 15px;">محل برگزاری جشن</div>
-          <div style="font-size: 13px; color: var(--text-muted);">تهران، تالار و باغ تشریفات</div>
-        </div>
-      </div>
-
-      <button class="btn-action" id="open-map-modal">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-        </svg>
-        <span>مسیریابی با نرم‌افزارهای نقشه</span>
-      </button>
-    </section>
-
-    <!-- فرم اعلام حضور (RSVP) -->
-    <section class="card">
-      <h2 style="font-size: 18px; color: var(--text-main); margin-bottom: 6px;">اعلام حضور در مراسم (RSVP)</h2>
-      <p style="font-size: 13px; color: var(--text-muted);">لطفاً جهت برنامه‌ریزی بهتر، حضور گرمتان را به ما اطلاع دهید.</p>
-
-      <form class="rsvp-form" id="rsvpForm">
-        <div>
-          <label style="font-size: 12px; color: var(--text-muted); margin-bottom: 4px; display:block;">نام و نام خانوادگی:</label>
-          <input type="text" id="guestName" required placeholder="مثلاً: علی رضایی">
-        </div>
-
-        <div>
-          <label style="font-size: 12px; color: var(--text-muted); margin-bottom: 4px; display:block;">وضعیت حضور:</label>
-          <select id="attendanceStatus">
-            <option value="yes">با کمال میل حضور خواهم داشت ✨</option>
-            <option value="no">متاسفانه امکان حضور ندارم 🌸</option>
-          </select>
-        </div>
-
-        <div>
-          <label style="font-size: 12px; color: var(--text-muted); margin-bottom: 4px; display:block;">تعداد نفرات همراه:</label>
-          <select id="guestCount">
-            <option value="1">۱ نفر (تنها)</option>
-            <option value="2">۲ نفر</option>
-            <option value="3">۳ نفر</option>
-            <option value="4+">۴ نفر و بیشتر</option>
-          </select>
-        </div>
-
-        <div>
-          <label style="font-size: 12px; color: var(--text-muted); margin-bottom: 4px; display:block;">پیام تبریک (اختیاری):</label>
-          <textarea id="guestMessage" rows="2" placeholder="شادباش یا پیام پرمهر شما..."></textarea>
-        </div>
-
-        <button type="submit" class="btn-action" style="margin-top: 6px;">
-          ثبت و ارسال پاسخ
-        </button>
-
-        <div id="formStatus" class="rsvp-status"></div>
-      </form>
-    </section>
-
-  </div>
-
-  <!-- پاپ‌آپ انتخاب اپلیکیشن مسیریاب -->
-  <div class="modal-overlay" id="mapModal">
-    <div class="modal-sheet">
-      <h3 style="font-size: 17px; margin-bottom: 6px;">انتخاب مسیریاب</h3>
-      <p style="font-size: 13px; color: var(--text-muted);">مسیریاب مورد نظر خود را انتخاب کنید:</p>
-
-      <div class="maps-grid">
-        <!-- نشان -->
-        <a href="https://nshn.ir/7bvg9J2xGkQI" target="_blank" rel="noopener" class="map-btn">
-          <img src="neshan.png" alt="نشان" onerror="this.src='https://nshn.ir/static/images/neshan-logo.png'">
-          <span style="font-size: 13px; font-weight: 600;">نشان</span>
-        </a>
-
-        <!-- بلد -->
-        <a href="https://balad.ir/p/5HvNwijWgpQLam" target="_blank" rel="noopener" class="map-btn">
-          <img src="Balad.png" alt="بلد" onerror="this.src='https://balad.ir/favicon.ico'">
-          <span style="font-size: 13px; font-weight: 600;">بلد</span>
-        </a>
-
-        <!-- گوگل مپ -->
-        <a href="https://maps.google.com" target="_blank" rel="noopener" class="map-btn">
-          <img src="Google_Maps_Logo.png" alt="گوگل مپ" onerror="this.src='https://maps.gstatic.com/tactile/pane/default_geocode-1x.png'">
-          <span style="font-size: 13px; font-weight: 600;">گوگل مپ</span>
-        </a>
-      </div>
-
-      <button id="close-map-modal" style="background:#eee; border:none; width:100%; padding:12px; border-radius:14px; font-size:14px; cursor:pointer;">بستن</button>
     </div>
-  </div>
 
-  <script>
-    // ----------------- ۱. مدیریت اسپلش ویدیویی و موزیک -----------------
-    const splash = document.getElementById('splash-screen');
-    const video = document.getElementById('intro-video');
-    const audio = document.getElementById('bg-audio');
-    const musicBtn = document.getElementById('music-toggle');
-    let hasEntered = false;
+    <script>
+        // اضافه کردن کلاس visible هنگام قرار گرفتن بخش در دید کاربر
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    // اطمینان از پخش ویدیو
+                    const video = entry.target.querySelector('video');
+                    if (video && video.paused) {
+                        video.play();
+                    }
+                }
+            });
+        }, { threshold: 0.5 });
 
-    function enterMainSite() {
-      if (hasEntered) return;
-      hasEntered = true;
-      splash.classList.add('hidden');
-      video.pause();
-      
-      // شروع پخش موزیک پس از تعامل با ویدیو
-      audio.play().then(() => {
-        musicBtn.classList.add('playing');
-      }).catch(err => {
-        console.log("Audio autoplay waiting for explicit play button click", err);
-      });
-    }
-
-    // پخش ویدیو با لمس صفحه و ورود در لمس دوم یا اتمام ویدیو
-    splash.addEventListener('click', () => {
-      if (video.paused) {
-        video.play().catch(() => {});
-      } else {
-        enterMainSite();
-      }
-    });
-
-    video.addEventListener('ended', enterMainSite);
-
-    // دکمه روشن/خاموش موزیک
-    musicBtn.addEventListener('click', () => {
-      if (audio.paused) {
-        audio.play();
-        musicBtn.classList.add('playing');
-      } else {
-        audio.pause();
-        musicBtn.classList.remove('playing');
-      }
-    });
-
-    // ----------------- ۲. حباب‌های پس‌زمینه و واکنش به ژیروسکوپ -----------------
-    const bubbleContainer = document.getElementById('bubble-canvas-container');
-    const bubblesCount = 14;
-    const bubbles = [];
-
-    for (let i = 0; i < bubblesCount; i++) {
-      const b = document.createElement('div');
-      b.className = 'bubble';
-      const size = Math.floor(Math.random() * 45) + 20; // بین 20 تا 65 پیکسل
-      const initX = Math.random() * 100;
-      const initY = Math.random() * 100;
-      const speed = (Math.random() * 0.4 + 0.1);
-
-      b.style.width = `${size}px`;
-      b.style.height = `${size}px`;
-      b.style.left = `${initX}%`;
-      b.style.top = `${initY}%`;
-
-      bubbleContainer.appendChild(b);
-      bubbles.push({ el: b, x: initX, y: initY, speed: speed });
-    }
-
-    // حرکت ژیروسکوپ موبایل (DeviceOrientation)
-    let targetTiltX = 0;
-    let targetTiltY = 0;
-
-    window.addEventListener('deviceorientation', (e) => {
-      if (e.gamma !== null && e.beta !== null) {
-        targetTiltX = e.gamma * 0.7; // چپ و راست
-        targetTiltY = (e.beta - 45) * 0.7; // بالا و پایین
-        updateBubbles();
-      }
-    });
-
-    // افکت پارالاکس ماوس در دسکتاپ
-    window.addEventListener('mousemove', (e) => {
-      targetTiltX = ((e.clientX / window.innerWidth) - 0.5) * 40;
-      targetTiltY = ((e.clientY / window.innerHeight) - 0.5) * 40;
-      updateBubbles();
-    });
-
-    function updateBubbles() {
-      bubbles.forEach(b => {
-        const moveX = targetTiltX * b.speed * 1.5;
-        const moveY = targetTiltY * b.speed * 1.5;
-        b.el.style.transform = `translate3d(${moveX}px, ${moveY}px, 0)`;
-      });
-    }
-
-    // ----------------- ۳. شمارش معکوس تا ۲۵ مهر ۱۴۰۵ (16 اکتبر 2026) -----------------
-    const targetDate = new Date("2026-10-16T19:00:00").getTime();
-
-    function updateCountdown() {
-      const now = new Date().getTime();
-      const difference = targetDate - now;
-
-      if (difference > 0) {
-        const d = Math.floor(difference / (1000 * 60 * 60 * 24));
-        const h = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const m = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-        const s = Math.floor((difference % (1000 * 60)) / 1000);
-
-        document.getElementById('days').innerText = d;
-        document.getElementById('hours').innerText = h < 10 ? '0' + h : h;
-        document.getElementById('minutes').innerText = m < 10 ? '0' + m : m;
-        document.getElementById('seconds').innerText = s < 10 ? '0' + s : s;
-      }
-    }
-    setInterval(updateCountdown, 1000);
-    updateCountdown();
-
-    // ----------------- ۴. مودال مسیریابی -----------------
-    const mapModal = document.getElementById('mapModal');
-    document.getElementById('open-map-modal').addEventListener('click', () => {
-      mapModal.classList.add('active');
-    });
-    document.getElementById('close-map-modal').addEventListener('click', () => {
-      mapModal.classList.remove('active');
-    });
-    mapModal.addEventListener('click', (e) => {
-      if (e.target === mapModal) mapModal.classList.remove('active');
-    });
-
-    // ----------------- ۵. ثبت فرم اعلام حضور (RSVP) -----------------
-    const rsvpForm = document.getElementById('rsvpForm');
-    const formStatus = document.getElementById('formStatus');
-
-    rsvpForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const name = document.getElementById('guestName').value.trim();
-      const status = document.getElementById('attendanceStatus').value === 'yes' ? 'می‌آیم' : 'نمی‌توانم بیایم';
-      const count = document.getElementById('guestCount').value;
-      const msg = document.getElementById('guestMessage').value.trim();
-
-      // ذخیره محلی در حافظه مرورگر
-      const guestData = { name, status, count, msg, timestamp: new Date().toISOString() };
-      localStorage.setItem('wedding_rsvp_' + Date.now(), JSON.stringify(guestData));
-
-      formStatus.style.display = 'block';
-      formStatus.style.background = '#e8f5e9';
-      formStatus.style.color = '#2e7d32';
-      formStatus.innerText = 'پاسخ شما با موفقیت ثبت شد. از همراهی‌تان سپاسگزاریم ❤️';
-
-      rsvpForm.reset();
-    });
-  </script>
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
 </body>
 </html>
