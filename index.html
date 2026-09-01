@@ -1,251 +1,70 @@
 <!DOCTYPE html>
-<!-- 
-  راهنما:
-  ۱. این فایل را با نام index.html ذخیره کنید.
-  ۲. فایل ویدیوی ورودی خود را با نام intro-video.mp4 دقیقاً در کنار همین فایل قرار دهید.
-  ۳. برای اجرای روی GitHub Pages، کافی است این فایل‌ها را در ریپازیتوری پوش (Push) کنید.
--->
 <html lang="fa" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>تجربه ویدیویی سینمایی</title>
+  <title>دعوت‌نامه سینمایی</title>
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { width: 100%; height: 100%; background-color: #0b0b0f; color: #fff; font-family: sans-serif; overflow: hidden; }
 
-    html, body {
-      width: 100%;
-      height: 100%;
-      background-color: #0b0b0f;
-      color: #fff;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Vazirmatn", "Tahoma", sans-serif;
-      overflow: hidden;
-      user-select: none;
-      -webkit-user-select: none;
-    }
+    /* صفحه اینترو */
+    .intro-screen { position: fixed; inset: 0; z-index: 50; background: #000; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    .intro-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .intro-hint { position: absolute; bottom: 40px; padding: 10px 22px; border-radius: 999px; background: rgba(0,0,0,0.45); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.18); pointer-events: none; }
 
-    /* =========================================================
-       ۱. صفحه اینترو (ویدیو ورودی)
-       ========================================================= */
-    .intro-screen {
-      position: fixed;
-      inset: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: 50;
-      background: #000;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: visibility 0.3s ease;
-    }
+    /* ترنزیشن */
+    .white-overlay { position: fixed; inset: 0; background: #ffffff; z-index: 100; opacity: 0; pointer-events: none; transition: opacity 0.6s; }
+    .white-overlay.active { opacity: 1; pointer-events: all; }
 
-    .intro-video {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      pointer-events: none;
-    }
-
-    /* راهنمای کوچک لمس/کلیک */
-    .intro-hint {
-      position: absolute;
-      bottom: 40px;
-      z-index: 2;
-      padding: 10px 22px;
-      border-radius: 999px;
-      background: rgba(0, 0, 0, 0.45);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      font-size: 0.95rem;
-      letter-spacing: 0.5px;
-      color: #fff;
-      opacity: 0;
-      animation: hintFadeIn 1.2s ease forwards 1s;
-      pointer-events: none;
-    }
-
-    @keyframes hintFadeIn {
-      to { opacity: 0.85; }
-    }
-
-    /* =========================================================
-       ۲. لایه سینمایی Dip to White
-       ========================================================= */
-    .white-overlay {
-      position: fixed;
-      inset: 0;
-      width: 100vw;
-      height: 100vh;
-      background: #ffffff;
-      z-index: 100;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .white-overlay.active {
-      opacity: 1;
-      pointer-events: all;
-    }
-
-    .white-overlay.fade-out {
-      opacity: 0;
-      transition: opacity 0.8s cubic-bezier(0.2, 0, 0.2, 1);
-      pointer-events: none;
-    }
-
-    /* =========================================================
-       ۳. بدنه اصلی سایت (اسکرول اسنپ تمام‌صفحه)
-       ========================================================= */
-    .website-content {
-      width: 100vw;
-      height: 100vh;
-      overflow-y: scroll;
-      scroll-snap-type: y mandatory;
-      scroll-behavior: smooth;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.4s ease;
-    }
-
-    .website-content.revealed {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .scroll-section {
-      position: relative;
-      width: 100vw;
-      height: 100vh;
-      scroll-snap-align: start;
-      scroll-snap-stop: always;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 24px;
-      background: radial-gradient(circle at center, #151520 0%, #08080c 100%);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-      overflow: hidden;
-    }
-
-    /* ویدیوی پس‌زمینه برای سکشن‌های داخل سایت */
-    .bg-video {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      z-index: 1;
-      opacity: 0.5;
-    }
-
-    .section-overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.4);
-      z-index: 2;
-    }
-
-    .section-card {
-      position: relative;
-      z-index: 3;
-      max-width: 650px;
-      padding: 32px 28px;
-      border-radius: 20px;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
-      transform: translateY(40px);
-      opacity: 0;
-      transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.9s ease;
-    }
-
-    .scroll-section.visible .section-card {
-      transform: translateY(0);
-      opacity: 1;
-    }
-
-    .section-card h2 {
-      font-size: 2.2rem;
-      margin-bottom: 12px;
-      letter-spacing: -0.5px;
-    }
-
-    .section-card p {
-      font-size: 1.1rem;
-      color: rgba(255, 255, 255, 0.78);
-      line-height: 1.8;
-    }
-
-    .scroll-indicator {
-      margin-top: 24px;
-      display: inline-block;
-      font-size: 0.85rem;
-      color: rgba(255, 255, 255, 0.5);
-      border: 1px dashed rgba(255, 255, 255, 0.25);
-      padding: 6px 14px;
-      border-radius: 999px;
-    }
+    /* سایت اصلی */
+    .website-content { width: 100vw; height: 100vh; overflow-y: scroll; scroll-snap-type: y mandatory; scroll-behavior: smooth; opacity: 0; transition: opacity 0.4s; }
+    .website-content.revealed { opacity: 1; }
+    .scroll-section { position: relative; width: 100vw; height: 100vh; scroll-snap-align: start; display: flex; align-items: center; justify-content: center; text-align: center; overflow: hidden; }
+    .bg-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; opacity: 0.5; }
+    .section-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.4); z-index: 2; }
+    .section-card { position: relative; z-index: 3; max-width: 650px; padding: 32px; border-radius: 20px; background: rgba(255,255,255,0.04); backdrop-filter: blur(12px); transform: translateY(40px); opacity: 0; transition: transform 0.9s, opacity 0.9s; }
+    .scroll-section.visible .section-card { transform: translateY(0); opacity: 1; }
   </style>
 </head>
 <body>
 
-  <!-- لایه ترنزیشن Dip to White -->
   <div class="white-overlay" id="whiteOverlay"></div>
 
-  <!-- صفحه اینترو ویدیویی -->
   <div class="intro-screen" id="introScreen">
-    <video class="intro-video" id="introVideo" autoplay muted playsinline preload="auto">
-      <source src="intro-video.mp4" type="video/mp4">
-    </video>
+    <video class="intro-video" id="introVideo" autoplay muted playsinline src="intro-video.mp4"></video>
     <div class="intro-hint">برای ورود کلیک کنید</div>
   </div>
 
-  <!-- بدنه اصلی سایت (اسکرولی) -->
   <main class="website-content" id="websiteContent">
-
-    <!-- سکشن اول -->
+    
+    <!-- سکشن ۱ -->
     <section class="scroll-section">
-      <!-- برای اضافه کردن ویدیو به پس‌زمینه سکشن، خط زیر را از کامنت خارج کنید: -->
-      <!-- <video class="bg-video" autoplay muted loop playsinline src="video1.mp4"></video> -->
+      <video class="bg-video" autoplay muted loop playsinline src="section1.mp4"></video>
       <div class="section-overlay"></div>
       <div class="section-card">
         <h2>بخش اول</h2>
-        <p>به فضای اصلی خوش آمدید. با اسکرول کردن به سمت پایین به بخش‌ها و ویدیوهای بعدی هدایت می‌شوید.</p>
-        <span class="scroll-indicator">↓ اسکرول کنید</span>
+        <p>متن خود را اینجا وارد کنید.</p>
       </div>
     </section>
 
-    <!-- سکشن دوم -->
+    <!-- سکشن ۲ -->
     <section class="scroll-section">
-      <!-- <video class="bg-video" autoplay muted loop playsinline src="video2.mp4"></video> -->
+      <video class="bg-video" autoplay muted loop playsinline src="section2.mp4"></video>
       <div class="section-overlay"></div>
       <div class="section-card">
         <h2>بخش دوم</h2>
-        <p>هر بخش به صورت اسنپ قفل می‌شود تا ویدیوها و موشن‌ها به صورت سینمایی و کامل در دید کاربر قرار گیرند.</p>
-        <span class="scroll-indicator">↓ اسکرول کنید</span>
+        <p>متن خود را اینجا وارد کنید.</p>
       </div>
     </section>
 
-    <!-- سکشن سوم -->
+    <!-- سکشن ۳ -->
     <section class="scroll-section">
-      <!-- <video class="bg-video" autoplay muted loop playsinline src="video3.mp4"></video> -->
+      <video class="bg-video" autoplay muted loop playsinline src="section3.mp4"></video>
       <div class="section-overlay"></div>
       <div class="section-card">
         <h2>بخش سوم</h2>
-        <p>می‌توانید هر تعداد سکشن ویدیویی دلخواه با فرمت‌های لوپ، گیف‌مانند یا تعاملی به اینجا اضافه کنید.</p>
+        <p>متن خود را اینجا وارد کنید.</p>
       </div>
     </section>
 
@@ -254,64 +73,32 @@
   <script>
     const introScreen = document.getElementById('introScreen');
     const introVideo = document.getElementById('introVideo');
-    const whiteOverlay = document.getElementById('whiteOverlay');
     const websiteContent = document.getElementById('websiteContent');
+    const whiteOverlay = document.getElementById('whiteOverlay');
 
-    let isTransitioning = false;
-
-    // ترنزیشن سینمایی Dip to White
-    function dipToWhiteTransition() {
-      if (isTransitioning) return;
-      isTransitioning = true;
-
-      // مرحله ۱: محو شدن به سفید (Fade into White)
+    function start() {
       whiteOverlay.classList.add('active');
-
       setTimeout(() => {
-        // مرحله ۲: توقف و حذف اینترو، فعال‌سازی بدنه اصلی
-        if (introVideo) {
-          try { introVideo.pause(); } catch (e) {}
-        }
         introScreen.style.display = 'none';
         websiteContent.classList.add('revealed');
-        document.body.style.overflow = 'auto';
-
-        // مرحله ۳: محو شدن سفیدی و آشکارسازی سایت (Fade out from White)
         whiteOverlay.classList.remove('active');
-        whiteOverlay.classList.add('fade-out');
-
-        setTimeout(() => {
-          whiteOverlay.style.display = 'none';
-        }, 850);
       }, 600);
     }
 
-    // ورود با کلیک یا لمس
-    introScreen.addEventListener('click', dipToWhiteTransition);
-    introScreen.addEventListener('touchend', (e) => {
-      e.preventDefault();
-      dipToWhiteTransition();
-    }, { passive: false });
+    introScreen.addEventListener('click', start);
+    introVideo.addEventListener('ended', start);
 
-    // ورود خودکار در صورت اتمام ویدیو
-    introVideo.addEventListener('ended', dipToWhiteTransition);
-
-    // فعال‌سازی انیمیشن سکشن‌ها با اسکرول (Intersection Observer)
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
           const video = entry.target.querySelector('video');
-          if (video && video.paused) {
-            video.play().catch(() => {});
-          }
+          if (video) video.play().catch(() => {});
         }
       });
     }, { threshold: 0.45 });
 
-    document.querySelectorAll('.scroll-section').forEach(section => {
-      observer.observe(section);
-    });
+    document.querySelectorAll('.scroll-section').forEach(section => observer.observe(section));
   </script>
 </body>
 </html>
