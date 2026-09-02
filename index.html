@@ -116,44 +116,21 @@
   opacity: 1;
   transform: translateY(0) scale(1);
 }
-    /* تعریف فونت B Yekan و Eras Light */
+ /* فونت‌ها */
 @font-face {
   font-family: 'BYekan';
   src: url('https://cdn.fontcdn.ir/Font/Persian/Yekan/Yekan.woff2') format('woff2');
   font-weight: normal;
-  font-style: normal;
 }
 
 @font-face {
   font-family: 'ErasLight';
-  src: local('Eras Light ITC'), local('Eras-Light-ITC'), local('Eras Medium ITC');
+  src: local('Eras Light ITC'), local('Eras-Light-ITC'), local('Eras Medium ITC'), sans-serif;
   font-weight: 300;
 }
 
-/* کلاس‌های کمکی برای فونت‌ها */
-.font-yekan {
-  font-family: 'BYekan', Tahoma, sans-serif;
-  font-weight: normal;
-}
-
-.font-roboto-light {
-  font-family: 'Roboto', sans-serif;
-  font-weight: 300;
-}
-
-.font-roboto-bold-condensed {
-  font-family: 'Roboto Condensed', 'Roboto', sans-serif;
-  font-weight: 700;
-}
-
-.font-eras {
-  font-family: 'ErasLight', 'Eras Light ITC', sans-serif;
-  font-weight: 300;
-  letter-spacing: 2px;
-}
-
-/* استایل سکشن داستانی ما (Our Story) */
-.story-section {
+/* ساختار کلی سکشن ۲ */
+.event-date-section {
   position: relative;
   width: 100%;
   height: 100dvh;
@@ -162,157 +139,144 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 45px 24px 35px 24px;
+  padding: 40px 20px 25px 20px;
   box-sizing: border-box;
   overflow: hidden;
-  color: #2b2b2b;
   direction: rtl;
-}
-
-/* متن هدر بالا */
-.story-header {
   text-align: center;
-  width: 100%;
 }
 
-.story-header p {
-  margin: 0;
-  font-size: 15px;
-  color: #3a3a3a;
-  line-height: 1.8;
+/* تیترها */
+.main-title {
+  font-family: 'BYekan', Tahoma, sans-serif;
+  font-size: 26px;
+  font-weight: normal;
+  color: #4a4a4a;
+  margin: 0 0 6px 0;
 }
 
-.story-title {
-  text-align: center;
-  font-size: 32px;
+.sub-title-eras {
+  font-family: 'ErasLight', sans-serif;
+  font-size: 13px;
+  letter-spacing: 7px;
+  color: #888888;
+  margin-bottom: 20px;
   text-transform: uppercase;
-  color: #2a2a2a;
-  margin: 12px 0 6px 0;
 }
 
-/* کانتینر میانی شامل دو عکس با چسب نواری و تاریخ‌ها */
-.story-content {
-  position: relative;
-  width: 100%;
-  flex: 1;
+/* بلوک اعداد تقویم */
+.date-display-block {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  margin: 10px 0;
+  align-items: center;
+  width: 100%;
 }
 
-/* ردیف اول: عکس چپ + متن راست */
-.story-row-1 {
+.date-split-row {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  padding-left: 10px;
+  justify-content: center;
+  gap: 16px;
 }
 
-/* ردیف دوم: متن چپ + عکس راست */
-.story-row-2 {
+.date-col {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  padding-right: 10px;
 }
 
-/* استایل کارت‌های عکس با چسب نواری شیشه‌ای */
-.photo-card-wrap {
+.number-bold {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 64px;
+  font-weight: 700;
+  line-height: 1;
+  color: #000000;
+}
+
+.date-divider {
+  width: 1.5px;
+  height: 90px;
+  background-color: #707070;
+}
+
+.label-yekan {
+  font-family: 'BYekan', Tahoma, sans-serif;
+  font-size: 22px;
+  color: #333333;
+  margin-top: 4px;
+}
+
+.year-bold {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 60px;
+  font-weight: 700;
+  letter-spacing: 12px;
+  margin-left: -12px;
+  color: #000000;
+  margin-top: 14px;
+  line-height: 1;
+}
+
+/* متن تاریخ کامل و ساعت */
+.event-info-text {
+  font-family: 'BYekan', Tahoma, sans-serif;
+  font-size: 20px;
+  color: #333333;
+  line-height: 1.6;
+  margin-top: 15px;
+}
+
+/* بخش دو عکس چسب‌خورده پایین */
+.bottom-photos-row {
   position: relative;
-  display: inline-block;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px 0;
 }
 
-.photo-tape {
-  position: absolute;
-  top: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 55px;
-  height: 18px;
-  background: rgba(235, 235, 235, 0.7);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12);
-  backdrop-filter: blur(2px);
-  z-index: 2;
-  border-left: 2px dashed rgba(200,200,200,0.5);
-  border-right: 2px dashed rgba(200,200,200,0.5);
-}
-
-.photo-frame {
-  width: 135px;
-  height: 165px;
+.photo-wrapper {
+  position: relative;
+  width: 130px;
+  height: 95px;
   background: #ffffff;
-  padding: 6px;
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
-  border-radius: 2px;
+  padding: 5px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
   box-sizing: border-box;
 }
 
-.photo-frame img {
+.photo-wrapper img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
 }
 
-/* انحراف ملایم طبیعی برای چسبیدن روی کاغذ */
+/* چسب‌های کاغذی مات گوشه‌ها */
+.tape {
+  position: absolute;
+  width: 32px;
+  height: 12px;
+  background-color: rgba(238, 232, 205, 0.75);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  z-index: 3;
+}
+
+.tape-tl { top: -6px; left: -8px; transform: rotate(-35deg); }
+.tape-tr { top: -6px; right: -8px; transform: rotate(35deg); }
+.tape-bl { bottom: -6px; left: -8px; transform: rotate(35deg); }
+.tape-br { bottom: -6px; right: -8px; transform: rotate(-35deg); }
+
+/* شیب ملایم کارت‌ها */
 .tilt-left {
-  transform: rotate(-3deg);
+  transform: rotate(-10deg);
 }
 
 .tilt-right {
-  transform: rotate(3deg);
+  transform: rotate(8deg);
 }
 
-/* تایپوگرافی تاریخ و شماره روز */
-.story-meta {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
-
-.story-day-bold {
-  font-size: 78px;
-  line-height: 0.9;
-  color: #222222;
-  letter-spacing: -2px;
-}
-
-.story-date-light {
-  font-size: 15px;
-  color: #333333;
-  margin-top: 6px;
-  letter-spacing: 0.5px;
-}
-
-.story-label-farsi {
-  font-size: 13px;
-  color: #666666;
-  margin-top: 4px;
-}
-
-/* فوتر سکشن */
-.story-footer {
-  text-align: center;
-  width: 100%;
-}
-
-.story-footer p {
-  margin: 0;
-  font-size: 14px;
-  color: #3a3a3a;
-  line-height: 1.8;
-}
-
-  </style>
-  <!-- درون تگ <head> قبل از بسته شدن </head> -->
-<!-- لود فونت‌های Roboto از گوگل -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
 </head>
 <body>
   <!-- فایل صوتی -->
@@ -344,64 +308,63 @@
       </div>
     </section>
 
-   <!-- سکشن دوم: Our Story -->
-<section class="scroll-section story-section" id="story-section">
-  
-  <!-- متن بالا -->
-  <div class="story-header font-yekan">
-    <p>هر داستانی شروعی دارد</p>
-    <p>اما داستان ما زیباترین آغاز را داشت</p>
+   <!-- سکشن دوم: موعد دیدار عشق ما -->
+<section class="scroll-section event-date-section">
+
+  <!-- تیترها -->
+  <div>
+    <h2 class="main-title">موعد دیدار عشق ما</h2>
+    <div class="sub-title-eras">O u r &nbsp; S t o r y</div>
   </div>
 
-  <!-- عنوان انگلیسی Our Story -->
-  <div class="story-title font-eras">
-    OUR STORY
-  </div>
-
-  <!-- بخش میانی دو عکس و دو تاریخ -->
-  <div class="story-content">
-    
-    <!-- ردیف بالا: عکس اول و تاریخ اول -->
-    <div class="story-row-1">
-      <div class="photo-card-wrap tilt-left">
-        <div class="photo-tape"></div>
-        <div class="photo-frame">
-          <img src="story-photo-1.jpg" alt="Our First Meet">
-        </div>
+  <!-- بلوک روز، ماه، خط میانی و سال -->
+  <div class="date-display-block">
+    <div class="date-split-row">
+      <!-- ستون ۲۴ / روز -->
+      <div class="date-col">
+        <span class="number-bold">24</span>
+        <span class="label-yekan">روز</span>
       </div>
 
-      <div class="story-meta">
-        <span class="story-day-bold font-roboto-bold-condensed">04</span>
-        <span class="story-date-light font-roboto-light">1403.02.04</span>
-        <span class="story-label-farsi font-yekan">شروع داستان ما</span>
+      <!-- خط جداکننده وسط -->
+      <div class="date-divider"></div>
+
+      <!-- ستون ۰۷ / ماه -->
+      <div class="date-col">
+        <span class="number-bold">07</span>
+        <span class="label-yekan">ماه</span>
       </div>
     </div>
 
-    <!-- ردیف پایین: تاریخ دوم و عکس دوم -->
-    <div class="story-row-2">
-      <div class="story-meta">
-        <span class="story-day-bold font-roboto-bold-condensed">19</span>
-        <span class="story-date-light font-roboto-light">1404.06.19</span>
-        <span class="story-label-farsi font-yekan">روز پیوند ما</span>
-      </div>
-
-      <div class="photo-card-wrap tilt-right">
-        <div class="photo-tape"></div>
-        <div class="photo-frame">
-          <img src="story-photo-2.jpg" alt="Our Wedding Day">
-        </div>
-      </div>
-    </div>
-
+    <!-- سال ۱۴۰۵ -->
+    <div class="year-bold">1405</div>
   </div>
 
-  <!-- متن پایین -->
-  <div class="story-footer font-yekan">
-    <p>و اینک در این روز باشکوه</p>
-    <p>حضور شما آغازگر فصل جدید زندگی ما خواهد بود</p>
+  <!-- متن تاریخ شمسی و ساعت -->
+  <div class="event-info-text">
+    جمعه 24 مهرماه 1405<br>
+    از ساعت 19
+  </div>
+
+  <!-- دو عکس در انتهای تصویر -->
+  <div class="bottom-photos-row">
+    <!-- عکس چپ با چسب‌ها -->
+    <div class="photo-wrapper tilt-left">
+      <div class="tape tape-tl"></div>
+      <div class="tape tape-br"></div>
+      <img src="story-photo-1.jpg" alt="عکس ۱">
+    </div>
+
+    <!-- عکس راست با چسب‌ها -->
+    <div class="photo-wrapper tilt-right">
+      <div class="tape tape-tr"></div>
+      <div class="tape tape-bl"></div>
+      <img src="story-photo-2.jpg" alt="عکس ۲">
+    </div>
   </div>
 
 </section>
+
 
     <!-- سکشن ۳: پس‌زمینه عکس پترن سفید برجسته -->
     <section class="scroll-section">
