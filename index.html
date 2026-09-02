@@ -118,10 +118,11 @@
 }
  /* فونت‌ها */
 @font-face {
-  font-family: 'YekanBakhBold';
-  src: url('https://cdn.fontcdn.ir/Font/Persian/Yekan/Yekan.woff2') format('woff2'),
-       local('Yekan Bakh Bold'), local('Yekan Bakh');
-  font-weight: 700;
+  font-family: 'BYekan';
+  src: url('./BYekan.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -154,11 +155,11 @@
   overflow: hidden;
 }
 
-/* تیتر اصلی */
+/* تیتر اصلی با فونت بی یکان */
 .title-main {
-  font-family: 'YekanBakhBold', Tahoma, sans-serif;
+  font-family: 'BYekan', Tahoma, sans-serif;
   font-size: 27px;
-  font-weight: 700;
+  font-weight: bold;
   color: #414141;
   letter-spacing: 0;
   margin: 0 0 4px 0;
@@ -208,10 +209,11 @@
   letter-spacing: 0;
 }
 
+/* نوشته‌های روز و ماه با فونت بی یکان */
 .date-caption {
-  font-family: 'YekanBakhBold', Tahoma, sans-serif;
-  font-size: 30px;
-  font-weight: 700;
+  font-family: 'BYekan', Tahoma, sans-serif;
+  font-size: 28px;
+  font-weight: bold;
   color: #414141;
   letter-spacing: 0;
   margin-top: 2px;
@@ -234,11 +236,11 @@
   margin-top: 6px;
 }
 
-/* متن تاریخ شمسی و ساعت */
+/* متن تاریخ شمسی و ساعت با فونت بی یکان */
 .event-schedule-text {
-  font-family: 'YekanBakhBold', Tahoma, sans-serif;
-  font-size: 26px;
-  font-weight: 700;
+  font-family: 'BYekan', Tahoma, sans-serif;
+  font-size: 25px;
+  font-weight: bold;
   color: #414141;
   line-height: 1.5;
   letter-spacing: 0;
@@ -298,6 +300,7 @@
 .tape-3 { width: 34px; height: 13px; top: -6px; right: -10px; transform: rotate(35deg); }
 .tape-4 { width: 34px; height: 13px; bottom: -6px; right: -8px; transform: rotate(-35deg); }
 .tape-5 { width: 30px; height: 12px; top: 35px; left: -12px; transform: rotate(15deg); }
+
 
   </style>  <!-- این تگ حتماً باید اینجا بسته بشه -->
 
