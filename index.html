@@ -300,12 +300,68 @@
 .tape-3 { width: 34px; height: 13px; top: -6px; right: -10px; transform: rotate(35deg); }
 .tape-4 { width: 34px; height: 13px; bottom: -6px; right: -8px; transform: rotate(-35deg); }
 .tape-5 { width: 30px; height: 12px; top: 35px; left: -12px; transform: rotate(15deg); }
+/* لایه مرواریدها به صورت ثابت روی کل صفحه */
+.pearl-layer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none; /* تا به هیچ‌وجه مانع لمس و کلیک روی دکمه‌ها و فرم‌ها نشود */
+  z-index: 10; /* بالای پس‌زمینه‌ها ولی زیر متن‌ها و محتوا */
+  overflow: hidden;
+}
+
+/* ظاهر مروارید شیشه‌ای (Glass Pearl) */
+.pearl {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, 
+    rgba(255, 255, 255, 0.95) 0%, 
+    rgba(255, 255, 255, 0.45) 40%, 
+    rgba(225, 230, 240, 0.25) 70%, 
+    rgba(255, 255, 255, 0.65) 100%);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  box-shadow: 
+    inset -4px -4px 8px rgba(0, 0, 0, 0.05),
+    inset 3px 3px 6px rgba(255, 255, 255, 0.85),
+    0 12px 24px rgba(0, 0, 0, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  transition: transform 0.15s cubic-bezier(0.2, 0, 0.3, 1);
+  will-change: transform;
+}
+
+/* موقعیت و ابعاد ۹ مروارید توزیع‌شده در کل صفحه موبایل */
+.pearl-1 { width: 38px; height: 38px; top: 7%; left: 8%; }
+.pearl-2 { width: 22px; height: 22px; top: 15%; right: 10%; }
+.pearl-3 { width: 52px; height: 52px; top: 32%; left: 5%; opacity: 0.85; }
+.pearl-4 { width: 26px; height: 26px; top: 44%; right: 7%; }
+.pearl-5 { width: 18px; height: 18px; top: 58%; left: 15%; }
+.pearl-6 { width: 46px; height: 46px; top: 68%; right: 12%; opacity: 0.9; }
+.pearl-7 { width: 24px; height: 24px; top: 80%; left: 10%; }
+.pearl-8 { width: 34px; height: 34px; top: 88%; right: 18%; }
+.pearl-9 { width: 20px; height: 20px; top: 22%; left: 50%; transform: translateX(-50%); }
 
 
   </style>  <!-- این تگ حتماً باید اینجا بسته بشه -->
 
 </head>
 <body>
+  <!-- لایه سراسری مرواریدهای شیشه‌ای برای تمام صفحات -->
+  <div class="pearl-layer">
+    <div class="pearl pearl-1" data-speed="1.8"></div>
+    <div class="pearl pearl-2" data-speed="-1.2"></div>
+    <div class="pearl pearl-3" data-speed="2.2"></div>
+    <div class="pearl pearl-4" data-speed="-1.8"></div>
+    <div class="pearl pearl-5" data-speed="1.0"></div>
+    <div class="pearl pearl-6" data-speed="-2.5"></div>
+    <div class="pearl pearl-7" data-speed="1.5"></div>
+    <div class="pearl pearl-8" data-speed="-1.0"></div>
+    <div class="pearl pearl-9" data-speed="2.0"></div>
+  </div>
+
+  <!-- بقیه سکشن‌ها و محتوای سایت شما از اینجا به بعد ادامه دارد -->
   <!-- فایل صوتی -->
   <audio id="bgMusic" src="music.mp3" loop></audio>
 
@@ -456,6 +512,44 @@
 document.querySelectorAll('.scroll-section').forEach(section => {
   observer.observe(section);
 });
+    // دریافت تمام مرواریدها
+const pearls = document.querySelectorAll('.pearl');
+
+function handleOrientation(event) {
+  let gamma = event.gamma || 0; // چرخش چپ و راست (-90 تا 90)
+  let beta = event.beta || 0;   // شیب جلو و عقب (-180 تا 180)
+
+  // محدودسازی دامنه برای روانی حرکت روی موبایل
+  let x = Math.max(-28, Math.min(28, gamma));
+  let y = Math.max(-28, Math.min(28, beta - 45)); // زاویه پیش‌فرض در دست گرفتن گوشی
+
+  pearls.forEach(pearl => {
+    const speed = parseFloat(pearl.getAttribute('data-speed')) || 1;
+    const moveX = x * speed * 0.9;
+    const moveY = y * speed * 0.9;
+    pearl.style.transform = `translate3d(${moveX}px, ${moveY}px, 0)`;
+  });
+}
+
+// فعال‌سازی ژیروسکوپ
+if (window.DeviceOrientationEvent) {
+  if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+    // مجوز برای iOS و آیفون‌ها با اولین لمس
+    document.addEventListener('touchstart', () => {
+      DeviceOrientationEvent.requestPermission()
+        .then(response => {
+          if (response === 'granted') {
+            window.addEventListener('deviceorientation', handleOrientation);
+          }
+        })
+        .catch(console.error);
+    }, { once: true });
+  } else {
+    // برای اندروید و مرورگرهای استاندارد
+    window.addEventListener('deviceorientation', handleOrientation);
+  }
+}
+
   </script>
 </body>
 </html>
