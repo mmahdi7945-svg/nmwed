@@ -42,14 +42,96 @@
     opacity 0.75s ease,
     transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
 }
+    /* استایل پاپ‌آپ شیشه‌ای موزیک */
+    .music-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+    .music-modal-backdrop.show {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .music-modal-box {
+      background: rgba(120, 120, 128, 0.28);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 20px;
+      padding: 24px 28px;
+      max-width: 320px;
+      width: 85%;
+      text-align: center;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+      transform: scale(0.9);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .music-modal-backdrop.show .music-modal-box {
+      transform: scale(1);
+    }
+    .music-modal-box p {
+      font-size: 16px;
+      color: #ffffff;
+      margin-bottom: 20px;
+      font-weight: 500;
+      line-height: 1.5;
+    }
+    .music-modal-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+    }
+    .modal-btn {
+      flex: 1;
+      padding: 10px 0;
+      border: none;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+      color: #ffffff;
+      transition: transform 0.2s, opacity 0.2s;
+    }
+    .modal-btn:active {
+      transform: scale(0.95);
+    }
+    .btn-yes {
+      background: rgba(34, 197, 94, 0.3);
+      border: 1.5px solid #22c55e;
+    }
+    .btn-no {
+      background: rgba(239, 68, 68, 0.3);
+      border: 1.5px solid #ef4444;
+    }
 
 .scroll-section.visible .section-card {
   opacity: 1;
   transform: translateY(0) scale(1);
 }
+    
   </style>
 </head>
 <body>
+  <!-- فایل صوتی -->
+  <audio id="bgMusic" src="music.mp3" loop></audio>
+
+  <!-- پاپ‌آپ تایید پخش موزیک -->
+  <div class="music-modal-backdrop" id="musicModal">
+    <div class="music-modal-box">
+      <p>آیا مایل هستید موزیک براتون پخش بشه؟</p>
+      <div class="music-modal-actions">
+        <button class="modal-btn btn-yes" id="musicYesBtn">بله</button>
+        <button class="modal-btn btn-no" id="musicNoBtn">خیر</button>
+      </div>
+    </div>
+  </div>
 
   <div class="white-overlay" id="whiteOverlay"></div>
 
@@ -93,6 +175,10 @@
     const introVideo = document.getElementById('introVideo');
     const websiteContent = document.getElementById('websiteContent');
     const whiteOverlay = document.getElementById('whiteOverlay');
+    const bgMusic = document.getElementById('bgMusic');
+    const musicModal = document.getElementById('musicModal');
+    const musicYesBtn = document.getElementById('musicYesBtn');
+    const musicNoBtn = document.getElementById('musicNoBtn');
 
     function start() {
       whiteOverlay.classList.add('active');
@@ -100,11 +186,27 @@
         introScreen.style.display = 'none';
         websiteContent.classList.add('revealed');
         whiteOverlay.classList.remove('active');
+        musicModal.classList.add('show');
       }, 600);
     }
 
     introScreen.addEventListener('click', start);
     introVideo.addEventListener('ended', start);
+    musicYesBtn.addEventListener('click', () => {
+      bgMusic.play600);
+    }
+
+    introScreen.addEventListener('click', start);
+    introVideo.addEventListener('ended', start);
+
+    musicYesBtn.addEventListener('click', () => {
+      bgMusic.play().catch(() => {});
+      musicModal.classList.remove('show');
+    });
+
+    musicNoBtn.addEventListener('click', () => {
+      musicModal.classList.remove('show');
+    });
 
     const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
