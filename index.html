@@ -193,13 +193,6 @@
     introScreen.addEventListener('click', start);
     introVideo.addEventListener('ended', start);
     musicYesBtn.addEventListener('click', () => {
-      bgMusic.play600);
-    }
-
-    introScreen.addEventListener('click', start);
-    introVideo.addEventListener('ended', start);
-
-    musicYesBtn.addEventListener('click', () => {
       bgMusic.play().catch(() => {});
       musicModal.classList.remove('show');
     });
