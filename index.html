@@ -118,18 +118,26 @@
 }
  /* فونت‌ها */
 @font-face {
-  font-family: 'BYekan';
-  src: url('https://cdn.fontcdn.ir/Font/Persian/Yekan/Yekan.woff2') format('woff2');
-  font-weight: normal;
+  font-family: 'YekanBakhBold';
+  src: url('https://cdn.fontcdn.ir/Font/Persian/Yekan/Yekan.woff2') format('woff2'),
+       local('Yekan Bakh Bold'), local('Yekan Bakh');
+  font-weight: 700;
 }
 
 @font-face {
-  font-family: 'ErasLight';
-  src: local('Eras Light ITC'), local('Eras-Light-ITC'), local('Eras Medium ITC'), sans-serif;
-  font-weight: 300;
+  font-family: 'BBTorsosPro';
+  src: local('BB Torsos Pro Regular'), local('BB Torsos Pro'),
+       url('https://fonts.gstatic.com/s/robotocondensed/v25/ieVi2ZhZI2eCN5jzbjEETS9weq8-19K7DQ.woff2') format('woff2');
+  font-weight: 400;
 }
 
-/* ساختار کلی سکشن ۲ */
+@font-face {
+  font-family: 'BiondiSans';
+  src: local('BiondiSansW00-ExtraLight'), local('Biondi Sans'), local('Eras Light ITC'), sans-serif;
+  font-weight: 200;
+}
+
+/* ساختار کلی سکشن ۲ مطابق مشخصات کانوا */
 .event-date-section {
   position: relative;
   width: 100%;
@@ -139,143 +147,158 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 40px 20px 25px 20px;
-  box-sizing: border-box;
-  overflow: hidden;
+  padding: 35px 20px 25px 20px;
   direction: rtl;
   text-align: center;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
-/* تیترها */
-.main-title {
-  font-family: 'BYekan', Tahoma, sans-serif;
-  font-size: 26px;
-  font-weight: normal;
-  color: #4a4a4a;
-  margin: 0 0 6px 0;
+/* تیتر اصلی */
+.title-main {
+  font-family: 'YekanBakhBold', Tahoma, sans-serif;
+  font-size: 27px;
+  font-weight: 700;
+  color: #414141;
+  letter-spacing: 0;
+  margin: 0 0 4px 0;
+  line-height: 1.2;
 }
 
-.sub-title-eras {
-  font-family: 'ErasLight', sans-serif;
-  font-size: 13px;
-  letter-spacing: 7px;
-  color: #888888;
-  margin-bottom: 20px;
+/* زیرتیتر انگلیسی */
+.title-sub-story {
+  font-family: 'BiondiSans', sans-serif;
+  font-size: 9.5px;
+  font-weight: 200;
+  color: #000000;
+  letter-spacing: 0.8em;
+  text-indent: 0.8em;
   text-transform: uppercase;
+  margin-bottom: 12px;
 }
 
-/* بلوک اعداد تقویم */
-.date-display-block {
+/* بلوک ارقام تقویم */
+.date-block-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
 }
 
-.date-split-row {
+.date-split-grid {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 16px;
 }
 
-.date-col {
+.date-unit {
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-width: 90px;
 }
 
-.number-bold {
-  font-family: 'Roboto Condensed', sans-serif;
-  font-size: 64px;
-  font-weight: 700;
-  line-height: 1;
+.date-number {
+  font-family: 'BBTorsosPro', 'Roboto Condensed', sans-serif;
+  font-size: 78px;
+  font-weight: 400;
   color: #000000;
+  line-height: 0.9;
+  letter-spacing: 0;
 }
 
-.date-divider {
-  width: 1.5px;
-  height: 90px;
-  background-color: #707070;
-}
-
-.label-yekan {
-  font-family: 'BYekan', Tahoma, sans-serif;
-  font-size: 22px;
-  color: #333333;
-  margin-top: 4px;
-}
-
-.year-bold {
-  font-family: 'Roboto Condensed', sans-serif;
-  font-size: 60px;
+.date-caption {
+  font-family: 'YekanBakhBold', Tahoma, sans-serif;
+  font-size: 30px;
   font-weight: 700;
-  letter-spacing: 12px;
-  margin-left: -12px;
+  color: #414141;
+  letter-spacing: 0;
+  margin-top: 2px;
+}
+
+.date-vertical-divider {
+  width: 2px;
+  height: 120px;
+  background-color: #000000;
+  border-radius: 1px;
+}
+
+.date-year {
+  font-family: 'BBTorsosPro', 'Roboto Condensed', sans-serif;
+  font-size: 80px;
+  font-weight: 400;
   color: #000000;
-  margin-top: 14px;
+  letter-spacing: 0.063em;
   line-height: 1;
+  margin-top: 6px;
 }
 
-/* متن تاریخ کامل و ساعت */
-.event-info-text {
-  font-family: 'BYekan', Tahoma, sans-serif;
-  font-size: 20px;
-  color: #333333;
-  line-height: 1.6;
-  margin-top: 15px;
+/* متن تاریخ شمسی و ساعت */
+.event-schedule-text {
+  font-family: 'YekanBakhBold', Tahoma, sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: #414141;
+  line-height: 1.5;
+  letter-spacing: 0;
 }
 
-/* بخش دو عکس چسب‌خورده پایین */
-.bottom-photos-row {
+/* کارت‌های پولاروید پایین */
+.polaroids-container {
   position: relative;
   width: 100%;
+  height: 170px;
+  margin-top: auto;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
-  padding: 10px 0;
 }
 
-.photo-wrapper {
-  position: relative;
-  width: 130px;
-  height: 95px;
+.polaroid-card {
+  position: absolute;
+  width: 145px;
+  height: 110px;
   background: #ffffff;
-  padding: 5px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  padding: 6px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
   box-sizing: border-box;
 }
 
-.photo-wrapper img {
+.polaroid-card img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
 }
 
-/* چسب‌های کاغذی مات گوشه‌ها */
 .tape {
   position: absolute;
-  width: 32px;
-  height: 12px;
-  background-color: rgba(238, 232, 205, 0.75);
-  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  background: rgba(242, 239, 219, 0.85);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+  z-index: 5;
+}
+
+.polaroid-left {
+  left: 14%;
+  bottom: 25px;
+  transform: rotate(-14deg);
+  z-index: 2;
+}
+
+.polaroid-right {
+  right: 14%;
+  bottom: 20px;
+  transform: rotate(10deg);
   z-index: 3;
 }
 
-.tape-tl { top: -6px; left: -8px; transform: rotate(-35deg); }
-.tape-tr { top: -6px; right: -8px; transform: rotate(35deg); }
-.tape-bl { bottom: -6px; left: -8px; transform: rotate(35deg); }
-.tape-br { bottom: -6px; right: -8px; transform: rotate(-35deg); }
+.tape-1 { width: 34px; height: 13px; top: -6px; left: -10px; transform: rotate(-35deg); }
+.tape-2 { width: 34px; height: 13px; bottom: -6px; left: -8px; transform: rotate(35deg); }
+.tape-3 { width: 34px; height: 13px; top: -6px; right: -10px; transform: rotate(35deg); }
+.tape-4 { width: 34px; height: 13px; bottom: -6px; right: -8px; transform: rotate(-35deg); }
+.tape-5 { width: 30px; height: 12px; top: 35px; left: -12px; transform: rotate(15deg); }
 
-/* شیب ملایم کارت‌ها */
-.tilt-left {
-  transform: rotate(-10deg);
-}
-
-.tilt-right {
-  transform: rotate(8deg);
-}
   </style>  <!-- این تگ حتماً باید اینجا بسته بشه -->
 
 </head>
@@ -309,62 +332,56 @@
   <div class="section-overlay"></div>
     </section>
 
-   <!-- سکشن دوم: موعد دیدار عشق ما -->
-<section class="scroll-section event-date-section">
+      <!-- سکشن دوم: موعد دیدار عشق ما -->
+   <section class="scroll-section event-date-section">
+     <!-- تیترها -->
+     <div>
+       <h2 class="title-main">موعد دیدار عشق ما</h2>
+       <div class="title-sub-story">OUR STORY</div>
+     </div>
 
-  <!-- تیترها -->
-  <div>
-    <h2 class="main-title">موعد دیدار عشق ما</h2>
-    <div class="sub-title-eras">O u r &nbsp; S t o r y</div>
-  </div>
+     <!-- تقویم ۲۴ / ۰۷ / ۱۴۰۵ -->
+     <div class="date-block-wrapper">
+       <div class="date-split-grid">
+         <div class="date-unit">
+           <span class="date-number">24</span>
+           <span class="date-caption">روز</span>
+         </div>
 
-  <!-- بلوک روز، ماه، خط میانی و سال -->
-  <div class="date-display-block">
-    <div class="date-split-row">
-      <!-- ستون ۲۴ / روز -->
-      <div class="date-col">
-        <span class="number-bold">24</span>
-        <span class="label-yekan">روز</span>
-      </div>
+         <div class="date-vertical-divider"></div>
 
-      <!-- خط جداکننده وسط -->
-      <div class="date-divider"></div>
+         <div class="date-unit">
+           <span class="date-number">07</span>
+           <span class="date-caption">ماه</span>
+         </div>
+       </div>
 
-      <!-- ستون ۰۷ / ماه -->
-      <div class="date-col">
-        <span class="number-bold">07</span>
-        <span class="label-yekan">ماه</span>
-      </div>
-    </div>
+       <div class="date-year">1405</div>
+     </div>
 
-    <!-- سال ۱۴۰۵ -->
-    <div class="year-bold">1405</div>
-  </div>
+     <!-- متن تاریخ و ساعت -->
+     <div class="event-schedule-text">
+       جمعه ۲۴ مهرماه ۱۴۰۵<br>
+       از ساعت ۱۹
+     </div>
 
-  <!-- متن تاریخ شمسی و ساعت -->
-  <div class="event-info-text">
-    جمعه 24 مهرماه 1405<br>
-    از ساعت 19
-  </div>
+     <!-- دو عکس پولاروید با چسب‌ها -->
+     <div class="polaroids-container">
+       <div class="polaroid-card polaroid-left">
+         <div class="tape tape-1"></div>
+         <div class="tape tape-2"></div>
+         <img src="story-photo-1.jpg" alt="عکس خاطره ۱">
+       </div>
 
-  <!-- دو عکس در انتهای تصویر -->
-  <div class="bottom-photos-row">
-    <!-- عکس چپ با چسب‌ها -->
-    <div class="photo-wrapper tilt-left">
-      <div class="tape tape-tl"></div>
-      <div class="tape tape-br"></div>
-      <img src="story-photo-1.jpg" alt="عکس ۱">
-    </div>
+       <div class="polaroid-card polaroid-right">
+         <div class="tape tape-3"></div>
+         <div class="tape tape-4"></div>
+         <div class="tape tape-5"></div>
+         <img src="story-photo-2.jpg" alt="عکس خاطره ۲">
+       </div>
+     </div>
+   </section>
 
-    <!-- عکس راست با چسب‌ها -->
-    <div class="photo-wrapper tilt-right">
-      <div class="tape tape-tr"></div>
-      <div class="tape tape-bl"></div>
-      <img src="story-photo-2.jpg" alt="عکس ۲">
-    </div>
-  </div>
-
-</section>
 
 
     <!-- سکشن ۳: پس‌زمینه عکس پترن سفید برجسته -->
