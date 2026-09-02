@@ -22,6 +22,16 @@
     .website-content.revealed { opacity: 1; }
     .scroll-section { position: relative; width: 100vw; height: 100vh; scroll-snap-align: start; display: flex; align-items: center; justify-content: center; text-align: center; overflow: hidden; }
     .bg-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; opacity: 1; }
+        /* تصویر پس‌زمینه ثابت و فیت شده */
+    .bg-image {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      z-index: 1;
+    }
     .section-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.4); z-index: 2; }
     .section-card {
   position: relative;
@@ -148,25 +158,26 @@
       </div>
     </section>
 
-    <!-- سکشن ۲ -->
+    <!-- سکشن ۲: پس‌زمینه عکس پترن سفید برجسته -->
     <section class="scroll-section">
-      <video class="bg-video" autoplay muted loop playsinline src="section2.mp4"></video>
-      <div class="section-overlay"></div>
+      <img class="bg-image" src="bg-pattern.jpg" alt="پس زمینه">
+      <div class="section-overlay" style="background: rgba(0,0,0,0.25);"></div>
       <div class="section-card">
         <h2>بخش دوم</h2>
-        <p>متن خود را اینجا وارد کنید.</p>
+        <p>متن و مشخصات مراسم</p>
       </div>
     </section>
 
-    <!-- سکشن ۳ -->
+    <!-- سکشن ۳: پس‌زمینه عکس پترن سفید برجسته -->
     <section class="scroll-section">
-      <video class="bg-video" autoplay muted loop playsinline src="section3.mp4"></video>
-      <div class="section-overlay"></div>
+      <img class="bg-image" src="bg-pattern.jpg" alt="پس زمینه">
+      <div class="section-overlay" style="background: rgba(0,0,0,0.25);"></div>
       <div class="section-card">
         <h2>بخش سوم</h2>
-        <p>متن خود را اینجا وارد کنید.</p>
+        <p>لوکیشن یا شمارش معکوس</p>
       </div>
     </section>
+
 
   </main>
 
