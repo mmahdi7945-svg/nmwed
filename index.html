@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>دعوت‌نامه سینمایی</title>
   <style>
+    
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { width: 100%; height: 100%; background-color: #0b0b0f; color: #f1f1f1; font-family: sans-serif; overflow: hidden; }
 
@@ -115,8 +116,203 @@
   opacity: 1;
   transform: translateY(0) scale(1);
 }
-    
+    /* تعریف فونت B Yekan و Eras Light */
+@font-face {
+  font-family: 'BYekan';
+  src: url('https://cdn.fontcdn.ir/Font/Persian/Yekan/Yekan.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ErasLight';
+  src: local('Eras Light ITC'), local('Eras-Light-ITC'), local('Eras Medium ITC');
+  font-weight: 300;
+}
+
+/* کلاس‌های کمکی برای فونت‌ها */
+.font-yekan {
+  font-family: 'BYekan', Tahoma, sans-serif;
+  font-weight: normal;
+}
+
+.font-roboto-light {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+}
+
+.font-roboto-bold-condensed {
+  font-family: 'Roboto Condensed', 'Roboto', sans-serif;
+  font-weight: 700;
+}
+
+.font-eras {
+  font-family: 'ErasLight', 'Eras Light ITC', sans-serif;
+  font-weight: 300;
+  letter-spacing: 2px;
+}
+
+/* استایل سکشن داستانی ما (Our Story) */
+.story-section {
+  position: relative;
+  width: 100%;
+  height: 100dvh;
+  background-color: #f1f1f1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 45px 24px 35px 24px;
+  box-sizing: border-box;
+  overflow: hidden;
+  color: #2b2b2b;
+  direction: rtl;
+}
+
+/* متن هدر بالا */
+.story-header {
+  text-align: center;
+  width: 100%;
+}
+
+.story-header p {
+  margin: 0;
+  font-size: 15px;
+  color: #3a3a3a;
+  line-height: 1.8;
+}
+
+.story-title {
+  text-align: center;
+  font-size: 32px;
+  text-transform: uppercase;
+  color: #2a2a2a;
+  margin: 12px 0 6px 0;
+}
+
+/* کانتینر میانی شامل دو عکس با چسب نواری و تاریخ‌ها */
+.story-content {
+  position: relative;
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin: 10px 0;
+}
+
+/* ردیف اول: عکس چپ + متن راست */
+.story-row-1 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding-left: 10px;
+}
+
+/* ردیف دوم: متن چپ + عکس راست */
+.story-row-2 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding-right: 10px;
+}
+
+/* استایل کارت‌های عکس با چسب نواری شیشه‌ای */
+.photo-card-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+.photo-tape {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 55px;
+  height: 18px;
+  background: rgba(235, 235, 235, 0.7);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+  backdrop-filter: blur(2px);
+  z-index: 2;
+  border-left: 2px dashed rgba(200,200,200,0.5);
+  border-right: 2px dashed rgba(200,200,200,0.5);
+}
+
+.photo-frame {
+  width: 135px;
+  height: 165px;
+  background: #ffffff;
+  padding: 6px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+  border-radius: 2px;
+  box-sizing: border-box;
+}
+
+.photo-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* انحراف ملایم طبیعی برای چسبیدن روی کاغذ */
+.tilt-left {
+  transform: rotate(-3deg);
+}
+
+.tilt-right {
+  transform: rotate(3deg);
+}
+
+/* تایپوگرافی تاریخ و شماره روز */
+.story-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.story-day-bold {
+  font-size: 78px;
+  line-height: 0.9;
+  color: #222222;
+  letter-spacing: -2px;
+}
+
+.story-date-light {
+  font-size: 15px;
+  color: #333333;
+  margin-top: 6px;
+  letter-spacing: 0.5px;
+}
+
+.story-label-farsi {
+  font-size: 13px;
+  color: #666666;
+  margin-top: 4px;
+}
+
+/* فوتر سکشن */
+.story-footer {
+  text-align: center;
+  width: 100%;
+}
+
+.story-footer p {
+  margin: 0;
+  font-size: 14px;
+  color: #3a3a3a;
+  line-height: 1.8;
+}
+
   </style>
+  <!-- درون تگ <head> قبل از بسته شدن </head> -->
+<!-- لود فونت‌های Roboto از گوگل -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
 </head>
 <body>
   <!-- فایل صوتی -->
@@ -148,12 +344,64 @@
       </div>
     </section>
 
-    <!-- سکشن ۲: پس‌زمینه عکس پترن سفید برجسته -->
-    <section class="scroll-section">
-             <h2>بخش دوم</h2>
-        <p>متن و مشخصات مراسم</p>
+   <!-- سکشن دوم: Our Story -->
+<section class="scroll-section story-section" id="story-section">
+  
+  <!-- متن بالا -->
+  <div class="story-header font-yekan">
+    <p>هر داستانی شروعی دارد</p>
+    <p>اما داستان ما زیباترین آغاز را داشت</p>
+  </div>
+
+  <!-- عنوان انگلیسی Our Story -->
+  <div class="story-title font-eras">
+    OUR STORY
+  </div>
+
+  <!-- بخش میانی دو عکس و دو تاریخ -->
+  <div class="story-content">
+    
+    <!-- ردیف بالا: عکس اول و تاریخ اول -->
+    <div class="story-row-1">
+      <div class="photo-card-wrap tilt-left">
+        <div class="photo-tape"></div>
+        <div class="photo-frame">
+          <img src="story-photo-1.jpg" alt="Our First Meet">
+        </div>
       </div>
-    </section>
+
+      <div class="story-meta">
+        <span class="story-day-bold font-roboto-bold-condensed">04</span>
+        <span class="story-date-light font-roboto-light">1403.02.04</span>
+        <span class="story-label-farsi font-yekan">شروع داستان ما</span>
+      </div>
+    </div>
+
+    <!-- ردیف پایین: تاریخ دوم و عکس دوم -->
+    <div class="story-row-2">
+      <div class="story-meta">
+        <span class="story-day-bold font-roboto-bold-condensed">19</span>
+        <span class="story-date-light font-roboto-light">1404.06.19</span>
+        <span class="story-label-farsi font-yekan">روز پیوند ما</span>
+      </div>
+
+      <div class="photo-card-wrap tilt-right">
+        <div class="photo-tape"></div>
+        <div class="photo-frame">
+          <img src="story-photo-2.jpg" alt="Our Wedding Day">
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- متن پایین -->
+  <div class="story-footer font-yekan">
+    <p>و اینک در این روز باشکوه</p>
+    <p>حضور شما آغازگر فصل جدید زندگی ما خواهد بود</p>
+  </div>
+
+</section>
 
     <!-- سکشن ۳: پس‌زمینه عکس پترن سفید برجسته -->
     <section class="scroll-section">
