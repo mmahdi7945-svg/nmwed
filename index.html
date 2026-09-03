@@ -377,11 +377,11 @@
   letter-spacing: 0;
 }
 
-/* چیدمان پلکانی و بدون همپوشانی پولارویدها */
+/* کارت‌های پولاروید هم‌راستا، بالاتر از دکمه و کاملاً جدا از هم */
 .polaroids-container {
   position: relative;
   width: 100%;
-  height: 225px; /* فضا برای اختلاف ارتفاع دو عکس */
+  height: 190px;
   margin-top: 5px;
   display: flex;
   justify-content: center;
@@ -390,10 +390,10 @@
 
 .polaroid-card {
   position: absolute;
-  width: 165px;
-  height: 125px;
+  width: 155px;
+  height: 118px;
   background: #ffffff;
-  padding: 7px 7px 11px 7px;
+  padding: 6px 6px 10px 6px;
   box-shadow: 0 10px 22px rgba(0, 0, 0, 0.16);
   box-sizing: border-box;
 }
@@ -412,47 +412,48 @@
   z-index: 5;
 }
 
-/* عکس چپ: پایین‌تر و با زاویه ملایم (کاملاً واضح) */
+/* عکس چپ: هم‌تراز با راست، کاملاً بالاتر از دکمه اسکرول */
 .polaroid-left {
-  left: 6%;
-  bottom: 15px; /* پایین‌تر */
-  transform: rotate(-7deg);
-  z-index: 3; /* اولویت دید برای خوانایی کامل */
+  left: 4%;
+  bottom: 75px; 
+  transform: rotate(-6deg);
+  z-index: 2;
 }
 
-/* عکس راست: بالاتر و نزدیک به تاریخ */
+/* عکس راست: در همان ارتفاع، با فاصله کامل از چپ */
 .polaroid-right {
-  right: 6%;
-  bottom: 80px; /* کاملاً بالاتر از عکس چپ */
+  right: 4%;
+  bottom: 75px; 
   transform: rotate(6deg);
   z-index: 2;
 }
 
-/* چسب‌های تزئینی */
-.tape-1 { width: 38px; height: 14px; top: -7px; left: -8px; transform: rotate(-30deg); }
-.tape-2 { width: 38px; height: 14px; bottom: -7px; left: -8px; transform: rotate(30deg); }
-.tape-3 { width: 38px; height: 14px; top: -7px; right: -8px; transform: rotate(30deg); }
-.tape-4 { width: 38px; height: 14px; bottom: -7px; right: -8px; transform: rotate(-30deg); }
-.tape-5 { width: 32px; height: 13px; top: 35px; left: -10px; transform: rotate(12deg); }
+/* چسب‌های تزئینی متناسب با اندازه */
+.tape-1 { width: 36px; height: 13px; top: -6px; left: -8px; transform: rotate(-30deg); }
+.tape-2 { width: 36px; height: 13px; bottom: -6px; left: -8px; transform: rotate(30deg); }
+.tape-3 { width: 36px; height: 13px; top: -6px; right: -8px; transform: rotate(30deg); }
+.tape-4 { width: 36px; height: 13px; bottom: -6px; right: -8px; transform: rotate(-30deg); }
+.tape-5 { width: 30px; height: 12px; top: 32px; left: -10px; transform: rotate(12deg); }
 
 /* تنظیم دقیق برای گوشی‌های کوچکتر */
 @media (max-width: 380px) {
   .polaroids-container {
-    height: 205px;
+    height: 175px;
   }
   .polaroid-card {
-    width: 145px;
-    height: 110px;
+    width: 140px;
+    height: 108px;
   }
   .polaroid-left {
-    left: 4%;
-    bottom: 12px;
+    left: 2%;
+    bottom: 68px;
   }
   .polaroid-right {
-    right: 4%;
-    bottom: 72px;
+    right: 2%;
+    bottom: 68px;
   }
 }
+
 
 /* ۱. لایه مرواریدها کاملاً در لایه زیرین و پس‌زمینه */
 .pearl-layer {
