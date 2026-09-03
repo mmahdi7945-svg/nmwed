@@ -184,14 +184,20 @@
   user-select: none;
 }
 
-.hero-swirl-divider { 
-  width: 140px; 
-  height: 34px; 
-  object-fit: contain; 
-  margin-bottom: 18px; 
-  display: block; 
+.hero-swirl-divider {
+  width: 140px;
+  height: auto;
+  object-fit: contain;
+  display: block;
   align-self: center;
+
+  /* فاصله کمتر از Mohammad */
+  margin-bottom: 5px;
+
+  /* کمی متمایل به راست */
+  transform: translateX(18px);
 }
+
 
 
 /* بلوک نام‌ها */
@@ -215,8 +221,11 @@
 
 /* تورفتگی Mahdi طبق تصویر برای قرارگیری زیر O تا m کلمه Mohammad */
 .hero-name-mahdi {
-  padding-left: 28px;
+  align-self: center;
+  padding-left: 0;
+  transform: translateX(-12px);
 }
+
 
 /* ردیف سوم: ترکیب And و Narges */
 .hero-and-narges-row {
@@ -226,29 +235,33 @@
 }
 
 /* کلمه And با فونت دست‌نویس */
-.hero-and-script {
-  font-family: 'EdwardianScript', 'Brush Script MT', cursive;
-  font-size: 58px; /* کمی تنظیم سایز برای هم‌قد شدن کامل با متن جورجیا */
-  color: #000000;
-  letter-spacing: 0;
-  line-height: 0.8;
-  margin-right: 12px;
-  font-weight: normal;
+.hero-and-narges-row {
+  display: flex;
+  flex-direction: row;
+  direction: ltr;
+  align-items: baseline;
+  justify-content: flex-start;
+  margin-top: 2px;
 }
+
 
 /* تاریخ جاستیفای شده در خط آخر */
 .hero-date-row {
-  font-family: 'ISOCTEUR', sans-serif, monospace;
+  font-family: 'ISOCTEUR', monospace;
   font-size: 15.8px;
   color: #424242;
-  letter-spacing: 1.24em; /* معادل دقیق مقدار 1240 کانوا */
-  text-indent: 1.24em;    /* جبران فاصله اضافه حرف آخر برای سنتر شدن */
+  letter-spacing: 1.24em;
+  text-indent: 1.24em;
   margin-top: 18px;
   width: 100%;
   text-align: center;
   white-space: nowrap;
   direction: ltr;
+
+  /* انتقال تاریخ به سمت راست */
+  transform: translateX(22px);
 }
+
 
 /* ساختار کلی سکشن ۲ مطابق مشخصات کانوا */
 .event-date-section {
