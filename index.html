@@ -1172,18 +1172,25 @@ body {
   animation: glassShine 1.4s ease-out 0.15s forwards;
 }
 
-/* تصویر NOONMEEM */
 .noonmeem-overlay {
   position: relative;
   z-index: 2;
 
-  width: 57%;
-  max-width: 190px;
-  height: auto;
+  /*
+   * تصویر تقریباً کل سطح عکس را می‌پوشاند
+   */
+  width: 100%;
+  height: 100%;
 
-  object-fit: contain;
+  /*
+   * اگر تصویر NOONMEEM پس‌زمینه یا قاب اضافی دارد،
+   * این مقدار باعث می‌شود کل محدوده را پر کند.
+   */
+  object-fit: cover;
+  object-position: center;
+
   opacity: 0;
-  transform: scale(0.72) rotate(-7deg);
+  transform: scale(0.92) rotate(-2deg);
 
   filter:
     drop-shadow(0 8px 12px rgba(0, 0, 0, 0.3))
@@ -1193,6 +1200,7 @@ body {
     opacity 0.75s ease,
     transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
 }
+
 
 /* ورود نرم لوگو */
 .scratch-photo-frame.glass-active .noonmeem-overlay {
@@ -1236,9 +1244,12 @@ body {
 /* در موبایل‌های کوچک لوگو کمی کوچک‌تر باشد */
 @media (max-width: 380px) {
   .noonmeem-overlay {
-    width: 52%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 }
+
 
 /* کاهش حرکت برای کاربران دارای تنظیمات دسترسی */
 @media (prefers-reduced-motion: reduce) {
