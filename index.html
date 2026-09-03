@@ -487,42 +487,41 @@ body {
   background-color: transparent; /* بدون رنگ اضافه تا مرواریدهای پشت دیده شوند */
 }
 /* =========================================
-   انیمیشن‌های ورود و خروج سکشن ۱ (اصلاح شده)
+   انیمیشن‌های ورود و خروج سکشن ۱ (اصلاح شده و دقیق)
    ========================================= */
 .hero-section .hero-swirl-divider,
-.hero-section .hero-name-row:not(.hero-and-narges-row .hero-name-row),
+.hero-section .hero-names-block > .hero-name-row,
 .hero-section .hero-and-narges-row,
 .hero-section .hero-date-row {
   opacity: 0;
-  transform: translateY(28px);
+  transform: translateY(25px);
   transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
               transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
 }
 
-/* ۱. ظاهر شدن خط تزئینی */
+/* ۱. ظاهر شدن خط تزئینی بالای صفحه */
 .hero-section.visible .hero-swirl-divider {
   opacity: 1;
   transform: translateX(18px) translateY(0);
   transition-delay: 0.1s;
 }
 
-/* ۲. ظاهر شدن کلمه Mohammad */
+/* ۲. ظاهر شدن Mohammad */
 .hero-section.visible .hero-names-block > .hero-name-row:first-child {
-  opacity:   opacity: 1;
+  opacity: 1;
   transform: translateY(0);
-  transition-delay: 0.55s;
+  transition-delay: 0.25s;
 }
 
-/* ۵. ظاهر شدن تاریخ */
-.hero-section.visible .hero-date-row {
+/* ۳. ظاهر شدن Mahdi */
+.hero-section.visible .hero-names-block > .hero-name-mahdi {
   opacity: 1;
-  transform: translateX(22px) translateY(0);
-  transition-px) translateY(0);
+  transform: translateX(-12px) translateY(0);
   transition-delay: 0.4s;
 }
 
-/* ۴. ظاهر شدن کامل خط And Narges با هم */
+/* ۴. ظاهر شدن کامل سطر And Narges */
 .hero-section.visible .hero-and-narges-row {
   opacity: 1;
   transform: translateY(0);
@@ -535,6 +534,7 @@ body {
   transform: translateX(22px) translateY(0);
   transition-delay: 0.7s;
 }
+
 
 
 
