@@ -580,72 +580,109 @@ body {
   transition-delay: 0.7s;
 }
 /* =========================================
-   راهنمای اسکرول شیشه‌ای دودی (پایین سکشن ۱)
+   دکمه شیشه‌ای دودی سراسری
    ========================================= */
 .scroll-hint-pill {
-  position: absolute;
-  bottom: 24px;
+  position: fixed;
   left: 50%;
-  transform: translateX(-50%);
-  z-index: 10;
-  
+  bottom: 24px;
+  z-index: 90;
+
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 18px;
-  
-  /* افکت شیشه‌ای دودی */
-  background: rgba(28, 28, 35, 0.58);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.16);
+  justify-content: center;
+  gap: 9px;
+
+  min-width: 190px;
+  padding: 11px 19px;
+
+  /* رنگ شیشه‌ای دودی */
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.20),
+      rgba(50, 50, 60, 0.62)
+    );
+
+  /* شیشه واقعی */
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+
+  border: 1px solid rgba(255, 255, 255, 0.32);
   border-radius: 999px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
-  
-  /* تایپوگرافی */
-  color: #f2f2f5;
+
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.32),
+    inset 0 1px 1px rgba(255, 255, 255, 0.35),
+    inset 0 -1 -1px 1px rgba(0, 0,  0.18);
+
+  color: #ffffff;
   font-family: 'BYekan', Tahoma, sans-serif;
-  font-size: 13.5px;
+  font-size: 13px;
   font-weight: normal;
-  letter-spacing: 0.3px;
-  text-decoration: none;
+  line-height: 1.5;
+  white-space: nowrap;
+
   cursor: pointer;
   user-select: none;
+  appearance: none;
+  -webkit-appearance: none;
 
-  /* انیمیشن پله‌ای ورود */
   opacity: 0;
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: transform, opacity;
+  visibility: hidden;
+  transform: translateX(-50%) translateY(10px);
+
+  transition:
+    opacity 0.45s ease,
+    visibility 0.45s ease,
+    transform 0.45s ease;
 }
 
-/* آیکون فلش SVG */
+/* زمان نمایش بعد از ورود به سایت */
+.scroll-hint-pill.active {
+  opacity: 1-hint-pill.active {
+  opacity: 1DownHint 2.2s ease-in-out infinite;
+}
+
+/* حالت لمس روی موبایل */
+.scroll-hint-pill:active {
+  transform: translateX(-50%) scale(0.94);
+}
+
+/* فلش داخل شیشه */
 .scroll-hint-pill svg {
-  width: 15px;
-  height: 15px;
+  width: 17px;
+  height: 17px;
+  flex: 0 0 17px;
+
   stroke: #ffffff;
-  stroke-width: 2.2;
+   stroke-line 2.4;
   fill: none;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
 
-/* حالت نمایان شدن همزمان با لود سکشن ۱ */
-.hero-section.visible .scroll-hint-pill {
-  opacity: 1;
-  transition-delay: 0.85s;
-  animation: floatDownHint 2s ease-in-out infinite 1.2s;
-}
-
-/* انیمیشن شناور ملایم به سمت پایین */
+/* حرکت نرم کل باکس */
 @keyframes floatDownHint {
   0%, 100% {
     transform: translateX(-50%) translateY(0);
   }
+
   50% {
-    transform: translateX(-50%) translateY(7px);
+    transform: translateX(-50%) translateY(6px);
   }
 }
+
+/* سازگاری با صفحه‌های کوچک */
+@media (max-width: 380px) {
+  .scroll-hint-pill {
+    min-width: 175px;
+    padding: {
+    min-width: 175px;
+    padding:12px;
+  }
+}
+
 
   </style>  <!-- این تگ حتماً باید اینجا بسته بشه -->
 
@@ -685,6 +722,14 @@ body {
     <video class="intro-video" id="introVideo" autoplay muted playsinline src="intro-video.mp4"></video>
     <div class="intro-hint">برای ورود کلیک کنید</div>
   </div>
+<!-- دکمه راهنمای اسکرول سراسری -->
+<button class="scroll-hint-pill" id="scrollHintBtn" type="button">
+  <span>به پایین اسکرول کنید</span>
+
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M7 10l5 5 5-5"></path>
+  </svg>
+</button>
 
   <main class="website-content" id="websiteContent">
     
@@ -799,6 +844,8 @@ body {
     websiteContent.scrollTop = 0;
     whiteOverlay.classList.remove('active');
     musicModal.classList.add('show');
+    document.getElementById('scrollHintBtn').classList.add('active');
+
   }, 600);
 }
 
@@ -817,26 +864,15 @@ body {
     const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     const section = entry.target;
-    const card = section.querySelector('.section-card');
-    const video = section.querySelector('.bg-video');
 
     if (entry.isIntersecting) {
-      // ورود به سکشن: انیمیشن اجرا می‌شود
       section.classList.add('visible');
-
-      if (video) {
-        video.play().catch(() => {});
-      }
     } else {
-      // خروج از سکشن: وضعیت به حالت اولیه برمی‌گردد
       section.classList.remove('visible');
-
-      if (video) {
-              }
     }
   });
 }, {
-  threshold: 0.55
+  threshold: 0.5
 });
 
 document.querySelectorAll('.scroll-section').forEach(section => {
@@ -879,12 +915,33 @@ if (window.DeviceOrientationEvent) {
     window.addEventListener('deviceorientation', handleOrientation);
   }
 }
-document.getElementById('scrollHintBtn')?.addEventListener('click', () => {
-  const nextSection = document.querySelector('.event-date-section');
-  if (nextSection) {
-    nextSection.scrollIntoView({ behavior: 'smooth' });
+const scrollHintBtn = document.getElementById('scrollHintBtn');
+
+scrollHintBtn?.addEventListener('click', () => {
+  const sections = [...document.querySelectorAll('.scroll-section')];
+
+  const currentScroll = websiteContent.scrollTop;
+
+  const currentIndex = sections.findIndex(section => {
+    return Math.abs(section.offsetTop - currentScroll) < window.innerHeight / 2;
+  });
+
+  const nextIndex = currentIndex + 1;
+
+  if (sections[nextIndex]) {
+    sections[nextIndex].scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    });
+  } else {
+    // در آخرین سکشن، دوباره به سکشن اول برمی‌گردد
+    sections[0].scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    });
   }
 });
+
 
   </script>
 </body>
