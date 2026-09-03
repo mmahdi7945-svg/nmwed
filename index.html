@@ -579,8 +579,9 @@ body {
   transform: translateY(0);
   transition-delay: 0.7s;
 }
+
 /* =========================================
-   دکمه شیشه‌ای دودی سراسری
+   دکمه راهنمای اسکرول سراسری
    ========================================= */
 .scroll-hint-pill {
   position: fixed;
@@ -596,15 +597,12 @@ body {
   min-width: 190px;
   padding: 11px 19px;
 
-  /* رنگ شیشه‌ای دودی */
-  background:
-    linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.20),
-      rgba(50, 50, 60, 0.62)
-    );
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.20),
+    rgba(50, 50, 60, 0.62)
+  );
 
-  /* شیشه واقعی */
   backdrop-filter: blur(18px) saturate(140%);
   -webkit-backdrop-filter: blur(18px) saturate(140%);
 
@@ -614,12 +612,11 @@ body {
   box-shadow:
     0 10px 30px rgba(0, 0, 0, 0.32),
     inset 0 1px 1px rgba(255, 255, 255, 0.35),
-    inset 0 -1 -1px 1px rgba(0, 0,  0.18);
+    inset 0 -1px 1px rgba(0, 0, 0, 0.18);
 
   color: #ffffff;
   font-family: 'BYekan', Tahoma, sans-serif;
   font-size: 13px;
-  font-weight: normal;
   line-height: 1.5;
   white-space: nowrap;
 
@@ -638,31 +635,28 @@ body {
     transform 0.45s ease;
 }
 
-/* زمان نمایش بعد از ورود به سایت */
 .scroll-hint-pill.active {
-  opacity: 1-hint-pill.active {
-  opacity: 1DownHint 2.2s ease-in-out infinite;
+  opacity: 1;
+  visibility: visible;
+  animation: floatDownHint 2.2s ease-in-out infinite;
 }
 
-/* حالت لمس روی موبایل */
 .scroll-hint-pill:active {
   transform: translateX(-50%) scale(0.94);
 }
 
-/* فلش داخل شیشه */
 .scroll-hint-pill svg {
   width: 17px;
   height: 17px;
   flex: 0 0 17px;
 
-  stroke: #ffffff;
-   stroke-line 2.4;
   fill: none;
+  stroke: #ffffff;
+  stroke-width: 2.4;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
 
-/* حرکت نرم کل باکس */
 @keyframes floatDownHint {
   0%, 100% {
     transform: translateX(-50%) translateY(0);
@@ -673,13 +667,11 @@ body {
   }
 }
 
-/* سازگاری با صفحه‌های کوچک */
 @media (max-width: 380px) {
   .scroll-hint-pill {
     min-width: 175px;
-    padding: {
-    min-width: 175px;
-    padding:12px;
+    padding: 10px 14px;
+    font-size: 12px;
   }
 }
 
@@ -752,13 +744,7 @@ body {
 
     <!-- خط تاریخ -->
     <div class="hero-date-row">1405/07/24</div>
-    <!-- دکمه شیشه‌ای راهنمای اسکرول -->
-    <div class="scroll-hint-pill" id="scrollHintBtn">
-      <span>برای دیدن ادامه اسکرول کنید</span>
-      <svg viewBox="0 0 24 24">
-        <path d="M7 10l5 5 5-5" />
-      </svg>
-    </div>
+   
 
   </div>
      
