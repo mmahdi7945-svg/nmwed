@@ -544,6 +544,7 @@ body {
 .event-date-section > div:first-child,
 .event-date-section .date-block-wrapper,
 .event-date-section .event-schedule-text,
+.event-date-section .countdown-grid-inline,
 .event-date-section .polaroids-container {
   opacity: 0;
   transform: translateY(32px);
@@ -563,17 +564,24 @@ body {
 .event-date-section.visible .date-block-wrapper {
   opacity: 1;
   transform: translateY(0);
-  transition-delay: 0.3s;
+  transition-delay: 0.25s;
 }
 
 /* ۳. ظاهر شدن متن تاریخ شمسی و ساعت */
 .event-date-section.visible .event-schedule-text {
   opacity: 1;
   transform: translateY(0);
-  transition-delay: 0.5s;
+  transition-delay: 0.4s;
 }
 
-/* ۴. ظاهر شدن کارت‌های پولاروید پایین */
+/* ۴. اضافه شده: ظاهر شدن انیمیشنی تایمر */
+.event-date-section.visible .countdown-grid-inline {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.55s;
+}
+
+/* ۵. ظاهر شدن کارت‌های پولاروید پایین */
 .event-date-section.visible .polaroids-container {
   opacity: 1;
   transform: translateY(0);
