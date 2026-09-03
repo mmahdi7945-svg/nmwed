@@ -849,13 +849,22 @@ body {
    انیمیشن‌های ورود و خروج سکشن ۳ (تایمر شمارش معکوس)
    ========================================= */
 .section-three .countdown-title,
-.section-three .cd-box {
+.section-three .cd-box,
+.section-three .map-card-wrapper {
   opacity: 0;
   transform: translateY(28px) scale(0.96);
   transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
               transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
 }
+
+/* ۳. ظاهر شدن انیمیشنی مپ سکشن ۳ */
+.section-three.visible .map-card-wrapper {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition-delay: 0.78s;
+}
+
 
 /* ۱. ظاهر شدن عنوان «لحظه شماری برای دیدار» */
 .section-three.visible .countdown-title {
@@ -1296,6 +1305,189 @@ body {
     transition-duration: 0.01ms;
   }
 }
+/* =========================================
+   استایل مینی‌مپ و کارت لوکیشن (سکشن ۳)
+   ========================================= */
+
+.map-card-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  user-select: none;
+}
+
+.map-location-title {
+  font-family: 'BYekan', Tahoma, sans-serif;
+  font-size: 19px;
+  font-weight: bold;
+  color: #414141;
+  margin-bottom: 2px;
+}
+
+.map-location-address {
+  font-family: 'BYekan', Tahoma, sans-serif;
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+
+.mini-map-frame {
+  position: relative;
+  width: 100%;
+  height: 165px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18);
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  background: #e5e3df;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.mini-map-frame:active {
+  transform: scale(0.98);
+}
+
+.mini-map-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  pointer-events: none; /* برای دریافت کلیک روی کل باکس و باز شدن پاپ‌آپ */
+}
+
+/* لایه راهنما و کلیک روی مپ */
+.map-click-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.12);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 8px;
+  transition: background 0.3s ease;
+}
+
+.map-click-overlay:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.map-click-badge {
+  font-family: 'BYekan', Tahoma, sans-serif;
+  font-size: 11px;
+  color: #ffffff;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  padding: 4px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* =========================================
+   پاپ‌آپ شیشه‌ای طوسی و افقی اپلیکیشن‌های مسیریابی
+   ========================================= */
+
+.nav-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 250;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+
+.nav-modal-backdrop.show {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.nav-modal-box {
+  background: rgba(100, 102, 108, 0.45); /* شیشه‌ای طوسی و کدر */
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 22px;
+  padding: 22px 20px;
+  width: 90%;
+  max-width: 320px;
+  text-align: center;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
+  transform: scale(0.88);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-modal-backdrop.show .nav-modal-box {
+  transform: scale(1);
+}
+
+.nav-modal-title {
+  font-family: 'BYekan', Tahoma, sans-serif;
+  font-size: 15px;
+  color: #ffffff;
+  margin-bottom: 16px;
+  font-weight: bold;
+}
+
+/* نمایش افقی سه لوگو */
+.nav-apps-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-app-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  transition: transform 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.nav-app-item:active {
+  transform: scale(0.9);
+}
+
+.nav-app-icon-wrap {
+  width: 54px;
+  height: 54px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.nav-app-icon-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.nav-app-name {
+  font-family: 'BYekan', Tahoma, sans-serif;
+  font-size: 12px;
+  color: #ffffff;
+  margin-top: 6px;
+}
 
 
 
@@ -1488,6 +1680,23 @@ body {
        <!-- سکشن ۳: شمارش معکوس و اطلاعات تکمیلی -->
     <section class="scroll-section section-three">
       <div class="countdown-wrapper">
+        <!-- مینی‌مپ و اطلاعات تالار ارم -->
+<div class="map-card-wrapper">
+  <div class="map-location-title">باغ تالار مجلل ارم</div>
+  <div class="map-location-address">اراک، جاده اراک - مرزیجران، ارم</div>
+
+  <div class="mini-map-frame" id="miniMapTrigger" role="button" tabindex="0" aria-label="مسیریابی به سمت تالار">
+    <iframe
+      class="mini-map-iframe"
+      src="https://maps.google.com/maps?q=34.1173579,49.6697487&z=15&output=embed"
+      loading="lazy">
+    </iframe>
+    <div class="map-click-overlay">
+      <span class="map-click-badge">برای مسیریابی کلیک کنید</span>
+    </div>
+  </div>
+</div>
+
          <div class="countdown-title">لحظه شماری برای دیدار</div>
          <div class="countdown-grid-inline">
             <div class="cd-box"><span class="cd-num" id="cdDays">00</span><span class="cd-label">Days</span></div>
@@ -1503,6 +1712,54 @@ body {
 
 
   </main>
+<!-- پاپ‌آپ شیشه‌ای انتخاب مسیریاب -->
+<div class="nav-modal-backdrop" id="navModal">
+  <div class="nav-modal-box">
+    <div class="nav-modal-title">مسیریابی با اپلیکیشن دلخواه:</div>
+    <div class="nav-apps-row">
+
+      <!-- بلد -->
+      <a
+        href="https://balad.ir/p/%D8%A8%D8%A7%D8%BA-%D8%AA%D8%A7%D9%84%D8%A7%D8%B1-%D9%85%D8%AC%D9%84%D9%84-%D8%A7%D8%B1%D9%85_ceremonial-services-PBoqVO7dYACB1Y#15/34.11821/49.67404"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="nav-app-item"
+      >
+        <div class="nav-app-icon-wrap">
+          <img src="balad.png" alt="بلد">
+        </div>
+        <span class="nav-app-name">بلد</span>
+      </a>
+
+      <!-- گوگل مپس -->
+      <a
+        href="https://www.google.com/maps/place/%D8%A8%D8%A7%D8%BA+%D8%AA%D8%A7%D9%84%D8%A7%D8%B1+%D8%A7%D8%B1%D9%85%E2%80%AD/data=!4m2!3m1!1s0x0:0x3ed0ec51a1b5825c?sa=X&ved=1t:2428&ictx=111"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="nav-app-item"
+      >
+        <div class="nav-app-icon-wrap">
+          <img src="google-maps.png" alt="گوگل مپ">
+        </div>
+        <span class="nav-app-name">گوگل مپ</span>
+      </a>
+
+      <!-- نشان -->
+      <a
+        href="https://neshan.org/maps/places/5b60e8b52ab9457d1e47b1861b7104e4#c34.117-49.675-15z-0p"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="nav-app-item"
+      >
+        <div class="nav-app-icon-wrap">
+          <img src="neshan.png" alt="نشان">
+        </div>
+        <span class="nav-app-name">نشان</span>
+      </a>
+
+    </div>
+  </div>
+</div>
 
   <script>
     const introScreen = document.getElementById('introScreen');
@@ -1990,6 +2247,33 @@ scratchArea.addEventListener('keydown', (event) => {
   }
 });
 
+/* =========================================
+   منطق باز و بسته شدن پاپ‌آپ مسیریاب
+   ========================================= */
+
+const miniMapTrigger = document.getElementById('miniMapTrigger');
+const navModal = document.getElementById('navModal');
+
+if (miniMapTrigger && navModal) {
+  // باز شدن پاپ‌آپ با کلیک روی مینی‌مپ
+  miniMapTrigger.addEventListener('click', () => {
+    navModal.classList.add('show');
+  });
+
+  miniMapTrigger.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      navModal.classList.add('show');
+    }
+  });
+
+  // بسته شدن با کلیک روی پس‌زمینه شیشه‌ای
+  navModal.addEventListener('click', (e) => {
+    if (e.target === navModal) {
+      navModal.classList.remove('show');
+    }
+  });
+}
 
   </script>
 </body>
