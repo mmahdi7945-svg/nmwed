@@ -581,16 +581,19 @@ body {
 }
 
 /* =========================================
-   دکمه اسکرول؛ فقط بعد از خروج از اینترو
-   ========================================= */
+   دکمه راهنمای ========================================= */
 
 .scroll-hint-wrap {
-  inset: 0;
+  position: fixed;
+  left: fixed;
+  left: 0;
+  right: 0;
+  bottom: 32px;
+  z-index: 90;
+
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
 
   pointer-events: none;
   opacity: 0;
@@ -601,19 +604,15 @@ body {
     visibility 0.45s ease;
 }
 
-/* بعد از ورود به سایت فعال می‌شود */
 .scroll-hint-wrap.active {
   opacity: 1;
   visibility: visible;
-  pointer-events: none;
 }
 
-/* خود دکمه */
 .scroll-hint-pill {
   position: relative;
-
-  min-width: 215px;
-  height: 52px;
+  min-width: 210px;
+  height: 50px;
   padding: 0 24px;
 
   display: flex;
@@ -629,82 +628,75 @@ body {
   cursor: pointer;
   pointer-events: auto;
 
-  background:
-    linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.34),
-      rgba(255, 255, 255, 0.10)
-    );
-
+  background: rgba(255, 255, 255, 0.16);
   backdrop-filter: blur(18px) saturate(160%);
   -webkit-backdrop-filter: blur(18px) saturate(160%);
 
-  border: 1px solid rgba(255, 255, 255, 0.62);
+  border: 1px solid rgba(255, 255, 255, 0.52);
   border-radius: 999px;
 
   box-shadow:
-    0 12px 30px rgba(0, 0, 0, 0.22),
-    inset 0 1px 1px rgba(255, 255, 255, 0.75),
-    inset 0 -8px0 -8px 16px rgba(0, 0, 0,);
+    0 10px 26px rgba(0, 0, 0, 0.22),
+    inset 0 1px 1px rgba(255, 255, 255, 0.7),
+    inset 0 -8px 18px rgba(0, 0, 0, 0.12);
 
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
 
-  animation: scrollButtonFloat 2.6s ease-in-out infinite;
+  animation: scrollButtonFloat 2.8s ease-in-out infinite;
 
   transition:
     transform 0.25s ease,
-    background 0.25s ease,
-    box-shadow 0.25s ease;
+    background 0.25s ease;
 }
 
-/* انعکاس باریک روی شیشه */
 .scroll-hint-pill::before {
   content: "";
 
   position: absolute;
   top: 4px;
   left: 22%;
+
   width: 56%;
   height: 7px;
 
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.42);
+  background: rgba(255, 255, 255, 0.38);
   filter: blur(4px);
+
   pointer-events: none;
 }
 
-/* متن دکمه */
 .scroll-hint-pill span {
   position: relative;
   z-index: 1;
 }
 
-/* حذف کامل فلش */
 .scroll-hint-pill svg {
   display: none !important;
 }
 
-/* افکت لمس */
 .scroll-hint-pill:active {
   transform: scale(0.94);
 }
 
-/* شناوری آرام */
 @keyframes scrollButtonFloat {
   0%, 100% {
     transform: translateY(0);
   }
 
   50% {
-    transform: translateY(-7px);
+    transform: translateY(-6px);
   }
 }
 
-/* موبایل‌های کوچک */
 @media (max-width: 380px) {
+  .scroll-hint-wrap {
+    bottom: 24px;
+  }
+
   .scroll-hint-pill {
-    min-width: 195px;
-    height: 49px;
+    min-width: 190px;
+    height: 47px;
     padding: 0 18px;
     font-size: 12px;
   }
@@ -760,9 +752,10 @@ body {
 
 <div class="scroll-hint-wrap" id="scrollHintWrap">
   <button class="scroll-hint-pill" id="scrollHintBtn" type="button">
-    <span>برای دیدن ادامه لمس کنید</span>
+    <span>به پایین اسکرول کنید</span>
   </button>
 </div>
+
 
 <main class="website-content" id="websiteContent">
 
@@ -865,18 +858,24 @@ body {
 
     function start() {
   whiteOverlay.classList.add('active');
+
   setTimeout(() => {
     introScreen.style.display = 'none';
+
     websiteContent.classList.add('revealed');
-    // ریست موقعیت اسکرول به سکشن اول
     websiteContent.scrollTop = 0;
+
     whiteOverlay.classList.remove('active');
     musicModal.classList.add('show');
-    document.getElementById('scrollHintWrap').classList.add('active');
 
+    // نمایش دکمه فقط بعد از خروج از اینترو
+    document
+      .getElementById('scrollHintWrap')
+      .classList.add('active');
 
   }, 600);
 }
+
 
 
     introScreen.addEventListener('click', start);
@@ -946,30 +945,36 @@ if (window.DeviceOrientationEvent) {
 }
 const scrollHintBtn = document.getElementById('scrollHintBtn');
 
-scrollHintBtn?.addEventListener('click', () => {
-  const sections = [...document.querySelectorAll('.scroll-section')];
+scrollHintBtn.addEventListener('click', () => {
+  const sections = [
+    ...document.querySelectorAll('.scroll-section')
+  ];
 
   const currentScroll = websiteContent.scrollTop;
 
-  const currentIndex = sections.findIndex(section => {
-    return Math.abs(section.offsetTop - currentScroll) < window.innerHeight / 2;
+  let currentIndex = sections.findIndex(section => {
+    return Math.abs(section.offsetTop - currentScroll) < 80;
   });
+
+  if (currentIndex === -1) {
+    currentIndex = 0;
+  }
 
   const nextIndex = currentIndex + 1;
 
   if (sections[nextIndex]) {
-    sections[nextIndex].scrollIntoView({
-      behavior: 'smooth',
-      block: 'start'
+    websiteContent.scrollTo({
+      top: sections[nextIndex].offsetTop,
+      behavior: 'smooth'
     });
   } else {
-    // در آخرین سکشن، دوباره به سکشن اول برمی‌گردد
-    sections[0].scrollIntoView({
-      behavior: 'smooth',
-      block: 'start'
+    websiteContent.scrollTo({
+      top: sections[0].offsetTop,
+      behavior: 'smooth'
     });
   }
 });
+
 
 
   </script>
