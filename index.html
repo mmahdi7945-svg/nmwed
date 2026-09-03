@@ -509,7 +509,7 @@ body {
   <main class="website-content" id="websiteContent">
     
     <!-- سکشن ۱ -->
-   <section class="hero-section">
+   <section class="scroll-section hero-section">
   <div class="hero-content">
     
     <!-- خط اسلیمی پیچ و تاب خورده (دقیقاً وکتور SVG طرح) -->
@@ -590,7 +590,6 @@ body {
     <section class="scroll-section">
              <h2>بخش سوم</h2>
         <p>لوکیشن یا شمارش معکوس</p>
-      </div>
     </section>
 
 
@@ -607,13 +606,17 @@ body {
     const musicNoBtn = document.getElementById('musicNoBtn');
 
     function start() {
-      whiteOverlay.classList.add('active');
-      setTimeout(() => {
-        introScreen.style.display = 'none';
-        websiteContent.classList.add('revealed');
-        whiteOverlay.classList.remove('active');
-        musicModal.classList.add('show');
-      }, 600);
+  whiteOverlay.classList.add('active');
+  setTimeout(() => {
+    introScreen.style.display = 'none';
+    websiteContent.classList.add('revealed');
+    // ریست موقعیت اسکرول به سکشن اول
+    websiteContent.scrollTop = 0;
+    whiteOverlay.classList.remove('active');
+    musicModal.classList.add('show');
+  }, 600);
+}
+
     }
 
     introScreen.addEventListener('click', start);
