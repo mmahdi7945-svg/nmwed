@@ -21,7 +21,7 @@
     /* سایت اصلی */
     .website-content { width: 100vw; height: 100vh; overflow-y: scroll; scroll-snap-type: y mandatory; scroll-behavior: smooth; opacity: 0; transition: opacity 0.4s; }
     .website-content.revealed { opacity: 1; }
-    .scroll-section { position: relative; width: 100vw; height: 100vh; scroll-snap-align: start; display: flex; align-items: center; justify-content: center; text-align: center; background-color: #f1f1f1; overflow: hidden; }
+    .scroll-section { position: relative; width: 100vw; height: 100vh; scroll-snap-align: start; display: flex; align-items: center; justify-content: center; text-align: center; background-color: transparent; overflow: hidden; }
     .bg-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; opacity: 1; }
         .section-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.4); z-index: 2; }
     .section-card {
@@ -164,7 +164,7 @@
   position: relative;
   width: 100%;
   height: 100dvh;
-  background-color: #f1f1f1;
+  background-color: transparent;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -618,7 +618,6 @@ body {
   }, 600);
 }
 
-    }
 
     introScreen.addEventListener('click', start);
     introVideo.addEventListener('ended', start);
