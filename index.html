@@ -581,167 +581,135 @@ body {
 }
 
 /* =========================================
-   دکمه شیشه‌ای لوکس راهنمای اسکرول
+   دکمه اسکرول؛ فقط بعد از خروج از اینترو
    ========================================= */
 
-.scroll-hint-pill {
-  position: fixed;
-  left: 50;
-  bottom: 26px;
-  z-index: 90;
-
-  display: inline-flex;
+.scroll-hint-wrap {
+  inset: 0;
+  display: flex;
   align-items: center;
   justify-content: center;
-  gap: 13px;
-
-  min-width: 214px;
-  height: 52px;
-  padding: 0 13px 0 20px;
-
-  color: rgba(255, 255, 255, 0.96);
-  font-family: 'BYekan', Tahoma, sans-serif;
-  font-size: 13px;
-  font-weight: normal;
-  line-height: 1;
-  white-space: nowrap;
-
-  cursor: pointer;
-  user-select: none;
-  appearance: none;
-  -webkit-appearance: none;
-
-  /* شیشه نیمه‌شفاف */
-  background:
-    linear-gradient(
-      110deg,
-      rgba(255, 255, 255, 0.34) 0%,
-      rgba(255, 255, 255, 0.12) 42%,
-      rgba(255, 255, 255, 0.05) 100%
-    );
-
-  backdrop-filter: blur(22px) saturate(175%);
-  -webkit-backdrop-filter: blur(22px) saturate(175%);
-
-  /* حاشیه شیشه‌ای روشن */
-  border: 1px solid rgba(255, 255, 255, 0.58);
-  border-radius: 999px;
-
-  /* سایه بیرونی + نور داخلی border-radius: 999px;
-
-  /* سایه بیرونی + نور داخلی */
-, 0, 0, 0.25),
-    0 0 18px rgba(255, 255, 255, 0.12),
-    inset 0 1px 1px rgba(255, 255, 255, 0.82),
-    inset 0 -10px 20px rgba(0 20px rgba(0, 0, 0, 0.12);
-
-  visibility: hidden;
-  transform: translateX(-50%) translateY(18px) scale(0.92);
-
-  transition:
-    opacity 0.55s ease,
-    visibility 0.55s ease,
-    transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* انعکاس نور روی بدنه شیشه */
-.scroll-hint-pill::before {
-  content: "";
-  position: absolute;
-  top: 1px;
-  left: 13%;
-  width: 50%;
-  height: 9px;
 
-  background: rgba(255, 255, 255, 0.35);
-  border-radius: 999px;
-  filter: blur(4px);
-  opacity: 0.75;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+
+  transition:
+    opacity 0.45s ease,
+    visibility 0.45s ease;
+}
+
+/* بعد از ورود به سایت فعال می‌شود */
+.scroll-hint-wrap.active {
+  opacity: 1;
+  visibility: visible;
   pointer-events: none;
 }
 
-/* فعال‌شدن دکمه بعد از ورود به سایت */
-.scroll-hint-pill.active {
-  opacity: 1;
-  visibility: visible;
-  transform: translateX(-50%) translateY(0) scale(1);
-  animation: glassHintFloat 2.8s ease-in-out infinite;
-}
-
-/* دایره شیشه‌ای فلش */
-.scroll-hint-pill svg {
+/* خود دکمه */
+.scroll-hint-pill {
   position: relative;
-  z-index: 1;
 
-  width: 31px;
-  height: 31px;
-  padding: 7px;
+  min-width: 215px;
+  height: 52px;
+  padding: 0 24px;
 
-  flex: 0 0 31px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  fill: none;
-  stroke: rgba(255, 255, 255, 0.98);
-  stroke-width: 2.2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+  color: #ffffff;
+  font-family: 'BYekan', Tahoma, sans-serif;
+  font-size: 13px;
+  font-weight: normal;
+  white-space: nowrap;
 
-  background: rgba(255, 255, 255, 0.18);
-  border: 1px solid rgba(255, 255, 255, 0.42);
-  border-radius: 50%;
+  cursor: pointer;
+  pointer-events: auto;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.34),
+      rgba(255, 255, 255, 0.10)
+    );
+
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+
+  border: 1px solid rgba(255, 255, 255, 0.62);
+  border-radius: 999px;
 
   box-shadow:
-    inset 0 1px 2px rgba(255, 255, 255, 0.6),
-    0 3px 8px rgba(0, 0, 0, 0.16);
+    0 12px 30px rgba(0, 0, 0, 0.22),
+    inset 0 1px 1px rgba(255, 255, 255, 0.75),
+    inset 0 -8px0 -8px 16px rgba(0, 0, 0,);
+
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+
+  animation: scrollButtonFloat 2.6s ease-in-out infinite;
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
-/* متن بالای لایه‌های تزئینی قرار بگیرد */
+/* انعکاس باریک روی شیشه */
+.scroll-hint-pill::before {
+  content: "";
+
+  position: absolute;
+  top: 4px;
+  left: 22%;
+  width: 56%;
+  height: 7px;
+
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.42);
+  filter: blur(4px);
+  pointer-events: none;
+}
+
+/* متن دکمه */
 .scroll-hint-pill span {
   position: relative;
   z-index: 1;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.28);
 }
 
-/* حالت لمس موبایل */
+/* حذف کامل فلش */
+.scroll-hint-pill svg {
+  display: none !important;
+}
+
+/* افکت لمس */
 .scroll-hint-pill:active {
-  transform: translateX(-50%) scale(0.94);
-  box-shadow:
-    0 6px 16px rgba(0, 0, 0, 0.24),
-    inset 0 1px 1px rgba(255, 255, 255, 0.65);
+  transform: scale(0.94);
 }
 
-/* حرکت بسیار ظریف شناور */
-@keyframes glassHintFloat {
+/* شناوری آرام */
+@keyframes scrollButtonFloat {
   0%, 100% {
-    transform: translateX(-50%) translateY(0);
+    transform: translateY(0);
   }
 
   50% {
-    transform: translateX(-50%) translateY(-6px);
+    transform: translateY(-7px);
   }
 }
 
 /* موبایل‌های کوچک */
 @media (max-width: 380px) {
   .scroll-hint-pill {
-    min-width: 194px;
+    min-width: 195px;
     height: 49px;
-    padding: 0 10px 0 16px;
-    gap: 10px;
+    padding: 0 18px;
     font-size: 12px;
   }
+}
 
-  .scroll-hint-pill svg {
-    width: 29px;
-    height: 29px;
-    flex-basis: 29px;
-  }
-}
-.hero-section ~ .scroll-hint-pill {
-  color: #ffffff;
-}
-.scroll-hint-pill {
-  text-shadow: 0 1px 5px rgba(0, 0, 0, 0.45);
-}
 
 
   </style>  <!-- این تگ حتماً باید اینجا بسته بشه -->
@@ -777,22 +745,28 @@ body {
   </div>
 
   <div class="white-overlay" id="whiteOverlay"></div>
+<div class="intro-screen" id="introScreen">
+  <video
+    class="intro-video"
+    id="introVideo"
+    autoplay
+    muted
+    playsinline
+    src="intro-video.mp4">
+  </video>
 
-  <div class="intro-screen" id="introScreen">
-    <video class="intro-video" id="introVideo" autoplay muted playsinline src="intro-video.mp4"></video>
-    <div class="intro-hint">برای ورود کلیک کنید</div>
-  </div>
-<!-- دکمه راهنمای اسکرول سراسری -->
-<button class="scroll-hint-pill" id="scrollHintBtn" type="button">
-  <span>به پایین اسکرول کنید</span>
+  <div class="intro-hint">برای ورود کلیک کنید</div>
+</div>
 
-  <svg viewBox="0 0 24 24" aria-hidden="true">
-    <path d="M7 10l5 5 5-5"></path>
-  </svg>
-</button>
+<div class="scroll-hint-wrap" id="scrollHintWrap">
+  <button class="scroll-hint-pill" id="scrollHintBtn" type="button">
+    <span>برای دیدن ادامه لمس کنید</span>
+  </button>
+</div>
 
-  <main class="website-content" id="websiteContent">
-    
+<main class="website-content" id="websiteContent">
+
+   
     <!-- سکشن ۱ -->
    <section class="scroll-section hero-section">
   <div class="hero-content">
@@ -898,7 +872,8 @@ body {
     websiteContent.scrollTop = 0;
     whiteOverlay.classList.remove('active');
     musicModal.classList.add('show');
-    document.getElementById('scrollHintBtn').classList.add('active');
+    document.getElementById('scrollHintWrap').classList.add('active');
+
 
   }, 600);
 }
