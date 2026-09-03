@@ -377,12 +377,12 @@
   letter-spacing: 0;
 }
 
-/* کارت‌های پولاروید پایین */
+/* کارت‌های پولاروید بزرگتر و بالاتر */
 .polaroids-container {
   position: relative;
   width: 100%;
-  height: 170px;
-  margin-top: auto;
+  height: 200px;
+  margin-top: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -390,11 +390,11 @@
 
 .polaroid-card {
   position: absolute;
-  width: 145px;
-  height: 110px;
+  width: 175px;
+  height: 130px;
   background: #ffffff;
-  padding: 6px;
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+  padding: 8px 8px 12px 8px;
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.18);
   box-sizing: border-box;
 }
 
@@ -413,24 +413,25 @@
 }
 
 .polaroid-left {
-  left: 14%;
-  bottom: 25px;
-  transform: rotate(-14deg);
+  left: 10%;
+  bottom: 45px;
+  transform: rotate(-10deg);
   z-index: 2;
 }
 
 .polaroid-right {
-  right: 14%;
-  bottom: 20px;
-  transform: rotate(10deg);
+  right: 10%;
+  bottom: 30px;
+  transform: rotate(8deg);
   z-index: 3;
 }
 
-.tape-1 { width: 34px; height: 13px; top: -6px; left: -10px; transform: rotate(-35deg); }
-.tape-2 { width: 34px; height: 13px; bottom: -6px; left: -8px; transform: rotate(35deg); }
-.tape-3 { width: 34px; height: 13px; top: -6px; right: -10px; transform: rotate(35deg); }
-.tape-4 { width: 34px; height: 13px; bottom: -6px; right: -8px; transform: rotate(-35deg); }
-.tape-5 { width: 30px; height: 12px; top: 35px; left: -12px; transform: rotate(15deg); }
+.tape-1 { width: 40px; height: 14px; top: -7px; left: -10px; transform: rotate(-35deg); }
+.tape-2 { width: 40px; height: 14px; bottom: -7px; left: -8px; transform: rotate(35deg); }
+.tape-3 { width: 40px; height: 14px; top: -7px; right: -10px; transform: rotate(35deg); }
+.tape-4 { width: 40px; height: 14px; bottom: -7px; right: -8px; transform: rotate(-35deg); }
+.tape-5 { width: 34px; height: 14px; top: 38px; left: -12px; transform: rotate(15deg); }
+
 /* ۱. لایه مرواریدها کاملاً در لایه زیرین و پس‌زمینه */
 .pearl-layer {
   position: fixed;
