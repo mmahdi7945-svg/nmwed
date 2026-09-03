@@ -1103,6 +1103,154 @@ body {
     animation-duration: 0.01ms;
   }
 }
+/* =========================================
+   لایه شیشه‌ای روی عکس پس از کلیک
+   ========================================= */
+
+.photo-glass-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.34),
+      rgba(255, 255, 255, 0.08) 42%,
+      rgba(255, 255, 255, 0.24)
+    );
+
+  backdrop-filter: blur(7px) saturate(125%);
+  -webkit-backdrop-filter: blur(7px) saturate(125%);
+
+  border: 1px solid rgba(255, 255, 255, 0.3);
+
+  transition:
+    opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    visibility 0.8s ease,
+    backdrop-filter 0.8s ease;
+}
+
+/* درخشش ظریف روی شیشه */
+.photo-glass-layer::before {
+  content: "";
+  position: absolute;
+  top: -20%;
+  left: -55%;
+
+  width: 42%;
+  height: 150%;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.65),
+    transparent
+  );
+
+  transform: rotate(18deg);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* فعال‌شدن لایه پس از کلیک روی عکس */
+.scratch-photo-frame.glass-active .photo-glass-layer {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.scratch-photo-frame.glass-active .photo-glass-layer::before {
+  animation: glassShine 1.4s ease-out 0.15s forwards;
+}
+
+/* تصویر NOONMEEM */
+.noonmeem-overlay {
+  position: relative;
+  z-index: 2;
+
+  width: 57%;
+  max-width: 190px;
+  height: auto;
+
+  object-fit: contain;
+  opacity: 0;
+  transform: scale(0.72) rotate(-7deg);
+
+  filter:
+    drop-shadow(0 8px 12px rgba(0, 0, 0, 0.3))
+    drop-shadow(0 0 12px rgba(255, 255, 255, 0.55));
+
+  transition:
+    opacity 0.75s ease,
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ورود نرم لوگو */
+.scratch-photo-frame.glass-active .noonmeem-overlay {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+  animation: noonmeemFloat 3.2s ease-in-out 1s infinite;
+}
+
+@keyframes glassShine {
+  0% {
+    left: -55%;
+    opacity: 0;
+  }
+
+  18% {
+    opacity: 1;
+  }
+
+  100% {
+    left: 130%;
+    opacity: 0;
+  }
+}
+
+@keyframes noonmeemFloat {
+  0%, 100% {
+    transform: scale(1) translateY(0);
+  }
+
+  50% {
+    transform: scale(1.025) translateY(-4px);
+  }
+}
+
+/* وضعیت فوکوس برای دسترسی بهتر */
+.scratch-photo-frame:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.85);
+  outline-offset: 5px;
+}
+
+/* در موبایل‌های کوچک لوگو کمی کوچک‌تر باشد */
+@media (max-width: 380px) {
+  .noonmeem-overlay {
+    width: 52%;
+  }
+}
+
+/* کاهش حرکت برای کاربران دارای تنظیمات دسترسی */
+@media (prefers-reduced-motion: reduce) {
+  .photo-glass-layer::before,
+  .noonmeem-overlay {
+    animation: none !important;
+  }
+
+  .noonmeem-overlay {
+    transition-duration: 0.01ms;
+  }
+}
 
 
 
@@ -1199,27 +1347,40 @@ body {
 
       <!-- وجه پشتی: عکس خراشیدنی -->
       <div class="hero-face hero-back">
-        <div class="scratch-photo-frame" id="scratchArea">
+       <div
+  class="scratch-photo-frame"
+  id="scratchArea"
+  role="button"
+  tabindex="0"
+  aria-label="برای نمایش نشان، روی عکس کلیک کنید"
+>
+  <img
+    src="hero-photo.jpg"
+    alt="عکس محمدمهدی و نرگس"
+    class="scratch-photo"
+    id="scratchPhoto"
+    draggable="false"
+  >
 
-          <!-- نام عکس دلخواه -->
-          <img
-            src="hero-photo.jpg"
-            alt="عکس محمدمهدی و نرگس"
-            class="scratch-photo"
-            id="scratchPhoto"
-            draggable="false"
-          >
+  <!-- لایه فلش اولیه پس از پاک‌شدن پوشش -->
+  <div class="scratch-reveal-flash" aria-hidden="true"></div>
 
-          <!-- فلش نوری نهایی -->
-          <div class="scratch-reveal-flash" aria-hidden="true"></div>
+  <!-- لایه شیشه‌ای که با کلیک روی عکس فعال می‌شود -->
+  <div class="photo-glass-layer" id="photoGlassLayer">
+    <img
+      src="NOONMEEM.png"
+      alt="نشان دعوت‌نامه"
+      class="noonmeem-overlay"
+    >
+  </div>
 
-          <!-- پوشش قابل خراشیدن -->
-          <canvas
-            class="scratch-canvas"
-            id="scratchCanvas"
-            aria-label="پوشش عکس را با حرکت انگشت پاک کنید"
-          ></canvas>
-        </div>
+  <canvas
+    class="scratch-canvas"
+    id="scratchCanvas"
+    aria-label="پوشش عکس را با حرکت انگشت پاک کنید"
+  ></canvas>
+</div>
+
       </div>
 
     </div>
@@ -1738,6 +1899,51 @@ scratchCanvas.addEventListener('lostpointercapture', () => {
   previousPoint = null;
 });
 
+/* =========================================
+   کلیک روی عکس و نمایش لایه شیشه‌ای
+   ========================================= */
+
+const photoGlassLayer = document.getElementById('photoGlassLayer');
+
+function activatePhotoGlass() {
+  /*
+   * فقط وقتی عکس کاملاً آزاد شده باشد، کلیک اثر می‌گذارد.
+   * بنابراین هنگام مرحله خراشیدن، لمس عکس باعث فعال‌شدن شیشه نمی‌شود.
+   */
+  if (!scratchCompleted) {
+    return;
+  }
+
+  scratchArea.classList.toggle('glass-active');
+
+  const isActive = scratchArea.classList.contains('glass-active');
+
+  scratchArea.setAttribute(
+    'aria-label',
+    isActive
+      ? 'برای پنهان‌کردن نشان، روی عکس کلیک کنید'
+      : 'برای نمایش نشان، روی عکس کلیک کنید'
+  );
+}
+
+scratchArea.addEventListener('click', (event) => {
+  /*
+   * اگر کلیک مستقیماً روی canvas باشد، آن را به‌عنوان
+   * عملیات خراشیدن در نظر می‌گیریم، نه کلیک شیشه‌ای.
+   */
+  if (event.target === scratchCanvas) {
+    return;
+  }
+
+  activatePhotoGlass();
+});
+
+scratchArea.addEventListener('keydown', (event) => {
+  if (event.key === 'Enter' || event.key === ' ') {
+    event.preventDefault();
+    activatePhotoGlass();
+  }
+});
 
 
   </script>
