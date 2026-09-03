@@ -845,58 +845,53 @@ body {
   z-index: 2;
   background-color: transparent;
 }
-/* =========================================
-   انیمیشن‌های ورود و خروج سکشن ۳ (تایمر شمارش معکوس)
-   ========================================= */
+/* وضعیت اولیه (مخفی بودن قبل از اسکرول) */
 .section-three .countdown-title,
 .section-three .cd-box,
 .section-three .map-card-wrapper {
   opacity: 0;
-  transform: translateY(28px) scale(0.96);
+  transform: translateY(24px) scale(0.96);
   transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
               transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
 }
 
-/* ۳. ظاهر شدن انیمیشنی مپ سکشن ۳ */
-.section-three.visible .map-card-wrapper {
-  opacity: 1;
-  transform: translateY(0) scale(1);
-  transition-delay: 0.78s;
-}
-
-
-/* ۱. ظاهر شدن عنوان «لحظه شماری برای دیدار» */
+/* ۱. اول عنوان وارد می‌شود */
 .section-three.visible .countdown-title {
   opacity: 1;
   transform: translateY(0) scale(1);
-  transition-delay: 0.15s;
+  transition-delay: 0.1s;
 }
 
-/* ۲. ظاهر شدن پلکانی باکس‌های تایمر */
-.section-three.visible .cd-box:nth-child(1) { /* باکس Days */
+/* ۲. سپس تایمرها پشت سر هم با افکت پله‌ای وارد می‌شوند */
+.section-three.visible .cd-box:nth-child(1) {
   opacity: 1;
   transform: translateY(0) scale(1);
-  transition-delay: 0.3s;
+  transition-delay: 0.22s;
+}
+.section-three.visible .cd-box:nth-child(2) {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition-delay: 0.34s;
+}
+.section-three.visible .cd-box:nth-child(3) {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition-delay: 0.46s;
+}
+.section-three.visible .cd-box:nth-child(4) {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition-delay: 0.58s;
 }
 
-.section-three.visible .cd-box:nth-child(2) { /* باکس Hours */
+/* ۳. در نهایت مپ و نام تالار بعد از تایمر وارد می‌شوند */
+.section-three.visible .map-card-wrapper {
   opacity: 1;
   transform: translateY(0) scale(1);
-  transition-delay: 0.42s;
+  transition-delay: 0.72s;
 }
 
-.section-three.visible .cd-box:nth-child(3) { /* باکس Minutes */
-  opacity: 1;
-  transform: translateY(0) scale(1);
-  transition-delay: 0.54s;
-}
-
-.section-three.visible .cd-box:nth-child(4) { /* باکس Seconds */
-  opacity: 1;
-  transform: translateY(0) scale(1);
-  transition-delay: 0.66s;
-}
 /* =========================================
    کارت فلیپ و عکس خراشیدنی سکشن اول
    ========================================= */
@@ -1677,35 +1672,39 @@ body {
 
 
 
-       <!-- سکشن ۳: شمارش معکوس و اطلاعات تکمیلی -->
-    <section class="scroll-section section-three">
-      <div class="countdown-wrapper">
-        <!-- مینی‌مپ و اطلاعات تالار ارم -->
-<div class="map-card-wrapper">
-  <div class="map-location-title">باغ تالار مجلل ارم</div>
-  <div class="map-location-address">اراک، جاده اراک - مرزیجران، ارم</div>
+             <!-- سکشن ۳: روزشمار + مپ -->
+      <section class="scroll-section section-three">
+        <div class="countdown-wrapper">
 
-  <div class="mini-map-frame" id="miniMapTrigger" role="button" tabindex="0" aria-label="مسیریابی به سمت تالار">
-    <iframe
-      class="mini-map-iframe"
-      src="https://maps.google.com/maps?q=34.1173579,49.6697487&z=15&output=embed"
-      loading="lazy">
-    </iframe>
-    <div class="map-click-overlay">
-      <span class="map-click-badge">برای مسیریابی کلیک کنید</span>
-    </div>
-  </div>
-</div>
+          <!-- ۱. ابتدا لحظه شماری برای دیدار -->
+          <div class="countdown-title">لحظه شماری برای دیدار</div>
 
-         <div class="countdown-title">لحظه شماری برای دیدار</div>
-         <div class="countdown-grid-inline">
-            <div class="cd-box"><span class="cd-num" id="cdDays">00</span><span class="cd-label">Days</span></div>
-            <div class="cd-box"><span class="cd-num" id="cdHours">00</span><span class="cd-label">Hours</span></div>
-            <div class="cd-box"><span class="cd-num" id="cdMinutes">00</span><span class="cd-label">Minutes</span></div>
-            <div class="cd-box"><span class="cd-num" id="cdSeconds">00</span><span class="cd-label">Seconds</span></div>
-         </div>
-      </div>
-      
+          <!-- ۲. سپس باکس‌های تایمر معکوس -->
+          <div class="countdown-grid-inline">
+            <div class="cd-box"><span class="cd-num" id="cdDays">00</span><span class="cd-lbl">روز</span></div>
+            <div class="cd-box"><span class="cd-num" id="cdHours">00</span><span class="cd-lbl">ساعت</span></div>
+            <div class="cd-box"><span class="cd-num" id="cdMinutes">00</span><span class="cd-lbl">دقیقه</span></div>
+            <div class="cd-box"><span class="cd-num" id="cdSeconds">00</span><span class="cd-lbl">ثانیه</span></div>
+          </div>
+
+          <!-- ۳. بعد از تایمر: اطلاعات تالار و مینی‌مپ -->
+          <div class="map-card-wrapper">
+            <div class="map-location-title">باغ تالار مجلل ارم</div>
+            <div class="map-location-address">اراک، جاده اراک - مرزیجران، ارم</div>
+            <div class="mini-map-frame" id="miniMapTrigger" role="button" tabindex="0" aria-label="مسیریابی به سمت تالار">
+              <iframe
+                class="mini-map-iframe"
+                src="https://maps.google.com/maps?q=34.1173579,49.6697487&z=15&output=embed"
+                loading="lazy">
+              </iframe>
+              <div class="map-click-overlay">
+                <span class="map-click-badge">برای مسیریابی کلیک کنید</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+    
       <!-- در اینجا می‌توانید هر محتوای دیگری که برای این سکشن دارید قرار دهید -->
     </section>
 
