@@ -116,6 +116,28 @@
   opacity: 1;
   transform: translateY(0) scale(1);
 }
+    /* فونت‌های اختصاصی سکشن ۱ */
+@font-face {
+  font-family: 'GeorgiaCustom';
+  src: url('./georgia.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'EdwardianScript';
+  src: url('./edwardianscriptitc.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ISOCTEUR';
+  src: url('./isocteur.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
  /* فونت‌ها */
 @font-face {
   font-family: 'BYekan';
@@ -136,6 +158,95 @@
   font-family: 'BiondiSans';
   src: local('BiondiSansW00-ExtraLight'), local('Biondi Sans'), local('Eras Light ITC'), sans-serif;
   font-weight: 200;
+}
+/* ساختار کلی سکشن ۱ */
+.hero-section {
+  position: relative;
+  width: 100%;
+  height: 100dvh;
+  background-color: #f1f1f1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  overflow: hidden;
+  z-index: 2;
+}
+
+/* باکس اصلی محتوای متنی */
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: left;
+  width: auto;
+  user-select: none;
+}
+
+/* خط تزئینی پیچ‌وتاب‌دار بالای اسامی */
+.hero-swirl-divider {
+  width: 130px;
+  height: auto;
+  margin-bottom: 22px;
+  color: #000000;
+  display: block;
+}
+
+/* بلوک نام‌ها */
+.hero-names-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+
+/* استایل کلمات انگلیسی با فونت جورجیا */
+.hero-name-row {
+  font-family: 'GeorgiaCustom', Georgia, serif;
+  font-size: 50.42px;
+  color: #000000;
+  line-height: 1.05;
+  letter-spacing: 0;
+  margin: 0;
+  font-weight: normal;
+}
+
+/* تورفتگی Mahdi طبق تصویر برای قرارگیری زیر O تا m کلمه Mohammad */
+.hero-name-mahdi {
+  padding-left: 28px;
+}
+
+/* ردیف سوم: ترکیب And و Narges */
+.hero-and-narges-row {
+  display: flex;
+  align-items: baseline;
+  margin-top: 2px;
+}
+
+/* کلمه And با فونت دست‌نویس */
+.hero-and-script {
+  font-family: 'EdwardianScript', 'Brush Script MT', cursive;
+  font-size: 58px; /* کمی تنظیم سایز برای هم‌قد شدن کامل با متن جورجیا */
+  color: #000000;
+  letter-spacing: 0;
+  line-height: 0.8;
+  margin-right: 12px;
+  font-weight: normal;
+}
+
+/* تاریخ جاستیفای شده در خط آخر */
+.hero-date-row {
+  font-family: 'ISOCTEUR', sans-serif, monospace;
+  font-size: 15.8px;
+  color: #424242;
+  letter-spacing: 1.24em; /* معادل دقیق مقدار 1240 کانوا */
+  text-indent: 1.24em;    /* جبران فاصله اضافه حرف آخر برای سنتر شدن */
+  margin-top: 18px;
+  width: 100%;
+  text-align: center;
+  white-space: nowrap;
+  direction: ltr;
 }
 
 /* ساختار کلی سکشن ۲ مطابق مشخصات کانوا */
@@ -398,10 +509,30 @@ body {
   <main class="website-content" id="websiteContent">
     
     <!-- سکشن ۱ -->
-    <section class="scroll-section">
-     <video class="bg-video" autoplay muted loop playsinline src="NM_5.mp4"></video>
-  <div class="section-overlay"></div>
-    </section>
+   <section class="hero-section">
+  <div class="hero-content">
+    
+    <!-- خط اسلیمی پیچ و تاب خورده (دقیقاً وکتور SVG طرح) -->
+    <svg class="hero-swirl-divider" viewBox="0 0 200 45" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M 15,22 C 35,22 45,12 55,22 C 65,32 75,22 85,15 C 95,8 105,8 115,15 C 125,22 135,32 145,22 C 155,12 165,22 185,22 M 68,22 C 78,8 90,8 98,22 M 102,22 C 110,8 122,8 132,22" />
+      <circle cx="100" cy="18" r="3.5" fill="#000000" />
+    </svg>
+
+    <!-- بلوک اسامی -->
+    <div class="hero-names-block">
+      <div class="hero-name-row">Mohammad</div>
+      <div class="hero-name-row hero-name-mahdi">Mahdi</div>
+      <div class="hero-and-narges-row">
+        <span class="hero-and-script">And</span>
+        <span class="hero-name-row">Narges</span>
+      </div>
+    </div>
+
+    <!-- خط تاریخ -->
+    <div class="hero-date-row">1405/07/24</div>
+
+  </div>
+</section>
 
       <!-- سکشن دوم: موعد دیدار عشق ما -->
    <section class="scroll-section event-date-section">
