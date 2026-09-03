@@ -701,6 +701,40 @@ body {
     font-size: 12px;
   }
 }
+/* استایل تایمر درون سکشن ۲ */
+.countdown-grid-inline {
+  display: flex;
+  flex-direction: row-reverse; /* برای اینکه Days سمت راست بیفتد */
+  justify-content: center;
+  gap: 8px;
+  margin: 15px 0;
+  width: 100%;
+}
+.cd-box {
+  background: rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 12px;
+  padding: 8px 4px;
+  min-width: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  backdrop-filter: blur(4px);
+}
+.cd-num {
+  font-family: 'BiondiSans', sans-serif;
+  font-size: 22px;
+  font-weight: 200;
+  color: #333;
+  line-height: 1;
+}
+.cd-label {
+  font-family: sans-serif;
+  font-size: 8px;
+  color: #666;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
 
 
 
@@ -785,7 +819,7 @@ body {
      
 </section>
 
-      <!-- سکشن دوم: موعد دیدار عشق ما -->
+           <!-- سکشن دوم: موعد دیدار عشق ما -->
    <section class="scroll-section event-date-section">
      <!-- تیترها -->
      <div>
@@ -808,7 +842,6 @@ body {
            <span class="date-caption">ماه</span>
          </div>
        </div>
-
        <div class="date-year">1405</div>
      </div>
 
@@ -818,6 +851,14 @@ body {
        از ساعت ۱۹
      </div>
 
+     <!-- اضافه شده: تایمر شمارش معکوس -->
+     <div class="countdown-grid-inline">
+        <div class="cd-box"><span class="cd-num" id="cdDays">00</span><span class="cd-label">Days</span></div>
+        <div class="cd-box"><span class="cd-num" id="cdHours">00</span><span class="cd-label">Hours</span></div>
+        <div class="cd-box"><span class="cd-num" id="cdMinutes">00</span><span class="cd-label">Minutes</span></div>
+        <div class="cd-box"><span class="cd-num" id="cdSeconds">00</span><span class="cd-label">Seconds</span></div>
+     </div>
+
      <!-- دو عکس پولاروید با چسب‌ها -->
      <div class="polaroids-container">
        <div class="polaroid-card polaroid-left">
@@ -825,7 +866,6 @@ body {
          <div class="tape tape-2"></div>
          <img src="story-photo-1.jpg" alt="عکس خاطره ۱">
        </div>
-
        <div class="polaroid-card polaroid-right">
          <div class="tape tape-3"></div>
          <div class="tape tape-4"></div>
@@ -974,6 +1014,26 @@ scrollHintBtn.addEventListener('click', () => {
     });
   }
 });
+    // منطق تایمر
+    function updateCountdown() {
+      const targetDate = new Date("2026-10-16T19:00:00+03:30").getTime();
+      const now = new Date().getTime();
+      const diff = targetDate - now;
+
+      if (diff > 0) {
+        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+        document.getElementById('cdDays').innerText = d.toString().padStart(2, '0');
+        document.getElementById('cdHours').innerText = h.toString().padStart(2, '0');
+        document.getElementById('cdMinutes').innerText = m.toString().padStart(2, '0');
+        document.getElementById('cdSeconds').innerText = s.toString().padStart(2, '0');
+      }
+    }
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
 
 
 
