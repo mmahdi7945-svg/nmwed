@@ -1872,50 +1872,49 @@ const musicYesBtn = document.getElementById('musicYesBtn');
 const musicNoBtn = document.getElementById('musicNoBtn');
 const scrollHintWrap = document.getElementById('scrollHintWrap');
 
-let introStarted = false;
-let introFinished = false;
 let hasStarted = false;
 
-// --- تابع شروع و نمایش سایت با امنیت کامل ---
+// تابع ورود به سایت
 function start() {
-if (hasStarted) return;
-hasStarted = true;
+  if (hasStarted) return;
+  hasStarted = true;
 
-// پنهان کردن صفحه اینترو
-if (introScreen) {
-introScreen.style.opacity = '0';
-introScreen.style.pointerEvents = 'none';
-setTimeout(() => {
-introScreen.style.display = 'none';
-}, 500);
+  // ۱. محو کردن اینترو
+  if (introScreen) {
+    introScreen.style.opacity = '0';
+    introScreen.style.pointerEvents = 'none';
+    setTimeout(() => {
+      introScreen.style.display = 'none';
+    }, 500);
+  }
+
+  // ۲. آشکار کردن محتوای اصلی سایت (حل مشکل نامرئی بودن)
+  if (websiteContent) {
+    websiteContent.classList.add('revealed');
+    websiteContent.scrollTop = 0;
+  }
+
+  // ۳. ظاهر شدن دکمه شیشه‌ای اسکرول
+  if (scrollHintWrap) {
+    scrollHintWrap.classList.add('active');
+  }
+
+  // ۴. نمایش مودال آهنگ
+  if (musicModal) {
+    musicModal.classList.add('show');
+  }
 }
 
-// فعال و نمایان شدن دکمه شیشه‌ای اسکرول
-if (scrollHintWrap) {
-scrollHintWrap.classList.add('active');
-}
-
-// نمایش مودال تایید پخش موزیک
-if (musicModal) {
-musicModal.classList.add('show');
-}
-}
-
-
-// هندلر کلیک اینترو
+// مدیریت کلیک و پخش ویدیو
 if (introScreen && introVideo) {
-let hasTapped = false;
+  // اگر ویدیو خودش شروع به پخش کرد یا با لمس کاربر، در هر دو حالت با لمس صفحه بلافاصله وارد سایت می‌شود (Skip)
+  introVideo.play().catch(() => {
+    // در صورت بلاک شدن پخش خودکار توسط مرورگر، منتظر لمس کاربر می‌ماند
+  });
 
-introScreen.addEventListener('click', () => {
-if (!hasTapped) {
-hasTapped = true;
-introVideo.play().catch(() => {
-// اگر ویدیو به هر دلیلی پخش نشد، کاربر را معطل نکن و وارد شو
-start();
-});
-} else {
-// تپ دوم: رد کردن سریع اینترو
-start();
+  introScreen.addEventListener('click', () => {
+    start();
+  });
 
   // اگر کاربر کلیک نکرد، پس از اتمام ویدیو خودکار وارد سایت شود
   introVideo.addEventListener('ended', start);
@@ -1924,14 +1923,6 @@ start();
   start();
 }
 
-  });
-
-  introVideo.addEventListener('ended', start);
-  introVideo.addEventListener('error', start);
-} else {
-  // اگر اینترو وجود نداشت مستقیماً باز شود
-  start();
-}
 
 
    
