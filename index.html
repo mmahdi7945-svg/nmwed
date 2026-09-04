@@ -1869,80 +1869,63 @@ const scrollHintWrap = document.getElementById('scrollHintWrap');
  let introStarted = false;
 let introFinished = false;
 
+// --- تابع شروع و نمایش سایت با امنیت کامل ---
 function start() {
-  if (introFinished) return;
-  if (!introScreen || introScreen.style.display === 'none') return;
+  if (window.isStarted) return;
+  window.isStarted = true;
 
-  introFinished = true;
+  const introScreen = document.getElementById('introScreen');
+  const introVideo = document.getElementById('introVideo');
+  const websiteContent = document.getElementById('websiteContent');
+  const musicModal = document.getElementById('musicModal');
 
   if (introVideo) {
     introVideo.pause();
-    introVideo.currentTime = 0;
   }
 
-  if (whiteOverlay) {
-    whiteOverlay.classList.add('active');
-  }
-
-  setTimeout(function () {
-    if (introScreen) {
+  if (introScreen) {
+    introScreen.style.opacity = '0';
+    introScreen.style.pointerEvents = 'none';
+    setTimeout(() => {
       introScreen.style.display = 'none';
-      introScreen.setAttribute('aria-hidden', 'true');
-    }
+    }, 600);
+  }
 
-    if (websiteContent) {
-      websiteContent.classList.add('revealed');
-      websiteContent.scrollTop = 0;
-    }
+  if (websiteContent) {
+    websiteContent.classList.add('revealed');
+  }
 
-    window.scrollTo(0, 0);
-
-    setTimeout(function () {
-      if (whiteOverlay) {
-        whiteOverlay.classList.remove('active');
-      }
-
-      if (musicModal) {
-        musicModal.classList.add('show');
-      }
-
-      if (scrollHintWrap) {
-        scrollHintWrap.classList.add('active');
-      }
-    }, 100);
-  }, 600);
+  // نمایش مودال موسیقی در صورت وجود
+  if (musicModal) {
+    musicModal.style.display = 'flex';
+  }
 }
 
+// هندلر کلیک اینترو
+const introScreen = document.getElementById('introScreen');
+const introVideo = document.getElementById('introVideo');
+
 if (introScreen && introVideo) {
-  /*
-   * فقط یک تپ:
-   * - ویدیو را پخش می‌کند
-   * - وارد سایت نمی‌شود
-   */
-  introScreen.addEventListener('click', function (event) {
-    event.preventDefault();
-    event.stopPropagation();
-
-    if (introStarted || introFinished) return;
-
-    introStarted = true;
-
-    var playPromise = introVideo.play();
-
-    if (playPromise && typeof playPromise.catch === 'function') {
-      playPromise.catch(function (error) {
-        console.warn('Intro video could not play:', error);
-        introStarted = false;
+  let hasTapped = false;
+  
+  introScreen.addEventListener('click', () => {
+    if (!hasTapped) {
+      hasTapped = true;
+      introVideo.play().catch(() => {
+        // اگر ویدیو به هر دلیلی پخش نشد، کاربر را معطل نکن و وارد شو
+        start();
       });
+    } else {
+      // تپ دوم: رد کردن سریع اینترو
+      start();
     }
   });
 
-  /*
-   * فقط پایان ویدیو وارد سایت می‌شود.
-   */
-  introVideo.addEventListener('ended', function () {
-    start();
-  });
+  introVideo.addEventListener('ended', start);
+  introVideo.addEventListener('error', start);
+} else {
+  // اگر اینترو وجود نداشت مستقیماً باز شود
+  start();
 }
 
 
@@ -2069,6 +2052,10 @@ const heroFlipCard = document.getElementById('heroFlipCard');
 const heroFront = document.getElementById('heroFront');
 const scratchArea = document.getElementById('scratchArea');
 const scratchCanvas = document.getElementById('scratchCanvas');
+if (scratchCanvas) {
+  const scratchContext = scratchCanvas.getContext('2d', { willReadFrequently: false });
+  // ادامه کدهای مربوط به اسکرچ کارت...
+}
 
 const scratchContext = scratchCanvas.getContext('2d', {
   willReadFrequently: false
