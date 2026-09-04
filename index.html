@@ -1494,11 +1494,18 @@ body {
   <video
     class="intro-video"
     id="introVideo"
-    autoplay
+    
     muted
     playsinline
     src="intro-video.mp4">
   </video>
+
+  <div class="intro-screen" id="introScreen">
+  <video class="intro-video" id="introVideo" muted playsinline preload="auto">
+    <source src="intro-video.mp4" type="video/mp4" />
+  </video>
+  <div class="intro-hint" id="introHint">برای مشاهده ویدیو کلیک کنید</div>
+</div>
 
   <div class="intro-hint">برای ورود کلیک کنید</div>
 </div>
@@ -1734,34 +1741,53 @@ body {
 
 
   <script>
-    const introScreen = document.getElementById('introScreen');
-    const introVideo = document.getElementById('introVideo');
-    const websiteContent = document.getElementById('websiteContent');
-    const whiteOverlay = document.getElementById('whiteOverlay');
-    const bgMusic = document.getElementById('bgMusic');
-    const musicModal = document.getElementById('musicModal');
-    const musicYesBtn = document.getElementById('musicYesBtn');
-    const musicNoBtn = document.getElementById('musicNoBtn');
+const introScreen = document.getElementById('introScreen');
+const introVideo = document.getElementById('introVideo');
+const introHint = document.getElementById('introHint');
+const websiteContent = document.getElementById('websiteContent');
+const whiteOverlay = document.getElementById('whiteOverlay');
+const bgMusic = document.getElementById('bgMusic');
+const musicModal = document.getElementById('musicModal');
+const musicYesBtn = document.getElementById('musicYesBtn');
+const musicNoBtn = document.getElementById('musicNoBtn');
+const scrollHintWrap = document.getElementById('scrollHintWrap');
 
-    function start() {
+let hasStartedPlaying = false; // وضعیت: آیا ویدیو شروع به پخش کرده یا نه؟
+
+function start() {
   whiteOverlay.classList.add('active');
-
   setTimeout(() => {
     introScreen.style.display = 'none';
-
     websiteContent.classList.add('revealed');
-    websiteContent.scrollTop = 0;
-
-    whiteOverlay.classList.remove('active');
-    musicModal.classList.add('show');
-
-    // نمایش دکمه فقط بعد از خروج از اینترو
-    document
-      .getElementById('scrollHintWrap')
-      .classList.add('active');
-
+    window.scrollTo(0, 0);
+    setTimeout(() => {
+      whiteOverlay.classList.remove('active');
+      musicModal.classList.add('show');
+      if (scrollHintWrap) {
+        scrollHintWrap.classList.add('active');
+      }
+    }, 100);
   }, 600);
 }
+
+// مدیریت دو بار تپ/کلیک روی اینترو
+introScreen.addEventListener('click', function () {
+  if (!hasStartedPlaying) {
+    // تپ اول: پخش ویدیو
+    introVideo.play();
+    hasStartedPlaying = true;
+    if (introHint) {
+      introHint.textContent = 'برای ورود به سایت کلیک کنید';
+    }
+  } else {
+    // تپ دوم: ورود به سایت
+    start();
+  }
+});
+
+// اگر ویدیو تا انتها پخش شد و کاربر کلیک نکرد، خودکار وارد سایت شود
+introVideo.addEventListener('ended', start);
+
 
 
 
