@@ -1583,6 +1583,26 @@ visibility 0.45s ease;
   -webkit-transform: rotateY(180deg);
   transform: rotateY(180deg);
 }
+.rsvp-submit-btn {
+  width: 100%;
+  padding: 12px 20px;
+  background: linear-gradient(135deg, #7c644d, #5a4635);
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  font-family: 'BYekan', Tahoma, sans-serif;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(124, 100, 77, 0.3);
+}
+
+.rsvp-submit-btn:hover {
+  background: linear-gradient(135deg, #8d735a, #68523f);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(124, 100, 77, 0.4);
+}
 
 
   </style>  <!-- این تگ حتماً باید اینجا بسته بشه -->
@@ -1856,6 +1876,10 @@ visibility 0.45s ease;
 
     </div>
   </div>
+</div>
+<div id="rsvpSuccessMsg" class="rsvp-success-msg" style="display: none;">
+  <span class="success-icon">✨</span>
+  <p>پاسخ شما با موفقیت ثبت شد. مشتاق دیدار شما هستیم!</p>
 </div>
 
 
