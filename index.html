@@ -1,5 +1,6 @@
 
 
+
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
@@ -861,10 +862,7 @@ visibility 0.45s ease;
 .section-three {
   position: relative;
   width: 100%;
-  min-height: 100dvh;
-  height: auto;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
+  height: 100dvh;
   display: flex;
   flex-direction: column;
   justify-content: flex-start; /* چسبیدن به بالای صفحه */
@@ -880,21 +878,18 @@ visibility 0.45s ease;
 /* وضعیت اولیه (مخفی بودن قبل از اسکرول) */
 .section-three .countdown-title,
 .section-three .cd-box,
-.section-three .map-location-title-justified {
-  width: 100%;
-  max-width: 320px;
-  text-align: justify;
-  text-align-last: center;
-  direction: rtl;
-  font-family: "B Yekan", "BYekan", "Yekan", "Vazirmatn", Tahoma, sans-serif;
-  font-size: 13px;
-  font-weight: normal;
-  color: #4a4a4a;
-  margin-bottom: 8px;
-  line-height: 1.8;
-}
-
-.map-card-wrapper {
+.section-three     .map-card-header {
+      font-family: 'BYekan', Tahoma, sans-serif !important;
+      font-size: 16px;
+      font-weight: bold;
+      color: #3e3228;
+      text-align: center;
+      width: 100%;
+      margin: 0 0 10px 0;
+      line-height: 1.6;
+      letter-spacing: 0.2px;
+    }
+    .map-card-wrapper {
   opacity: 0;
   transform: translateY(24px) scale(0.96);
   transition:
@@ -1603,159 +1598,12 @@ visibility 0.45s ease;
 }
 
 
-
-/* ===== فرم اعلام حضور (RSVP) ===== */
-.rsvp-card-wrapper {
-  margin-top: 18px;
-  width: 90%;
-  max-width: 380px;
-  background: rgba(255, 255, 255, 0.22);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.45);
-  border-radius: 20px;
-  padding: 16px 18px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-  box-sizing: border-box;
-  text-align: center;
-  font-family: 'BYekan', Tahoma, sans-serif;
-  opacity: 0;
-  transform: translateY(24px) scale(0.96);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: transform, opacity;
-}
-
-.section-three.visible .rsvp-card-wrapper {
-  opacity: 1;
-  transform: translateY(0) scale(1);
-  transition-delay: 0.85s;
-}
-
-.rsvp-title {
-  font-family: 'BYekan', Tahoma, sans-serif;
-  font-size: 17pt;
-  font-weight: bold;
-  color: #383838;
-  margin-bottom: 6px;
-}
-
-.rsvp-subtitle {
-  font-family: 'BYekan', Tahoma, sans-serif;
-  font-size: 11pt;
-  color: #555555;
-  margin-bottom: 14px;
-}
-
-.rsvp-form-group {
-  margin-bottom: 12px;
-  text-align: right;
-}
-
-.rsvp-label {
-  display: block;
-  font-family: 'BYekan', Tahoma, sans-serif;
-  font-size: 11pt;
-  color: #444;
-  margin-bottom: 5px;
-}
-
-.rsvp-input {
-  width: 100%;
-  padding: 10px 12px;
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(5px);
-  font-family: 'BYekan', Tahoma, sans-serif;
-  font-size: 11.5pt;
-  color: #333;
-  outline: none;
-  box-sizing: border-box;
-  transition: all 0.3s ease;
-}
-
-.rsvp-input:focus {
-  border-color: #8b7355;
-  background: rgba(255, 255, 255, 0.95);
-  box-shadow: 0 0 10px rgba(139, 115, 85, 0.25);
-}
-
-.rsvp-options {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  margin-bottom: 14px;
-}
-
-.rsvp-option-btn {
-  flex: 1;
-  padding: 9px 8px;
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  background: rgba(255, 255, 255, 0.5);
-  font-family: 'BYekan', Tahoma, sans-serif;
-  font-size: 11pt;
-  color: #444;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  user-select: none;
-}
-
-.rsvp-option-btn.active {
-  background: #6d5843;
-  color: #ffffff;
-  border-color: #6d5843;
-  box-shadow: 0 4px 12px rgba(109, 88, 67, 0.3);
-  transform: scale(1.02);
-}
-
-.rsvp-submit-btn {
-  width: 100%;
-  padding: 11px;
-  border-radius: 14px;
-  border: none;
-  background: linear-gradient(135deg, #7;
-  background: linear-gradient(135deg, #7c644d,;
-  font-family: 'BYekan', Tahoma, sans-serif;
-  font-size: 12.5pt;
-  font-weight: bold;
-  cursor: pointer;
-  box-shadow: 0 4px 15px rgba(90, 70, 53, 0.3);
-  transition: all 0.3s ease;
-}
-
 .rsvp-submit-btn:hover {
-  filter: brightness(1.08);
-  transform: translateY(-1px);
+  background: linear-gradient(135deg, #8d735a, #68523f);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(124, 100, 77, 0.4);
 }
 
-.rsvp-submit-btn:active {
-  transform: scale(0.97);
-}
-
-.rsvp-success-msg {
-  display: none;
-  background: rgba(255, 255, 255, 0.85);
-  padding: 16px;
-  border-radius: 14px;
-  color: #2e6930;
-  font-family: 'BYekan', Tahoma, sans-serif;
-  font-size: 12pt;
-  line-height: 1.6;
-  border: 1px solid rgba(46, 105, 48, 0.3);
-  animation: rsvpFadeIn 0.5s ease forwards;
-}
-
-@keyframes rsvpFadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@media (max-width: 480px) {
-  .rsvp-card-wrapper { padding: 14px; border-radius: 16px; }
-  .rsvp-title { font-size: 15pt; }
-  .rsvp-options { flex-direction: column; }
-}
 
   </style>  <!-- این تگ حتماً باید اینجا بسته بشه -->
 
@@ -1959,7 +1807,7 @@ visibility 0.45s ease;
 
           <!-- ۳. اطلاعات تالار و مینی‌مپ کلیک‌خور -->
           <div class="map-card-wrapper">
-            <div class="map-location-title-justified">اراک ، مرزیجران ، باغ تالار ارم</div>
+            <div class="map-card-header">اراک ، مرزیجران ، باغ تالار ارم</div>
             <div class="mini-map-frame" id="miniMapTrigger" role="button" tabindex="0" aria-label="مسیریابی به سمت تالار">
               <iframe
                 class="mini-map-iframe"
@@ -1975,42 +1823,6 @@ visibility 0.45s ease;
         </div>
 
       <!-- در اینجا می‌توانید هر محتوای دیگری که برای این سکشن دارید قرار دهید -->
-    
-          <!-- فرم اعلام حضور -->
-          <div class="rsvp-card-wrapper" id="rsvpSection">
-            <div id="rsvpFormContainer">
-              <div class="rsvp-title">اعلام حضور</div>
-              <div class="rsvp-subtitle">همراهی شما، شادی‌بخش محفل ماست</div>
-
-              <form id="rsvpForm" onsubmit="handleRsvpSubmit(event)">
-                <div class="rsvp-form-group">
-                  <label class="rsvp-label" for="rsvpName">نام و نام خانوادگی:</label>
-                  <input type="text" id="rsvpName" class="rsvp-input" placeholder="مثلاً: علی رضایی" required>
-                </div>
-
-                <div class="rsvp-form-group">
-                  <label class="rsvp-label">وضعیت حضور:</label>
-                  <div class="rsvp-options">
-                    <button type="button" class="rsvp-option-btn active" onclick="setRsvpStatus(this, 'حضور دارم')">با افتخار می‌آیم ✨</button>
-                    <button type="button" class="rsvp-option-btn" onclick="setRsvpStatus(this, 'متاسفانه نمی‌توانم')">امکان حضور ندارم 🌸</button>
-                  </div>
-                  <input type="hidden" id="rsvpStatus" value="حضور دارم">
-                </div>
-
-                <div class="rsvp-form-group">
-                  <label class="rsvp-label" for="rsvpCount">تعداد همراهان:</label>
-                  <input type="number" id="rsvpCount" class="rsvp-input" min="1" max="10" value="1" required>
-                </div>
-
-                <button type="submit" class="rsvp-submit-btn">ثبت پاسخ</button>
-              </form>
-            </div>
-
-            <div id🎉 پاسخ شما با موفقیتrsvp-success-msg">
-              🎉 پاسخ شما با موفقیت ثبت شد.<br>از لطف و توجه شما بسیار سپاسگزاریم!
-            </div>
-          </div>
-
     </section>
 
 
@@ -2064,6 +1876,7 @@ visibility 0.45s ease;
     </div>
   </div>
 </div>
+
 
 
   <script>
@@ -2623,29 +2436,6 @@ if (miniMapTrigger && navModal) {
 }
 
 
-
-
-  // منطق فرم اعلام حضور (RSVP)
-  function setRsvpStatus(btn, status) {
-    document.querySelectorAll('.rsvp-option-btn').forEach(function (b) { b.classList.remove('active'); });
-    btn.classList.add('active');
-    var statusInput = document.getElementById('rsvpStatus');
-    if (statusInput) statusInput.value = status;
-  }
-
-  function handleRsvpSubmit(e) {
-    e.preventDefault();
-    var name = document.getElementById('rsvpName').value.trim();
-    var status = document.getElementById('rsvpStatus').value;
-    if (!name) return;
-
-    var formContainer = document.getElementById('rsvpFormContainer');
-    var successMsg = document.getElementById('rsvpSuccessMsg');
-    if (formContainer && successMsg) {
-      formContainer.style.display = 'none';
-      successMsg.style.display = 'block';
-    }
-  }
 
   </script>
 </body>
