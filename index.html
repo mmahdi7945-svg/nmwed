@@ -1456,6 +1456,39 @@ body {
   height: 32px;
   object-fit: contain;
 }
+/* اصلاح رندر ۳D و متن‌های سکشن ۱ برای سافاری و iOS */
+.hero-flip-card {
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -webkit-perspective: 1000px;
+  perspective: 1000px;
+}
+
+.hero-front,
+.hero-back {
+  -webkit-backface-visibility: hidden !important;
+  backface-visibility: hidden !important;
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+
+.hero-front {
+  z-index: 2;
+  transform: rotateY(0deg);
+}
+
+.hero-back {
+  transform: rotateY(180deg);
+}
+
+.hero-flip-card.flipped .hero-front {
+  transform: rotateY(180deg);
+}
+
+.hero-flip-card.flipped .hero-back {
+  transform: rotateY(360deg);
+  z-index: 3;
+}
 
   </style>  <!-- این تگ حتماً باید اینجا بسته بشه -->
 
@@ -1490,22 +1523,20 @@ body {
   </div>
 
   <div class="white-overlay" id="whiteOverlay"></div>
-<div class="intro-screen" id="introScreen">
-  <video
-    class="intro-video"
-    id="introVideo"
-    
-    muted
-    playsinline
-    src="intro-video.mp4">
-  </video>
 
-  <div class="intro-screen" id="introScreen">
-  <video class="intro-video" id="introVideo" muted playsinline preload="auto">
+<div class="intro-screen" id="introScreen">
+  <video 
+    class="intro-video" 
+    id="introVideo" 
+    muted 
+    playsinline 
+    webkit-playsinline 
+    preload="auto">
     <source src="intro-video.mp4" type="video/mp4" />
   </video>
   <div class="intro-hint" id="introHint">برای مشاهده ویدیو کلیک کنید</div>
 </div>
+
 
   <div class="intro-hint">برای ورود کلیک کنید</div>
 </div>
@@ -1752,41 +1783,54 @@ const musicYesBtn = document.getElementById('musicYesBtn');
 const musicNoBtn = document.getElementById('musicNoBtn');
 const scrollHintWrap = document.getElementById('scrollHintWrap');
 
-let hasStartedPlaying = false; // وضعیت: آیا ویدیو شروع به پخش کرده یا نه؟
+let hasStartedPlaying = false;
 
 function start() {
+  if (!introScreen || introScreen.style.display === 'none') return;
+  
   whiteOverlay.classList.add('active');
   setTimeout(() => {
     introScreen.style.display = 'none';
     websiteContent.classList.add('revealed');
+    
+    // اصلاح اسکرول برای iOS و مرورگرها
+    websiteContent.scrollTop = 0;
     window.scrollTo(0, 0);
+    
     setTimeout(() => {
       whiteOverlay.classList.remove('active');
-      musicModal.classList.add('show');
-      if (scrollHintWrap) {
-        scrollHintWrap.classList.add('active');
-      }
+      if (musicModal) musicModal.classList.add('show');
+      if (scrollHintWrap) scrollHintWrap.classList.add('active');
     }, 100);
   }, 600);
 }
 
-// مدیریت دو بار تپ/کلیک روی اینترو
-introScreen.addEventListener('click', function () {
-  if (!hasStartedPlaying) {
-    // تپ اول: پخش ویدیو
-    introVideo.play();
-    hasStartedPlaying = true;
-    if (introHint) {
-      introHint.textContent = 'برای ورود به سایت کلیک کنید';
+// مدیریت کلیک دو مرحله‌ای
+if (introScreen && introVideo) {
+  introScreen.addEventListener('click', function () {
+    if (!hasStartedPlaying) {
+      // کلیک اول: اجرای ویدیو
+      introVideo.play().then(() => {
+        hasStartedPlaying = true;
+        if (introHint) {
+          introHint.textContent = 'برای ورود به سایت کلیک کنید';
+        }
+      }).catch(err => {
+        // در صورت مسدود بودن ویدیو توسط مرورگر با کلیک اول وارد شود
+        start();
+      });
+    } else {
+      // کلیک دوم: ورود به سایت
+      start();
     }
-  } else {
-    // تپ دوم: ورود به سایت
-    start();
-  }
-});
+  });
 
-// اگر ویدیو تا انتها پخش شد و کاربر کلیک نکرد، خودکار وارد سایت شود
-introVideo.addEventListener('ended', start);
+  // اگر ویدیو تا انتها پخش شد و کاربر کلیک نکرد
+  introVideo.addEventListener('ended', function() {
+    start();
+  });
+}
+
 
 
 
