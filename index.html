@@ -705,10 +705,9 @@ body {
    دکمه راهنمای ========================================= */
 
 .scroll-hint-wrap {
- حذف کنید. نسخه درست:
-```css
-.scroll-hint-wrap {
- 0;
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
   bottom: 32px;
   z-index: 90;
 
@@ -879,9 +878,9 @@ visibility 0.45s ease;
 .section-three .cd-box,
 .section-three .map-card-wrapper {
   opacity: 0;
-  transform: translateY(24px) scale(0.24px) scale(0.96);
+  transform: translateY(24px) scale(0.96);
   transition:
-    opacity 0.75s, 1, 0.3, 1),
+    opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
     transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
 }
@@ -1543,7 +1542,6 @@ visibility 0.45s ease;
   object-fit: contain;
 }
 
-  }
 /* سازگاری نهایی با آیفون و Safari */
 
 .intro-screen {
@@ -1874,11 +1872,6 @@ function start() {
   if (window.isStarted) return;
   window.isStarted = true;
 
-  const introScreen = document.getElementById('introScreen');
-  const introVideo = document.getElementById('introVideo');
-  const websiteContent = document.getElementById('websiteContent');
-  const musicModal = document.getElementById('musicModal');
-
   if (introVideo) {
     introVideo.pause();
   }
@@ -1897,14 +1890,11 @@ function start() {
 
   // نمایش مودال موسیقی در صورت وجود
   if (musicModal) {
-    musicModal.style.display = 'flex';
+    musicModal.classList.add('show');
   }
 }
 
 // هندلر کلیک اینترو
-const introScreen = document.getElementById('introScreen');
-const introVideo = document.getElementById('introVideo');
-
 if (introScreen && introVideo) {
   let hasTapped = false;
   
@@ -1995,7 +1985,7 @@ if (window.DeviceOrientationEvent) {
 }
 const scrollHintBtn = document.getElementById('scrollHintBtn');
 
-scrollHintBtn.addEventListener('click', () => {
+if (scrollHintBtn && websiteContent) scrollHintBtn.addEventListener('click', () => {
   const sections = [
     ...document.querySelectorAll('.scroll-section')
   ];
@@ -2052,14 +2042,10 @@ const heroFlipCard = document.getElementById('heroFlipCard');
 const heroFront = document.getElementById('heroFront');
 const scratchArea = document.getElementById('scratchArea');
 const scratchCanvas = document.getElementById('scratchCanvas');
-if (scratchCanvas) {
-  const scratchContext = scratchCanvas.getContext('2d', { willReadFrequently: false });
-  // ادامه کدهای مربوط به اسکرچ کارت...
-}
 
-const scratchContext = scratchCanvas.getContext('2d', {
-  willReadFrequently: false
-});
+const scratchContext = scratchCanvas
+  ? scratchCanvas.getContext('2d', { willReadFrequently: false })
+  : null;
 
 let scratchInitialized = false;
 let scratchCompleted = false;
@@ -2170,7 +2156,7 @@ function flipHeroCard() {
   window.setTimeout(initializeScratchCanvas, 350);
 }
 
-heroFront.addEventListener('click', flipHeroCard);
+if (heroFront && heroFlipCard) heroFront.addEventListener('click', flipHeroCard);
 
 heroFront.addEventListener('keydown', (event) => {
   if (event.key === 'Enter' || event.key === ' ') {
@@ -2292,7 +2278,7 @@ function completeScratchReveal() {
   scratchCanvas.setAttribute('aria-hidden', 'true');
 }
 
-scratchCanvas.addEventListener('pointerdown', (event) => {
+if (scratchCanvas) scratchCanvas.addEventListener('pointerdown', (event) => {
   if (!scratchInitialized || scratchCompleted) {
     return;
   }
@@ -2333,9 +2319,9 @@ function stopScratching(event) {
   }
 }
 
-scratchCanvas.addEventListener('pointerup', stopScratching);
-scratchCanvas.addEventListener('pointercancel', stopScratching);
-scratchCanvas.addEventListener('lostpointercapture', () => {
+if (scratchCanvas) scratchCanvas.addEventListener('pointerup', stopScratching);
+if (scratchCanvas) scratchCanvas.addEventListener('pointercancel', stopScratching);
+if (scratchCanvas) scratchCanvas.addEventListener('lostpointercapture', () => {
   isScratching = false;
   previousPoint = null;
 });
