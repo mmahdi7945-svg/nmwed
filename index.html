@@ -13,7 +13,32 @@
     /* صفحه اینترو */
     .intro-screen { position: fixed; inset: 0; z-index: 50; background: #000; cursor: pointer; display: flex; align-items: center; justify-content: center; }
     .intro-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-    .intro-hint { position: absolute; bottom: 40px; padding: 10px 22px; border-radius: 999px; background: rgba(0,0,0,0.45); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.18); pointer-events: none; }
+    .intro-hint {
+  position: absolute;
+  left: 50%;
+  bottom: max(28px, env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+
+  display: block;
+  width: max-content;
+  max-width: calc(100% - 40px);
+
+  padding: 10px 18px;
+  border-radius: 999px;
+
+  color: #ffffff;
+  background: rgba(0, 0, 0, 0.48);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+
+  font-size: 14px;
+  line-height: 1.6;
+  text-align: center;
+  white-space: nowrap;
+
+  pointer-events: none;
+  z-index: 2;
+}
+
 
     /* ترنزیشن */
     .white-overlay { position: fixed; inset: 0; background: #ffffff; z-index: 100; opacity: 0; pointer-events: none; transition: opacity 0.6s; }
@@ -680,10 +705,10 @@ body {
    دکمه راهنمای ========================================= */
 
 .scroll-hint-wrap {
-  position: fixed;
-  left: fixed;
-  left: 0;
-  right: 0;
+ حذف کنید. نسخه درست:
+```css
+.scroll-hint-wrap {
+ 0;
   bottom: 32px;
   z-index: 90;
 
@@ -696,9 +721,10 @@ body {
   visibility: hidden;
 
   transition:
-    opacity 0.45s ease,
-    visibility 0.45s ease;
+opacity 0.45s ease,
+visibility 0.45s ease;
 }
+
 
 .scroll-hint-wrap.active {
   opacity: 1;
@@ -851,13 +877,15 @@ body {
 /* وضعیت اولیه (مخفی بودن قبل از اسکرول) */
 .section-three .countdown-title,
 .section-three .cd-box,
-.section-three 
+.section-three .map-card-wrapper {
   opacity: 0;
-  transform: translateY(24px) scale(0.96);
-  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(24px) scale(0.24px) scale(0.96);
+  transition:
+    opacity 0.75s, 1, 0.3, 1),
+    transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
 }
+
 
 /* ۱. اول عنوان وارد می‌شود */
 .section-three.visible .countdown-title {
@@ -895,8 +923,9 @@ body {
   transition-delay: 0.72s;
 }
 
+
 /* =========================================
-   کارت فلیپ و عکس خراشیدنی سکشن اول
+   کارت فلیپ سکشن اول - نسخه سازگار با iOS
    ========================================= */
 
 .hero-flip-card {
@@ -904,34 +933,94 @@ body {
   width: min(82vw, 330px);
   height: min(66vh, 455px);
   max-height: 455px;
+
   perspective: 1300px;
+  -webkit-perspective: 1300px;
+
   z-index: 3;
+  overflow: hidden;
 }
 
 .hero-flip-inner {
   position: relative;
   width: 100%;
   height: 100%;
+
   transform-style: preserve-3d;
-  transition:
-    transform 1s cubic-bezier(0.16, 1, 0.3, 1),
-    filter 0.7s ease;
+  -webkit-transform-style: preserve-3d;
+
+  transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+
   will-change: transform;
 }
 
 .hero-flip-card.flipped .hero-flip-inner {
   transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
 }
 
 .hero-face {
   position: absolute;
   inset: 0;
+
   width: 100%;
   height: 100%;
+
+  /*
+   * این ویژگی فقط روی خود وجه‌ها کافی است.
+   * preserve-3d را روی hero-face قرار ندهید.
+   */
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
-  transform-style: preserve-3d;
+
+  overflow: hidden;
 }
+
+/* روی کارت نوشته‌ها */
+.hero-front {
+  display: flex;
+  width: 100%;
+  height: 100%;
+
+  cursor: pointer;
+  outline: none;
+
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+
+  transform: rotateY(0deg);
+  -webkit-transform: rotateY(0deg);
+}
+
+/* سمت عکس */
+.hero-back {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+}
+
+/*
+ * در حالت فلیپ، وجه نوشته‌ها کاملاً غیرفعال شود
+ * تا حروف آینه‌ای یا باقی‌مانده دیده نشوند.
+ */
+.hero-flip-card.flipped .hero-front {
+  pointer-events: none;
+}
+
+.hero-flip-card.flipped .hero-back {
+  pointer-events: auto;
+}
+
+/*
+ * جلوگیری از اعمال transform اضافی روی خود front
+ */
+.hero-front:active {
+  opacity: 0.94;
+}
+
 
 /* سمت نوشته‌ها */
 .hero-front {
@@ -949,10 +1038,7 @@ body {
   outline-offset: 8px;
 }
 
-/* هنگام لمس، نوشته‌ها کمی به عقب می‌روند */
-.hero-front:active {
-  transform: scale(0.985);
-}
+
 
 /* سمت عکس */
 .hero-back {
@@ -1456,45 +1542,50 @@ body {
   height: 32px;
   object-fit: contain;
 }
-  /* رفع تداخل فلیپ و پایداری در Safari و آیفون */
-  .hero-flip-card {
-    perspective: 1200px;
-    -webkit-perspective: 1200px;
-  }
 
-  .hero-flip-inner {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    transform-style: preserve-3d;
-    -webkit-transform-style: preserve-3d;
-    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
   }
+/* سازگاری نهایی با آیفون و Safari */
 
-  .hero-flip-card.flipped .hero-flip-inner {
-    transform: rotateY(180deg);
-    -webkit-transform: rotateY(180deg);
-  }
+.intro-screen {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
 
-  .hero-front,
-  .hero-back {
-    position: absolute;
-    inset: 0;
-    -webkit-backface-visibility: hidden !important;
-    backface-visibility: hidden !important;
-    transform: translate3d(0, 0, 0);
-    -webkit-transform: translate3d(0, 0, 0);
-  }
+  overflow: hidden;
+  z-index: 50;
+  background: #000;
+}
 
-  .hero-front {
-    z-index: 2;
-  }
+.intro-video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
 
-  .hero-back {
-    transform: rotateY(180deg);
-    -webkit-transform: rotateY(180deg);
-    z-index: 1;
-  }
+.hero-flip-inner {
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+
+.hero-face {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.hero-back {
+  -webkit-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+}
+
+.hero-flip-card.flipped .hero-flip-inner {
+  -webkit-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+}
+
 
   </style>  <!-- این تگ حتماً باید اینجا بسته بشه -->
 
@@ -1528,25 +1619,10 @@ body {
     </div>
   </div>
 
-   <div class="white-overlay" id="whiteOverlay"></div>
-
-  <div class="intro-screen" id="introScreen">
-    <video
-      class="intro-video"
-      id="introVideo"
-      muted
-      playsinline
-      webkit-playsinline
-      preload="auto">
-      <source src="intro-video.mp4" type="video/mp4" />
-    </video>
-    <div class="intro-hint" id="introHint">برای مشاهده ویدیو ضربه بزنید</div>
-  </div>
+  <div class="white-overlay" id="whiteOverlay"></div>
 
 
-
-  <div class="intro-hint">برای ورود کلیک کنید</div>
-</div>
+      
 
 <div class="scroll-hint-wrap" id="scrollHintWrap">
   <button class="scroll-hint-pill" id="scrollHintBtn" type="button">
@@ -1790,63 +1866,87 @@ const musicYesBtn = document.getElementById('musicYesBtn');
 const musicNoBtn = document.getElementById('musicNoBtn');
 const scrollHintWrap = document.getElementById('scrollHintWrap');
 
-  let hasStartedPlaying = false;
+ let introStarted = false;
+let introFinished = false;
 
-  function start() {
-    if (!introScreen || introScreen.style.display === 'none') return;
-    
-    if (introVideo) {
-      introVideo.pause();
-    }
-    
+function start() {
+  if (introFinished) return;
+  if (!introScreen || introScreen.style.display === 'none') return;
+
+  introFinished = true;
+
+  if (introVideo) {
+    introVideo.pause();
+    introVideo.currentTime = 0;
+  }
+
+  if (whiteOverlay) {
     whiteOverlay.classList.add('active');
-    setTimeout(() => {
+  }
+
+  setTimeout(function () {
+    if (introScreen) {
       introScreen.style.display = 'none';
+      introScreen.setAttribute('aria-hidden', 'true');
+    }
+
+    if (websiteContent) {
       websiteContent.classList.add('revealed');
       websiteContent.scrollTop = 0;
-      window.scrollTo(0, 0);
+    }
 
-      setTimeout(() => {
+    window.scrollTo(0, 0);
+
+    setTimeout(function () {
+      if (whiteOverlay) {
         whiteOverlay.classList.remove('active');
-        if (musicModal) musicModal.classList.add('show');
-        if (scrollHintWrap) scrollHintWrap.classList.add('active');
-      }, 100);
-    }, 600);
-  }
-
-  // مدیریت کلیک دو مرحله‌ای روی صفحه ویدیو
-  if (introScreen && introVideo) {
-    introScreen.addEventListener('click', function () {
-      if (!hasStartedPlaying) {
-        // تپ اول: پخش ویدیو
-        introVideo.play().then(() => {
-          hasStartedPlaying = true;
-          if (introHint) {
-            introHint.textContent = 'برای ورود به کارت دعوت ضربه بزنید';
-          }
-        }).catch(err => {
-          // اگر مرورگر جلوی پخش را گرفت، مستقیماً وارد شود
-          start();
-        });
-      } else {
-        // تپ دوم: ورود به سایت
-        start();
       }
-    });
 
-    // اگر ویدیو تا آخر پخش شد و کاربر کلیک نکرد
-    introVideo.addEventListener('ended', function () {
-      start();
-    });
-  }
+      if (musicModal) {
+        musicModal.classList.add('show');
+      }
+
+      if (scrollHintWrap) {
+        scrollHintWrap.classList.add('active');
+      }
+    }, 100);
+  }, 600);
+}
+
+if (introScreen && introVideo) {
+  /*
+   * فقط یک تپ:
+   * - ویدیو را پخش می‌کند
+   * - وارد سایت نمی‌شود
+   */
+  introScreen.addEventListener('click', function (event) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    if (introStarted || introFinished) return;
+
+    introStarted = true;
+
+    var playPromise = introVideo.play();
+
+    if (playPromise && typeof playPromise.catch === 'function') {
+      playPromise.catch(function (error) {
+        console.warn('Intro video could not play:', error);
+        introStarted = false;
+      });
+    }
+  });
+
+  /*
+   * فقط پایان ویدیو وارد سایت می‌شود.
+   */
+  introVideo.addEventListener('ended', function () {
+    start();
+  });
+}
 
 
-
-
-
-
-    introScreen.addEventListener('click', start);
-    introVideo.addEventListener('ended', start);
+   
     musicYesBtn.addEventListener('click', () => {
       bgMusic.play().catch(() => {});
       musicModal.classList.remove('show');
