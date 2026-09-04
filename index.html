@@ -1601,6 +1601,13 @@ visibility 0.45s ease;
     <div class="pearl pearl-8" data-speed="-1.0"></div>
     <div class="pearl pearl-9" data-speed="2.0"></div>
   </div>
+<!-- اینترو ویدیو (Splash Screen) -->
+<div class="intro-screen" id="introScreen">
+  <video class="intro-video" id="introVideo" muted playsinline webkit-playsinline preload="auto">
+    <source src="intro-video.mp4" type="video/mp4" />
+  </video>
+  <div class="intro-hint" id="introHint">برای ورود لمس کنید</div>
+</div>
 
   <!-- بقیه سکشن‌ها و محتوای سایت شما از اینجا به بعد ادامه دارد -->
   <!-- فایل صوتی -->
@@ -1869,30 +1876,29 @@ let introFinished = false;
 
 // --- تابع شروع و نمایش سایت با امنیت کامل ---
 function start() {
-  if (window.isStarted) return;
-  window.isStarted = true;
-
-  if (introVideo) {
-    introVideo.pause();
-  }
-
+  if (hasStarted) return;
+  hasStarted = true;
+  
+  // پنهان کردن صفحه اینترو
   if (introScreen) {
     introScreen.style.opacity = '0';
     introScreen.style.pointerEvents = 'none';
     setTimeout(() => {
       introScreen.style.display = 'none';
-    }, 600);
+    }, 500);
+  }
+  
+  // فعال و نمایان شدن دکمه شیشه‌ای اسکرول
+  if (scrollHintWrap) {
+    scrollHintWrap.classList.add('active');
   }
 
-  if (websiteContent) {
-    websiteContent.classList.add('revealed');
-  }
-
-  // نمایش مودال موسیقی در صورت وجود
+  // نمایش مودال تایید پخش موزیک
   if (musicModal) {
     musicModal.classList.add('show');
   }
 }
+
 
 // هندلر کلیک اینترو
 if (introScreen && introVideo) {
