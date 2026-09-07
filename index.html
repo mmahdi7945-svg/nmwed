@@ -2743,31 +2743,31 @@ document.addEventListener('DOMContentLoaded', function () {
     const lightboxImg = document.getElementById('lightboxImg');
     const lightboxClose = document.getElementById('lightboxClose');
 
-    // پیدا کردن تمام عکس‌های موجود در کارت‌های پولاروید سکشن دوم
-    const polaroidImages = document.querySelectorAll('.polaroid-frame img, .story-photo');
+    // تصاویر مشخص با نام فایل‌ها
+    const targetImages = document.querySelectorAll('img[src$="story-photo-1.jpg"], img[src$="story-photo-3.jpg"]');
 
-    polaroidImages.forEach(img => {
-        img.addEventListener('click', function (e) {
-            e.stopPropagation();
+    targetImages.forEach(img => {
+        img.style.cursor = 'pointer';
+        img.addEventListener('click', function () {
             lightboxImg.src = this.src;
             lightbox.classList.add('active');
         });
     });
 
-    // بستن با زدن دکمه ضربدر
     if (lightboxClose) {
-        lightboxClose.addEventListener('click', function () {
+        lightboxClose.addEventListener('click', function (e) {
+            e.stopPropagation();
             lightbox.classList.remove('active');
         });
     }
 
-    // بستن با لمس فضای خالی شیشه‌ای دور عکس
     if (lightbox) {
         lightbox.addEventListener('click', function () {
             lightbox.classList.remove('active');
         });
     }
 });
+
 
 
   </script>
