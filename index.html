@@ -151,7 +151,28 @@
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+  font-family: "Bell MT Custom";
 
+  src: url("https://raw.githubusercontent.com/mmahdi7945-svg/nmwed/main/BellMT.ttf")
+    format("truetype");
+
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Edwardian Script ITC Custom";
+
+  src: url("https://raw.githubusercontent.com/mmahdi7945-svg/nmwed/main/EdwardianScriptITC.ttf")
+    format("truetype");
+
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+ل
 @font-face {
   font-family: 'EdwardianScript';
   src: url('./edwardianscriptitc.ttf') format('truetype');
@@ -187,18 +208,27 @@
   src: local('BiondiSansW00-ExtraLight'), local('Biondi Sans'), local('Eras Light ITC'), sans-serif;
   font-weight: 200;
 }
-/* ساختار کلی سکشن ۱ */
+
+/* سکشن اول */
 .hero-section {
   position: relative;
   width: 100%;
-  height: 100dvh;
-  background-color: transparent;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-sizing: border-box;
+  min-height: 100svh;
   overflow: hidden;
-  z-index: 2;
+  background: #ffffff;
+  color: #000000;
+}
+
+/*
+  بوم طراحی با نسبت 736 × 1104
+*/
+.hero-section .hero-content,
+.hero-section .hero-inner,
+.hero-section .hero-design {
+  position: relative;
+  width: min(100vw, calc(100svh * 736 / 1104));
+  aspect-ratio: 736 / 1104;
+  margin: 0 auto;
 }
 
 /* باکس اصلی محتوای متنی */
@@ -228,74 +258,128 @@
 
 
 
-/* بلوک نام‌ها */
+/* ظرف نام‌ها */
 .hero-names-block {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  position: relative;
   width: 100%;
+  height: 100%;
 }
-
-/* استایل کلمات انگلیسی با فونت جورجیا */
 .hero-name-row {
-  font-family: 'GeorgiaCustom', Georgia, serif;
-  font-size: 50.42px;
+  position: absolute;
+
   color: #000000;
-  line-height: 1.05;
+
+  font-family:
+    "Bell MT Custom",
+    "Bell MT",
+    serif;
+
+  font-size: 79pt;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1;
+
   letter-spacing: 0;
-  margin: 0;
-  font-weight: normal;
-}
-
-/* تورفتگی Mahdi طبق تصویر برای قرارگیری زیر O تا m کلمه Mohammad */
-.hero-name-mahdi {
-  align-self: center;
-  padding-left: 0;
-  transform: translateX(-12px);
-}
-
-
-
-/* کلمه And با فونت دست‌نویس */
-.hero-and-narges-row {
-  display: flex;
-  flex-direction: row;
-  direction: ltr;
-  align-items: baseline;
-  justify-content: flex-start;
-  margin-top: 2px;
-}
-/* کلمه And با فونت دست‌نویس */
-.hero-and-script {
-  display: inline-block;
-  flex-shrink: 0;
-  font-family: 'EdwardianScript', cursive;
-  font-size: 58px;
-  font-weight: normal;
-  line-height: 0.8;
-  letter-spacing: 0;
-  color: #000000;
-  margin-right: 12px;
-}
-
-
-/* تاریخ جاستیفای شده در خط آخر */
-.hero-date-row {
-  font-family: 'ISOCTEUR', monospace;
-  font-size: 15.8px;
-  color: #424242;
-  letter-spacing: 1.24em;
-  text-indent: 1.24em;
-  margin-top: 18px;
-  width: 100%;
-  text-align: center;
   white-space: nowrap;
-  direction: ltr;
+}
+/* Narges */
+.hero-name-narges {
+  left: calc(418.83 / 736 * 100%);
+  top: calc(479.39 / 1104 * 100%);
 
-  /* انتقال تاریخ به سمت راست */
-  transform: translateX(22px);
+  transform 100%);
+
+  transform: translate(-50%, -50%);
 }
 
+/* Mahdi {
+  left: calc(460.42 / 736 * 100%);
+  top: calc(573.39 / 1104 * 100%);
+
+  transform: translate(-50%, -50%);
+}
+
+/* And */
+.hero-and-script {
+  position: absolute;
+
+  left: calc(299.03 / 736 * 100%);
+  top: calc(571.08 / 1104 * 100%);
+
+  transform: translate(-50%, -50%);
+
+  color: #000000;
+
+  font-family:
+    "Edwardian Script ITC Custom",
+    "Edwardian Script ITC",
+    cursive;
+
+  font-size: 32pt;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1;
+
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+/* تاریخ */
+.hero-date-row {
+  position: absolute;
+
+  left: calc(428.41 / 736 * 100%);
+  top: calc(636.82 / 1104 * 100%);
+
+  transform: translate(-50%, -50%);
+
+  color: #000000;
+
+  font-family:
+    "Edwardian Script ITC Custom",
+    "Edwardian Script ITC",
+    cursive;
+
+  font-size: 23.53pt;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1;
+
+  /*
+    tracking برابر 640 در نرم‌افزار طراحی
+    به صورت تقریبی معادل 0.64em در CSS است.
+  */
+  letter-spacing: 0.64em;
+
+  white-space: nowrap;
+  direction: rtl;
+  unicode-bidi: plaintext;
+}
+/* نمایش درست در صفحه‌های باریک */
+@media (max-width: 600px) {
+  .hero-section {
+    min-height: 100svh;
+  }
+
+  .hero-section .hero-content,
+  .hero-section .hero-inner,
+  .hero-section .hero-design {
+    width: 100vw;
+  }
+}
+
+
+/* نمایش درست در صفحه‌های بزرگ */
+@media (min-width: 737px) {
+  .hero-section .hero-content,
+  .hero-section .hero-inner,
+  .hero-section .hero-design {
+    width: min(
+      736px,
+      calc(100svh * 736 / 1104)
+    );
+  }
+}
 
 /* ساختار کلی سکشن ۲ مطابق مشخصات کانوا */
 .event-date-section {
@@ -1679,19 +1763,25 @@ visibility 0.45s ease;
         >
 
         <div class="hero-names-block">
-          <div class="hero-name-row">Mohammad</div>
 
-          <div class="hero-name-row hero-name-mahdi">
-            Mahdi
-          </div>
+  <div class="hero-name-row hero-name-narges">
+    Narges
+  </div>
 
-          <div class="hero-and-narges-row">
-            <span class="hero-and-script">And</span>
-            <span class="hero-name-row">Narges</span>
-          </div>
-        </div>
+  <div class="hero-name-row hero-name-mahdi">
+    Mahdi
+  </div>
 
-        <div class="hero-date-row">1405/07/24</div>
+  <div class="hero-and-script">
+    And
+  </div>
+
+</div>
+
+<div class="hero-date-row" dir="rtl">
+  <bdi>23.07.1405</bdi>
+</div>
+
       </div>
 
       <!-- وجه پشتی: عکس خراشیدنی -->
@@ -1821,6 +1911,31 @@ visibility 0.45s ease;
           </div>
 
         </div>
+<section class="hero-section">
+  <div class="hero-design">
+
+    <!-- خط تزئینی و سایر محتوای سکشن اینجا قرار می‌گیرند -->
+
+    <div class="hero-names-block">
+      <div class="hero-name-row hero-name-narges">
+        Narges
+      </div>
+
+      <div class="hero-name-row hero-name-mahdi">
+        Mahdi
+      </div>
+
+      <div class="hero-and-script">
+        And
+      </div>
+    </div>
+
+    <div class="hero-date-row" dir="rtl">
+      <bdi>23.07.1405</bdi>
+    </div>
+
+  </div>
+</section>
 
       <!-- در اینجا می‌توانید هر محتوای دیگری که برای این سکشن دارید قرار دهید -->
     </section>
