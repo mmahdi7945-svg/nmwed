@@ -1813,6 +1813,85 @@ visibility 0.45s ease;
   box-shadow: 0 6px 18px rgba(124, 100, 77, 0.4);
 }
 
+/* استایل پاپ‌آپ شیشه‌ای عکس */
+.image-lightbox-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    background: rgba(15, 23, 42, 0.65);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.image-lightbox-modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.lightbox-content-box {
+    position: relative;
+    max-width: 90vw;
+    max-height: 85vh;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 20px;
+    padding: 10px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(255, 255, 255, 0.1);
+    transform: scale(0.85);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-lightbox-modal.active .lightbox-content-box {
+    transform: scale(1);
+}
+
+.lightbox-content-box img {
+    max-width: 100%;
+    max-height: calc(85vh - 20px);
+    object-fit: contain;
+    border-radius: 14px;
+    display: block;
+}
+
+/* دکمه بستن پاپ‌آپ */
+.lightbox-close-btn {
+    position: absolute;
+    top: -12px;
+    right: -12px;
+    width: 36px;
+    height: 36px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
+    color: #fff;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    transition: all 0.2s;
+}
+
+.lightbox-close-btn:active {
+    transform: scale(0.9);
+}
+
+/* تغییر اشاره‌گر موس روی عکس‌های سکشن دوم */
+.polaroid-frame, .polaroid-frame img {
+    cursor: pointer;
+}
 
   </style>  <!-- این تگ حتماً باید اینجا بسته بشه -->
 
@@ -1999,6 +2078,14 @@ visibility 0.45s ease;
          <img src="story-photo-2.jpg" alt="عکس خاطره ۲">
        </div>
      </div>
+      <!-- لایت‌باکس شیشه‌ای بزرگ‌نمایی عکس -->
+<div id="imageLightbox" class="image-lightbox-modal">
+    <div class="lightbox-content-box" onclick="event.stopPropagation()">
+        <button type="button" class="lightbox-close-btn" id="lightboxClose">&times;</button>
+        <img id="lightboxImg" src="" alt="نمایش بزرگ عکس">
+    </div>
+</div>
+
    </section>
 
 
@@ -2650,6 +2737,37 @@ if (miniMapTrigger && navModal) {
   });
 }
 
+// فعال‌سازی بزرگ‌نمایی پاپ‌آپ شیشه‌ای برای عکس‌های سکشن دوم
+document.addEventListener('DOMContentLoaded', function () {
+    const lightbox = document.getElementById('imageLightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const lightboxClose = document.getElementById('lightboxClose');
+
+    // پیدا کردن تمام عکس‌های موجود در کارت‌های پولاروید سکشن دوم
+    const polaroidImages = document.querySelectorAll('.polaroid-frame img, .story-photo');
+
+    polaroidImages.forEach(img => {
+        img.addEventListener('click', function (e) {
+            e.stopPropagation();
+            lightboxImg.src = this.src;
+            lightbox.classList.add('active');
+        });
+    });
+
+    // بستن با زدن دکمه ضربدر
+    if (lightboxClose) {
+        lightboxClose.addEventListener('click', function () {
+            lightbox.classList.remove('active');
+        });
+    }
+
+    // بستن با لمس فضای خالی شیشه‌ای دور عکس
+    if (lightbox) {
+        lightbox.addEventListener('click', function () {
+            lightbox.classList.remove('active');
+        });
+    }
+});
 
 
   </script>
