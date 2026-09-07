@@ -2738,7 +2738,54 @@ if (miniMapTrigger && navModal) {
 }
 
 // فعال‌سازی بزرگ‌نمایی پاپ‌آپ شیشه‌ای برای عکس‌های سکشن دوم
+
 document.addEventListener('DOMContentLoaded', function () {
+    // ۱. پیدا کردن المان‌های پاپ‌آپ
+    const lightbox = document.getElementById('imageLightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const lightboxClose = document.getElementById('lightboxClose');
+
+    // ۲. پیدا کردن تمام عکس‌های سکشن دوم (بدون حساسیت به اسم یا کلاس)
+    // ما مستقیم سراغ سکشن دوم می‌رویم و تمام عکس‌های داخلش را برمی‌داریم
+    const allSections = document.getElementsByTagName('section');
+    let targetImages = [];
+
+    if (allSections.length >= 2) {
+        // سکشن دوم معمولاً ایندکس ۱ است
+        targetImages = allSections[1].getElementsByTagName('img');
+    } else {
+        // اگر سکشن‌بندی شما متفاوت بود، تمام عکس‌های صفحه را امتحان کن
+        targetImages = document.getElementsByTagName('img');
+    }
+
+    console.log("تعداد عکس‌های شناسایی شده:", targetImages.length);
+
+    // ۳. دادن قابلیت کلیک به تک‌تک عکس‌های پیدا شده
+    for (let i = 0; i < targetImages.length; i++) {
+        targetImages[i].addEventListener('click', function () {
+            console.log("یک عکس کلیک شد:", this.src); // برای تست در کنسول
+            lightboxImg.src = this.src; // آدرس عکس کلیک شده را به پاپ‌آپ بده
+            lightbox.classList.add('active'); // پاپ‌آپ را نشان بده
+        });
+    }
+
+    // ۴. بستن پاپ‌آپ با زدن دکمه ضربدر
+    if (lightboxClose) {
+        lightboxClose.addEventListener('click', function (e) {
+            e.stopPropagation();
+            lightbox.classList.remove('active');
+        });
+    }
+
+    // ۵. بستن پاپ‌آپ با کلیک روی فضای خالی دور عکس
+    if (lightbox) {
+        lightbox.addEventListener('click', function () {
+            lightbox.classList.remove('active');
+        });
+    }
+});
+</script>
+
     const lightbox = document.getElementById('imageLightbox');
     const lightboxImg = document.getElementById('lightboxImg');
     const lightboxClose = document.getElementById('lightboxClose');
