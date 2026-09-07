@@ -656,4 +656,32 @@
                     entry.target.classList.add('visible');
                     // If it's the hero section, start animations after a slight delay
                     if (entry.target.id === 'heroSection') {
-                        setTimeout(() => 
+                        setTimeout(() => {
+                            const elements = entry.target.querySelectorAll('.hero-swirl-divider, .hero-name-narges, .hero-and-narges-row, .hero-date-row');
+                            elements.forEach((el, index) => {
+                                el.style.transitionDelay = `${index * 0.15 + 0.1}s`; // Staggered delay
+                                el.style.opacity = '1';
+                                el.style.transform = 'translateY(0)';
+                            });
+                        }, 100); // Slight delay before starting hero animations
+                    }
+                }
+            });
+        }, { threshold: 0.5 }); // Trigger when 50% of the section is visible
+
+        const heroSection = document.getElementById('heroSection');
+        if (heroSection) {
+            observer.observe(heroSection);
+        }
+
+        // Ensure website content is revealed after initial load
+        document.addEventListener('DOMContentLoaded', () => {
+            const websiteContent = document.querySelector('.website-content');
+            if (websiteContent) {
+                websiteContent.classList.add('revealed');
+            }
+        });
+
+    </script>
+</body>
+</html>
