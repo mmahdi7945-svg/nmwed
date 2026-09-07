@@ -213,8 +213,18 @@
   font-style: normal;
   font-display: swap;
 }
-
-
+@font-face {
+      font-family: 'Yekan';
+      /* لینک مستقیم فایل فونت در گیت‌هاب (Raw) */
+      src: url('./Yekan.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+}
+   /* حالا یک کلاس می‌سازیم که هر جا خواستیم استفاده کنیم */
+.font-yekan {
+    font-family: 'MyYekan', Tahoma, sans-serif !important;
+}  
 /* =========================================
    ساختار اصلی سکشن ۱
 ========================================= */
@@ -474,7 +484,7 @@
 
 /* تیتر اصلی با فونت بی یکان */
 .title-main {
-  font-family: 'BYekan';
+  font-family: 'Yekan';
   font-size: 27px;
   font-weight: bold;
   color: #414141;
