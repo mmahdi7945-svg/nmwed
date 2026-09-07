@@ -6,57 +6,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>دعوت‌نامه نرگس و محمد مهدی</title>
-   <!-- Open Graph؛ برای تلگرام، ایتا، بله و بیشتر پیام‌رسان‌ها -->
-  <meta property="og:type" content="website">
-
-  <meta
-    property="og:title"
-    content="دعوت‌نامه  نرگس و مهدی"
-  >
-
-  <meta
-    property="og:description"
-    content="دعوت‌نامه مراسم نرگس و مهدی"
-  >
-
-  <meta
-    property="og:image"
-    content="https://mmahdi7945-svg.github.io/nmwed/preview.jpg"
-  >
-
-  <meta
-    property="og:url"
-    content="https://mmahdi7945-svg.github.io/nmwed/"
-  >
-
-  <meta property="og:site_name" content="نرگس و مهدی">
-
-  <!-- اندازه و نوع تصویر پیش‌نمایش -->
-  <meta property="og:image:type" content="image/jpeg">
-  <meta property="og:image:width" content="1200">
-  <meta property=" این اطلاعات هم استفاده می‌کنند -->
- ">
-
-  <!-- Twitter Card؛ بعضی سرویس‌ها از این اطلاعات هم استفاده می‌کنند -->
-  <meta name="twitter:card" content="summary_large_image">
-
-  <meta
-    name="twitter:title"
-    content="کارت دعوت مراسم نرگس و مهدی "
-  >
-
-  <meta
-    name="twitter:description"
-    content="دعوت‌نامه مراسم نرگس و مهدی"
-  >
-
-  <meta
-    name="twitter:image"
-    content="https://mmahdi7945-svg.github.io/nmwed/preview.jpg"
-  >
-
-  <!-- ادامه تگ‌های قبلی head -->
+  <title>دعوت‌نامه سینمایی</title>
   <style>
     
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -201,28 +151,7 @@
   font-weight: normal;
   font-style: normal;
 }
-@font-face {
-  font-family: "Bell MT Custom";
 
-  src: url("https://raw.githubusercontent.com/mmahdi7945-svg/nmwed/main/BellMT.ttf")
-    format("truetype");
-
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Edwardian Script ITC Custom";
-
-  src: url("https://raw.githubusercontent.com/mmahdi7945-svg/nmwed/main/EdwardianScriptITC.ttf")
-    format("truetype");
-
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-}
-ل
 @font-face {
   font-family: 'EdwardianScript';
   src: url('./edwardianscriptitc.ttf') format('truetype');
@@ -258,27 +187,18 @@
   src: local('BiondiSansW00-ExtraLight'), local('Biondi Sans'), local('Eras Light ITC'), sans-serif;
   font-weight: 200;
 }
-
-/* سکشن اول */
+/* ساختار کلی سکشن ۱ */
 .hero-section {
   position: relative;
   width: 100%;
-  min-height: 100svh;
+  height: 100dvh;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
   overflow: hidden;
-  background: #ffffff;
-  color: #000000;
-}
-
-/*
-  بوم طراحی با نسبت 736 × 1104
-*/
-.hero-section .hero-content,
-.hero-section .hero-inner,
-.hero-section .hero-design {
-  position: relative;
-  width: min(100vw, calc(100svh * 736 / 1104));
-  aspect-ratio: 736 / 1104;
-  margin: 0 auto;
+  z-index: 2;
 }
 
 /* باکس اصلی محتوای متنی */
@@ -308,128 +228,74 @@
 
 
 
-/* ظرف نام‌ها */
+/* بلوک نام‌ها */
 .hero-names-block {
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   width: 100%;
-  height: 100%;
 }
+
+/* استایل کلمات انگلیسی با فونت جورجیا */
 .hero-name-row {
-  position: absolute;
-
+  font-family: 'GeorgiaCustom', Georgia, serif;
+  font-size: 50.42px;
   color: #000000;
-
-  font-family:
-    "Bell MT Custom",
-    "Bell MT",
-    serif;
-
-  font-size: 79pt;
-  font-weight: 400;
-  font-style: normal;
-  line-height: 1;
-
+  line-height: 1.05;
   letter-spacing: 0;
-  white-space: nowrap;
-}
-/* Narges */
-.hero-name-narges {
-  left: calc(418.83 / 736 * 100%);
-  top: calc(479.39 / 1104 * 100%);
-
-  transform 100%);
-
-  transform: translate(-50%, -50%);
+  margin: 0;
+  font-weight: normal;
 }
 
-/* Mahdi {
-  left: calc(460.42 / 736 * 100%);
-  top: calc(573.39 / 1104 * 100%);
-
-  transform: translate(-50%, -50%);
+/* تورفتگی Mahdi طبق تصویر برای قرارگیری زیر O تا m کلمه Mohammad */
+.hero-name-mahdi {
+  align-self: center;
+  padding-left: 0;
+  transform: translateX(-12px);
 }
 
-/* And */
+
+
+/* کلمه And با فونت دست‌نویس */
+.hero-and-narges-row {
+  display: flex;
+  flex-direction: row;
+  direction: ltr;
+  align-items: baseline;
+  justify-content: flex-start;
+  margin-top: 2px;
+}
+/* کلمه And با فونت دست‌نویس */
 .hero-and-script {
-  position: absolute;
-
-  left: calc(299.03 / 736 * 100%);
-  top: calc(571.08 / 1104 * 100%);
-
-  transform: translate(-50%, -50%);
-
-  color: #000000;
-
-  font-family:
-    "Edwardian Script ITC Custom",
-    "Edwardian Script ITC",
-    cursive;
-
-  font-size: 32pt;
-  font-weight: 400;
-  font-style: normal;
-  line-height: 1;
-
+  display: inline-block;
+  flex-shrink: 0;
+  font-family: 'EdwardianScript', cursive;
+  font-size: 58px;
+  font-weight: normal;
+  line-height: 0.8;
   letter-spacing: 0;
-  white-space: nowrap;
-}
-
-/* تاریخ */
-.hero-date-row {
-  position: absolute;
-
-  left: calc(428.41 / 736 * 100%);
-  top: calc(636.82 / 1104 * 100%);
-
-  transform: translate(-50%, -50%);
-
   color: #000000;
+  margin-right: 12px;
+}
 
-  font-family:
-    "Edwardian Script ITC Custom",
-    "Edwardian Script ITC",
-    cursive;
 
-  font-size: 23.53pt;
-  font-weight: 400;
-  font-style: normal;
-  line-height: 1;
-
-  /*
-    tracking برابر 640 در نرم‌افزار طراحی
-    به صورت تقریبی معادل 0.64em در CSS است.
-  */
-  letter-spacing: 0.64em;
-
+/* تاریخ جاستیفای شده در خط آخر */
+.hero-date-row {
+  font-family: 'ISOCTEUR', monospace;
+  font-size: 15.8px;
+  color: #424242;
+  letter-spacing: 1.24em;
+  text-indent: 1.24em;
+  margin-top: 18px;
+  width: 100%;
+  text-align: center;
   white-space: nowrap;
-  direction: rtl;
-  unicode-bidi: plaintext;
-}
-/* نمایش درست در صفحه‌های باریک */
-@media (max-width: 600px) {
-  .hero-section {
-    min-height: 100svh;
-  }
+  direction: ltr;
 
-  .hero-section .hero-content,
-  .hero-section .hero-inner,
-  .hero-section .hero-design {
-    width: 100vw;
-  }
+  /* انتقال تاریخ به سمت راست */
+  transform: translateX(22px);
 }
 
-
-/* نمایش درست در صفحه‌های بزرگ */
-@media (min-width: 737px) {
-  .hero-section .hero-content,
-  .hero-section .hero-inner,
-  .hero-section .hero-design {
-    width: min(
-      736px,
-      calc(100svh * 736 / 1104)
-    );
-  }
-}
 
 /* ساختار کلی سکشن ۲ مطابق مشخصات کانوا */
 .event-date-section {
@@ -1738,197 +1604,6 @@ visibility 0.45s ease;
   box-shadow: 0 6px 18px rgba(124, 100, 77, 0.4);
 }
 
-/* =========================================
-   Text-based invitation — Flexbox only
-   ========================================= */
-
-section.scroll-section.nm-invitation {
-  position: relative;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  box-sizing: border-box;
-  width: 100%;
-  max-width: 100%;
-
-  /* Override the old shared 100vh fixed height */
-  height: auto;
-  min-height: 100vh;
-  min-height: 100svh;
-
-  padding: 32px 16px;
-
-  background: #fff;
-  color: #000;
-  text-align: center;
-  overflow: visible;
-}
-
-.nm-invitation,
-.nm-invitation * {
-  box-sizing: border-box;
-}
-
-/*
-  At a 736px-wide viewport:
-  1em = 16px.
-  All dimensions scale together on smaller phones.
-*/
-.nm-invitation .nm-invitation__design {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  width: 25em;
-  max-width: 100%;
-  min-width: 0;
-
-  margin: 0;
-  padding: 0;
-
-  font-size: clamp(8px, 2.173913vw, 16px);
-  color: #000;
-  direction: ltr;
-}
-
-.nm-invitation .nm-invitation__ornament {
-  display: block;
-  flex: 0 0 auto;
-
-  width: 16.625em;
-  max-width: 100%;
-  height: auto;
-
-  margin: 0 0 0.35em;
-  padding: 0;
-  border: 0;
-}
-
-/* Both name lines belong to one semantic heading */
-.nm-invitation .nm-invitation__names {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  width: 100%;
-  min-width: 0;
-
-  margin: 0;
-  padding: 0;
-
-  font-size: inherit;
-  font-weight: 400;
-  line-height: 1;
-}
-
-/* 79pt = approximately 105.333px at full scale */
-.nm-invitation .nm-invitation__narges,
-.nm-invitation .nm-invitation__mahdi {
-  display: block;
-  flex: 0 0 auto;
-
-  margin: 0;
-  padding: 0;
-
-  font-family: "Bell MT Custom", "Bell MT", serif;
-  font-size: 6.583333em;
-  font-style: italic;
-  font-weight: 400;
-
-  line-height: 1;
-  letter-spacing: 0;
-  text-transform: none;
-  white-space: nowrap;
-  color: #000;
-}
-
-.nm-invitation .nm-invitation__second-line {
-  display: flex;
-  flex-direction: row;
-  align-items: baseline;
-  justify-content: center;
-
-  gap: 0.45em;
-
-  max-width: 100%;
-  min-width: 0;
-
-  margin: 0;
-  padding: 0;
-
-  direction: ltr;
-}
-
-/* 32pt = approximately 42.667px at full scale */
-.nm-invitation .nm-invitation__and {
-  display: block;
-  flex: 0 0 auto;
-
-  margin: 0;
-  padding: 0;
-
-  font-family:
-    "Edwardian Script ITC Custom",
-    "Edwardian Script ITC",
-    cursive;
-
-  font-size: 2.666667em;
-  font-style: normal;
-  font-weight: 400;
-
-  line-height: 1;
-  letter-spacing: 0;
-  white-space: nowrap;
-  color: #000;
-}
-
-/* Date is arranged right-to-left by Flexbox */
-.nm-invitation .nm-invitation__date {
-  display: flex;
-  flex-direction: row;
-  align-items: baseline;
-  justify-content: center;
-
-  max-width: 100%;
-  margin: 0.3em 0 0;
-  padding: 0;
-
-  direction: rtl;
-
-  font-family:
-    "Edwardian Script ITC Custom",
-    "Edwardian Script ITC",
-    cursive;
-
-  /* 23.53pt = approximately 31.373px */
-  font-size: 1.960833em;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 1.5;
-
-  color: #000;
-  white-space: nowrap;
-}
-
-.nm-invitation .nm-invitation__date > span {
-  display: block;
-  flex: 0 0 auto;
-
-  /* Tracking 640 interpreted as 640/1000 em */
-  letter-spacing: 0.64em;
-
-  /* Compensate for spacing after the final character */
-  margin-inline-end: -0.64em;
-}
-
-.nm-invitation .nm-invitation__date {
-  gap: 0.64em;
-}
 
   </style>  <!-- این تگ حتماً باید اینجا بسته بشه -->
 
@@ -1985,50 +1660,81 @@ section.scroll-section.nm-invitation {
 
    
     <!-- سکشن ۱ -->
-<section
-  class="scroll-section nm-invitation"
-  aria-label="دعوت‌نامه عروسی نرگس و مهدی، ۲۳ مهر ۱۴۰۵"
+<section class="scroll-section hero-section">
+  <div class="hero-flip-card" id="heroFlipCard">
+    <div class="hero-flip-inner">
+
+      <!-- وجه جلویی: نوشته‌ها -->
+      <div
+        class="hero-face hero-front hero-content"
+        id="heroFront"
+        role="button"
+        tabindex="0"
+        aria-label="نمایش عکس"
+      >
+        <img
+          src="NM (1).png"
+          alt="خط تزئینی"
+          class="hero-swirl-divider"
+        >
+
+        <div class="hero-names-block">
+          <div class="hero-name-row">Mohammad</div>
+
+          <div class="hero-name-row hero-name-mahdi">
+            Mahdi
+          </div>
+
+          <div class="hero-and-narges-row">
+            <span class="hero-and-script">And</span>
+            <span class="hero-name-row">Narges</span>
+          </div>
+        </div>
+
+        <div class="hero-date-row">1405/07/24</div>
+      </div>
+
+      <!-- وجه پشتی: عکس خراشیدنی -->
+      <div class="hero-face hero-back">
+       <div
+  class="scratch-photo-frame"
+  id="scratchArea"
+  role="button"
+  tabindex="0"
+  aria-label="برای نمایش نشان، روی عکس کلیک کنید"
 >
-  <div class="nm-invitation__design" dir="ltr">
+  <img
+    src="hero-photo.jpg"
+    alt="عکس محمدمهدی و نرگس"
+    class="scratch-photo"
+    id="scratchPhoto"
+    draggable="false"
+  >
 
+  <!-- لایه فلش اولیه پس از پاک‌شدن پوشش -->
+  <div class="scratch-reveal-flash" aria-hidden="true"></div>
+
+  <!-- لایه شیشه‌ای که با کلیک روی عکس فعال می‌شود -->
+  <div class="photo-glass-layer" id="photoGlassLayer">
     <img
-      class="nm-invitation__ornament"
-      src="./NM%20(1).png"
-      alt=""
-      aria-hidden="true"
-      decoding="async"
--hidden="true"
-      decoding="async"
+      src="NOONMEEM.png"
+      alt="نشان دعوت‌نامه"
+      class="noonmeem-overlay"
     >
+  </div>
 
-    <h1 class="nmNarges and Mahdi">
+  <canvas
+    class="scratch-canvas"
+    id="scratchCanvas"
+    aria-label="پوشش عکس را با حرکت انگشت پاک کنید"
+  ></canvas>
+</div>
 
-      <span class="nm-invitation__narges">
-        Narges
-      </span>
+      </div>
 
-      <span class="nm-invitation__second-line">
-        <span class="nm-invitation__and">And</span>
-        <span class="nm-invitation__mahdi">Mahdi</span>
-      </span>
-
-    </h1>
-
-    <div
-      class="nm-invitation__date"
-      dir="rtl"
-      aria-label="۲۳ مهر ۱۴۰۵"
-    >
-      <span dir="ltr">23</span>
-      <span aria-hidden="true">.</span>
-      <span dir="ltr">07</span>
-      <span aria-hidden="true">.</span>
-      <span dir="ltr">1405</span>
     </div>
-
   </div>
 </section>
-
 
 
              <!-- سکشن دوم: موعد دیدار عشق ما -->
@@ -2115,31 +1821,6 @@ section.scroll-section.nm-invitation {
           </div>
 
         </div>
-<section class="hero-section">
-  <div class="hero-design">
-
-    <!-- خط تزئینی و سایر محتوای سکشن اینجا قرار می‌گیرند -->
-
-    <div class="hero-names-block">
-      <div class="hero-name-row hero-name-narges">
-        Narges
-      </div>
-
-      <div class="hero-name-row hero-name-mahdi">
-        Mahdi
-      </div>
-
-      <div class="hero-and-script">
-        And
-      </div>
-    </div>
-
-    <div class="hero-date-row" dir="rtl">
-      <bdi>23.07.1405</bdi>
-    </div>
-
-  </div>
-</section>
 
       <!-- در اینجا می‌توانید هر محتوای دیگری که برای این سکشن دارید قرار دهید -->
     </section>
