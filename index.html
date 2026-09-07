@@ -194,12 +194,16 @@
   opacity: 1;
   transform: translateY(0) scale(1);
 }
-    /* فونت‌های اختصاصی سکشن ۱ */
+/* =========================================
+   فونت‌های اختصاصی سکشن ۱
+========================================= */
+
 @font-face {
-  font-family: 'GeorgiaCustom';
-  src: url('./georgia.ttf') format('truetype');
+  font-family: 'BellMTCustom';
+  src: url('./BellMT.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -207,143 +211,239 @@
   src: url('./edwardianscriptitc.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
-}
-
-@font-face {
-  font-family: 'ISOCTEUR';
-  src: url('./isocteur.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-
- /* فونت‌ها */
-@font-face {
-  font-family: 'BYekan';
-  src: url('./BYekan.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
   font-display: swap;
 }
 
-@font-face {
-  font-family: 'BBTorsosPro';
-  src: local('BB Torsos Pro Regular'), local('BB Torsos Pro'),
-       url('https://fonts.gstatic.com/s/robotocondensed/v25/ieVi2ZhZI2eCN5jzbjEETS9weq8-19K7DQ.woff2') format('woff2');
-  font-weight: 400;
-}
 
-@font-face {
-  font-family: 'BiondiSans';
-  src: local('BiondiSansW00-ExtraLight'), local('Biondi Sans'), local('Eras Light ITC'), sans-serif;
-  font-weight: 200;
-}
-/* ساختار کلی سکشن ۱ */
+/* =========================================
+   ساختار اصلی سکشن ۱
+========================================= */
+
 .hero-section {
   position: relative;
   width: 100%;
   height: 100dvh;
-  background-color: transparent;
+
   display: flex;
-  justify-content: center;
   align-items: center;
-  box-sizing: border-box;
+  justify-content: center;
+
   overflow: hidden;
   z-index: 2;
 }
 
-/* باکس اصلی محتوای متنی */
-.hero-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+
+/* =========================================
+   محتوای جلوی کارت
+========================================= */
+
+.hero-front.hero-content {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  direction: ltr;
   text-align: left;
-  width: auto;
+
   user-select: none;
+
+  color: #000000;
 }
+
+
+/* =========================================
+   خط پیچ‌خورده بالا
+   NM (1).png
+========================================= */
 
 .hero-swirl-divider {
-  width: 140px;
+  position: absolute;
+
+  top: 74px;
+  left: 50%;
+
+  width: 280px;
   height: auto;
+
+  margin-left: -140px;
+
   object-fit: contain;
   display: block;
-  align-self: center;
 
-  /* فاصله کمتر از Mohammad */
-  margin-bottom: 5px;
-
-  /* کمی متمایل به راست */
-  transform: translateX(18px);
+  pointer-events: none;
 }
 
 
+/* =========================================
+   بلوک نام‌ها
+========================================= */
 
-/* بلوک نام‌ها */
 .hero-names-block {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  position: absolute;
+  inset: 0;
+
   width: 100%;
+  height: 100%;
+
+  display: block;
+
+  pointer-events: none;
 }
 
-/* استایل کلمات انگلیسی با فونت جورجیا */
+
+/* =========================================
+   Narges
+   Bell MT
+   79pt = 105.33px در CSS
+========================================= */
+
 .hero-name-row {
-  font-family: 'GeorgiaCustom', Georgia, serif;
-  font-size: 50.42px;
-  color: #000000;
-  line-height: 1.05;
-  letter-spacing: 0;
-  margin: 0;
+  font-family: 'BellMTCustom', serif;
+
+  font-size: 105.33px;
+
   font-weight: normal;
-}
+  font-style: normal;
 
-/* تورفتگی Mahdi طبق تصویر برای قرارگیری زیر O تا m کلمه Mohammad */
-.hero-name-mahdi {
-  align-self: center;
-  padding-left: 0;
-  transform: translateX(-12px);
-}
-
-
-
-/* کلمه And با فونت دست‌نویس */
-.hero-and-narges-row {
-  display: flex;
-  flex-direction: row;
-  direction: ltr;
-  align-items: baseline;
-  justify-content: flex-start;
-  margin-top: 2px;
-}
-/* کلمه And با فونت دست‌نویس */
-.hero-and-script {
-  display: inline-block;
-  flex-shrink: 0;
-  font-family: 'EdwardianScript', cursive;
-  font-size: 58px;
-  font-weight: normal;
-  line-height: 0.8;
-  letter-spacing: 0;
   color: #000000;
-  margin-right: 12px;
-}
 
+  letter-spacing: 0;
 
-/* تاریخ جاستیفای شده در خط آخر */
-.hero-date-row {
-  font-family: 'ISOCTEUR', monospace;
-  font-size: 15.8px;
-  color: #424242;
-  letter-spacing: 1.24em;
-  text-indent: 1.24em;
-  margin-top: 18px;
-  width: 100%;
-  text-align: center;
+  line-height: 0.82;
+
   white-space: nowrap;
+}
+
+
+.hero-name-narges {
+  position: absolute;
+
+  top: 116px;
+  left: 0;
+
+  width: 100%;
+
+  text-align: left;
+}
+
+
+/* =========================================
+   ردیف And + Mahdi
+========================================= */
+
+.hero-and-narges-row {
+  position: absolute;
+
+  top: 207px;
+  left: 0;
+
+  width: 100%;
+  height: 100px;
+
   direction: ltr;
 
-  /* انتقال تاریخ به سمت راست */
-  transform: translateX(22px);
+  display: block;
+}
+
+
+/* =========================================
+   Mahdi
+   Bell MT
+   79pt
+========================================= */
+
+.hero-name-mahdi {
+  position: absolute;
+
+  top: 0;
+  left: 56px;
+
+  font-family: 'BellMTCustom', serif;
+
+  font-size: 105.33px;
+
+  font-weight: normal;
+  font-style: normal;
+
+  color: #000000;
+
+  letter-spacing: 0;
+
+  line-height: 0.82;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================
+   And
+   Edwardian Script ITC
+   32pt = 42.67px
+========================================= */
+
+.hero-and-script {
+  position: absolute;
+
+  left: 2px;
+  top: 27px;
+
+  display: block;
+
+  font-family: 'EdwardianScript', cursive;
+
+  font-size: 42.67px;
+
+  font-weight: normal;
+  font-style: normal;
+
+  line-height: 1;
+
+  letter-spacing: 0;
+
+  color: #000000;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================
+   تاریخ
+   Edwardian Script ITC
+   23.53pt = 31.37px
+   Tracking 640 = 0.64em
+========================================= */
+
+.hero-date-row {
+  position: absolute;
+
+  top: 303px;
+  left: 0;
+
+  width: 100%;
+
+  font-family: 'EdwardianScript', cursive;
+
+  font-size: 31.37px;
+
+  font-weight: normal;
+  font-style: normal;
+
+  line-height: 1;
+
+  color: #000000;
+
+  letter-spacing: 0.64em;
+
+  text-indent: 0.64em;
+
+  text-align: center;
+
+  white-space: nowrap;
+
+  direction: ltr;
 }
 
 
@@ -589,52 +689,93 @@ body {
   background-color: transparent; /* بدون رنگ اضافه تا مرواریدهای پشت دیده شوند */
 }
 /* =========================================
-   انیمیشن‌های ورود و خروج سکشن ۱ (اصلاح شده و دقیق)
-   ========================================= */
+   انیمیشن ورود سکشن ۱
+   بدون تغییر سیستم Flip و Scroll
+========================================= */
+
 .hero-section .hero-swirl-divider,
-.hero-section .hero-names-block > .hero-name-row,
+.hero-section .hero-name-narges,
 .hero-section .hero-and-narges-row,
 .hero-section .hero-date-row {
   opacity: 0;
-  transform: translateY(25px);
-  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+
+  transition:
+    opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+
   will-change: opacity, transform;
 }
 
-/* ۱. ظاهر شدن خط تزئینی بالای صفحه */
+
+/* خط بالا */
+
+.hero-section .hero-swirl-divider {
+  transform: translateY(25px);
+}
+
+
+/* Narges */
+
+.hero-section .hero-name-narges {
+  transform: translateY(25px);
+}
+
+
+/* And + Mahdi */
+
+.hero-section .hero-and-narges-row {
+  transform: translateY(25px);
+}
+
+
+/* تاریخ */
+
+.hero-section .hero-date-row {
+  transform: translateY(25px);
+}
+
+
+/* ظاهر شدن خط */
+
 .hero-section.visible .hero-swirl-divider {
   opacity: 1;
-  transform: translateX(18px) translateY(0);
+
+  transform: translateY(0);
+
   transition-delay: 0.1s;
 }
 
-/* ۲. ظاهر شدن Mohammad */
-.hero-section.visible .hero-names-block > .hero-name-row:first-child {
+
+/* ظاهر شدن Narges */
+
+.hero-section.visible .hero-name-narges {
   opacity: 1;
+
   transform: translateY(0);
+
   transition-delay: 0.25s;
 }
 
-/* ۳. ظاهر شدن Mahdi */
-.hero-section.visible .hero-names-block > .hero-name-mahdi {
-  opacity: 1;
-  transform: translateX(-12px) translateY(0);
-  transition-delay: 0.4s;
-}
 
-/* ۴. ظاهر شدن کامل سطر And Narges */
+/* ظاهر شدن And + Mahdi */
+
 .hero-section.visible .hero-and-narges-row {
   opacity: 1;
+
   transform: translateY(0);
-  transition-delay: 0.55s;
+
+  transition-delay: 0.45s;
 }
 
-/* ۵. ظاهر شدن تاریخ */
+
+/* ظاهر شدن تاریخ */
+
 .hero-section.visible .hero-date-row {
   opacity: 1;
-  transform: translateX(22px) translateY(0);
-  transition-delay: 0.7s;
+
+  transform: translateY(0);
+
+  transition-delay: 0.65s;
 }
 /* =========================================
    استایل عنوان و تایمر شمارش معکوس
@@ -1714,35 +1855,39 @@ visibility 0.45s ease;
   <div class="hero-flip-card" id="heroFlipCard">
     <div class="hero-flip-inner">
 
-      <!-- وجه جلویی: نوشته‌ها -->
       <div
-        class="hero-face hero-front hero-content"
-        id="heroFront"
-        role="button"
-        tabindex="0"
-        aria-label="نمایش عکس"
-      >
-        <img
-          src="NM (1).png"
-          alt="خط تزئینی"
-          class="hero-swirl-divider"
-        >
+  class="hero-face hero-front hero-content"
+  id="heroFront"
+  role="button"
+  tabindex="0"
+  aria-label="نمایش عکس"
+>
+  <img
+    src="NM (1).png"
+    alt="خط تزئینی"
+    class="hero-swirl-divider"
+  >
 
-        <div class="hero-names-block">
-          <div class="hero-name-row">Mohammad</div>
+  <div class="hero-names-block">
 
-          <div class="hero-name-row hero-name-mahdi">
-            Mahdi
-          </div>
+    <div class="hero-name-row hero-name-narges">
+      Narges
+    </div>
 
-          <div class="hero-and-narges-row">
-            <span class="hero-and-script">And</span>
-            <span class="hero-name-row">Narges</span>
-          </div>
-        </div>
+    <div class="hero-and-narges-row">
+      <span class="hero-and-script">And</span>
 
-        <div class="hero-date-row">1405/07/24</div>
-      </div>
+      <span class="hero-name-row hero-name-mahdi">
+        Mahdi
+      </span>
+    </div>
+
+  </div>
+
+  <div class="hero-date-row">
+    1405.07.23
+  </div>
+</div>
 
       <!-- وجه پشتی: عکس خراشیدنی -->
       <div class="hero-face hero-back">
