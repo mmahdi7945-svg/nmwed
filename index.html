@@ -213,7 +213,18 @@
   font-style: normal;
   font-display: swap;
 }
-     /* کانتینر عنوان بالای عکس خراشیدنی */
+/* تنظیم وجه پشت کارت تا عنوان بالای عکس قرار بگیرد */
+.hero-face.hero-back {
+  display: flex !important;
+  flex-direction: column !important; /* چینش از بالا به پایین */
+  align-items: center !important;
+  justify-content: center !important;
+  transform: rotateY(180deg);
+  padding: 15px 10px;
+  box-sizing: border-box;
+}
+
+/* کانتینر عنوان بالای عکس */
 .scratch-header-title {
   display: flex;
   align-items: center;
@@ -221,59 +232,49 @@
   direction: ltr;
   gap: 10px;
   margin-bottom: 12px;
+  flex-shrink: 0; /* جلوگیری از جمع شدن عنوان */
   opacity: 0;
-  transform: translateY(-10px) scale(0.96);
-  animation: romanticFadeIn 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-  animation-delay: 0.35s;
+  transform: translateY(-8px);
+  animation: romanticFadeIn 0.8s ease forwards;
+  animation-delay: 0.3s;
 }
 
-/* متن اسامی Narges و Mahdi */
 .scratch-name {
   font-family: 'EdwardianScript', cursive, serif;
   font-size: 38pt;
   color: #000000;
   line-height: 1;
   user-select: none;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
 }
 
-/* عکس قلب وسط */
 .scratch-heart-icon {
-  width: 32px;
+  width: 30px;
   height: auto;
   display: inline-block;
-  vertical-align: middle;
   animation: heartSoftPulse 2s ease-in-out infinite;
 }
 
 @keyframes romanticFadeIn {
   to {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translateY(0);
   }
 }
 
 @keyframes heartSoftPulse {
-  0%, 100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.12);
-  }
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.12); }
 }
 
 @media (max-width: 420px) {
   .scratch-name {
-    font-size: 30pt;
+    font-size: 28pt;
   }
   .scratch-heart-icon {
-    width: 26px;
-  }
-  .scratch-header-title {
-    gap: 6px;
-    margin-bottom: 8px;
+    width: 24px;
   }
 }
+
 @font-face {
       font-family: 'Yekan';
       /* لینک مستقیم فایل فونت در گیت‌هاب (Raw) */
@@ -2048,17 +2049,17 @@ visibility 0.45s ease;
   </div>
    </div>
 </div>
+<!-- وجه پشت کارت (Hero Back) -->
+<div class="hero-face hero-back">
 
-      <!-- وجه پشتی: عکس خراشیدنی -->
-      <div class="hero-face hero-back">
-          <!-- عنوان اسامی و قلب بالای عکس -->
+  <!-- ۱. عنوان بالای عکس: Narges ♡ Mahdi -->
   <div class="scratch-header-title">
     <span class="scratch-name">Narges</span>
     <img src="Heartse1.png" alt="Love" class="scratch-heart-icon" />
     <span class="scratch-name">Mahdi</span>
   </div>
 
-  <!-- قاب عکس خراشیدنی -->
+  <!-- ۲. قاب عکس خراشیدنی (فقط یک‌بار) -->
   <div class="scratch-photo-frame" id="scratchArea">
     <img src="hero-photo.jpg" class="scratch-photo" id="scratchPhoto" alt="Our Moment" />
     <div class="scratch-reveal-flash" id="scratchFlash"></div>
@@ -2069,6 +2070,7 @@ visibility 0.45s ease;
   </div>
 
 </div>
+
        <div
   class="scratch-photo-frame"
   id="scratchArea"
