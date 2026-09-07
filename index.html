@@ -1738,6 +1738,197 @@ visibility 0.45s ease;
   box-shadow: 0 6px 18px rgba(124, 100, 77, 0.4);
 }
 
+/* =========================================
+   Text-based invitation — Flexbox only
+   ========================================= */
+
+section.scroll-section.nm-invitation {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+
+  /* Override the old shared 100vh fixed height */
+  height: auto;
+  min-height: 100vh;
+  min-height: 100svh;
+
+  padding: 32px 16px;
+
+  background: #fff;
+  color: #000;
+  text-align: center;
+  overflow: visible;
+}
+
+.nm-invitation,
+.nm-invitation * {
+  box-sizing: border-box;
+}
+
+/*
+  At a 736px-wide viewport:
+  1em = 16px.
+  All dimensions scale together on smaller phones.
+*/
+.nm-invitation .nm-invitation__design {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 25em;
+  max-width: 100%;
+  min-width: 0;
+
+  margin: 0;
+  padding: 0;
+
+  font-size: clamp(8px, 2.173913vw, 16px);
+  color: #000;
+  direction: ltr;
+}
+
+.nm-invitation .nm-invitation__ornament {
+  display: block;
+  flex: 0 0 auto;
+
+  width: 16.625em;
+  max-width: 100%;
+  height: auto;
+
+  margin: 0 0 0.35em;
+  padding: 0;
+  border: 0;
+}
+
+/* Both name lines belong to one semantic heading */
+.nm-invitation .nm-invitation__names {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  min-width: 0;
+
+  margin: 0;
+  padding: 0;
+
+  font-size: inherit;
+  font-weight: 400;
+  line-height: 1;
+}
+
+/* 79pt = approximately 105.333px at full scale */
+.nm-invitation .nm-invitation__narges,
+.nm-invitation .nm-invitation__mahdi {
+  display: block;
+  flex: 0 0 auto;
+
+  margin: 0;
+  padding: 0;
+
+  font-family: "Bell MT Custom", "Bell MT", serif;
+  font-size: 6.583333em;
+  font-style: italic;
+  font-weight: 400;
+
+  line-height: 1;
+  letter-spacing: 0;
+  text-transform: none;
+  white-space: nowrap;
+  color: #000;
+}
+
+.nm-invitation .nm-invitation__second-line {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: center;
+
+  gap: 0.45em;
+
+  max-width: 100%;
+  min-width: 0;
+
+  margin: 0;
+  padding: 0;
+
+  direction: ltr;
+}
+
+/* 32pt = approximately 42.667px at full scale */
+.nm-invitation .nm-invitation__and {
+  display: block;
+  flex: 0 0 auto;
+
+  margin: 0;
+  padding: 0;
+
+  font-family:
+    "Edwardian Script ITC Custom",
+    "Edwardian Script ITC",
+    cursive;
+
+  font-size: 2.666667em;
+  font-style: normal;
+  font-weight: 400;
+
+  line-height: 1;
+  letter-spacing: 0;
+  white-space: nowrap;
+  color: #000;
+}
+
+/* Date is arranged right-to-left by Flexbox */
+.nm-invitation .nm-invitation__date {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: center;
+
+  max-width: 100%;
+  margin: 0.3em 0 0;
+  padding: 0;
+
+  direction: rtl;
+
+  font-family:
+    "Edwardian Script ITC Custom",
+    "Edwardian Script ITC",
+    cursive;
+
+  /* 23.53pt = approximately 31.373px */
+  font-size: 1.960833em;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.5;
+
+  color: #000;
+  white-space: nowrap;
+}
+
+.nm-invitation .nm-invitation__date > span {
+  display: block;
+  flex: 0 0 auto;
+
+  /* Tracking 640 interpreted as 640/1000 em */
+  letter-spacing: 0.64em;
+
+  /* Compensate for spacing after the final character */
+  margin-inline-end: -0.64em;
+}
+
+.nm-invitation .nm-invitation__date {
+  gap: 0.64em;
+}
 
   </style>  <!-- این تگ حتماً باید اینجا بسته بشه -->
 
@@ -1794,87 +1985,50 @@ visibility 0.45s ease;
 
    
     <!-- سکشن ۱ -->
-<section class="scroll-section hero-section">
-  <div class="hero-flip-card" id="heroFlipCard">
-    <div class="hero-flip-inner">
-
-      <!-- وجه جلویی: نوشته‌ها -->
-      <div
-        class="hero-face hero-front hero-content"
-        id="heroFront"
-        role="button"
-        tabindex="0"
-        aria-label="نمایش عکس"
-      >
-        <img
-          src="NM (1).png"
-          alt="خط تزئینی"
-          class="hero-swirl-divider"
-        >
-
-        <div class="hero-names-block">
-
-  <div class="hero-name-row hero-name-narges">
-    Narges
-  </div>
-
-  <div class="hero-name-row hero-name-mahdi">
-    Mahdi
-  </div>
-
-  <div class="hero-and-script">
-    And
-  </div>
-
-</div>
-
-<div class="hero-date-row" dir="rtl">
-  <bdi>23.07.1405</bdi>
-</div>
-
-      </div>
-
-      <!-- وجه پشتی: عکس خراشیدنی -->
-      <div class="hero-face hero-back">
-       <div
-  class="scratch-photo-frame"
-  id="scratchArea"
-  role="button"
-  tabindex="0"
-  aria-label="برای نمایش نشان، روی عکس کلیک کنید"
+<section
+  class="scroll-section nm-invitation"
+  aria-label="دعوت‌نامه عروسی نرگس و مهدی، ۲۳ مهر ۱۴۰۵"
 >
-  <img
-    src="hero-photo.jpg"
-    alt="عکس محمدمهدی و نرگس"
-    class="scratch-photo"
-    id="scratchPhoto"
-    draggable="false"
-  >
+  <div class="nm-invitation__design" dir="ltr">
 
-  <!-- لایه فلش اولیه پس از پاک‌شدن پوشش -->
-  <div class="scratch-reveal-flash" aria-hidden="true"></div>
-
-  <!-- لایه شیشه‌ای که با کلیک روی عکس فعال می‌شود -->
-  <div class="photo-glass-layer" id="photoGlassLayer">
     <img
-      src="NOONMEEM.png"
-      alt="نشان دعوت‌نامه"
-      class="noonmeem-overlay"
+      class="nm-invitation__ornament"
+      src="./NM%20(1).png"
+      alt=""
+      aria-hidden="true"
+      decoding="async"
+-hidden="true"
+      decoding="async"
     >
-  </div>
 
-  <canvas
-    class="scratch-canvas"
-    id="scratchCanvas"
-    aria-label="پوشش عکس را با حرکت انگشت پاک کنید"
-  ></canvas>
-</div>
+    <h1 class="nmNarges and Mahdi">
 
-      </div>
+      <span class="nm-invitation__narges">
+        Narges
+      </span>
 
+      <span class="nm-invitation__second-line">
+        <span class="nm-invitation__and">And</span>
+        <span class="nm-invitation__mahdi">Mahdi</span>
+      </span>
+
+    </h1>
+
+    <div
+      class="nm-invitation__date"
+      dir="rtl"
+      aria-label="۲۳ مهر ۱۴۰۵"
+    >
+      <span dir="ltr">23</span>
+      <span aria-hidden="true">.</span>
+      <span dir="ltr">07</span>
+      <span aria-hidden="true">.</span>
+      <span dir="ltr">1405</span>
     </div>
+
   </div>
 </section>
+
 
 
              <!-- سکشن دوم: موعد دیدار عشق ما -->
