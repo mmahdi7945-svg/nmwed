@@ -640,40 +640,45 @@ body {
 
 
 .countdown-grid-inline {
-  display: flex;
-  flex-direction: row-reverse; /* Days سمت راست */
-  justify-content: center;
-  gap: 8px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
   width: 100%;
+  max-width: 340px;
+  margin: 15px auto;
+  direction: ltr; /* برای قرارگیری درست Days تا Seconds */
 }
 
 .cd-box {
-  background: rgba(255, 255, 255, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  border-radius: 12px;
-  padding: 8px 4px;
-  min-width: 60px;
+  aspect-ratio: 1 / 1; /* مربع کامل */
   display: flex;
   flex-direction: column;
   align-items: center;
-  backdrop-filter: blur(4px);
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 14px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  padding: 4px;
+  box-sizing: border-box;
 }
 
 .cd-num {
-  font-family: 'BiondiSans', sans-serif;
-  font-size: 22px;
-  font-weight: 200;
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.1;
   color: #333;
-  line-height: 1;
 }
 
 .cd-label {
-  font-family: sans-serif;
-  font-size: 8px;
+  font-size: 0.72rem;
   color: #666;
-  text-transform: uppercase;
-  margin-top: 2px;
+  margin-top: 3px;
+  text-transform: capitalize;
 }
+
 
 /* =========================================
    انیمیشن‌های ورود و خروج سکشن ۲ (Fade In/Out پلکانی)
@@ -1627,6 +1632,59 @@ visibility 0.45s ease;
 
 
   </style>  <!-- این تگ حتماً باید اینجا بسته بشه -->
+.map-footer-section {
+  width: 100%;
+  margin-top: 14px;
+  text-align: center;
+}
+
+.map-location-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #3e3e3e;
+  margin-bottom: 8px;
+}
+
+.map-divider {
+  width: 80%;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.15), transparent);
+  margin: 0 auto 12px auto;
+}
+
+.routing-logos-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  flex-direction: row;
+}
+
+.routing-logo-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  gap: 4px;
+  transition: transform 0.2s ease;
+}
+
+.routing-logo-btn:active {
+  transform: scale(0.92);
+}
+
+.routing-logo-btn img {
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.routing-logo-btn span {
+  font-size: 0.72rem;
+  color: #555;
+}
 
 </head>
 <body>
@@ -1786,7 +1844,7 @@ visibility 0.45s ease;
 
      <!-- متن تاریخ و ساعت -->
      <div class="event-schedule-text">
-       جمعه ۲۴ مهرماه ۱۴۰۵<br>
+       جمعه ۲۳ مهرماه ۱۴۰۵<br>
        از ساعت ۱۹
      </div>
 
@@ -1842,6 +1900,29 @@ visibility 0.45s ease;
           </div>
 
         </div>
+<!-- بخش آدرس و دکمه‌های مسیریابی زیر نقشه -->
+<div class="map-footer-section">
+  <div class="map-location-title">اراک، مرزیجران، باغ تالار ارم</div>
+  <div class="map-divider"></div>
+  
+  <div class="routing-logos-container">
+    <!-- نشان / بلد / گوگل مپ -->
+    <a href="https://neshan.org/maps/@34.1173579,49.6697487,15z" target="_blank" rel="noopener noreferrer" class="routing-logo-btn" title="مسیریابی با نشان">
+      <img src="assets/img/neshan.png" alt="نشان" />
+      <span>نشان</span>
+    </a>
+
+    <a href="https://balad.ir/location?latitude=34.1173579&longitude=49.6697487" target="_blank" rel="noopener noreferrer" class="routing-logo-btn" title="مسیریابی با بلد">
+      <img src="assets/img/balad.png" alt="بلد" />
+      <span>بلد</span>
+    </a>
+
+    <a href="https://maps.google.com/maps?q=34.1173579,49.6697487" target="_blank" rel="noopener noreferrer" class="routing-logo-btn" title="مسیریابی با گوگل مپ">
+      <img src="assets/img/google-maps.png" alt="گوگل مپ" />
+      <span>Google Maps</span>
+    </a>
+  </div>
+</div>
 
       <!-- در اینجا می‌توانید هر محتوای دیگری که برای این سکشن دارید قرار دهید -->
     </section>
@@ -2063,7 +2144,9 @@ if (scrollHintBtn && websiteContent) scrollHintBtn.addEventListener('click', () 
 });
     // منطق تایمر
     function updateCountdown() {
-      const targetDate = new Date("2026-10-16T19:00:00+03:30").getTime();
+      // تاریخ جدید: ۲۳ مهر ۱۴۰۵ ساعت ۱۹:۰۰
+const targetDate = new Date("2026-10-15T19:00:00+03:30").getTime();
+
       const now = new Date().getTime();
       const diff = targetDate - now;
 
