@@ -1905,6 +1905,21 @@ visibility 0.45s ease;
 .polaroid-frame, .polaroid-frame img {
     cursor: pointer;
 }
+.map-inline-apps {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 20px !important;
+  margin-top: 14px !important;
+  width: 100% !important;
+}
+
+.map-inline-apps .nav-app-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+}
 
   </style>  <!-- این تگ حتماً باید اینجا بسته بشه -->
 
@@ -2134,47 +2149,33 @@ visibility 0.45s ease;
   <div class="nav-modal-box">
     <div class="nav-modal-title">مسیریابی با اپلیکیشن دلخواه:</div>
     <div class="nav-apps-row">
-
-      <!-- بلد -->
-      <a
-        href="https://balad.ir/p/%D8%A8%D8%A7%D8%BA-%D8%AA%D8%A7%D9%84%D8%A7%D8%B1-%D9%85%D8%AC%D9%84%D9%84-%D8%A7%D8%B1%D9%85_ceremonial-services-PBoqVO7dYACB1Y#15/34.11821/49.67404"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="nav-app-item"
-      >
+<!-- سه لوگوی مسیریاب به صورت افقی زیر نقشه -->
+<div class="nav-apps-row map-inline-apps">
+    <!-- بلد -->
+    <a href="https://balad.ir/p/..." class="nav-app-item" target="_blank" rel="noopener">
         <div class="nav-app-icon-wrap">
-          <img src="balad.png" alt="بلد">
+            <img src="balad.png" alt="بلد" class="nav-app-icon">
         </div>
         <span class="nav-app-name">بلد</span>
-      </a>
-
-      <!-- گوگل مپس -->
-      <a
-        href="https://www.google.com/maps/place/%D8%A8%D8%A7%D8%BA+%D8%AA%D8%A7%D9%84%D8%A7%D8%B1+%D8%A7%D8%B1%D9%85%E2%80%AD/data=!4m2!3m1!1s0x0:0x3ed0ec51a1b5825c?sa=X&ved=1t:2428&ictx=111"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="nav-app-item"
-      >
+    </a>
+    
+    <!-- گوگل مپ -->
+    <a href="https://maps.google.com/?q=34.1173579,49.6697487" class="nav-app-item" target="_blank" rel="noopener">
         <div class="nav-app-icon-wrap">
-          <img src="google-maps.png" alt="گوگل مپ">
+            <img src="google-maps.png" alt="گوگل مپ" class="nav-app-icon">
         </div>
         <span class="nav-app-name">گوگل مپ</span>
-      </a>
+    </a>
 
-      <!-- نشان -->
-      <a
-        href="https://neshan.org/maps/places/5b60e8b52ab9457d1e47b1861b7104e4#c34.117-49.675-15z-0p"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="nav-app-item"
-      >
+    <!-- نشان -->
+    <a href="https://neshan.org/maps/..." class="nav-app-item" target="_blank" rel="noopener">
         <div class="nav-app-icon-wrap">
-          <img src="neshan.png" alt="نشان">
+            <img src="neshan.png" alt="نشان" class="nav-app-icon">
         </div>
         <span class="nav-app-name">نشان</span>
-      </a>
+    </a>
+</div>
 
-    </div>
   </div>
 </div>
 
