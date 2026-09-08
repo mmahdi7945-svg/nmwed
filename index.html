@@ -215,15 +215,7 @@
   font-display: swap;
 }
 /* تنظیم وجه پشت کارت تا عنوان بالای عکس قرار بگیرد */
-.hero-face.hero-back {
-  display: flex !important;
-  flex-direction: column !important; /* چینش از بالا به پایین */
-  align-items: center !important;
-  justify-content: center !important;
-  transform: rotateY(180deg);
-  padding: 15px 10px;
-  box-sizing: border-box;
-}
+
 
 /* کانتینر عنوان بالای عکس */
 .scratch-header-title {
@@ -1332,13 +1324,6 @@ visibility 0.45s ease;
 
 
 
-/* سمت عکس */
-.hero-back {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transform: rotateY(180deg);
-}
 
 .scratch-photo-frame {
   position: relative;
@@ -1580,53 +1565,13 @@ visibility 0.45s ease;
   pointer-events: none;
 }
 
-/* فعال‌شدن لایه پس از کلیک روی عکس */
-.scratch-photo-frame.glass-active .photo-glass-layer {
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
-}
-
 .scratch-photo-frame.glass-active .photo-glass-layer::before {
   animation: glassShine 1.4s ease-out 0.15s forwards;
 }
 
-.noonmeem-overlay {
-  position: relative;
-  z-index: 2;
-
-  /*
-   * تصویر تقریباً کل سطح عکس را می‌پوشاند
-   */
-  width: 100%;
-  height: 100%;
-
-  /*
-   * اگر تصویر NOONMEEM پس‌زمینه یا قاب اضافی دارد،
-   * این مقدار باعث می‌شود کل محدوده را پر کند.
-   */
-  object-fit: cover;
-  object-position: center;
-
-  opacity: 0;
-  transform: scale(0.92) rotate(-2deg);
-
-  filter:
-    drop-shadow(0 8px 12px rgba(0, 0, 0, 0.3))
-    drop-shadow(0 0 12px rgba(255, 255, 255, 0.55));
-
-  transition:
-    opacity 0.75s ease,
-    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
-}
 
 
-/* ورود نرم لوگو */
-.scratch-photo-frame.glass-active .noonmeem-overlay {
-  opacity: 1;
-  transform: scale(1) rotate(0deg);
-  animation: noonmeemFloat 3.2s ease-in-out 1s infinite;
-}
+
 
 @keyframes glassShine {
   0% {
@@ -1867,15 +1812,8 @@ visibility 0.45s ease;
   backface-visibility: hidden;
 }
 
-.hero-back {
-  -webkit-transform: rotateY(180deg);
-  transform: rotateY(180deg);
-}
 
-.hero-flip-card.flipped .hero-flip-inner {
-  -webkit-transform: rotateY(180deg);
-  transform: rotateY(180deg);
-}
+
 
 
 .rsvp-submit-btn:hover {
