@@ -227,7 +227,7 @@
   justify-content: center;
   direction: ltr;
   gap: 10px;
-  margin-bottom: 12px;
+  margin-bottom: 3px;
   flex-shrink: 0; /* جلوگیری از جمع شدن عنوان */
   opacity: 0;
   transform: translateY(-8px);
@@ -246,7 +246,6 @@
 .scratch-heart-icon {
   width: 20px;
   display: inline-block;
-   margin: -20 -20 0px 0;
   animation: heartSoftPulse 2s ease-in-out infinite;
 }
 
@@ -266,10 +265,12 @@
   .scratch-name {
     font-size: 28pt;
   }
-  .scratch-heart-icon {
-    width: 90px;
-     height: 90px
-  }
+ .scratch-heart-icon {
+  width: 20px;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
 }
 
 @font-face {
