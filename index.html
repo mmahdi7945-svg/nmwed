@@ -1278,13 +1278,16 @@ visibility 0.45s ease;
 
 /* سمت عکس */
 .hero-back {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
+  display: flex !important;
+  flex-direction: column !important; /* این خط متن را می‌برد بالای عکس */
+  align-items: center !important;
+  justify-content: flex-start !important;
+  padding: 20px 15px !important;
+  box-sizing: border-box !important;
   transform: rotateY(180deg);
   -webkit-transform: rotateY(180deg);
 }
+
 
 /*
  * در حالت فلیپ، وجه نوشته‌ها کاملاً غیرفعال شود
