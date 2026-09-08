@@ -227,7 +227,7 @@
   justify-content: center;
   direction: ltr;
   gap: 10px;
-  margin-bottom: 3px;
+  margin-bottom: 12px;
   flex-shrink: 0; /* جلوگیری از جمع شدن عنوان */
   opacity: 0;
   transform: translateY(-8px);
@@ -244,8 +244,9 @@
 }
 
 .scratch-heart-icon {
-  width: 70px;
+  width: 20px;
   display: inline-block;
+   margin: -20px -20px 0 0;
   animation: heartSoftPulse 2s ease-in-out infinite;
 }
 
@@ -265,12 +266,10 @@
   .scratch-name {
     font-size: 28pt;
   }
- .scratch-heart-icon {
-  width: 70px;
-  height: auto;
-  display: block;
-  object-fit: contain;
-}
+  .scratch-heart-icon {
+    width: 90px;
+     height: 90px
+  }
 }
 
 @font-face {
@@ -490,7 +489,7 @@
   position: absolute;
 
   top: 303px;
-  left: -10;
+  left: -10px;
 
   width: 100%;
 
@@ -1012,7 +1011,7 @@ visibility 0.45s ease;
   justify-content: center;
 
   color: #ffffff;
-  font-family: 'BYekan', Tahoma, sans-serif;
+  font-family: 'Yekan', Tahoma, sans-serif;
   font-size: 13px;
   font-weight: normal;
   white-space: nowrap;
@@ -1144,7 +1143,88 @@ visibility 0.45s ease;
   z-index: 2;
   background-color: transparent;
 }
+/* انیمیشن یک‌دست ورود و خروج سکشن ۳ */
+.section-three .countdown-wrapper {
+  opacity: 1;
+  transform: none;
+}
+
+.section-three .countdown-title,
+.section-three .cd-box,
+.section-three .map-card-wrapper {
+  opacity: 0;
+  transform: translateY(35px) scale(0.94);
+  transition:
+    opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.section-three.visible .countdown-title {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition-delay: 0.10s;
+}
+
+.section-three.visible .cd-box:nth-child(1) {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition-delay: 0.22s;
+}
+
+.section-three.visible .cd-box:nth-child(2) {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition-delay: 0.34s;
+}
+
+.section-three.visible .cd-box:nth-child(3) {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition-delay: 0.46s;
+}
+
+.section-three.visible .cd-box:nth-child(4) {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition-delay: 0.58s;
+}
+
+.section-three.visible .map-card-wrapper {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition-delay: 0.72s;
+}
+
+.cd-num {
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.section-three.visible .cd-num {
+  animation: countdownNumberAppear 0.45s ease both;
+}
+
+.section-three.visible .cd-box:nth-child(1) .cd-num { animation-delay: 0.30s; }
+.section-three.visible .cd-box:nth-child(2) .cd-num { animation-delay: 0.42s; }
+.section-three.visible .cd-box:nth-child(3) .cd-num { animation-delay: 0.54s; }
+.section-three.visible .cd-box:nth-child(4) .cd-num { animation-delay: 0.66s; }
+
+@keyframes countdownNumberAppear {
+  from { opacity: 0; transform: translateY(6px) scale(0.92); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-three .countdown-title,
+  .section-three .cd-box,
+  .section-three .map-card-wrapper {
+    transition-duration: 0.01ms;
+    animation: none !important;
+  }
+}
+
 /* وضعیت اولیه (مخفی بودن قبل از اسکرول) */
+
 .section-three .countdown-title,
 .section-three     .map-card-header {
       font-family: 'Yekan', Tahoma, sans-serif !important;
@@ -1219,8 +1299,8 @@ visibility 0.45s ease;
 
 .hero-flip-card {
   position: relative;
-  width: min(88vw, 380px);
-  height: min(72vh, 500px);
+  width: min(82vw, 330px);
+  height: min(66vh, 455px);
   max-height: 455px;
 
   perspective: 1300px;
@@ -2012,7 +2092,7 @@ visibility 0.45s ease;
   </div>
 
   <!-- ۲. قاب عکس خراشیدنی (فقط یک‌بار) -->
-  <div class="scratch-photo-frame" id="scratchArea">
+  <div class="scratch-photo-frame" id="scratchArea" role="button" tabindex="0" aria-label="برای خراشیدن تصویر با انگشت بکشید">
     <img src="hero-photo.jpg" class="scratch-photo" id="scratchPhoto" alt="Our Moment" />
     <div class="scratch-reveal-flash" id="scratchFlash"></div>
     <div class="photo-glass-layer" id="photoGlassLayer">
@@ -2059,7 +2139,7 @@ visibility 0.45s ease;
 
      <!-- متن تاریخ و ساعت -->
      <div class="event-schedule-text">
-       پنجشنبه 23 مهرماه 1405<br>
+       جمعه 24 مهرماه 1405<br>
        از ساعت 19
      </div>
 
@@ -2771,37 +2851,6 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 
-    const lightbox = document.getElementById('imageLightbox');
-    const lightboxImg = document.getElementById('lightboxImg');
-    const lightboxClose = document.getElementById('lightboxClose');
 
-    // تصاویر مشخص با نام فایل‌ها
-    const targetImages = document.querySelectorAll('img[src$="story-photo-1.jpg"], img[src$="story-photo-3.jpg"]');
-
-    targetImages.forEach(img => {
-        img.style.cursor = 'pointer';
-        img.addEventListener('click', function () {
-            lightboxImg.src = this.src;
-            lightbox.classList.add('active');
-        });
-    });
-
-    if (lightboxClose) {
-        lightboxClose.addEventListener('click', function (e) {
-            e.stopPropagation();
-            lightbox.classList.remove('active');
-        });
-    }
-
-    if (lightbox) {
-        lightbox.addEventListener('click', function () {
-            lightbox.classList.remove('active');
-        });
-    }
-});
-
-
-
-  </script>
 </body>
 </html>
