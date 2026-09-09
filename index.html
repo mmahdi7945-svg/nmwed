@@ -1774,20 +1774,10 @@ visibility 0.45s ease;
   width: 100%;
   height: 100%;
   border: 0;
-  pointer-events: none;
+  pointer-events: auto;
   display: block;
 }
 
-.map-click-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.1) 60%, transparent 100%);
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  padding-bottom: 10px;
-  pointer-events: none;
-}
 
 .map-click-badge {
   background: rgba(255, 255, 255, 0.92);
@@ -2512,7 +2502,53 @@ margin: 0;
 .section-four-inner {
   width: min(100%, 620px);
   display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.section-four-heartline-wrap {
+  width: 100%;
+  display: flex;
   justify-content: center;
+  align-items: center;
+  margin: 8px 0 18px;
+  opacity: 0;
+  transform: translateY(18px) scale(.96);
+  transition: opacity .75s cubic-bezier(.16,1,.3,1), transform .75s cubic-bezier(.16,1,.3,1);
+}
+
+.section-four-heartline {
+  display: block;
+  width: min(100%, 250px);
+  height: auto;
+  max-height: 90px;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.section-four.visible .section-four-heartline-wrap {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition-delay: .52s;
+}
+
+@media (max-width: 600px) {
+  .section-four-heartline-wrap {
+    margin: 4px 0 14px;
+  }
+  .section-four-heartline {
+    width: min(100%, 210px);
+    max-height: 75px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-four-heartline-wrap {
+    transition-duration: .01ms !important;
+  }
 }
 .section-four-map-block {
   width: min(100%, 420px);
@@ -2603,18 +2639,18 @@ margin: 0;
    گل‌باران شیشه‌ای نقره‌ای و پاستیلی — سراسر سایت
 ========================================================= */
 .silver-flower-rain-global {
-  position: fixed;
+  position: absolute;
   inset: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 45;
+  width: 100%;
+  height: 100%;
+  z-index: 4;
   pointer-events: none;
   overflow: hidden;
 }
 
 .silver-flower-global {
-  --size: 28px;
-  --duration: 8s;
+  --size: 17px;
+  --duration: 13s;
   --delay: -2s;
   --drift: -90px;
   --tilt: 0deg;
@@ -2643,7 +2679,7 @@ margin: 0;
   88% { opacity:.55; }
   100% { opacity:0; transform:translate3d(var(--drift),118vh,0) rotate(calc(var(--tilt) + 390deg)) scale(.6); }
 }
-.flower-g1{--size:21px;--duration:9s;--delay:-1s;--start-right:2%;--drift:-90px}.flower-g2{--size:15px;--duration:7s;--delay:-5s;--start-right:9%;--drift:-55px}.flower-g3{--size:19px;--duration:10s;--delay:-7s;--start-right:16%;--drift:-120px}.flower-g4{--size:15px;--duration:8s;--delay:-2s;--start-right:24%;--drift:-70px}.flower-g5{--size:24px;--duration:11s;--delay:-9s;--start-right:31%;--drift:-100px}.flower-g6{--size:16px;--duration:7.5s;--delay:-4s;--start-right:38%;--drift:-80px}.flower-g7{--size:20px;--duration:9.5s;--delay:-12s;--start-right:46%;--drift:-110px}.flower-g8{--size:15px;--duration:8.5s;--delay:-6s;--start-right:54%;--drift:-65px}.flower-g9{--size:22px;--duration:10.5s;--delay:-3s;--start-right:62%;--drift:-100px}.flower-g10{--size:16px;--duration:7.2s;--delay:-10s;--start-right:69%;--drift:-75px}.flower-g11{--size:19px;--duration:9s;--delay:-8s;--start-right:76%;--drift:-115px}.flower-g12{--size:15px;--duration:8s;--delay:-13s;--start-right:83%;--drift:-60px}.flower-g13{--size:22px;--duration:11.5s;--delay:-4s;--start-right:89%;--drift:-90px}.flower-g14{--size:17px;--duration:8.8s;--delay:-11s;--start-right:95%;--drift:-125px}.flower-g15{--size:15px;--duration:7.8s;--delay:-1s;--start-right:12%;--drift:-50px}.flower-g16{--size:20px;--duration:10s;--delay:-6s;--start-right:28%;--drift:-90px}.flower-g17{--size:16px;--duration:8.2s;--delay:-9s;--start-right:43%;--drift:-75px}.flower-g18{--size:23px;--duration:12s;--delay:-2s;--start-right:58%;--drift:-110px}.flower-g19{--size:15px;--duration:7.4s;--delay:-5s;--start-right:72%;--drift:-65px}.flower-g20{--size:18px;--duration:9.8s;--delay:-12s;--start-right:87%;--drift:-95px}.flower-g21{--size:15px;--duration:8.6s;--delay:-7s;--start-right:4%;--drift:-70px}.flower-g22{--size:22px;--duration:10.8s;--delay:-3s;--start-right:20%;--drift:-120px}.flower-g23{--size:17px;--duration:7.9s;--delay:-10s;--start-right:67%;--drift:-80px}.flower-g24{--size:19px;--duration:9.3s;--delay:-14s;--start-right:92%;--drift:-105px}
+.flower-g1{--size:14px;--duration:14s;--delay:-1s;--start-right:2%;--drift:-70px}.flower-g2{--size:12px;--duration:12s;--delay:-5s;--start-right:8%;--drift:-45px}.flower-g3{--size:14px;--duration:15s;--delay:-7s;--start-right:14%;--drift:-85px}.flower-g4{--size:12px;--duration:13s;--delay:-2s;--start-right:20%;--drift:-55px}.flower-g5{--size:16px;--duration:16s;--delay:-9s;--start-right:27%;--drift:-75px}.flower-g6{--size:12px;--duration:12.5s;--delay:-4s;--start-right:33%;--drift:-60px}.flower-g7{--size:15px;--duration:14.5s;--delay:-12s;--start-right:40%;--drift:-80px}.flower-g8{--size:12px;--duration:13.5s;--delay:-6s;--start-right:47%;--drift:-50px}.flower-g9{--size:15px;--duration:15.5s;--delay:-3s;--start-right:54%;--drift:-75px}.flower-g10{--size:12px;--duration:12.2s;--delay:-10s;--start-right:61%;--drift:-55px}.flower-g11{--size:14px;--duration:14s;--delay:-8s;--start-right:68%;--drift:-85px}.flower-g12{--size:12px;--duration:13s;--delay:-13s;--start-right:75%;--drift:-45px}.flower-g13{--size:15px;--duration:16.5s;--delay:-4s;--start-right:82%;--drift:-70px}.flower-g14{--size:12px;--duration:14s;--delay:-11s;--start-right:88%;--drift:-90px}.flower-g15{--size:12px;--duration:12.8s;--delay:-1s;--start-right:5%;--drift:-40px}.flower-g16{--size:14px;--duration:15s;--delay:-6s;--start-right:22%;--drift:-65px}.flower-g17{--size:12px;--duration:13.2s;--delay:-9s;--start-right:37%;--drift:-55px}.flower-g18{--size:16px;--duration:17s;--delay:-2s;--start-right:52%;--drift:-80px}.flower-g19{--size:12px;--duration:12.4s;--delay:-5s;--start-right:67%;--drift:-50px}.flower-g20{--size:14px;--duration:15.2s;--delay:-12s;--start-right:79%;--drift:-70px}.flower-g21{--size:12px;--duration:13.6s;--delay:-7s;--start-right:11%;--drift:-55px}.flower-g22{--size:15px;--duration:16s;--delay:-3s;--start-right:31%;--drift:-75px}.flower-g23{--size:12px;--duration:12.8s;--delay:-10s;--start-right:59%;--drift:-45px}.flower-g24{--size:14px;--duration:15s;--delay:-6s;--start-right:92%;--drift:-65px}
 @media (max-width:600px){.silver-flower-global{--size:18px}.flower-g1,.flower-g5,.flower-g7,.flower-g13,.flower-g18,.flower-g22{--size:22px}}
 @media(prefers-reduced-motion:reduce){.silver-flower-global{animation:none!important;opacity:.28;transform:none!important}}
 
@@ -2956,8 +2992,7 @@ margin: 0;
             <div class="section-three-always-text">Always</div>
             <img
               class="section-three-heartline"
-              src="LINEEHEARTT.png"
-              onerror="this.onerror=null; this.src='HeartLine.png';"
+              src="https://raw.githubusercontent.com/mmahdi7945-svg/nmwed/main/HeartLine.png"
               alt="Heart line"
             />
           </div>
@@ -2972,6 +3007,25 @@ margin: 0;
     <section class="scroll-section section-four" id="sectionFour" aria-label="سکشن ۴">
       <div class="section-four-inner">
 
+        <!-- تصویر پایانی -->
+        <div class="section-four-invitation-footer" aria-label="پیام دعوت">
+          <img
+            src="FINAL.png"
+            alt="منتظر حضور گرمتان هستیم"
+            class="section-four-final-image"
+          >
+        </div>
+
+        <!-- تصویر فاصله بین FINAL و نقشه -->
+        <div class="section-four-heartline-wrap" aria-hidden="true">
+          <img
+            src="LINEEHEARTT.png"
+            alt=""
+            class="section-four-heartline"
+          >
+        </div>
+
+        <!-- نقشه و اپلیکیشن‌های مسیریابی -->
         <div class="section-four-map-block">
           <div class="map-card-wrapper section-four-map-card">
             <div class="map-card-header">- اراک، جاده اراک - مرزیجران، ارم، تالارباغ ارم -</div>
@@ -2999,15 +3053,6 @@ margin: 0;
                class="section-four-nav-app" target="_blank" rel="noopener" aria-label="باز کردن مسیر در گوگل مپس">
               <img src="https://raw.githubusercontent.com/mmahdi7945-svg/nmwed/main/google-maps.png" alt="گوگل مپس">
             </a>
-          </div>
-
-          <!-- پایان سکشن ۴: پیام دعوت + گل کناری -->
-          <div class="section-four-invitation-footer" aria-label="پیام دعوت">
-            <img
-              src="FINAL.png"
-              alt="منتظر حضور گرمتان هستیم"
-              class="section-four-final-image"
-            >
           </div>
         </div>
 
