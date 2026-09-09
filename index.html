@@ -2454,9 +2454,9 @@ margin: 0;
 .section-three .independent-scratch-hint{position:absolute;left:50%;top:50%;z-index:8;transform:translate(-50%,-50%);width:max-content;max-width:80%;padding:5px 9px;font-family:'Yekan',Tahoma,sans-serif!important;font-size:10px;font-weight:normal;line-height:1.5;color:rgba(20,20,20,.86);text-align:center;white-space:nowrap;background:rgba(255,255,255,.34);border:1px solid rgba(255,255,255,.32);border-radius:7px;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);pointer-events:none;user-select:none;transition:opacity .35s ease,transform .35s ease}
 .section-three .independent-scratch-photo-frame.revealed .independent-scratch-hint{opacity:0;transform:translate(-50%,-50%) scale(.92)}
 .section-three .independent-photo-glass-layer{position:absolute;inset:0;z-index:6;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(255,255,255,.30) 0%,rgba(255,255,255,.12) 45%,rgba(255,255,255,.25) 100%);border:1px solid rgba(255,255,255,.34);box-shadow:inset 0 1px 0 rgba(255,255,255,.55),inset 0 -1px 0 rgba(255,255,255,.18);backdrop-filter:blur(2.5px);-webkit-backdrop-filter:blur(2.5px);opacity:0;pointer-events:none;transition:opacity .65s ease}
-.section-three .independent-scratch-photo-frame.revealed .independent-photo-glass-layer{opacity:1}
+.section-three .independent-scratch-photo-frame.revealed .independent-photo-glass-layer{opacity:1!important;visibility:visible!important;display:flex!important}
 .section-three .independent-noonmeem-overlay{position:relative;z-index:1;display:block;width:min(58%,175px);max-width:70%;max-height:65%;height:auto;object-fit:contain;opacity:0;transform:scale(.72) translateY(8px);filter:drop-shadow(0 8px 16px rgba(0,0,0,.20)) drop-shadow(0 0 10px rgba(255,255,255,.28));transition:opacity .55s ease,transform .65s cubic-bezier(.16,1,.3,1)}
-.section-three .independent-scratch-photo-frame.revealed .independent-noonmeem-overlay{opacity:1;transform:scale(1) translateY(0)}
+.section-three .independent-scratch-photo-frame.revealed .independent-noonmeem-overlay{opacity:1!important;visibility:visible!important;transform:scale(1) translateY(0);display:block!important}
 @media(max-width:600px){.section-three .independent-scratch-hint{font-size:9px;padding:4px 8px}.section-three .independent-noonmeem-overlay{width:min(62%,145px)}}
 </style>  <!-- این تگ حتماً باید اینجا بسته بشه -->
 
@@ -2567,7 +2567,7 @@ margin: 0;
     <img src="hero-photo.jpg" class="scratch-photo" id="scratchPhoto" alt="Our Moment" />
     <div class="scratch-reveal-flash" id="scratchFlash"></div>
     <div class="photo-glass-layer" id="photoGlassLayer">
-  <img src="NOONMEEM.png" alt="NM Seal" class="noonmeem-overlay" />
+  <img src="https://raw.githubusercontent.com/mmahdi7945-svg/nmwed/main/NOONMEEM.png" alt="NM Seal" class="noonmeem-overlay" />
 </div>
 
     <canvas class="scratch-canvas" id="scratchCanvas"></canvas>
@@ -2697,7 +2697,7 @@ margin: 0;
                 aria-hidden="true"
               >
                 <img
-                  src="NOONMEEM.png"
+                  src="https://raw.githubusercontent.com/mmahdi7945-svg/nmwed/main/NOONMEEM.png"
                   class="independent-noonmeem-overlay"
                   alt="NOONMEEM"
                 />
@@ -4160,14 +4160,31 @@ document.addEventListener('keydown', function (event) {
     scratching = false;
 
     /* بلافاصله بعد از ریویل کامل، شیشه و NOONMEEM روی خود عکس ظاهر شوند */
+    independentScratchArea.classList.add('revealed');
+
     if (independentPhotoGlassLayer) {
       independentPhotoGlassLayer.setAttribute('aria-hidden', 'false');
+      independentPhotoGlassLayer.style.visibility = 'visible';
+      independentPhotoGlassLayer.style.opacity = '1';
     }
 
+    const independentNoonmeem =
+      document.querySelector(
+        '#independentScratchArea .independent-noonmeem-overlay'
+      );
 
-    independentScratchArea.classList.add(
-      'revealed'
-    );
+    if (independentNoonmeem) {
+      independentNoonmeem.style.visibility = 'visible';
+      independentNoonmeem.style.opacity = '1';
+      independentNoonmeem.style.transform =
+        'scale(1) translateY(0)';
+    }
+
+    if (independentNoonmeem) {
+      independentNoonmeem.addEventListener('error', () => {
+        console.error('NOONMEEM.png could not be loaded:', independentNoonmeem.src);
+      }, { once: true });
+    }
 
 
     if (independentScratchFlash) {
