@@ -2881,10 +2881,26 @@ margin: 0;
   height: 100% !important;
 }
 
-/* مینی‌مپ واقعی، اما کوچک و مناسب داخل سکشن ۴ */
+/* مینی‌مپ واقعی، کوچک و چسبیده‌تر به ابتدای سکشن ۴ */
+.section-four {
+  align-items: flex-start !important;
+  justify-content: flex-start !important;
+  padding-top: 10px !important;
+}
+.section-four-inner {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+  justify-content: flex-start !important;
+  align-items: center !important;
+}
 .section-four-map-block {
   width: 100% !important;
   max-width: 280px !important;
+  margin-top: 0 !important;
+}
+.section-four-map-card,
+.section-four-map-card .map-card-wrapper {
+  margin-top: 0 !important;
 }
 
 .section-four-map-card {
@@ -2939,6 +2955,7 @@ margin: 0;
   }
 
   .section-four {
+    padding-top: 8px !important;
     padding-left: 16px !important;
     padding-right: 16px !important;
   }
