@@ -1985,7 +1985,403 @@ visibility 0.45s ease;
 .polaroid-frame, .polaroid-frame img {
     cursor: pointer;
 }
+/* =========================================================
+   INDEPENDENT SCRATCH PHOTO SECTION
+   ========================================================= */
 
+.independent-scratch-section {
+  position: relative;
+  width: 100%;
+  height: 100dvh;
+  min-height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-sizing: border-box;
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 50% 40%,
+      #ffffff 0%,
+      #f5f5f5 45%,
+      #eeeeee 100%
+    );
+
+  direction: rtl;
+  text-align: center;
+
+  padding: 30px 20px;
+}
+
+
+/* محتوای اصلی */
+
+.independent-scratch-content {
+  width: 100%;
+  max-width: 600px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+}
+
+
+/* عنوان */
+
+.independent-scratch-title {
+  font-family: inherit;
+  font-size: clamp(22px, 5vw, 34px);
+  font-weight: 700;
+
+  color: #333;
+
+  margin-bottom: 2px;
+
+  opacity: 0;
+  transform: translateY(20px);
+
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s ease;
+}
+
+
+/* زیرعنوان */
+
+.independent-scratch-subtitle {
+  font-family: inherit;
+  font-size: clamp(13px, 3.2vw, 17px);
+
+  color: #888;
+
+  margin-bottom: 18px;
+
+  opacity: 0;
+  transform: translateY(15px);
+
+  transition:
+    opacity 0.8s ease 0.15s,
+    transform 0.8s ease 0.15s;
+}
+
+
+/* وقتی سکشن visible شد */
+
+.independent-scratch-section.visible
+.independent-scratch-title,
+
+.independent-scratch-section.visible
+.independent-scratch-subtitle {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* =========================================================
+   PHOTO FRAME
+   ========================================================= */
+
+.independent-scratch-photo-frame {
+  position: relative;
+
+  width: min(82vw, 430px);
+  aspect-ratio: 3 / 4;
+
+  overflow: hidden;
+
+  background: #d0d0d0;
+
+  border-radius: 8px;
+
+  box-shadow:
+    0 18px 45px rgba(0, 0, 0, 0.18),
+    0 4px 12px rgba(0, 0, 0, 0.10);
+
+  cursor: crosshair;
+
+  user-select: none;
+  -webkit-user-select: none;
+
+  touch-action: none;
+
+  transform: translateY(25px) scale(0.96);
+  opacity: 0;
+
+  transition:
+    opacity 0.9s ease 0.2s,
+    transform 0.9s cubic-bezier(.22, .61, .36, 1) 0.2s;
+}
+
+
+/* ورود عکس */
+
+.independent-scratch-section.visible
+.independent-scratch-photo-frame {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+
+/* =========================================================
+   ORIGINAL PHOTO
+   ========================================================= */
+
+.independent-scratch-photo {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  display: block;
+
+  user-select: none;
+  -webkit-user-drag: none;
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   GLASS / OVERLAY
+   ========================================================= */
+
+.independent-photo-glass-layer {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 2;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  pointer-events: none;
+
+  opacity: 1;
+
+  transition:
+    opacity 0.8s ease,
+    visibility 0.8s ease;
+}
+
+
+.independent-noonmeem-overlay {
+  width: 35%;
+  max-width: 150px;
+
+  opacity: 0.82;
+
+  pointer-events: none;
+
+  user-select: none;
+}
+
+
+/* =========================================================
+   SCRATCH CANVAS
+   ========================================================= */
+
+.independent-scratch-canvas {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  z-index: 3;
+
+  display: block;
+
+  touch-action: none;
+
+  cursor: crosshair;
+
+  user-select: none;
+  -webkit-user-select: none;
+
+  transition:
+    opacity 0.8s ease;
+}
+
+
+/* =========================================================
+   FLASH
+   ========================================================= */
+
+.independent-scratch-flash {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 4;
+
+  pointer-events: none;
+
+  opacity: 0;
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(255,255,255,0.95) 0%,
+      rgba(255,255,255,0.55) 25%,
+      rgba(255,255,255,0) 70%
+    );
+}
+
+
+/* اجرای فلش */
+
+.independent-scratch-photo-frame
+.independent-scratch-flash.flash-active {
+  animation: independentScratchFlash 0.9s ease forwards;
+}
+
+
+@keyframes independentScratchFlash {
+
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+
+  35% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1.15);
+  }
+
+}
+
+
+/* =========================================================
+   COMPLETED STATE
+   ========================================================= */
+
+.independent-scratch-photo-frame.revealed
+.independent-scratch-canvas {
+  opacity: 0;
+  pointer-events: none;
+}
+
+
+.independent-scratch-photo-frame.revealed
+.independent-photo-glass-layer {
+  opacity: 0;
+  visibility: hidden;
+}
+
+
+/* =========================================================
+   HINT
+   ========================================================= */
+
+.independent-scratch-hint {
+  margin-top: 14px;
+
+  font-family: inherit;
+
+  font-size: clamp(12px, 3vw, 15px);
+
+  color: #999;
+
+  opacity: 0;
+
+  transform: translateY(10px);
+
+  transition:
+    opacity 0.8s ease 0.35s,
+    transform 0.8s ease 0.35s;
+}
+
+
+.independent-scratch-section.visible
+.independent-scratch-hint {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+.independent-scratch-photo-frame.revealed
+~ .independent-scratch-hint {
+  opacity: 0.35;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+  .independent-scratch-section {
+    padding:
+      25px 15px
+      calc(25px + env(safe-area-inset-bottom))
+      15px;
+  }
+
+  .independent-scratch-content {
+    max-width: 100%;
+  }
+
+  .independent-scratch-photo-frame {
+    width: min(82vw, 370px);
+  }
+
+}
+
+
+/* =========================================================
+   SMALL PHONES
+   ========================================================= */
+
+@media (max-height: 700px) {
+
+  .independent-scratch-photo-frame {
+    width: min(70vw, 330px);
+  }
+
+  .independent-scratch-subtitle {
+    margin-bottom: 8px;
+  }
+
+  .independent-scratch-title {
+    font-size: 23px;
+  }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .independent-scratch-title,
+  .independent-scratch-subtitle,
+  .independent-scratch-photo-frame,
+  .independent-scratch-hint {
+    transition: none;
+    transform: none;
+  }
+
+}
   </style>  <!-- این تگ حتماً باید اینجا بسته بشه -->
 
 </head>
@@ -2109,7 +2505,73 @@ visibility 0.45s ease;
   </div>
 </section>
 
+<!-- =========================================================
+     INDEPENDENT SCRATCH PHOTO SECTION
+     ========================================================= -->
+<section class="scroll-section independent-scratch-section" id="independentScratchSection">
 
+  <div class="independent-scratch-content">
+
+    <div class="independent-scratch-title">
+      <span>یک خاطره‌ی دوست‌داشتنی</span>
+    </div>
+
+    <div class="independent-scratch-subtitle">
+      تصویر را با انگشت خراش دهید
+    </div>
+
+    <div
+      class="independent-scratch-photo-frame"
+      id="independentScratchArea"
+      role="button"
+      tabindex="0"
+      aria-label="برای نمایان شدن تصویر روی آن بکشید"
+    >
+
+      <!-- عکس اصلی -->
+      <img
+        src="hero-photo.jpg"
+        class="independent-scratch-photo"
+        id="independentScratchPhoto"
+        alt="Our Moment"
+      />
+
+      <!-- افکت نور هنگام کامل شدن -->
+      <div
+        class="independent-scratch-flash"
+        id="independentScratchFlash"
+      ></div>
+
+      <!-- لایه روی عکس -->
+      <div
+        class="independent-photo-glass-layer"
+        id="independentPhotoGlassLayer"
+      >
+        <img
+          src="NOONMEEM.png"
+          class="independent-noonmeem-overlay"
+          alt=""
+        />
+      </div>
+
+      <!-- لایه خراش -->
+      <canvas
+        class="independent-scratch-canvas"
+        id="independentScratchCanvas"
+      ></canvas>
+
+    </div>
+
+    <div
+      class="independent-scratch-hint"
+      id="independentScratchHint"
+    >
+      با انگشت روی تصویر بکشید
+    </div>
+
+  </div>
+
+</section>
              <!-- سکشن دوم: موعد دیدار عشق ما -->
    <section class="scroll-section event-date-section">
      <!-- تیترها -->
@@ -3028,6 +3490,888 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
+     /* =========================================================
+   INDEPENDENT SCRATCH PHOTO
+   Completely independent from the Hero scratch system
+   ========================================================= */
+
+(() => {
+
+  const independentScratchSection =
+    document.getElementById('independentScratchSection');
+
+  const independentScratchArea =
+    document.getElementById('independentScratchArea');
+
+  const independentScratchCanvas =
+    document.getElementById('independentScratchCanvas');
+
+  const independentScratchPhoto =
+    document.getElementById('independentScratchPhoto');
+
+  const independentScratchFlash =
+    document.getElementById('independentScratchFlash');
+
+  const independentPhotoGlassLayer =
+    document.getElementById('independentPhotoGlassLayer');
+
+  const independentScratchHint =
+    document.getElementById('independentScratchHint');
+
+
+  /* ---------------------------------------------------------
+     Safety check
+     --------------------------------------------------------- */
+
+  if (
+    !independentScratchSection ||
+    !independentScratchArea ||
+    !independentScratchCanvas
+  ) {
+    return;
+  }
+
+
+  const ctx =
+    independentScratchCanvas.getContext(
+      '2d',
+      { willReadFrequently: false }
+    );
+
+
+  /* ---------------------------------------------------------
+     State
+     --------------------------------------------------------- */
+
+  let initialized = false;
+  let scratching = false;
+  let completed = false;
+
+  let previousPoint = null;
+
+  const gridColumns = 18;
+  const gridRows = 24;
+
+  const scratchedCells = new Set();
+
+
+  /* ---------------------------------------------------------
+     Canvas resize
+     --------------------------------------------------------- */
+
+  function resizeIndependentScratchCanvas() {
+
+    const rect =
+      independentScratchArea.getBoundingClientRect();
+
+    if (!rect.width || !rect.height) {
+      return;
+    }
+
+    const dpr =
+      Math.min(window.devicePixelRatio || 1, 2);
+
+    independentScratchCanvas.width =
+      Math.round(rect.width * dpr);
+
+    independentScratchCanvas.height =
+      Math.round(rect.height * dpr);
+
+    independentScratchCanvas.style.width =
+      rect.width + 'px';
+
+    independentScratchCanvas.style.height =
+      rect.height + 'px';
+
+    ctx.setTransform(
+      dpr,
+      0,
+      0,
+      dpr,
+      0,
+      0
+    );
+
+    drawScratchSurface(rect.width, rect.height);
+  }
+
+
+  /* ---------------------------------------------------------
+     Draw scratch coating
+     --------------------------------------------------------- */
+
+  function drawScratchSurface(width, height) {
+
+    ctx.clearRect(
+      0,
+      0,
+      width,
+      height
+    );
+
+
+    /* Metallic gradient */
+
+    const gradient =
+      ctx.createLinearGradient(
+        0,
+        0,
+        width,
+        height
+      );
+
+    gradient.addColorStop(0, '#d8d8d8');
+    gradient.addColorStop(0.22, '#a8aaad');
+    gradient.addColorStop(0.48, '#eeeeee');
+    gradient.addColorStop(0.72, '#999ca0');
+    gradient.addColorStop(1, '#d4d4d4');
+
+
+    ctx.fillStyle = gradient;
+
+    ctx.fillRect(
+      0,
+      0,
+      width,
+      height
+    );
+
+
+    /* Metallic texture */
+
+    for (let i = 0; i < 900; i++) {
+
+      const x =
+        Math.random() * width;
+
+      const y =
+        Math.random() * height;
+
+      const alpha =
+        0.025 + Math.random() * 0.08;
+
+      const size =
+        Math.random() * 1.5 + 0.3;
+
+      ctx.fillStyle =
+        `rgba(255,255,255,${alpha})`;
+
+      ctx.fillRect(
+        x,
+        y,
+        size,
+        size
+      );
+    }
+
+
+    /* Dark tiny texture */
+
+    for (let i = 0; i < 450; i++) {
+
+      const x =
+        Math.random() * width;
+
+      const y =
+        Math.random() * height;
+
+      const alpha =
+        0.015 + Math.random() * 0.04;
+
+      ctx.fillStyle =
+        `rgba(0,0,0,${alpha})`;
+
+      ctx.fillRect(
+        x,
+        y,
+        1,
+        1
+      );
+    }
+
+
+    /* Center instruction */
+
+    ctx.save();
+
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+
+    const fontSize =
+      Math.max(
+        14,
+        Math.min(21, width * 0.045)
+      );
+
+    ctx.font =
+      `600 ${fontSize}px Arial, sans-serif`;
+
+    ctx.fillStyle =
+      'rgba(255,255,255,0.82)';
+
+    ctx.shadowColor =
+      'rgba(0,0,0,0.18)';
+
+    ctx.shadowBlur = 3;
+
+    ctx.fillText(
+      'با انگشت روی تصویر بکشید',
+      width / 2,
+      height / 2
+    );
+
+    ctx.restore();
+  }
+
+
+  /* ---------------------------------------------------------
+     Get pointer position
+     --------------------------------------------------------- */
+
+  function getScratchPoint(event) {
+
+    const rect =
+      independentScratchCanvas.getBoundingClientRect();
+
+    return {
+      x: event.clientX - rect.left,
+      y: event.clientY - rect.top
+    };
+  }
+
+
+  /* ---------------------------------------------------------
+     Register scratched cells
+     --------------------------------------------------------- */
+
+  function registerScratchedCells(
+    point,
+    brushRadius
+  ) {
+
+    const rect =
+      independentScratchCanvas.getBoundingClientRect();
+
+    const cellWidth =
+      rect.width / gridColumns;
+
+    const cellHeight =
+      rect.height / gridRows;
+
+
+    const minColumn =
+      Math.max(
+        0,
+        Math.floor(
+          (point.x - brushRadius) / cellWidth
+        )
+      );
+
+    const maxColumn =
+      Math.min(
+        gridColumns - 1,
+        Math.floor(
+          (point.x + brushRadius) / cellWidth
+        )
+      );
+
+
+    const minRow =
+      Math.max(
+        0,
+        Math.floor(
+          (point.y - brushRadius) / cellHeight
+        )
+      );
+
+    const maxRow =
+      Math.min(
+        gridRows - 1,
+        Math.floor(
+          (point.y + brushRadius) / cellHeight
+        )
+      );
+
+
+    for (
+      let row = minRow;
+      row <= maxRow;
+      row++
+    ) {
+
+      for (
+        let column = minColumn;
+        column <= maxColumn;
+        column++
+      ) {
+
+        const cellCenterX =
+          column * cellWidth +
+          cellWidth / 2;
+
+        const cellCenterY =
+          row * cellHeight +
+          cellHeight / 2;
+
+
+        const dx =
+          cellCenterX - point.x;
+
+        const dy =
+          cellCenterY - point.y;
+
+
+        if (
+          Math.sqrt(
+            dx * dx +
+            dy * dy
+          ) <= brushRadius + Math.max(cellWidth, cellHeight)
+        ) {
+
+          scratchedCells.add(
+            `${column}-${row}`
+          );
+        }
+
+      }
+
+    }
+
+  }
+
+
+  /* ---------------------------------------------------------
+     Erase scratch line
+     --------------------------------------------------------- */
+
+  function eraseScratchLine(
+    from,
+    to
+  ) {
+
+    const rect =
+      independentScratchCanvas.getBoundingClientRect();
+
+    const brushRadius =
+      Math.max(
+        24,
+        Math.min(
+          42,
+          rect.width * 0.09
+        )
+      );
+
+
+    ctx.save();
+
+    ctx.globalCompositeOperation =
+      'destination-out';
+
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+
+    ctx.lineWidth =
+      brushRadius * 2;
+
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+      from.x,
+      from.y
+    );
+
+    ctx.lineTo(
+      to.x,
+      to.y
+    );
+
+    ctx.stroke();
+
+
+    /* Bigger soft brush */
+
+    ctx.globalAlpha = 0.15;
+
+    ctx.lineWidth =
+      brushRadius * 2.8;
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+      from.x,
+      from.y
+    );
+
+    ctx.lineTo(
+      to.x,
+      to.y
+    );
+
+    ctx.stroke();
+
+
+    ctx.restore();
+
+
+    registerScratchedCells(
+      from,
+      brushRadius
+    );
+
+    registerScratchedCells(
+      to,
+      brushRadius
+    );
+
+
+    checkIndependentScratchCompletion();
+  }
+
+
+  /* ---------------------------------------------------------
+     Check completion
+     --------------------------------------------------------- */
+
+  function checkIndependentScratchCompletion() {
+
+    if (completed) {
+      return;
+    }
+
+
+    const totalCells =
+      gridColumns * gridRows;
+
+    const revealedRatio =
+      scratchedCells.size / totalCells;
+
+
+    /*
+       55% is enough to automatically reveal
+       the entire image.
+    */
+
+    if (revealedRatio >= 0.55) {
+
+      completeIndependentScratchReveal();
+    }
+
+  }
+
+
+  /* ---------------------------------------------------------
+     Complete reveal
+     --------------------------------------------------------- */
+
+  function completeIndependentScratchReveal() {
+
+    if (completed) {
+      return;
+    }
+
+    completed = true;
+    scratching = false;
+
+
+    independentScratchArea.classList.add(
+      'revealed'
+    );
+
+
+    if (independentScratchFlash) {
+
+      independentScratchFlash.classList.remove(
+        'flash-active'
+      );
+
+      /*
+         Force reflow so animation can restart
+      */
+
+      void independentScratchFlash.offsetWidth;
+
+      independentScratchFlash.classList.add(
+        'flash-active'
+      );
+    }
+
+
+    /*
+       Fade the remaining scratch layer away.
+    */
+
+    setTimeout(() => {
+
+      ctx.clearRect(
+        0,
+        0,
+        independentScratchCanvas.width,
+        independentScratchCanvas.height
+      );
+
+    }, 500);
+
+
+    if (independentScratchHint) {
+
+      independentScratchHint.textContent =
+        '❤️ خاطره‌مان برای همیشه ماندگار است ❤️';
+    }
+
+  }
+
+
+  /* ---------------------------------------------------------
+     Pointer Down
+     --------------------------------------------------------- */
+
+  function handlePointerDown(event) {
+
+    if (completed) {
+      return;
+    }
+
+
+    event.preventDefault();
+
+    scratching = true;
+
+    previousPoint =
+      getScratchPoint(event);
+
+
+    try {
+
+      independentScratchCanvas.setPointerCapture(
+        event.pointerId
+      );
+
+    } catch (error) {
+      /* Ignore pointer capture errors */
+    }
+
+
+    /*
+       Create the first scratch point
+    */
+
+    const point =
+      previousPoint;
+
+    const rect =
+      independentScratchCanvas.getBoundingClientRect();
+
+    const brushRadius =
+      Math.max(
+        24,
+        Math.min(
+          42,
+          rect.width * 0.09
+        )
+      );
+
+
+    ctx.save();
+
+    ctx.globalCompositeOperation =
+      'destination-out';
+
+    ctx.beginPath();
+
+    ctx.arc(
+      point.x,
+      point.y,
+      brushRadius,
+      0,
+      Math.PI * 2
+    );
+
+    ctx.fill();
+
+    ctx.restore();
+
+
+    registerScratchedCells(
+      point,
+      brushRadius
+    );
+
+    checkIndependentScratchCompletion();
+  }
+
+
+  /* ---------------------------------------------------------
+     Pointer Move
+     --------------------------------------------------------- */
+
+  function handlePointerMove(event) {
+
+    if (
+      !scratching ||
+      completed ||
+      !previousPoint
+    ) {
+      return;
+    }
+
+
+    event.preventDefault();
+
+
+    const currentPoint =
+      getScratchPoint(event);
+
+
+    eraseScratchLine(
+      previousPoint,
+      currentPoint
+    );
+
+
+    previousPoint =
+      currentPoint;
+  }
+
+
+  /* ---------------------------------------------------------
+     Stop scratching
+     --------------------------------------------------------- */
+
+  function stopIndependentScratching() {
+
+    scratching = false;
+    previousPoint = null;
+  }
+
+
+  /* ---------------------------------------------------------
+     Keyboard accessibility
+     --------------------------------------------------------- */
+
+  function handleKeyboard(event) {
+
+    if (
+      event.key !== 'Enter' &&
+      event.key !== ' '
+    ) {
+      return;
+    }
+
+    event.preventDefault();
+
+    if (completed) {
+      return;
+    }
+
+
+    /*
+       Reveal the center when keyboard is used.
+    */
+
+    const rect =
+      independentScratchCanvas.getBoundingClientRect();
+
+    const center = {
+      x: rect.width / 2,
+      y: rect.height / 2
+    };
+
+
+    const brushRadius =
+      Math.max(
+        24,
+        Math.min(
+          42,
+          rect.width * 0.09
+        )
+      );
+
+
+    ctx.save();
+
+    ctx.globalCompositeOperation =
+      'destination-out';
+
+    ctx.beginPath();
+
+    ctx.arc(
+      center.x,
+      center.y,
+      brushRadius * 1.5,
+      0,
+      Math.PI * 2
+    );
+
+    ctx.fill();
+
+    ctx.restore();
+
+
+    registerScratchedCells(
+      center,
+      brushRadius * 1.5
+    );
+
+    checkIndependentScratchCompletion();
+  }
+
+
+  /* ---------------------------------------------------------
+     Initialize
+     --------------------------------------------------------- */
+
+  function initializeIndependentScratch() {
+
+    if (initialized) {
+      return;
+    }
+
+    initialized = true;
+
+    scratchedCells.clear();
+
+    completed = false;
+
+    independentScratchArea.classList.remove(
+      'revealed'
+    );
+
+    resizeIndependentScratchCanvas();
+  }
+
+
+  /* ---------------------------------------------------------
+     Resize
+     --------------------------------------------------------- */
+
+  window.addEventListener(
+    'resize',
+    () => {
+
+      if (!initialized) {
+        return;
+      }
+
+      /*
+         Don't redraw the scratch layer after
+         the user has already started scratching.
+      */
+
+      if (
+        !scratching &&
+        !completed
+      ) {
+        resizeIndependentScratchCanvas();
+      }
+
+    }
+  );
+
+
+  /* ---------------------------------------------------------
+     Pointer events
+     --------------------------------------------------------- */
+
+  independentScratchCanvas.addEventListener(
+    'pointerdown',
+    handlePointerDown,
+    { passive: false }
+  );
+
+
+  independentScratchCanvas.addEventListener(
+    'pointermove',
+    handlePointerMove,
+    { passive: false }
+  );
+
+
+  independentScratchCanvas.addEventListener(
+    'pointerup',
+    stopIndependentScratching
+  );
+
+
+  independentScratchCanvas.addEventListener(
+    'pointercancel',
+    stopIndependentScratching
+  );
+
+
+  independentScratchCanvas.addEventListener(
+    'lostpointercapture',
+    stopIndependentScratching
+  );
+
+
+  /* ---------------------------------------------------------
+     Keyboard
+     --------------------------------------------------------- */
+
+  independentScratchArea.addEventListener(
+    'keydown',
+    handleKeyboard
+  );
+
+
+  /* ---------------------------------------------------------
+     Initialize when section becomes visible
+     --------------------------------------------------------- */
+
+  if ('IntersectionObserver' in window) {
+
+    const observer =
+      new IntersectionObserver(
+        entries => {
+
+          entries.forEach(entry => {
+
+            if (
+              entry.isIntersecting &&
+              entry.intersectionRatio > 0.2
+            ) {
+
+              independentScratchSection.classList.add(
+                'visible'
+              );
+
+              /*
+                 Wait until CSS layout has settled.
+              */
+
+              requestAnimationFrame(() => {
+
+                initializeIndependentScratch();
+
+              });
+
+            }
+
+          });
+
+        },
+        {
+          threshold: [0.2, 0.5, 0.8]
+        }
+      );
+
+
+    observer.observe(
+      independentScratchSection
+    );
+
+  } else {
+
+    independentScratchSection.classList.add(
+      'visible'
+    );
+
+    initializeIndependentScratch();
+  }
+
+
+})();
 </script>
 
 
