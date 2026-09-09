@@ -3002,6 +3002,37 @@ margin: 0;
 }
 </style>
 
+
+<style>
+/* FIX قطعی فاصله بالای سکشن ۴ — محتوا از ابتدای خود سکشن شروع شود */
+.section-four {
+  position: relative !important;
+  align-items: flex-start !important;
+  justify-content: flex-start !important;
+  padding-top: 0 !important;
+  padding-bottom: 12px !important;
+}
+.section-four-inner {
+  position: absolute !important;
+  top: 4px !important;
+  left: 50% !important;
+  width: min(100%, 620px) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  transform: translateX(-50%) !important;
+}
+.section-four-map-block {
+  margin-top: 0 !important;
+}
+.section-four-map-card {
+  margin-top: 0 !important;
+}
+@media (max-width: 600px) {
+  .section-four-inner {
+    top: 4px !important;
+  }
+}
+</style>
 </head>
 <body>
   <!-- لایه سراسری مرواریدهای شیشه‌ای برای تمام صفحات -->
