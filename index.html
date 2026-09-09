@@ -2340,7 +2340,7 @@ visibility 0.45s ease;
   </div>
 <!-- اینترو ویدیو (Splash Screen) -->
 <div class="intro-screen" id="introScreen">
-  <video class="intro-video" id="introVideo" muted playsinline webkit-playsinline preload="auto">
+  <video class="intro-video" id="introVideo" muted playsinline webkit-playsinline preload="metadata">
     <source src="intro-video.mp4" type="video/mp4" />
   </video>
   <div class="intro-hint" id="introHint">برای ورود لمس کنید</div>
@@ -2682,22 +2682,50 @@ function start() {
   }
 }
 
-// مدیریت کلیک و پخش ویدیو
 if (introScreen && introVideo) {
-  // اگر ویدیو خودش شروع به پخش کرد یا با لمس کاربر، در هر دو حالت با لمس صفحه بلافاصله وارد سایت می‌شود (Skip)
-  introVideo.play().catch(() => {
-    // در صورت بلاک شدن پخش خودکار توسط مرورگر، منتظر لمس کاربر می‌ماند
+
+  // ویدیو در ابتدا متوقف باشد
+  introVideo.pause();
+
+  let videoStarted = false;
+
+
+  // کلیک اول = شروع ویدیو
+  // کلیک دوم = ورود به سایت
+  introScreen.addEventListener('click', () => {
+
+    if (!videoStarted) {
+
+      videoStarted = true;
+
+      introVideo.play().catch(() => {
+        console.log('ویدیو اجرا نشد.');
+      });
+
+    } else {
+
+      start();
+
+    }
+
   });
 
-  introScreen.addEventListener('click', () => {
+
+  // بعد از تمام شدن ویدیو وارد سایت شو
+  introVideo.addEventListener('ended', () => {
     start();
   });
 
-  // اگر کاربر کلیک نکرد، پس از اتمام ویدیو خودکار وارد سایت شود
-  introVideo.addEventListener('ended', start);
-  introVideo.addEventListener('error', start);
+
+  // اگر فایل ویدیو مشکل داشت وارد سایت شو
+  introVideo.addEventListener('error', () => {
+    start();
+  });
+
 } else {
+
   start();
+
 }
 
 
