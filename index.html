@@ -2358,21 +2358,43 @@ margin: 0;
    جابه‌جایی عکس خراشیدنی به سکشن ۳ + قاب قلبی
    ========================================================= */
 
-/* محفظه‌ی عکس داخل سکشن ۳ */
+/* =========================================================
+   SCRATCH HEART IN SECTION 3
+   ========================================================= */
+
 .section-three .section-three-scratch-content {
+  position: relative;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 4px 0 2px;
-  padding: 0;
+  margin: 12px 0 18px;
+  padding: 12px 0 22px;
   min-height: 0;
   height: auto;
+  overflow: visible;
 }
 
-/* قاب قلبی */
+/* قلب سفیدِ زیر عکس؛ مثل استروک/پشت‌قاب پولاروید */
+.section-three .section-three-scratch-content::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(56vw, 267px);
+  height: min(52vh, 262px);
+  transform: translate(-50%, -48%) translateY(10px) scale(1.045);
+  background: #fff;
+  clip-path: url("#smoothHeartClip");
+  filter: drop-shadow(0 5px 10px rgba(0,0,0,.08));
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* قلب اصلی */
 .section-three .independent-scratch-photo-frame {
   position: relative;
+  z-index: 1;
   width: min(54vw, 255px);
   height: min(50vh, 250px);
   aspect-ratio: 1 / 1;
@@ -2383,31 +2405,31 @@ margin: 0;
   overflow: hidden;
   isolation: isolate;
   background: #d8d8d8;
-  box-shadow:
-    0 18px 45px rgba(0, 0, 0, 0.22),
-    0 4px 12px rgba(0, 0, 0, 0.12);
+  clip-path: url("#smoothHeartClip");
+  filter: drop-shadow(0 0 2px rgba(255,255,255,1))
+          drop-shadow(0 0 5px rgba(255,255,255,.95));
   cursor: crosshair;
   user-select: none;
   -webkit-user-select: none;
   touch-action: none;
 
-  /* قلب نرم و متقارن */
-  border-radius: 0;
-  clip-path: url("#smoothHeartClip");
-  filter:
-    drop-shadow(0 0 2px rgba(255,255,255,1))
-    drop-shadow(0 0 5px rgba(255,255,255,1))
-    drop-shadow(0 0 9px rgba(255,255,255,.72));
-
   opacity: 0;
-  transform: translateY(32px) scale(0.86) rotate(-3deg);
+  transform: translateY(32px) scale(.86) rotate(-3deg);
   transition:
-    opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity .8s cubic-bezier(.16,1,.3,1),
+    transform .8s cubic-bezier(.16,1,.3,1);
   will-change: opacity, transform;
 }
 
-/* حاشیه‌ی سفید قلبی با pseudo-element */
+/* عکس و تمام لایه‌های خراش دقیقاً همان قلب را می‌گیرند */
+.section-three .independent-scratch-photo,
+.section-three .independent-scratch-canvas,
+.section-three .independent-photo-glass-layer,
+.section-three .independent-scratch-flash {
+  clip-path: url("#smoothHeartClip");
+}
+
+/* استروک سفید واقعی دور خود قلب */
 .section-three .independent-scratch-photo-frame::before {
   content: "";
   position: absolute;
@@ -2416,30 +2438,108 @@ margin: 0;
   pointer-events: none;
   border: 0;
   background: transparent;
-  clip-path: inherit;
-  transform: scale(1.035);
+  clip-path: url("#smoothHeartClip");
+  box-shadow: inset 0 0 0 7px rgba(255,255,255,.98);
 }
 
-/* ورود */
 .section-three.visible .independent-scratch-photo-frame {
   opacity: 1;
   transform: translateY(0) scale(1) rotate(0deg);
-  transition-delay: 0.70s;
+  transition-delay: .70s;
 }
 
-/* خروج هنگام ترک سکشن */
 .section-three:not(.visible) .independent-scratch-photo-frame {
   opacity: 0;
-  transform: translateY(-24px) scale(0.86) rotate(3deg);
+  transform: translateY(-24px) scale(.86) rotate(3deg);
   transition-delay: 0s;
 }
 
-/* عکس و لایه‌های داخلی هم دقیقاً داخل قلب بمانند */
-.section-three .independent-scratch-photo,
-.section-three .independent-scratch-canvas,
-.section-three .independent-photo-glass-layer,
-.section-three .independent-scratch-flash {
-  clip-path: inherit;
+/* متن راهنما کاملاً حذف شده */
+.section-three .independent-touch-hint {
+  display: none !important;
+}
+
+/* NOONMEEM بزرگ بعد از ریویل */
+.section-three .independent-photo-glass-layer {
+  display: none !important;
+}
+
+.noonmeem-reveal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(255,255,255,.18);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity .35s ease, visibility .35s ease;
+}
+
+.noonmeem-reveal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.noonmeem-reveal-overlay img {
+  width: min(72vw, 430px);
+  max-width: 430px;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 18px 38px rgba(0,0,0,.22));
+  transform: scale(.72);
+  opacity: 0;
+}
+
+.noonmeem-reveal-overlay.active img {
+  animation: noonmeemRevealPop .65s cubic-bezier(.16,1,.3,1) forwards;
+}
+
+@keyframes noonmeemRevealPop {
+  0% { opacity: 0; transform: scale(.72) rotate(-5deg); }
+  65% { opacity: 1; transform: scale(1.06) rotate(1deg); }
+  100% { opacity: 1; transform: scale(1) rotate(0); }
+}
+
+@media (max-width: 600px) {
+  .section-three .section-three-scratch-content {
+    margin: 8px 0 14px;
+    padding: 8px 0 18px;
+  }
+
+  .section-three .independent-scratch-photo-frame {
+    width: min(52vw, 220px);
+    height: min(44vh, 220px);
+  }
+
+  .section-three .section-three-scratch-content::before {
+    width: min(54vw, 231px);
+    height: min(46vh, 231px);
+  }
+}
+
+@media (max-height: 700px) {
+  .section-three .independent-scratch-photo-frame {
+    width: min(48vw, 200px);
+    height: min(40vh, 200px);
+  }
+
+  .section-three .section-three-scratch-content::before {
+    width: min(50vw, 210px);
+    height: min(42vh, 210px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-three .independent-scratch-photo-frame,
+  .noonmeem-reveal-overlay,
+  .noonmeem-reveal-overlay img {
+    transition-duration: .01ms;
+    animation-duration: .01ms !important;
+  }
 }
 
 /* کمی کوچک‌تر روی موبایل‌های باریک */
@@ -2651,7 +2751,7 @@ margin: 0;
       <svg aria-hidden="true" width="0" height="0" style="position:absolute;overflow:hidden;pointer-events:none">
   <defs>
     <clipPath id="smoothHeartClip" clipPathUnits="objectBoundingBox">
-      <path d="M0.5,0.92 C0.43,0.86 0.08,0.63 0.04,0.39 C0.005,0.19 0.13,0.06 0.28,0.06 C0.39,0.06 0.47,0.12 0.5,0.22 C0.53,0.12 0.61,0.06 0.72,0.06 C0.87,0.06 0.995,0.19 0.96,0.39 C0.92,0.63 0.57,0.86 0.5,0.92 Z"/>
+      <path d="M0.5,0.94 C0.46,0.90 0.12,0.69 0.05,0.43 C0.00,0.23 0.11,0.07 0.27,0.06 C0.38,0.05 0.46,0.11 0.5,0.23 C0.54,0.11 0.62,0.05 0.73,0.06 C0.89,0.07 1.00,0.23 0.95,0.43 C0.88,0.69 0.54,0.90 0.5,0.94 Z"/>
     </clipPath>
   </defs>
 </svg>
@@ -2724,6 +2824,11 @@ margin: 0;
               </div>
 
             </div>
+          </div>
+
+          <!-- نمایش بزرگ NOONMEEM بلافاصله بعد از ریویل -->
+          <div class="noonmeem-reveal-overlay" id="noonmeemRevealOverlay" aria-hidden="true">
+            <img src="NOONMEEM.png" alt="NOONMEEM" />
           </div>
 
           <!-- ۴. اطلاعات تالار و مینی‌مپ کلیک‌خور -->
@@ -4211,6 +4316,8 @@ ctx.fillStyle =
       'revealed'
     );
 
+    // دقیقاً بعد از ریویل شدن عکس، NOONMEEM بزرگ نمایش داده شود.
+    showNoonmeemReveal();
 
     if (independentScratchFlash) {
 
@@ -4249,17 +4356,24 @@ ctx.fillStyle =
  
   }
 /* ---------------------------------------------------------
-   Show NooNMeeM after touching revealed photo
+   Show large NooNMeeM immediately after reveal
    --------------------------------------------------------- */
 
+const noonmeemRevealOverlay =
+  document.getElementById('noonmeemRevealOverlay');
+
+function showNoonmeemReveal() {
+  if (!noonmeemRevealOverlay) return;
+
+  noonmeemRevealOverlay.classList.remove('active');
+  void noonmeemRevealOverlay.offsetWidth;
+  noonmeemRevealOverlay.classList.add('active');
+  noonmeemRevealOverlay.setAttribute('aria-hidden', 'false');
+}
+
+// اگر روی عکسِ ریویل‌شده کلیک هم شد، دوباره نمایش داده شود.
 independentScratchArea.addEventListener('click', () => {
-
-  if (!completed) {
-    return;
-  }
-
-  independentScratchArea.classList.add('show-noonmeem');
-
+  if (completed) showNoonmeemReveal();
 });
 
   /* ---------------------------------------------------------
