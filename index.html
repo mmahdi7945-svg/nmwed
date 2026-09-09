@@ -1800,97 +1800,6 @@ visibility 0.45s ease;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
-/* استایل پاپ‌آپ (Modal) */
-.nav-modal-backdrop {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.55);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
-  z-index: 999999;
-  padding: 20px;
-}
-
-.nav-modal-backdrop.show {
-  opacity: 1;
-  visibility: visible;
-}
-
-.nav-modal-box {
-  background: rgba(255, 255, 255, 0.88);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  border-radius: 24px;
-  padding: 22px 18px 18px;
-  width: 100%;
-  max-width: 320px;
-  text-align: center;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-  transform: translateY(20px) scale(0.95);
-  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  direction: rtl;
-}
-
-.nav-modal-backdrop.show .nav-modal-box {
-  transform: translateY(0) scale(1);
-}
-
-.nav-modal-title {
-  font-size: 13px;
-  font-weight: 700;
-  color: #4a4a4a;
-  margin-bottom: 16px;
-}
-
-.nav-apps-row {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  gap: 10px;
-}
-
-.nav-app-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  text-decoration: none;
-  color: #333;
-  font-size: 11px;
-  font-weight: 600;
-  transition: transform 0.2s ease;
-}
-
-.nav-app-item:active {
-  transform: scale(0.92);
-}
-
-.nav-app-icon-wrap {
-  width: 52px;
-  height: 52px;
-  border-radius: 14px;
-  background: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  overflow: hidden;
-}
-
-.nav-app-icon-wrap img {
-  width: 32px;
-  height: 32px;
-  object-fit: contain;
-}
-
 /* سازگاری نهایی با آیفون و Safari */
 
 .intro-screen {
@@ -2734,13 +2643,33 @@ margin: 0;
   88% { opacity:.55; }
   100% { opacity:0; transform:translate3d(var(--drift),118vh,0) rotate(calc(var(--tilt) + 390deg)) scale(.6); }
 }
-.flower-g1{--size:34px;--duration:9s;--delay:-1s;--start-right:2%;--drift:-90px}.flower-g2{--size:24px;--duration:7s;--delay:-5s;--start-right:9%;--drift:-55px}.flower-g3{--size:30px;--duration:10s;--delay:-7s;--start-right:16%;--drift:-120px}.flower-g4{--size:21px;--duration:8s;--delay:-2s;--start-right:24%;--drift:-70px}.flower-g5{--size:38px;--duration:11s;--delay:-9s;--start-right:31%;--drift:-100px}.flower-g6{--size:26px;--duration:7.5s;--delay:-4s;--start-right:38%;--drift:-80px}.flower-g7{--size:32px;--duration:9.5s;--delay:-12s;--start-right:46%;--drift:-110px}.flower-g8{--size:22px;--duration:8.5s;--delay:-6s;--start-right:54%;--drift:-65px}.flower-g9{--size:36px;--duration:10.5s;--delay:-3s;--start-right:62%;--drift:-100px}.flower-g10{--size:25px;--duration:7.2s;--delay:-10s;--start-right:69%;--drift:-75px}.flower-g11{--size:31px;--duration:9s;--delay:-8s;--start-right:76%;--drift:-115px}.flower-g12{--size:23px;--duration:8s;--delay:-13s;--start-right:83%;--drift:-60px}.flower-g13{--size:35px;--duration:11.5s;--delay:-4s;--start-right:89%;--drift:-90px}.flower-g14{--size:27px;--duration:8.8s;--delay:-11s;--start-right:95%;--drift:-125px}.flower-g15{--size:20px;--duration:7.8s;--delay:-1s;--start-right:12%;--drift:-50px}.flower-g16{--size:33px;--duration:10s;--delay:-6s;--start-right:28%;--drift:-90px}.flower-g17{--size:25px;--duration:8.2s;--delay:-9s;--start-right:43%;--drift:-75px}.flower-g18{--size:37px;--duration:12s;--delay:-2s;--start-right:58%;--drift:-110px}.flower-g19{--size:22px;--duration:7.4s;--delay:-5s;--start-right:72%;--drift:-65px}.flower-g20{--size:29px;--duration:9.8s;--delay:-12s;--start-right:87%;--drift:-95px}.flower-g21{--size:24px;--duration:8.6s;--delay:-7s;--start-right:4%;--drift:-70px}.flower-g22{--size:35px;--duration:10.8s;--delay:-3s;--start-right:20%;--drift:-120px}.flower-g23{--size:27px;--duration:7.9s;--delay:-10s;--start-right:67%;--drift:-80px}.flower-g24{--size:30px;--duration:9.3s;--delay:-14s;--start-right:92%;--drift:-105px}
-@media (max-width:600px){.silver-flower-global{--size:24px}.flower-g1,.flower-g5,.flower-g7,.flower-g13,.flower-g18,.flower-g22{--size:29px}}
+.flower-g1{--size:21px;--duration:9s;--delay:-1s;--start-right:2%;--drift:-90px}.flower-g2{--size:15px;--duration:7s;--delay:-5s;--start-right:9%;--drift:-55px}.flower-g3{--size:19px;--duration:10s;--delay:-7s;--start-right:16%;--drift:-120px}.flower-g4{--size:15px;--duration:8s;--delay:-2s;--start-right:24%;--drift:-70px}.flower-g5{--size:24px;--duration:11s;--delay:-9s;--start-right:31%;--drift:-100px}.flower-g6{--size:16px;--duration:7.5s;--delay:-4s;--start-right:38%;--drift:-80px}.flower-g7{--size:20px;--duration:9.5s;--delay:-12s;--start-right:46%;--drift:-110px}.flower-g8{--size:15px;--duration:8.5s;--delay:-6s;--start-right:54%;--drift:-65px}.flower-g9{--size:22px;--duration:10.5s;--delay:-3s;--start-right:62%;--drift:-100px}.flower-g10{--size:16px;--duration:7.2s;--delay:-10s;--start-right:69%;--drift:-75px}.flower-g11{--size:19px;--duration:9s;--delay:-8s;--start-right:76%;--drift:-115px}.flower-g12{--size:15px;--duration:8s;--delay:-13s;--start-right:83%;--drift:-60px}.flower-g13{--size:22px;--duration:11.5s;--delay:-4s;--start-right:89%;--drift:-90px}.flower-g14{--size:17px;--duration:8.8s;--delay:-11s;--start-right:95%;--drift:-125px}.flower-g15{--size:15px;--duration:7.8s;--delay:-1s;--start-right:12%;--drift:-50px}.flower-g16{--size:20px;--duration:10s;--delay:-6s;--start-right:28%;--drift:-90px}.flower-g17{--size:16px;--duration:8.2s;--delay:-9s;--start-right:43%;--drift:-75px}.flower-g18{--size:23px;--duration:12s;--delay:-2s;--start-right:58%;--drift:-110px}.flower-g19{--size:15px;--duration:7.4s;--delay:-5s;--start-right:72%;--drift:-65px}.flower-g20{--size:18px;--duration:9.8s;--delay:-12s;--start-right:87%;--drift:-95px}.flower-g21{--size:15px;--duration:8.6s;--delay:-7s;--start-right:4%;--drift:-70px}.flower-g22{--size:22px;--duration:10.8s;--delay:-3s;--start-right:20%;--drift:-120px}.flower-g23{--size:17px;--duration:7.9s;--delay:-10s;--start-right:67%;--drift:-80px}.flower-g24{--size:19px;--duration:9.3s;--delay:-14s;--start-right:92%;--drift:-105px}
+@media (max-width:600px){.silver-flower-global{--size:18px}.flower-g1,.flower-g5,.flower-g7,.flower-g13,.flower-g18,.flower-g22{--size:22px}}
 @media(prefers-reduced-motion:reduce){.silver-flower-global{animation:none!important;opacity:.28;transform:none!important}}
-}
 
 </style>  <!-- این تگ حتماً باید اینجا بسته بشه -->
 
+
+<style>
+/* تثبیت انیمیشن‌های سکشن ۳: هر بار ورود به سکشن دوباره اجرا می‌شود */
+.section-three .countdown-title,
+.section-three .cd-box,
+.section-three .section-three-scratch-content,
+.section-three .section-three-always-wrap,
+.section-three .section-three-heartline {
+  will-change: opacity, transform;
+}
+.section-three .section-three-scratch-content {
+  opacity: 0;
+  transform: translateY(30px) scale(.96);
+  transition: opacity .75s cubic-bezier(.16,1,.3,1), transform .75s cubic-bezier(.16,1,.3,1);
+}
+.section-three.visible .section-three-scratch-content {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition-delay: .70s;
+}
+</style>
 </head>
 <body>
   <!-- لایه سراسری مرواریدهای شیشه‌ای برای تمام صفحات -->
@@ -2790,41 +2719,39 @@ margin: 0;
 </div>
 
 
-<div class="silver-flower-rain-global" aria-hidden="true">
-  <span class="silver-flower-global flower-g1"></span>
-  <span class="silver-flower-global flower-g2"></span>
-  <span class="silver-flower-global flower-g3"></span>
-  <span class="silver-flower-global flower-g4"></span>
-  <span class="silver-flower-global flower-g5"></span>
-  <span class="silver-flower-global flower-g6"></span>
-  <span class="silver-flower-global flower-g7"></span>
-  <span class="silver-flower-global flower-g8"></span>
-  <span class="silver-flower-global flower-g9"></span>
-  <span class="silver-flower-global flower-g10"></span>
-  <span class="silver-flower-global flower-g11"></span>
-  <span class="silver-flower-global flower-g12"></span>
-  <span class="silver-flower-global flower-g13"></span>
-  <span class="silver-flower-global flower-g14"></span>
-  <span class="silver-flower-global flower-g15"></span>
-  <span class="silver-flower-global flower-g16"></span>
-  <span class="silver-flower-global flower-g17"></span>
-  <span class="silver-flower-global flower-g18"></span>
-  <span class="silver-flower-global flower-g19"></span>
-  <span class="silver-flower-global flower-g20"></span>
-  <span class="silver-flower-global flower-g21"></span>
-  <span class="silver-flower-global flower-g22"></span>
-  <span class="silver-flower-global flower-g23"></span>
-  <span class="silver-flower-global flower-g24"></span>
-</div>
-
 <main class="website-content" id="websiteContent">
 
    
     <!-- سکشن ۱ -->
 <section class="scroll-section hero-section">
 
-  <!-- گل‌باران مینیمال نقره‌ای -->
-  
+  <!-- گل‌ها فقط داخل سکشن ۱ و با اندازه کوچک‌تر -->
+  <div class="silver-flower-rain-global" aria-hidden="true">
+    <span class="silver-flower-global flower-g1"></span>
+    <span class="silver-flower-global flower-g2"></span>
+    <span class="silver-flower-global flower-g3"></span>
+    <span class="silver-flower-global flower-g4"></span>
+    <span class="silver-flower-global flower-g5"></span>
+    <span class="silver-flower-global flower-g6"></span>
+    <span class="silver-flower-global flower-g7"></span>
+    <span class="silver-flower-global flower-g8"></span>
+    <span class="silver-flower-global flower-g9"></span>
+    <span class="silver-flower-global flower-g10"></span>
+    <span class="silver-flower-global flower-g11"></span>
+    <span class="silver-flower-global flower-g12"></span>
+    <span class="silver-flower-global flower-g13"></span>
+    <span class="silver-flower-global flower-g14"></span>
+    <span class="silver-flower-global flower-g15"></span>
+    <span class="silver-flower-global flower-g16"></span>
+    <span class="silver-flower-global flower-g17"></span>
+    <span class="silver-flower-global flower-g18"></span>
+    <span class="silver-flower-global flower-g19"></span>
+    <span class="silver-flower-global flower-g20"></span>
+    <span class="silver-flower-global flower-g21"></span>
+    <span class="silver-flower-global flower-g22"></span>
+    <span class="silver-flower-global flower-g23"></span>
+    <span class="silver-flower-global flower-g24"></span>
+  </div>
 
   <div class="hero-flip-card" id="heroFlipCard">
     <div class="hero-flip-inner">
@@ -3029,7 +2956,8 @@ margin: 0;
             <div class="section-three-always-text">Always</div>
             <img
               class="section-three-heartline"
-              src="https://raw.githubusercontent.com/mmahdi7945-svg/nmwed/main/HeartLine.png"
+              src="LINEEHEARTT.png"
+              onerror="this.onerror=null; this.src='HeartLine.png';"
               alt="Heart line"
             />
           </div>
@@ -3047,15 +2975,14 @@ margin: 0;
         <div class="section-four-map-block">
           <div class="map-card-wrapper section-four-map-card">
             <div class="map-card-header">- اراک، جاده اراک - مرزیجران، ارم، تالارباغ ارم -</div>
-            <div class="mini-map-frame" id="miniMapTrigger" role="button" tabindex="0" aria-label="مسیریابی به سمت تالار">
+            <div class="mini-map-frame" aria-label="نقشه محل برگزاری">
               <iframe
                 class="mini-map-iframe"
                 src="https://maps.google.com/maps?q=34.1173579,49.6697487&z=15&output=embed"
-                loading="lazy">
+                loading="lazy"
+                allowfullscreen
+                referrerpolicy="no-referrer-when-downgrade">
               </iframe>
-              <div class="map-click-overlay">
-                <span class="map-click-badge">برای مسیریابی کلیک کنید</span>
-              </div>
             </div>
           </div>
 
@@ -3091,43 +3018,7 @@ margin: 0;
 
 
   </main>
-<!-- پاپ‌آپ شیشه‌ای انتخاب مسیریاب -->
-<div class="nav-modal-backdrop" id="navModal">
-  <div class="nav-modal-box">
-    <div class="nav-modal-title">مسیریابی با اپلیکیشن دلخواه:</div>
-    <div class="nav-apps-row">
-
-    <!-- بلد -->
-    <a href="https://balad.ir/p/%D8%A8%D8%A7%D8%BA-%D8%AA%D8%A7%D9%84%D8%A7%D8%B1-%D9%85%D8%AC%D9%84%D9%84-%D8%A7%D8%B1%D9%85_ceremonial-services-PBoqVO7dYACB1Y" class="nav-app-item" target="_blank" rel="noopener">
-        <div class="nav-app-icon-wrap">
-            <img src="balad.png" alt="بلد" class="nav-app-icon">
-        </div>
-        <span class="nav-app-name">بلد</span>
-    </a>
-    
-    <!-- گوگل مپ -->
-    <a href="https://maps.google.com/?q=34.1173579,49.6697487" class="nav-app-item" target="_blank" rel="noopener">
-        <div class="nav-app-icon-wrap">
-            <img src="google-maps.png" alt="گوگل مپ" class="nav-app-icon">
-        </div>
-        <span class="nav-app-name">گوگل مپ</span>
-    </a>
-
-    <!-- نشان -->
-    <a href="https://neshan.org/maps/places/5b60e8b52ab9457d1e47b1861b7104e4#c34.117-49.675-15z-0p" class="nav-app-item" target="_blank" rel="noopener">
-        <div class="nav-app-icon-wrap">
-            <img src="neshan.png" alt="نشان" class="nav-app-icon">
-        </div>
-        <span class="nav-app-name">نشان</span>
-    </a>
-</div>
-
-  </div>
-</div>
-
-
-
-  <script>
+<script>
 // دریافت المان‌های اصلی
 const introScreen = document.getElementById('introScreen');
 const introVideo = document.getElementById('introVideo');
@@ -3320,23 +3211,24 @@ musicNoBtn.addEventListener('click', () => {
 
 });
 
-    const observer = new IntersectionObserver((entries) => {
+    /* ناظر اسکرول با root خود کانتینر؛ انیمیشن‌های سکشن ۳ و ۴ دوباره درست تریگر می‌شوند */
+const scrollSections = document.querySelectorAll('.scroll-section');
+
+const sectionObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     const section = entry.target;
-
-    if (entry.isIntersecting) {
+    if (entry.isIntersecting && entry.intersectionRatio >= 0.35) {
       section.classList.add('visible');
-    } else {
+    } else if (!entry.isIntersecting) {
       section.classList.remove('visible');
     }
   });
 }, {
-  threshold: 0.5
+  root: websiteContent || null,
+  threshold: [0, 0.35, 0.5, 0.75, 1]
 });
 
-document.querySelectorAll('.scroll-section').forEach(section => {
-  observer.observe(section);
-});
+scrollSections.forEach(section => sectionObserver.observe(section));
 /* =========================================
    GYROSCOPE / DEVICE ORIENTATION
    iPhone + Android
@@ -3591,25 +3483,29 @@ if (scrollHintBtn && websiteContent) scrollHintBtn.addEventListener('click', () 
   }
 });
     // منطق تایمر
+    const countdownTarget = new Date("2026-10-16T19:00:00+03:30").getTime();
+    const cdDays = document.getElementById('cdDays');
+    const cdHours = document.getElementById('cdHours');
+    const cdMinutes = document.getElementById('cdMinutes');
+    const cdSeconds = document.getElementById('cdSeconds');
+
     function updateCountdown() {
-      const targetDate = new Date("2026-10-16T19:00:00+03:30").getTime();
-      const now = new Date().getTime();
-      const diff = targetDate - now;
+      if (!cdDays || !cdHours || !cdMinutes || !cdSeconds) return;
 
-      if (diff > 0) {
-        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        const s = Math.floor((diff % (1000 * 60)) / 1000);
+      const diff = Math.max(0, countdownTarget - Date.now());
+      const d = Math.floor(diff / 86400000);
+      const h = Math.floor((diff % 86400000) / 3600000);
+      const m = Math.floor((diff % 3600000) / 60000);
+      const sec = Math.floor((diff % 60000) / 1000);
 
-        document.getElementById('cdDays').innerText = d.toString().padStart(2, '0');
-        document.getElementById('cdHours').innerText = h.toString().padStart(2, '0');
-        document.getElementById('cdMinutes').innerText = m.toString().padStart(2, '0');
-        document.getElementById('cdSeconds').innerText = s.toString().padStart(2, '0');
-      }
+      cdDays.textContent = String(d).padStart(2, '0');
+      cdHours.textContent = String(h).padStart(2, '0');
+      cdMinutes.textContent = String(m).padStart(2, '0');
+      cdSeconds.textContent = String(sec).padStart(2, '0');
     }
-    setInterval(updateCountdown, 1000);
+
     updateCountdown();
+    window.setInterval(updateCountdown, 1000);
 /* =========================================
    فلیپ و Scratch Reveal سکشن اول
    ========================================= */
@@ -3947,44 +3843,6 @@ scratchArea.addEventListener('keydown', (event) => {
     activatePhotoGlass();
   }
 });
-const miniMapTrigger = document.getElementById('miniMapTrigger');
-const navModal = document.getElementById('navModal');
-
-function openNavModal() {
-  if (navModal) {
-    navModal.classList.add('show');
-  }
-}
-
-function closeNavModal() {
-  if (navModal) {
-    navModal.classList.remove('show');
-  }
-}
-
-if (miniMapTrigger && navModal) {
-  miniMapTrigger.addEventListener('click', openNavModal);
-
-  miniMapTrigger.addEventListener('keydown', function (event) {
-    if (event.key === 'Enter' || event.key === ' ') {
-      event.preventDefault();
-      openNavModal();
-    }
-  });
-
-  navModal.addEventListener('click', function (event) {
-    if (event.target === navModal) {
-      closeNavModal();
-    }
-  });
-
-  document.addEventListener('keydown', function (event) {
-    if (event.key === 'Escape') {
-      closeNavModal();
-    }
-  });
-}
-
 /* =========================================================
    پاپ‌آپ عکس‌های سکشن دوم
    ========================================================= */
