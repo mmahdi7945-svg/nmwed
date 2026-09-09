@@ -1999,92 +1999,30 @@ visibility 0.45s ease;
   align-items: center;
   justify-content: center;
 
-  box-sizing: border-box;
-  overflow: hidden;
+  padding: 20px;
 
-  background:
-    radial-gradient(
-      circle at 50% 40%,
-      #ffffff 0%,
-      #f5f5f5 45%,
-      #eeeeee 100%
-    );
+  background: transparent !important;
 
   direction: rtl;
   text-align: center;
 
-  padding: 30px 20px;
+  overflow: hidden;
 }
 
-
-/* محتوای اصلی */
+/* کانتینر وسط صفحه */
 
 .independent-scratch-content {
   width: 100%;
-  max-width: 600px;
 
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-
-  gap: 10px;
-}
-
-
-/* عنوان */
-
-.independent-scratch-title {
-  font-family: inherit;
-  font-size: clamp(22px, 5vw, 34px);
-  font-weight: 700;
-
-  color: #333;
-
-  margin-bottom: 2px;
-
-  opacity: 0;
-  transform: translateY(20px);
-
-  transition:
-    opacity 0.8s ease,
-    transform 0.8s ease;
-}
-
-
-/* زیرعنوان */
-
-.independent-scratch-subtitle {
-  font-family: inherit;
-  font-size: clamp(13px, 3.2vw, 17px);
-
-  color: #888;
-
-  margin-bottom: 18px;
-
-  opacity: 0;
-  transform: translateY(15px);
-
-  transition:
-    opacity 0.8s ease 0.15s,
-    transform 0.8s ease 0.15s;
-}
-
-
-/* وقتی سکشن visible شد */
-
-.independent-scratch-section.visible
-.independent-scratch-title,
-
-.independent-scratch-section.visible
-.independent-scratch-subtitle {
-  opacity: 1;
-  transform: translateY(0);
 }
 
 
 /* =========================================================
    PHOTO FRAME
+   مشابه قاب خراشیدنی سکشن ۱
    ========================================================= */
 
 .independent-scratch-photo-frame {
@@ -2094,14 +2032,17 @@ visibility 0.45s ease;
   aspect-ratio: 3 / 4;
 
   overflow: hidden;
+  isolation: isolate;
 
-  background: #d0d0d0;
+  background: #d8d8d8;
 
-  border-radius: 8px;
+  /* قاب مشابه سکشن ۱ */
+  border: 8px solid rgba(255, 255, 255, 0.94);
+  border-bottom-width: 24px;
 
   box-shadow:
-    0 18px 45px rgba(0, 0, 0, 0.18),
-    0 4px 12px rgba(0, 0, 0, 0.10);
+    0 18px 45px rgba(0, 0, 0, 0.22),
+    0 4px 12px rgba(0, 0, 0, 0.12);
 
   cursor: crosshair;
 
@@ -2110,16 +2051,16 @@ visibility 0.45s ease;
 
   touch-action: none;
 
-  transform: translateY(25px) scale(0.96);
+  transform: translateY(20px) scale(0.96);
   opacity: 0;
 
   transition:
-    opacity 0.9s ease 0.2s,
-    transform 0.9s cubic-bezier(.22, .61, .36, 1) 0.2s;
+    opacity 0.8s ease,
+    transform 0.8s cubic-bezier(.22, .61, .36, 1);
 }
 
 
-/* ورود عکس */
+/* ورود فریم */
 
 .independent-scratch-section.visible
 .independent-scratch-photo-frame {
@@ -2134,32 +2075,35 @@ visibility 0.45s ease;
 
 .independent-scratch-photo {
   position: absolute;
-
   inset: 0;
 
   width: 100%;
   height: 100%;
 
   object-fit: cover;
+  object-position: center;
 
   display: block;
 
   user-select: none;
   -webkit-user-drag: none;
+
   pointer-events: none;
+
+  filter: brightness(0.96) saturate(0.9);
 }
 
 
 /* =========================================================
-   GLASS / OVERLAY
+   NOONMEEM OVERLAY
+   در ابتدا مخفی است
    ========================================================= */
 
 .independent-photo-glass-layer {
   position: absolute;
-
   inset: 0;
 
-  z-index: 2;
+  z-index: 5;
 
   display: flex;
   align-items: center;
@@ -2167,23 +2111,48 @@ visibility 0.45s ease;
 
   pointer-events: none;
 
-  opacity: 1;
+  opacity: 0;
+  visibility: hidden;
+
+  background: rgba(0, 0, 0, 0.18);
 
   transition:
-    opacity 0.8s ease,
-    visibility 0.8s ease;
+    opacity 0.45s ease,
+    visibility 0.45s ease;
 }
 
 
 .independent-noonmeem-overlay {
-  width: 35%;
-  max-width: 150px;
+  width: 48%;
+  max-width: 180px;
 
-  opacity: 0.82;
+  opacity: 0;
+
+  transform: scale(0.82);
+
+  transition:
+    opacity 0.45s ease,
+    transform 0.45s cubic-bezier(.16, 1, .3, 1);
 
   pointer-events: none;
 
   user-select: none;
+}
+
+
+/* وقتی عکس لمس شد */
+
+.independent-scratch-photo-frame.show-noonmeem
+.independent-photo-glass-layer {
+  opacity: 1;
+  visibility: visible;
+}
+
+
+.independent-scratch-photo-frame.show-noonmeem
+.independent-noonmeem-overlay {
+  opacity: 1;
+  transform: scale(1);
 }
 
 
@@ -2193,7 +2162,6 @@ visibility 0.45s ease;
 
 .independent-scratch-canvas {
   position: absolute;
-
   inset: 0;
 
   width: 100%;
@@ -2211,7 +2179,16 @@ visibility 0.45s ease;
   -webkit-user-select: none;
 
   transition:
-    opacity 0.8s ease;
+    opacity 0.7s ease,
+    visibility 0.7s ease;
+}
+
+
+.independent-scratch-photo-frame.revealed
+.independent-scratch-canvas {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
 }
 
 
@@ -2221,7 +2198,6 @@ visibility 0.45s ease;
 
 .independent-scratch-flash {
   position: absolute;
-
   inset: 0;
 
   z-index: 4;
@@ -2240,9 +2216,6 @@ visibility 0.45s ease;
 }
 
 
-/* اجرای فلش */
-
-.independent-scratch-photo-frame
 .independent-scratch-flash.flash-active {
   animation: independentScratchFlash 0.9s ease forwards;
 }
@@ -2269,56 +2242,45 @@ visibility 0.45s ease;
 
 
 /* =========================================================
-   COMPLETED STATE
+   متن لمس کنید
    ========================================================= */
 
-.independent-scratch-photo-frame.revealed
-.independent-scratch-canvas {
+.independent-touch-hint {
+  position: absolute;
+
+  left: 50%;
+  bottom: 18px;
+
+  z-index: 6;
+
+  transform: translateX(-50%) translateY(8px);
+
   opacity: 0;
+
+  color: rgba(255, 255, 255, 0.95);
+
+  font-family: 'Yekan', Tahoma, sans-serif;
+  font-size: 16px;
+
+  white-space: nowrap;
+
   pointer-events: none;
-}
 
-
-.independent-scratch-photo-frame.revealed
-.independent-photo-glass-layer {
-  opacity: 0;
-  visibility: hidden;
-}
-
-
-/* =========================================================
-   HINT
-   ========================================================= */
-
-.independent-scratch-hint {
-  margin-top: 14px;
-
-  font-family: inherit;
-
-  font-size: clamp(12px, 3vw, 15px);
-
-  color: #999;
-
-  opacity: 0;
-
-  transform: translateY(10px);
+  text-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.55);
 
   transition:
-    opacity 0.8s ease 0.35s,
-    transform 0.8s ease 0.35s;
+    opacity 0.45s ease,
+    transform 0.45s ease;
 }
 
 
-.independent-scratch-section.visible
-.independent-scratch-hint {
-  opacity: 1;
-  transform: translateY(0);
-}
-
+/* بعد از خراش */
 
 .independent-scratch-photo-frame.revealed
-~ .independent-scratch-hint {
-  opacity: 0.35;
+.independent-touch-hint {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
 }
 
 
@@ -2330,13 +2292,9 @@ visibility 0.45s ease;
 
   .independent-scratch-section {
     padding:
-      25px 15px
-      calc(25px + env(safe-area-inset-bottom))
+      20px 15px
+      calc(20px + env(safe-area-inset-bottom))
       15px;
-  }
-
-  .independent-scratch-content {
-    max-width: 100%;
   }
 
   .independent-scratch-photo-frame {
@@ -2346,39 +2304,21 @@ visibility 0.45s ease;
 }
 
 
-/* =========================================================
-   SMALL PHONES
-   ========================================================= */
-
 @media (max-height: 700px) {
 
   .independent-scratch-photo-frame {
     width: min(70vw, 330px);
   }
 
-  .independent-scratch-subtitle {
-    margin-bottom: 8px;
-  }
-
-  .independent-scratch-title {
-    font-size: 23px;
-  }
-
 }
 
 
-/* =========================================================
-   REDUCED MOTION
-   ========================================================= */
-
 @media (prefers-reduced-motion: reduce) {
 
-  .independent-scratch-title,
-  .independent-scratch-subtitle,
   .independent-scratch-photo-frame,
-  .independent-scratch-hint {
+  .independent-touch-hint,
+  .independent-noonmeem-overlay {
     transition: none;
-    transform: none;
   }
 
 }
@@ -2505,20 +2445,12 @@ visibility 0.45s ease;
   </div>
 </section>
 
-<!-- =========================================================
-     INDEPENDENT SCRATCH PHOTO SECTION
-     ========================================================= -->
-<section class="scroll-section independent-scratch-section" id="independentScratchSection">
+<section
+  class="scroll-section independent-scratch-section"
+  id="independentScratchSection"
+>
 
   <div class="independent-scratch-content">
-
-    <div class="independent-scratch-title">
-      <span>یک خاطره‌ی دوست‌داشتنی</span>
-    </div>
-
-    <div class="independent-scratch-subtitle">
-      تصویر را با انگشت خراش دهید
-    </div>
 
     <div
       class="independent-scratch-photo-frame"
@@ -2536,21 +2468,21 @@ visibility 0.45s ease;
         alt="Our Moment"
       />
 
-      <!-- افکت نور هنگام کامل شدن -->
+      <!-- افکت نور -->
       <div
         class="independent-scratch-flash"
         id="independentScratchFlash"
       ></div>
 
-      <!-- لایه روی عکس -->
+      <!-- فایل NooNMeeM بعد از لمس -->
       <div
         class="independent-photo-glass-layer"
         id="independentPhotoGlassLayer"
       >
         <img
-          src="NOONMEEM.png"
+          src="NooNMeeM.Png"
           class="independent-noonmeem-overlay"
-          alt=""
+          alt="NooNMeeM"
         />
       </div>
 
@@ -2560,18 +2492,20 @@ visibility 0.45s ease;
         id="independentScratchCanvas"
       ></canvas>
 
-    </div>
+      <!-- متن لمس بعد از نمایان شدن عکس -->
+      <div
+        class="independent-touch-hint"
+        id="independentTouchHint"
+      >
+        لمس کنید
+      </div>
 
-    <div
-      class="independent-scratch-hint"
-      id="independentScratchHint"
-    >
-      با انگشت روی تصویر بکشید
     </div>
 
   </div>
 
 </section>
+   
              <!-- سکشن دوم: موعد دیدار عشق ما -->
    <section class="scroll-section event-date-section">
      <!-- تیترها -->
@@ -4013,14 +3947,21 @@ document.addEventListener('DOMContentLoaded', function () {
     }, 500);
 
 
-    if (independentScratchHint) {
+ 
+  }
+/* ---------------------------------------------------------
+   Show NooNMeeM after touching revealed photo
+   --------------------------------------------------------- */
 
-      independentScratchHint.textContent =
-        '❤️ خاطره‌مان برای همیشه ماندگار است ❤️';
-    }
+independentScratchArea.addEventListener('click', () => {
 
+  if (!completed) {
+    return;
   }
 
+  independentScratchArea.classList.add('show-noonmeem');
+
+});
 
   /* ---------------------------------------------------------
      Pointer Down
