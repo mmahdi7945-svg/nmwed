@@ -2752,152 +2752,137 @@ margin: 0;
 
 /* =========================================================
    گل‌باران شیشه‌ای نقره‌ای و پاستیلی — سکشن اول
-   مینیمال، ظریف و بدون نیاز به فایل تصویری
+   نسخه واضح‌تر و قابل‌مشاهده روی پس‌زمینه روشن
 ========================================================= */
 .hero-section .silver-flower-rain {
   position: absolute;
   inset: 0;
-  z-index: 1;
+  z-index: 4;
   overflow: hidden;
   pointer-events: none;
-  isolation: isolate;
 }
 
 .hero-section .silver-flower {
   --size: 18px;
   --duration: 8s;
-  --delay: 0s;
-  --drift: -90px;
+  --delay: -3s;
+  --drift: -80px;
   --tilt: 0deg;
 
   position: absolute;
   top: -45px;
-  right: var(--start-right, 8%);
+  right: var(--start-right, 5%);
   width: var(--size);
   height: var(--size);
   display: block;
   opacity: 0;
-  transform: translate3d(0, -20px, 0) rotate(var(--tilt)) scale(.65);
+  transform: translate3d(0,-40px,0) rotate(var(--tilt)) scale(.7);
   transform-origin: center;
   will-change: transform, opacity;
 
-  /* فرم گل پنج‌پر بسیار مینیمال و شیشه‌ای */
+  /* گل شیشه‌ای پنج‌پر */
   clip-path: polygon(
-    50% 0%,
-    61% 30%,
-    96% 20%,
-    72% 48%,
-    94% 78%,
-    59% 67%,
-    50% 100%,
-    40% 67%,
-    6% 78%,
-    28% 48%,
-    4% 20%,
-    39% 30%
+    50% 0%, 62% 31%, 96% 20%, 72% 49%, 94% 79%,
+    59% 67%, 50% 100%, 40% 67%, 6% 79%, 28% 49%, 4% 20%, 38% 31%
   );
 
   background:
-    radial-gradient(circle at 50% 45%, rgba(255,255,255,.98) 0 11%, rgba(240,242,246,.78) 23%, transparent 43%),
+    radial-gradient(circle at 38% 30%,
+      rgba(255,255,255,.98) 0 9%,
+      transparent 23%),
     linear-gradient(135deg,
-      rgba(255,255,255,.92) 0%,
-      rgba(221,224,230,.72) 28%,
-      rgba(250,250,252,.94) 52%,
-      rgba(190,195,204,.60) 78%,
-      rgba(255,255,255,.90) 100%);
-
-  border: 1px solid rgba(255,255,255,.85);
+      rgba(255,255,255,.98) 0%,
+      rgba(210,214,222,.96) 30%,
+      rgba(248,249,251,.98) 52%,
+      rgba(169,175,186,.88) 76%,
+      rgba(255,255,255,.96) 100%);
 
   box-shadow:
-    inset 1px 1px 2px rgba(255,255,255,.95),
-    inset -2px -2px 4px rgba(150,155,165,.20),
-    0 2px 8px rgba(120,125,135,.13),
-    0 0 12px rgba(255,255,255,.28);
+    inset 1px 1px 2px rgba(255,255,255,1),
+    inset -2px -2px 3px rgba(120,126,138,.32),
+    0 2px 7px rgba(80,86,98,.22),
+    0 0 12px rgba(255,255,255,.65);
 
-  filter: saturate(.72) brightness(1.04);
+  border: 1px solid rgba(145,150,160,.42);
+  filter: saturate(.72) brightness(1.02);
 
-  animation:
-    silverGlassFlowerFall
+  animation: silverGlassFlowerFall
     var(--duration)
     var(--delay)
     cubic-bezier(.35,.02,.25,1)
     infinite;
 }
 
-/* یک برق خیلی ظریف روی مرکز گل */
+/* درخشش کوچک روی شیشه */
 .hero-section .silver-flower::after {
   content: '';
   position: absolute;
-  width: 28%;
-  height: 28%;
-  left: 36%;
-  top: 36%;
+  width: 26%;
+  height: 26%;
+  left: 37%;
+  top: 37%;
   border-radius: 50%;
-  background: rgba(255,255,255,.88);
-  box-shadow: 0 0 6px rgba(255,255,255,.7);
+  background: rgba(255,255,255,.98);
+  box-shadow: 0 0 7px rgba(255,255,255,.95);
 }
 
-/* مسیرهای مختلف برای طبیعی شدن بارش */
-.hero-section .flower-1  { --start-right: 3%;  --size: 20px; --duration: 8.4s; --delay: 0s;    --drift: -70px;  --tilt: 12deg; }
-.hero-section .flower-2  { --start-right: 9%;  --size: 13px; --duration: 7.1s; --delay: 1.4s;  --drift: -125px; --tilt: -18deg; }
-.hero-section .flower-3  { --start-right: 15%; --size: 17px; --duration: 9.2s; --delay: 2.6s;  --drift: -90px;  --tilt: 35deg; }
-.hero-section .flower-4  { --start-right: 21%; --size: 11px; --duration: 6.7s; --delay: 3.8s;  --drift: -145px; --tilt: -30deg; }
-.hero-section .flower-5  { --start-right: 6%;  --size: 15px; --duration: 8.8s; --delay: 5.1s;  --drift: -105px; --tilt: 48deg; }
-.hero-section .flower-6  { --start-right: 27%; --size: 9px;  --duration: 10.2s;--delay: 6.3s;  --drift: -165px; --tilt: -42deg; }
-.hero-section .flower-7  { --start-right: 12%; --size: 22px; --duration: 9.7s; --delay: 7.2s;  --drift: -80px;  --tilt: 20deg; }
-.hero-section .flower-8  { --start-right: 31%; --size: 12px; --duration: 7.8s; --delay: 8.6s;  --drift: -150px; --tilt: -10deg; }
-.hero-section .flower-9  { --start-right: 18%; --size: 16px; --duration: 8.1s; --delay: 9.5s;  --drift: -115px; --tilt: 58deg; }
-.hero-section .flower-10 { --start-right: 4%;  --size: 10px; --duration: 6.9s; --delay: 10.7s; --drift: -130px; --tilt: -55deg; }
-.hero-section .flower-11 { --start-right: 24%; --size: 14px; --duration: 9.5s; --delay: 11.8s; --drift: -175px; --tilt: 25deg; }
-.hero-section .flower-12 { --start-right: 10%; --size: 18px; --duration: 8.9s; --delay: 13.1s; --drift: -95px;  --tilt: -25deg; }
-.hero-section .flower-13 { --start-right: 35%; --size: 8px;  --duration: 10.8s;--delay: 14.2s; --drift: -185px; --tilt: 40deg; }
-.hero-section .flower-14 { --start-right: 17%; --size: 13px; --duration: 7.5s; --delay: 15.4s; --drift: -120px; --tilt: -65deg; }
+/* گل‌ها از بالا سمت راست شروع می‌شوند */
+.hero-section .flower-1  { --start-right: 3%;  --size: 24px; --duration: 8.0s;  --delay: -1.0s;  --drift: -80px;  --tilt: 15deg; }
+.hero-section .flower-2  { --start-right: 9%;  --size: 15px; --duration: 7.0s;  --delay: -4.0s;  --drift: -125px; --tilt: -18deg; }
+.hero-section .flower-3  { --start-right: 15%; --size: 20px; --duration: 9.0s;  --delay: -6.0s;  --drift: -95px;  --tilt: 35deg; }
+.hero-section .flower-4  { --start-right: 21%; --size: 13px; --duration: 6.8s;  --delay: -2.2s;  --drift: -140px; --tilt: -30deg; }
+.hero-section .flower-5  { --start-right: 6%;  --size: 18px; --duration: 8.8s;  --delay: -7.0s;  --drift: -110px; --tilt: 48deg; }
+.hero-section .flower-6  { --start-right: 27%; --size: 11px; --duration: 10.0s; --delay: -3.0s;  --drift: -165px; --tilt: -42deg; }
+.hero-section .flower-7  { --start-right: 12%; --size: 25px; --duration: 9.5s;  --delay: -8.0s;  --drift: -75px;  --tilt: 20deg; }
+.hero-section .flower-8  { --start-right: 31%; --size: 14px; --duration: 7.6s;  --delay: -5.0s;  --drift: -145px; --tilt: -10deg; }
+.hero-section .flower-9  { --start-right: 18%; --size: 19px; --duration: 8.2s;  --delay: -9.0s;  --drift: -115px; --tilt: 58deg; }
+.hero-section .flower-10 { --start-right: 4%;  --size: 12px; --duration: 6.6s;  --delay: -1.8s;  --drift: -130px; --tilt: -55deg; }
+.hero-section .flower-11 { --start-right: 24%; --size: 16px; --duration: 9.2s;  --delay: -6.5s;  --drift: -175px; --tilt: 25deg; }
+.hero-section .flower-12 { --start-right: 10%; --size: 21px; --duration: 8.6s;  --delay: -10.0s; --drift: -95px;  --tilt: -25deg; }
+.hero-section .flower-13 { --start-right: 35%; --size: 10px; --duration: 10.5s; --delay: -4.8s;  --drift: -185px; --tilt: 40deg; }
+.hero-section .flower-14 { --start-right: 17%; --size: 15px; --duration: 7.4s;  --delay: -11.0s; --drift: -120px; --tilt: -65deg; }
 
 @keyframes silverGlassFlowerFall {
   0% {
     opacity: 0;
-    transform: translate3d(0, -40px, 0) rotate(var(--tilt)) scale(.62);
+    transform: translate3d(0,-45px,0) rotate(var(--tilt)) scale(.62);
   }
-
   8% {
-    opacity: .82;
+    opacity: .95;
   }
-
   25% {
-    opacity: .76;
-    transform: translate3d(calc(var(--drift) * .18), 24vh, 0) rotate(calc(var(--tilt) + 75deg)) scale(.82);
+    opacity: .88;
+    transform: translate3d(calc(var(--drift) * .16),24vh,0) rotate(calc(var(--tilt) + 80deg)) scale(.92);
   }
-
   50% {
-    opacity: .66;
-    transform: translate3d(calc(var(--drift) * .62), 53vh, 0) rotate(calc(var(--tilt) + 165deg)) scale(.70);
+    opacity: .76;
+    transform: translate3d(calc(var(--drift) * .62),53vh,0) rotate(calc(var(--tilt) + 170deg)) scale(.78);
   }
-
   76% {
-    opacity: .48;
-    transform: translate3d(calc(var(--drift) * .35), 82vh, 0) rotate(calc(var(--tilt) + 260deg)) scale(.58);
+    opacity: .58;
+    transform: translate3d(calc(var(--drift) * .35),82vh,0) rotate(calc(var(--tilt) + 265deg)) scale(.62);
   }
-
   100% {
     opacity: 0;
-    transform: translate3d(var(--drift), 116vh, 0) rotate(calc(var(--tilt) + 360deg)) scale(.48);
+    transform: translate3d(var(--drift),116vh,0) rotate(calc(var(--tilt) + 360deg)) scale(.50);
   }
 }
 
 @media (max-width: 600px) {
   .hero-section .silver-flower-rain {
-    opacity: .88;
+    z-index: 4;
+    opacity: 1;
   }
 
   .hero-section .silver-flower {
     transform-origin: center;
   }
 
-  .hero-section .flower-1  { --size: 17px; }
-  .hero-section .flower-3  { --size: 14px; }
-  .hero-section .flower-7  { --size: 18px; }
-  .hero-section .flower-9  { --size: 14px; }
-  .hero-section .flower-12 { --size: 15px; }
+  .hero-section .flower-1  { --size: 20px; }
+  .hero-section .flower-3  { --size: 17px; }
+  .hero-section .flower-7  { --size: 21px; }
+  .hero-section .flower-9  { --size: 17px; }
+  .hero-section .flower-12 { --size: 18px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
