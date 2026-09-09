@@ -2349,6 +2349,143 @@ margin: 0;
   }
 
 }
+
+/* =========================================================
+   جابه‌جایی عکس خراشیدنی به سکشن ۳ + قاب قلبی
+   ========================================================= */
+
+/* محفظه‌ی عکس داخل سکشن ۳ */
+.section-three .section-three-scratch-content {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 4px 0 2px;
+  padding: 0;
+  min-height: 0;
+  height: auto;
+}
+
+/* قاب قلبی */
+.section-three .independent-scratch-photo-frame {
+  position: relative;
+  width: min(54vw, 255px);
+  height: min(50vh, 250px);
+  aspect-ratio: 1 / 1;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  overflow: hidden;
+  isolation: isolate;
+  background: #d8d8d8;
+  box-shadow:
+    0 18px 45px rgba(0, 0, 0, 0.22),
+    0 4px 12px rgba(0, 0, 0, 0.12);
+  cursor: crosshair;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none;
+
+  /* قلب نرم و متقارن */
+  clip-path: polygon(
+    50% 92%,
+    44% 87%,
+    35% 80%,
+    25% 72%,
+    16% 62%,
+    8% 52%,
+    3% 42%,
+    2% 32%,
+    5% 22%,
+    12% 14%,
+    21% 9%,
+    30% 9%,
+    39% 14%,
+    46% 22%,
+    50% 29%,
+    54% 22%,
+    61% 14%,
+    70% 9%,
+    79% 9%,
+    88% 14%,
+    95% 22%,
+    98% 32%,
+    97% 42%,
+    92% 52%,
+    84% 62%,
+    75% 72%,
+    65% 80%,
+    56% 87%
+  );
+
+  opacity: 0;
+  transform: translateY(32px) scale(0.86) rotate(-3deg);
+  transition:
+    opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+/* حاشیه‌ی سفید قلبی با pseudo-element */
+.section-three .independent-scratch-photo-frame::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 7;
+  pointer-events: none;
+  border: 8px solid rgba(255, 255, 255, 0.94);
+  clip-path: inherit;
+}
+
+/* ورود */
+.section-three.visible .independent-scratch-photo-frame {
+  opacity: 1;
+  transform: translateY(0) scale(1) rotate(0deg);
+  transition-delay: 0.70s;
+}
+
+/* خروج هنگام ترک سکشن */
+.section-three:not(.visible) .independent-scratch-photo-frame {
+  opacity: 0;
+  transform: translateY(-24px) scale(0.86) rotate(3deg);
+  transition-delay: 0s;
+}
+
+/* عکس و لایه‌های داخلی هم دقیقاً داخل قلب بمانند */
+.section-three .independent-scratch-photo,
+.section-three .independent-scratch-canvas,
+.section-three .independent-photo-glass-layer,
+.section-three .independent-scratch-flash {
+  clip-path: inherit;
+}
+
+/* کمی کوچک‌تر روی موبایل‌های باریک */
+@media (max-width: 600px) {
+  .section-three .section-three-scratch-content {
+    margin: 2px 0 0;
+  }
+
+  .section-three .independent-scratch-photo-frame {
+    width: min(52vw, 220px);
+    height: min(44vh, 220px);
+  }
+}
+
+/* موبایل‌های خیلی کوتاه */
+@media (max-height: 700px) {
+  .section-three .independent-scratch-photo-frame {
+    width: min(48vw, 200px);
+    height: min(40vh, 200px);
+  }
+}
+
+/* هماهنگ با حالت کاهش حرکت */
+@media (prefers-reduced-motion: reduce) {
+  .section-three .independent-scratch-photo-frame {
+    transition-duration: 0.01ms;
+  }
+}
   </style>  <!-- این تگ حتماً باید اینجا بسته بشه -->
 
 </head>
@@ -2472,68 +2609,7 @@ margin: 0;
   </div>
 </section>
 
-<section
-  class="scroll-section independent-scratch-section"
-  id="independentScratchSection"
->
-
-  <div class="independent-scratch-content">
-
-    <div
-      class="independent-scratch-photo-frame"
-      id="independentScratchArea"
-      role="button"
-      tabindex="0"
-      aria-label="برای نمایان شدن تصویر روی آن بکشید"
-    >
-
-      <!-- عکس اصلی -->
-      <img
-        src="hero-photo.jpg"
-        class="independent-scratch-photo"
-        id="independentScratchPhoto"
-        alt="Our Moment"
-      />
-
-      <!-- افکت نور -->
-      <div
-        class="independent-scratch-flash"
-        id="independentScratchFlash"
-      ></div>
-
-      <!-- فایل NooNMeeM بعد از لمس -->
-      <div
-        class="independent-photo-glass-layer"
-        id="independentPhotoGlassLayer"
-      >
-        <img
-          src="NOONMEEM.png"
-          class="independent-noonmeem-overlay"
-          alt="NOONMEEM"
-        />
-      </div>
-
-      <!-- لایه خراش -->
-      <canvas
-        class="independent-scratch-canvas"
-        id="independentScratchCanvas"
-      ></canvas>
-
-      <!-- متن لمس بعد از نمایان شدن عکس -->
-      <div
-        class="independent-touch-hint"
-        id="independentTouchHint"
-      >
-        لمس کنید
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-   
-             <!-- سکشن دوم: موعد دیدار عشق ما -->
+<!-- سکشن دوم: موعد دیدار عشق ما -->
    <section class="scroll-section event-date-section">
      <!-- تیترها -->
      <div>
@@ -2604,7 +2680,63 @@ margin: 0;
             <div class="cd-box"><span class="cd-num" id="cdSeconds">00</span><span class="cd-label">Seconds</span></div>
           </div>
 
-          <!-- ۳. اطلاعات تالار و مینی‌مپ کلیک‌خور -->
+          <!-- ۳. عکس خراشیدنی؛ بین تایمر و مینی‌مپ -->
+          <div
+            class="independent-scratch-content section-three-scratch-content"
+            id="independentScratchSection"
+          >
+            <div
+              class="independent-scratch-photo-frame"
+              id="independentScratchArea"
+              role="button"
+              tabindex="0"
+              aria-label="برای نمایان شدن تصویر روی آن بکشید"
+            >
+
+              <!-- عکس اصلی -->
+              <img
+                src="hero-photo.jpg"
+                class="independent-scratch-photo"
+                id="independentScratchPhoto"
+                alt="Our Moment"
+              />
+
+              <!-- افکت نور -->
+              <div
+                class="independent-scratch-flash"
+                id="independentScratchFlash"
+              ></div>
+
+              <!-- فایل NooNMeeM بعد از لمس -->
+              <div
+                class="independent-photo-glass-layer"
+                id="independentPhotoGlassLayer"
+              >
+                <img
+                  src="NOONMEEM.png"
+                  class="independent-noonmeem-overlay"
+                  alt="NOONMEEM"
+                />
+              </div>
+
+              <!-- لایه خراش -->
+              <canvas
+                class="independent-scratch-canvas"
+                id="independentScratchCanvas"
+              ></canvas>
+
+              <!-- متن لمس بعد از نمایان شدن عکس -->
+              <div
+                class="independent-touch-hint"
+                id="independentTouchHint"
+              >
+                لمس کنید
+              </div>
+
+            </div>
+          </div>
+
+          <!-- ۴. اطلاعات تالار و مینی‌مپ کلیک‌خور -->
           <div class="map-card-wrapper">
             <div class="map-card-header">اراک ، مرزیجران ، باغ تالار ارم</div>
             <div class="mini-map-frame" id="miniMapTrigger" role="button" tabindex="0" aria-label="مسیریابی به سمت تالار">
@@ -3609,7 +3741,7 @@ document.addEventListener('keydown', function (event) {
 (() => {
 
   const independentScratchSection =
-    document.getElementById('independentScratchSection');
+    document.querySelector('.section-three');
 
   const independentScratchArea =
     document.getElementById('independentScratchArea');
