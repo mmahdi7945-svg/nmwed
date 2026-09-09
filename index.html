@@ -2399,6 +2399,15 @@ margin: 0;
   transform: translateY(0) scale(1);
   transition-delay: .78s;
 }
+.section-three-always-image {
+  display: block;
+  width: min(88%, 330px);
+  height: auto;
+  max-height: none;
+  object-fit: contain;
+  margin: 0 auto;
+  opacity: 1;
+}
 .section-three-always-text {
   direction: ltr;
   font-family: 'EdwardianScript', 'BellMTCustom', 'Brush Script MT', cursive !important;
@@ -2419,7 +2428,7 @@ margin: 0;
   transform: translateY(10px) scale(.94);
   transition: opacity .7s ease, transform .7s cubic-bezier(.16,1,.3,1);
 }
-.section-three.visible .section-three-heartline {
+.section-three.visible .section-three-always-image {
   opacity: 1;
   transform: translateY(0) scale(1);
   transition-delay: 1.02s;
@@ -2634,6 +2643,7 @@ margin: 0;
   .section-three .section-three-always-wrap { margin-top: 12px; }
   .section-three-always-text { font-size: 68pt; }
   .section-three-heartline { width: min(260px, 72vw); margin-top: 0; }
+  .section-three-always-image { width: min(92%, 320px); }
 }
 @media (prefers-reduced-motion: reduce) {
   .section-three .section-three-always-wrap,
@@ -2706,7 +2716,7 @@ margin: 0;
 .section-three .countdown-grid-inline,
 .section-three .section-three-scratch-content,
 .section-three .section-three-always-wrap,
-.section-three .section-three-heartline {
+.section-three .section-three-always-image {
   opacity: 0;
   transform: translateY(28px) scale(.97);
   transition: opacity .75s cubic-bezier(.16,1,.3,1), transform .75s cubic-bezier(.16,1,.3,1);
@@ -3314,13 +3324,12 @@ margin: 0;
             </div>
           </div>
 
-          <!-- Always + HeartLine -->
+          <!-- Always image -->
           <div class="section-three-always-wrap" aria-label="Always">
-            <div class="section-three-always-text">Always</div>
             <img
-              class="section-three-heartline"
-              src="https://raw.githubusercontent.com/mmahdi7945-svg/nmwed/main/HeartLine.png"
-              alt="Heart line"
+              class="section-three-always-image"
+              src="https://raw.githubusercontent.com/mmahdi7945-svg/nmwed/main/Always.png"
+              alt="Always"
             />
           </div>
 
