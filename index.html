@@ -97,8 +97,29 @@
 
 
     /* ترنزیشن */
-    .white-overlay { position: fixed; inset: 0; background: #ffffff; z-index: 100; opacity: 0; pointer-events: none; transition: opacity 0.6s; }
-    .white-overlay.active { opacity: 1; pointer-events: all; }
+    .white-overlay {
+  position: fixed;
+
+  inset: 0;
+
+  background: #ffffff;
+
+  z-index: 100;
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  transition:
+    opacity 0.16s ease-out;
+}
+
+
+.white-overlay.active {
+  opacity: 1;
+
+  pointer-events: all;
+}
 
     /* سایت اصلی */
     .website-content { width: 100vw; height: 100vh; overflow-y: scroll; scroll-snap-type: y mandatory; scroll-behavior: smooth; opacity: 0; transition: opacity 0.4s; }
@@ -2010,13 +2031,18 @@ visibility 0.45s ease;
 }
 
 /* کانتینر وسط صفحه */
-
 .independent-scratch-content {
   width: 100%;
+  height: 100%;
+  min-height: 100dvh;
 
   display: flex;
+
   align-items: center;
   justify-content: center;
+
+  margin: 0;
+  padding: 0;
 }
 
 
@@ -2027,7 +2053,8 @@ visibility 0.45s ease;
 
 .independent-scratch-photo-frame {
   position: relative;
-
+align-self: center;
+margin: 0;
   width: min(82vw, 430px);
   aspect-ratio: 3 / 4;
 
@@ -2653,33 +2680,89 @@ let hasStarted = false;
 
 // تابع ورود به سایت
 function start() {
-  if (hasStarted) return;
+
+  if (hasStarted) {
+    return;
+  }
+
+
   hasStarted = true;
 
-  // ۱. محو کردن اینترو
-  if (introScreen) {
-    introScreen.style.opacity = '0';
-    introScreen.style.pointerEvents = 'none';
-    setTimeout(() => {
+
+  /* FLASH شروع */
+
+  if (whiteOverlay) {
+
+    whiteOverlay.classList.add('active');
+
+  }
+
+
+  setTimeout(() => {
+
+    /* نمایش سایت زیر فلش سفید */
+
+    if (websiteContent) {
+
+      websiteContent.classList.add('revealed');
+
+      websiteContent.scrollTop = 0;
+
+    }
+
+
+    /* حذف Intro */
+
+    if (introScreen) {
+
       introScreen.style.display = 'none';
-    }, 500);
-  }
 
-  // ۲. آشکار کردن محتوای اصلی سایت (حل مشکل نامرئی بودن)
-  if (websiteContent) {
-    websiteContent.classList.add('revealed');
-    websiteContent.scrollTop = 0;
-  }
+    }
 
-  // ۳. ظاهر شدن دکمه شیشه‌ای اسکرول
-  if (scrollHintWrap) {
-    scrollHintWrap.classList.add('active');
-  }
 
-  // ۴. نمایش مودال آهنگ
-  if (musicModal) {
-    musicModal.classList.add('show');
-  }
+    /* ری‌استارت انیمیشن سکشن اول */
+
+
+
+
+    /* ظاهر شدن دکمه اسکرول */
+
+    if (scrollHintWrap) {
+
+      scrollHintWrap.classList.add('active');
+
+    }
+
+
+    /* برداشتن فلش */
+
+    setTimeout(() => {
+
+      if (whiteOverlay) {
+
+        whiteOverlay.classList.remove('active');
+
+      }
+
+
+      /* بعد از Flash مودال موزیک */
+
+      setTimeout(() => {
+
+        if (musicModal) {
+
+          musicModal.classList.add('show');
+
+        }
+
+      }, 150);
+
+
+    }, 120);
+
+
+  }, 160);
+
 }
 
 if (introScreen && introVideo) {
@@ -2730,15 +2813,48 @@ if (introScreen && introVideo) {
 
 
 
-   
-    musicYesBtn.addEventListener('click', () => {
-      bgMusic.play().catch(() => {});
-      musicModal.classList.remove('show');
+   function startHeroAnimation() {
+
+  const heroSection =
+    document.querySelector('.hero-section');
+
+  if (!heroSection) {
+    return;
+  }
+
+  heroSection.classList.remove('visible');
+
+  void heroSection.offsetWidth;
+
+  requestAnimationFrame(() => {
+
+    requestAnimationFrame(() => {
+
+      heroSection.classList.add('visible');
+
     });
 
-    musicNoBtn.addEventListener('click', () => {
-      musicModal.classList.remove('show');
-    });
+  });
+
+}
+musicYesBtn.addEventListener('click', () => {
+
+  bgMusic.play().catch(() => {});
+
+  musicModal.classList.remove('show');
+
+  startHeroAnimation();
+
+});
+
+
+musicNoBtn.addEventListener('click', () => {
+
+  musicModal.classList.remove('show');
+
+  startHeroAnimation();
+
+});
 
     const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
@@ -3405,52 +3521,85 @@ if (miniMapTrigger && navModal) {
   });
 }
 
-// فعال‌سازی بزرگ‌نمایی پاپ‌آپ شیشه‌ای برای عکس‌های سکشن دوم
+/* =========================================================
+   پاپ‌آپ عکس‌های سکشن دوم
+   ========================================================= */
 
-document.addEventListener('DOMContentLoaded', function () {
-    // ۱. پیدا کردن المان‌های پاپ‌آپ
-    const lightbox = document.getElementById('imageLightbox');
-    const lightboxImg = document.getElementById('lightboxImg');
-    const lightboxClose = document.getElementById('lightboxClose');
+const lightbox = document.getElementById('imageLightbox');
+const lightboxImg = document.getElementById('lightboxImg');
+const lightboxClose = document.getElementById('lightboxClose');
 
-    // ۲. پیدا کردن تمام عکس‌های سکشن دوم (بدون حساسیت به اسم یا کلاس)
-    // ما مستقیم سراغ سکشن دوم می‌رویم و تمام عکس‌های داخلش را برمی‌داریم
-    const allSections = document.getElementsByTagName('section');
-    let targetImages = [];
 
-    if (allSections.length >= 2) {
-        // سکشن دوم معمولاً ایندکس ۱ است
-        targetImages = allSections[1].getElementsByTagName('img');
-    } else {
-        // اگر سکشن‌بندی شما متفاوت بود، تمام عکس‌های صفحه را امتحان کن
-        targetImages = document.getElementsByTagName('img');
+/* فقط عکس‌های پولاروید سکشن دوم */
+
+const targetImages = document.querySelectorAll(
+  '.event-date-section .polaroid-card img'
+);
+
+
+targetImages.forEach(image => {
+
+  image.addEventListener('click', function () {
+
+    if (!lightbox || !lightboxImg) {
+      return;
     }
 
-    console.log("تعداد عکس‌های شناسایی شده:", targetImages.length);
+    lightboxImg.src = this.src;
 
-    // ۳. دادن قابلیت کلیک به تک‌تک عکس‌های پیدا شده
-    for (let i = 0; i < targetImages.length; i++) {
-        targetImages[i].addEventListener('click', function () {
-            console.log("یک عکس کلیک شد:", this.src); // برای تست در کنسول
-            lightboxImg.src = this.src; // آدرس عکس کلیک شده را به پاپ‌آپ بده
-            lightbox.classList.add('active'); // پاپ‌آپ را نشان بده
-        });
+    lightbox.classList.add('active');
+
+  });
+
+});
+
+
+/* بستن با ضربدر */
+
+if (lightboxClose) {
+
+  lightboxClose.addEventListener('click', function (event) {
+
+    event.stopPropagation();
+
+    lightbox.classList.remove('active');
+
+  });
+
+}
+
+
+/* بستن با لمس فضای بیرون عکس */
+
+if (lightbox) {
+
+  lightbox.addEventListener('click', function (event) {
+
+    if (event.target === lightbox) {
+
+      lightbox.classList.remove('active');
+
     }
 
-    // ۴. بستن پاپ‌آپ با زدن دکمه ضربدر
-    if (lightboxClose) {
-        lightboxClose.addEventListener('click', function (e) {
-            e.stopPropagation();
-            lightbox.classList.remove('active');
-        });
-    }
+  });
 
-    // ۵. بستن پاپ‌آپ با کلیک روی فضای خالی دور عکس
-    if (lightbox) {
-        lightbox.addEventListener('click', function () {
-            lightbox.classList.remove('active');
-        });
-    }
+}
+
+
+/* بستن با Escape */
+
+document.addEventListener('keydown', function (event) {
+
+  if (
+    event.key === 'Escape' &&
+    lightbox &&
+    lightbox.classList.contains('active')
+  ) {
+
+    lightbox.classList.remove('active');
+
+  }
+
 });
      /* =========================================================
    INDEPENDENT SCRATCH PHOTO
@@ -3666,10 +3815,10 @@ document.addEventListener('DOMContentLoaded', function () {
       );
 
     ctx.font =
-      `600 ${fontSize}px Arial, sans-serif`;
+  `normal ${fontSize}px 'Yekan', Tahoma, sans-serif`;
 
-    ctx.fillStyle =
-      'rgba(255,255,255,0.82)';
+ctx.fillStyle =
+  '#000000';
 
     ctx.shadowColor =
       'rgba(0,0,0,0.18)';
