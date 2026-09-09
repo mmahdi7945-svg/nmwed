@@ -2771,6 +2771,220 @@ margin: 0;
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
 
+
+<style>
+/* =========================================================
+   FINAL POLISH — سکشن ۳ + مینی‌مپ جمع‌وجور
+   ========================================================= */
+
+/* سکشن ۳ کمی پایین‌تر، بدون چسبیدن محتوا به بالا */
+.section-three {
+  justify-content: flex-start !important;
+  padding-top: 72px !important;
+  padding-bottom: 22px !important;
+}
+
+/* ترتیب انیمیشن سکشن ۳ از بالا به پایین:
+   ۱) عنوان موعد  ۲) تایمر  ۳) عکس خراشیدنی
+   ۴) Always  ۵) HeartLine
+   با خروج معکوس هنگام ترک سکشن */
+.section-three .countdown-title,
+.section-three .countdown-grid-inline,
+.section-three .section-three-scratch-content,
+.section-three .section-three-always-wrap,
+.section-three .section-three-heartline {
+  opacity: 0 !important;
+  transform: translateY(24px) scale(.97) !important;
+  transition-property: opacity, transform !important;
+  transition-duration: .65s !important;
+  transition-timing-function: cubic-bezier(.16,1,.3,1) !important;
+  will-change: opacity, transform;
+}
+
+.section-three.visible .countdown-title {
+  opacity: 1 !important;
+  transform: translateY(0) scale(1) !important;
+  transition-delay: .08s !important;
+}
+
+.section-three.visible .countdown-grid-inline {
+  opacity: 1 !important;
+  transform: translateY(0) scale(1) !important;
+  transition-delay: .28s !important;
+}
+
+.section-three.visible .section-three-scratch-content {
+  opacity: 1 !important;
+  transform: translateY(0) scale(1) !important;
+  transition-delay: .50s !important;
+}
+
+.section-three.visible .section-three-always-wrap {
+  opacity: 1 !important;
+  transform: translateY(0) scale(1) !important;
+  transition-delay: .76s !important;
+}
+
+.section-three.visible .section-three-heartline {
+  opacity: 1 !important;
+  transform: translateY(0) scale(1) !important;
+  transition-delay: .96s !important;
+}
+
+/* خود تایمرها هم کمی پله‌ای ظاهر شوند */
+.section-three .cd-box {
+  opacity: 0 !important;
+  transform: translateY(18px) scale(.94) !important;
+  transition: opacity .55s cubic-bezier(.16,1,.3,1),
+              transform .55s cubic-bezier(.16,1,.3,1) !important;
+}
+.section-three.visible .cd-box:nth-child(1) {
+  opacity: 1 !important; transform: translateY(0) scale(1) !important; transition-delay: .34s !important;
+}
+.section-three.visible .cd-box:nth-child(2) {
+  opacity: 1 !important; transform: translateY(0) scale(1) !important; transition-delay: .40s !important;
+}
+.section-three.visible .cd-box:nth-child(3) {
+  opacity: 1 !important; transform: translateY(0) scale(1) !important; transition-delay: .46s !important;
+}
+.section-three.visible .cd-box:nth-child(4) {
+  opacity: 1 !important; transform: translateY(0) scale(1) !important; transition-delay: .52s !important;
+}
+
+/* عکس خراشیدنی مطابق تصویر مرجع: قاب جمع‌وجور و تقریباً مربعی */
+.section-three .independent-scratch-content {
+  width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+  flex: 0 0 auto !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 14px 0 0 !important;
+  padding: 0 !important;
+}
+
+.section-three .independent-scratch-photo-frame {
+  width: min(82vw, 270px) !important;
+  height: min(82vw, 270px) !important;
+  aspect-ratio: 1 / 1 !important;
+  flex: 0 0 auto !important;
+  margin: 0 !important;
+}
+
+/* تصویر و لایه خراش دقیقاً کل قاب را بپوشانند */
+.section-three .independent-scratch-photo,
+.section-three .independent-scratch-canvas,
+.section-three .independent-photo-glass-layer,
+.section-three .independent-scratch-flash {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* مینی‌مپ واقعی، اما کوچک و مناسب داخل سکشن ۴ */
+.section-four-map-block {
+  width: 100% !important;
+  max-width: 280px !important;
+}
+
+.section-four-map-card {
+  width: 100% !important;
+  max-width: 280px !important;
+}
+
+.section-four-map-card .map-card-wrapper {
+  width: 100% !important;
+  max-width: 280px !important;
+}
+
+.mini-map-frame {
+  width: 220px !important;
+  height: 220px !important;
+  max-width: 220px !important;
+  aspect-ratio: 1 / 1 !important;
+  border-radius: 16px !important;
+  margin: 0 auto !important;
+  overflow: hidden !important;
+  position: relative !important;
+  touch-action: none !important;
+}
+
+.mini-map {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 220px !important;
+  touch-action: none !important;
+}
+
+/* کنترل‌های نقشه کوچک و مرتب */
+.mini-map .leaflet-control-zoom {
+  margin: 8px 8px 0 0 !important;
+}
+.mini-map .leaflet-control-zoom a {
+  width: 28px !important;
+  height: 28px !important;
+  line-height: 28px !important;
+  font-size: 18px !important;
+}
+
+/* روی موبایل حتی جمع‌وجورتر */
+@media (max-width: 600px) {
+  .section-three {
+    padding-top: 68px !important;
+  }
+
+  .section-three .independent-scratch-photo-frame {
+    width: min(82vw, 270px) !important;
+    height: min(82vw, 270px) !important;
+  }
+
+  .section-four {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  .section-four-map-block,
+  .section-four-map-card,
+  .section-four-map-card .map-card-wrapper {
+    max-width: 270px !important;
+  }
+
+  .mini-map-frame {
+    width: 220px !important;
+    height: 220px !important;
+    max-width: 220px !important;
+  }
+
+  .mini-map {
+    min-height: 220px !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .mini-map-frame {
+    width: 205px !important;
+    height: 205px !important;
+    max-width: 205px !important;
+  }
+  .mini-map {
+    min-height: 205px !important;
+  }
+}
+
+/* احترام به کاهش حرکت */
+@media (prefers-reduced-motion: reduce) {
+  .section-three .countdown-title,
+  .section-three .countdown-grid-inline,
+  .section-three .section-three-scratch-content,
+  .section-three .section-three-always-wrap,
+  .section-three .section-three-heartline,
+  .section-three .cd-box {
+    transition-duration: .01ms !important;
+    animation: none !important;
+  }
+}
+</style>
+
 </head>
 <body>
   <!-- لایه سراسری مرواریدهای شیشه‌ای برای تمام صفحات -->
@@ -3097,7 +3311,7 @@ margin: 0;
           </div>
         </div>
 
-        <!-- تصویر فاصله بین FINAL و نقشه -->
+        <!-- LINEEHEARTT بعد از اپلیکیشن‌ها و قبل از FINAL -->
         <div class="section-four-heartline-wrap" aria-hidden="true">
           <img
             src="LINEEHEARTT.png"
@@ -3106,7 +3320,7 @@ margin: 0;
           >
         </div>
 
-        <!-- تصویر پایانی -->
+        <!-- FINAL بعد از LINEEHEARTT -->
         <div class="section-four-invitation-footer" aria-label="پیام دعوت">
           <img
             src="FINAL.png"
@@ -3156,6 +3370,16 @@ margin: 0;
 
   requestAnimationFrame(() => map.invalidateSize());
   window.setTimeout(() => map.invalidateSize(), 400);
+
+  const mapSection = document.getElementById('sectionFour');
+  if (mapSection && 'MutationObserver' in window) {
+    const mapVisibilityObserver = new MutationObserver(() => {
+      if (mapSection.classList.contains('visible')) {
+        requestAnimationFrame(() => map.invalidateSize());
+      }
+    });
+    mapVisibilityObserver.observe(mapSection, { attributes: true, attributeFilter: ['class'] });
+  }
 })();
 
 // دریافت المان‌های اصلی
