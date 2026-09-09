@@ -2338,43 +2338,230 @@ if (introScreen && introVideo) {
 document.querySelectorAll('.scroll-section').forEach(section => {
   observer.observe(section);
 });
-    // دریافت تمام مرواریدها
+     <script>
+/* =========================================
+   GYROSCOPE / DEVICE ORIENTATION
+   iPhone + Android
+   ========================================= */
+
 const pearls = document.querySelectorAll('.pearl');
 
-function handleOrientation(event) {
-  let gamma = event.gamma || 0; // چرخش چپ و راست (-90 تا 90)
-  let beta = event.beta || 0;   // شیب جلو و عقب (-180 تا 180)
+let gyroEnabled = false;
+let lastX = 0;
+let lastY = 0;
 
-  // محدودسازی دامنه برای روانی حرکت روی موبایل
+
+/* -----------------------------------------
+   حرکت مرواریدها
+----------------------------------------- */
+function handleOrientation(event) {
+
+  // زاویه چرخش چپ و راست
+  let gamma = event.gamma;
+
+  // زاویه حرکت جلو و عقب
+  let beta = event.beta;
+
+  // اگر اطلاعات سنسور دریافت نشد
+  if (gamma === null || gamma === undefined ||
+      beta === null || beta === undefined) {
+    return;
+  }
+
+  /*
+    محدود کردن حرکت
+    تا مرواریدها بیش از حد از جای خود خارج نشوند
+  */
+
   let x = Math.max(-28, Math.min(28, gamma));
-  let y = Math.max(-28, Math.min(28, beta - 45)); // زاویه پیش‌فرض در دست گرفتن گوشی
+
+  /*
+    گوشی در حالت عادی تقریباً 45 درجه در دست گرفته می‌شود
+  */
+  let y = Math.max(-28, Math.min(28, beta - 45));
+
+
+  /*
+    Smooth کردن حرکت
+    باعث می‌شود مرواریدها لرزش نداشته باشند
+  */
+
+  const smooth = 0.12;
+
+  lastX += (x - lastX) * smooth;
+  lastY += (y - lastY) * smooth;
+
+
+  /*
+    اعمال حرکت به تمام مرواریدها
+  */
 
   pearls.forEach(pearl => {
-    const speed = parseFloat(pearl.getAttribute('data-speed')) || 1;
-    const moveX = x * speed * 0.9;
-    const moveY = y * speed * 0.9;
-    pearl.style.transform = `translate3d(${moveX}px, ${moveY}px, 0)`;
+
+    const speed =
+      parseFloat(pearl.getAttribute('data-speed')) || 1;
+
+    const moveX = lastX * speed * 0.9;
+    const moveY = lastY * speed * 0.9;
+
+    pearl.style.transform =
+      `translate3d(${moveX}px, ${moveY}px, 0)`;
   });
 }
 
-// فعال‌سازی ژیروسکوپ
-if (window.DeviceOrientationEvent) {
-  if (typeof DeviceOrientationEvent.requestPermission === 'function') {
-    // مجوز برای iOS و آیفون‌ها با اولین لمس
-    document.addEventListener('touchstart', () => {
-      DeviceOrientationEvent.requestPermission()
-        .then(response => {
-          if (response === 'granted') {
-            window.addEventListener('deviceorientation', handleOrientation);
-          }
-        })
-        .catch(console.error);
-    }, { once: true });
+
+/* -----------------------------------------
+   فعال کردن Orientation
+----------------------------------------- */
+function startGyroscope() {
+
+  if (!window.DeviceOrientationEvent) {
+    console.log('Device Orientation روی این دستگاه پشتیبانی نمی‌شود.');
+    return;
+  }
+
+  /*
+    iOS جدید:
+    درخواست Permission باید داخل یک تعامل کاربر
+    مثل click / touch اجرا شود.
+  */
+
+  if (
+    typeof DeviceOrientationEvent.requestPermission === 'function'
+  ) {
+
+    DeviceOrientationEvent.requestPermission()
+      .then(permissionState => {
+
+        console.log(
+          'Gyroscope permission:',
+          permissionState
+        );
+
+        if (permissionState === 'granted') {
+
+          window.addEventListener(
+            'deviceorientation',
+            handleOrientation,
+            true
+          );
+
+          gyroEnabled = true;
+
+          console.log('Gyroscope فعال شد.');
+
+        } else {
+
+          console.log(
+            'دسترسی Gyroscope توسط کاربر داده نشد.'
+          );
+        }
+
+      })
+      .catch(error => {
+
+        console.error(
+          'خطا در فعال‌سازی Gyroscope:',
+          error
+        );
+
+      });
+
   } else {
-    // برای اندروید و مرورگرهای استاندارد
-    window.addEventListener('deviceorientation', handleOrientation);
+
+    /*
+      Android / مرورگرهایی که Permission لازم ندارند
+    */
+
+    window.addEventListener(
+      'deviceorientation',
+      handleOrientation,
+      true
+    );
+
+    gyroEnabled = true;
+
+    console.log('Gyroscope فعال شد.');
   }
 }
+
+
+/* -----------------------------------------
+   iPhone
+   فعال‌سازی با اولین لمس واقعی
+----------------------------------------- */
+
+let gyroStarted = false;
+
+function requestGyroscopeOnce() {
+
+  if (gyroStarted) return;
+
+  gyroStarted = true;
+
+  startGyroscope();
+}
+
+
+/*
+  click
+*/
+document.addEventListener(
+  'click',
+  requestGyroscopeOnce,
+  {
+    once: true,
+    passive: true
+  }
+);
+
+
+/*
+  touchstart
+  برای Safari آیفون
+*/
+document.addEventListener(
+  'touchstart',
+  requestGyroscopeOnce,
+  {
+    once: true,
+    passive: true
+  }
+);
+
+
+/*
+  pointerdown
+  برای بعضی مرورگرها
+*/
+document.addEventListener(
+  'pointerdown',
+  requestGyroscopeOnce,
+  {
+    once: true,
+    passive: true
+  }
+);
+
+
+/* -----------------------------------------
+   جلوگیری از خطا در صورت نبودن سنسور
+----------------------------------------- */
+
+window.addEventListener(
+  'deviceorientationerror',
+  function(event) {
+
+    console.log(
+      'Device Orientation Error:',
+      event
+    );
+
+  },
+  true
+);
+
+</script>
 const scrollHintBtn = document.getElementById('scrollHintBtn');
 
 if (scrollHintBtn && websiteContent) scrollHintBtn.addEventListener('click', () => {
