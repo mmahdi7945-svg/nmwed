@@ -2458,6 +2458,162 @@ margin: 0;
 .section-three .independent-noonmeem-overlay{position:relative;z-index:1;display:block;width:min(58%,175px);max-width:70%;max-height:65%;height:auto;object-fit:contain;opacity:0;transform:scale(.72) translateY(8px);filter:drop-shadow(0 8px 16px rgba(0,0,0,.20)) drop-shadow(0 0 10px rgba(255,255,255,.28));transition:opacity .55s ease,transform .65s cubic-bezier(.16,1,.3,1)}
 .section-three .independent-scratch-photo-frame.revealed .independent-noonmeem-overlay{opacity:1!important;visibility:visible!important;transform:scale(1) translateY(0);display:block!important}
 @media(max-width:600px){.section-three .independent-scratch-hint{font-size:9px;padding:4px 8px}.section-three .independent-noonmeem-overlay{width:min(62%,145px)}}
+
+/* =========================================
+   سکشن ۳ — Always + HeartLine
+========================================= */
+.section-three .section-three-always-wrap {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 18px;
+  opacity: 0;
+  transform: translateY(30px) scale(.96);
+  transition:
+    opacity .8s cubic-bezier(.16,1,.3,1),
+    transform .8s cubic-bezier(.16,1,.3,1);
+  will-change: opacity, transform;
+}
+.section-three.visible .section-three-always-wrap {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition-delay: .78s;
+}
+.section-three-always-text {
+  direction: ltr;
+  font-family: 'EdwardianScript', 'BellMTCustom', 'Brush Script MT', cursive !important;
+  font-size: 90pt;
+  line-height: .72;
+  font-weight: normal;
+  color: #000;
+  white-space: nowrap;
+  text-align: center;
+}
+.section-three-heartline {
+  display: block;
+  width: min(300px, 70vw);
+  height: auto;
+  margin-top: 2px;
+  object-fit: contain;
+  opacity: 0;
+  transform: translateY(10px) scale(.94);
+  transition: opacity .7s ease, transform .7s cubic-bezier(.16,1,.3,1);
+}
+.section-three.visible .section-three-heartline {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition-delay: 1.02s;
+}
+
+/* =========================================
+   سکشن ۴ — مینی‌مپ + سه اپ مسیریابی
+========================================= */
+.section-four {
+  position: relative;
+  width: 100%;
+  height: 100dvh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 42px 20px 28px;
+  overflow: hidden;
+  direction: rtl;
+  text-align: center;
+  background: transparent;
+  z-index: 2;
+}
+.section-four-inner {
+  width: min(100%, 620px);
+  display: flex;
+  justify-content: center;
+}
+.section-four-map-block {
+  width: min(100%, 420px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.section-four-map-card {
+  width: 100%;
+  opacity: 0;
+  transform: translateY(42px) scale(.95);
+  transition: opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1);
+  will-change: opacity, transform;
+}
+.section-four.visible .section-four-map-card {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition-delay: .10s;
+}
+.section-four-nav-apps {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  direction: ltr;
+  justify-content: center;
+  align-items: center;
+  gap: 26px;
+  margin-top: 18px;
+  opacity: 0;
+  transform: translateY(26px) scale(.96);
+  transition: opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1);
+}
+.section-four.visible .section-four-nav-apps {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition-delay: .36s;
+}
+.section-four-nav-app {
+  width: 58px;
+  height: 58px;
+  flex: 0 0 58px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  border-radius: 16px;
+  opacity: 0;
+  transform: translateY(16px) scale(.88);
+  transition: opacity .55s ease, transform .55s cubic-bezier(.16,1,.3,1), filter .2s ease;
+}
+.section-four.visible .section-four-nav-app:nth-child(1) { opacity: 1; transform: translateY(0) scale(1); transition-delay: .46s; }
+.section-four.visible .section-four-nav-app:nth-child(2) { opacity: 1; transform: translateY(0) scale(1); transition-delay: .56s; }
+.section-four.visible .section-four-nav-app:nth-child(3) { opacity: 1; transform: translateY(0) scale(1); transition-delay: .66s; }
+.section-four-nav-app img {
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+  display: block;
+  transition: transform .2s ease;
+}
+.section-four-nav-app:hover img,
+.section-four-nav-app:focus-visible img { transform: scale(1.08); }
+
+@media (max-width: 600px) {
+  .section-four { padding: 34px 16px 24px; }
+  .section-four-map-block { width: min(100%, 360px); }
+  .section-four-nav-apps { gap: 20px; margin-top: 16px; }
+  .section-four-nav-app { width: 52px; height: 52px; flex-basis: 52px; }
+  .section-four-nav-app img { width: 48px; height: 48px; }
+  .section-three .section-three-always-wrap { margin-top: 12px; }
+  .section-three-always-text { font-size: 68pt; }
+  .section-three-heartline { width: min(260px, 72vw); margin-top: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .section-three .section-three-always-wrap,
+  .section-three .section-three-heartline,
+  .section-four-map-card,
+  .section-four-nav-apps,
+  .section-four-nav-app {
+    transition-duration: .01ms !important;
+    animation: none !important;
+  }
+}
+
 </style>  <!-- این تگ حتماً باید اینجا بسته بشه -->
 
 </head>
@@ -2712,8 +2868,28 @@ margin: 0;
             </div>
           </div>
 
-          <!-- ۴. اطلاعات تالار و مینی‌مپ کلیک‌خور -->
-          <div class="map-card-wrapper">
+          <!-- Always + HeartLine -->
+          <div class="section-three-always-wrap" aria-label="Always">
+            <div class="section-three-always-text">Always</div>
+            <img
+              class="section-three-heartline"
+              src="https://raw.githubusercontent.com/mmahdi7945-svg/nmwed/main/HeartLine.png"
+              alt="Heart line"
+            />
+          </div>
+
+          </div>
+
+      <!-- در اینجا می‌توانید هر محتوای دیگری که برای این سکشن دارید قرار دهید -->
+    </section>
+
+
+    <!-- سکشن ۴: مینی‌مپ و اپلیکیشن‌های مسیریابی -->
+    <section class="scroll-section section-four" id="sectionFour" aria-label="سکشن ۴">
+      <div class="section-four-inner">
+
+        <div class="section-four-map-block">
+          <div class="map-card-wrapper section-four-map-card">
             <div class="map-card-header">اراک ، مرزیجران ، باغ تالار ارم</div>
             <div class="mini-map-frame" id="miniMapTrigger" role="button" tabindex="0" aria-label="مسیریابی به سمت تالار">
               <iframe
@@ -2725,57 +2901,27 @@ margin: 0;
                 <span class="map-click-badge">برای مسیریابی کلیک کنید</span>
               </div>
             </div>
-
-            <!-- اپلیکیشن‌های مسیریابی؛ مستقل از مینی‌مپ و پاپ‌آپ -->
-            <div class="map-navigation-apps" aria-label="اپلیکیشن‌های مسیریابی">
-              <a
-                class="map-navigation-app"
-                href="https://balad.ir/location?latitude=34.1173579&longitude=49.6697487&zoom=15"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="مسیریابی با بلد"
-              >
-                <img
-                  src="https://raw.githubusercontent.com/mmahdi7945-svg/nmwed/main/balad.png"
-                  alt="بلد"
-                  loading="lazy"
-                />
-              </a>
-
-              <a
-                class="map-navigation-app"
-                href="https://neshan.org/maps/@34.1173579,49.6697487,15z,0.0p"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="مسیریابی با نشان"
-              >
-                <img
-                  src="https://raw.githubusercontent.com/mmahdi7945-svg/nmwed/main/neshan.png"
-                  alt="نشان"
-                  loading="lazy"
-                />
-              </a>
-
-              <a
-                class="map-navigation-app"
-                href="https://www.google.com/maps/search/?api=1&query=34.1173579,49.6697487"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="مسیریابی با گوگل مپس"
-              >
-                <img
-                  src="https://raw.githubusercontent.com/mmahdi7945-svg/nmwed/main/google-maps.png"
-                  alt="گوگل مپس"
-                  loading="lazy"
-                />
-              </a>
-            </div>
           </div>
 
+          <div class="section-four-nav-apps" aria-label="اپلیکیشن‌های مسیریابی">
+            <a href="https://balad.ir/?lat=34.1173579&lng=49.6697487"
+               class="section-four-nav-app" target="_blank" rel="noopener" aria-label="باز کردن مسیر در بلد">
+              <img src="https://raw.githubusercontent.com/mmahdi7945-svg/nmwed/main/balad.png" alt="بلد">
+            </a>
+            <a href="https://neshan.org/maps/@34.1173579,49.6697487,15z"
+               class="section-four-nav-app" target="_blank" rel="noopener" aria-label="باز کردن مسیر در نشان">
+              <img src="https://raw.githubusercontent.com/mmahdi7945-svg/nmwed/main/neshan.png" alt="نشان">
+            </a>
+            <a href="https://www.google.com/maps/dir/?api=1&destination=34.1173579,49.6697487"
+               class="section-four-nav-app" target="_blank" rel="noopener" aria-label="باز کردن مسیر در گوگل مپس">
+              <img src="https://raw.githubusercontent.com/mmahdi7945-svg/nmwed/main/google-maps.png" alt="گوگل مپس">
+            </a>
+          </div>
         </div>
 
-      <!-- در اینجا می‌توانید هر محتوای دیگری که برای این سکشن دارید قرار دهید -->
+      </div>
     </section>
+
 
 
 
@@ -4621,64 +4767,3 @@ document.addEventListener('keydown', function (event) {
 </script>
 </body>
 </html>
-
-<style>
-/* سه آیکون مسیریابی زیر مینی‌مپ — مستقل از کد مینی‌مپ و پاپ‌آپ */
-.section-three .map-navigation-apps {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 18px;
-  margin-top: 14px;
-  direction: ltr;
-}
-
-.section-three .map-navigation-app {
-  width: 48px;
-  height: 48px;
-  flex: 0 0 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  border-radius: 12px;
-  -webkit-tap-highlight-color: transparent;
-  transition: transform .2s ease, opacity .2s ease;
-}
-
-.section-three .map-navigation-app img {
-  display: block;
-  width: 42px;
-  height: 42px;
-  object-fit: contain;
-}
-
-.section-three .map-navigation-app:hover {
-  transform: translateY(-2px) scale(1.04);
-  opacity: .92;
-}
-
-.section-three .map-navigation-app:active {
-  transform: scale(.96);
-}
-
-@media (max-width: 600px) {
-  .section-three .map-navigation-apps {
-    gap: 14px;
-    margin-top: 12px;
-  }
-
-  .section-three .map-navigation-app {
-    width: 44px;
-    height: 44px;
-    flex-basis: 44px;
-  }
-
-  .section-three .map-navigation-app img {
-    width: 38px;
-    height: 38px;
-  }
-}
-</style>
