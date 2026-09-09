@@ -2448,72 +2448,16 @@ margin: 0;
   }
 }
 
-/* =========================================================
-   نمایش بزرگ NOONMEEM بلافاصله بعد از ریویل
-   ========================================================= */
 
-.noonmeem-reveal-screen {
-  position: fixed;
-  inset: 0;
-  z-index: 99999;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  padding: 24px;
-  background: rgba(0, 0, 0, 0.58);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-
-  transition:
-    opacity 0.45s ease,
-    visibility 0.45s ease;
-}
-
-.noonmeem-reveal-screen.visible {
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
-}
-
-.noonmeem-reveal-screen img {
-  display: block;
-  width: min(82vw, 560px);
-  max-width: 100%;
-  max-height: 78vh;
-  object-fit: contain;
-
-  opacity: 0;
-  transform: scale(0.72) translateY(18px);
-  filter:
-    drop-shadow(0 18px 35px rgba(0, 0, 0, 0.35))
-    drop-shadow(0 0 18px rgba(255, 255, 255, 0.18));
-
-  transition:
-    opacity 0.55s ease,
-    transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.noonmeem-reveal-screen.visible img {
-  opacity: 1;
-  transform: scale(1) translateY(0);
-}
-
-@media (max-width: 600px) {
-  .noonmeem-reveal-screen {
-    padding: 18px;
-  }
-
-  .noonmeem-reveal-screen img {
-    width: min(88vw, 430px);
-    max-height: 72vh;
-  }
-}
+/* لایه شیشه‌ای و NOONMEEM روی خود عکس، بعد از ریویل */
+.section-three .independent-scratch-hint{position:absolute;left:50%;top:50%;z-index:8;transform:translate(-50%,-50%);width:max-content;max-width:80%;padding:5px 9px;font-family:'Yekan',Tahoma,sans-serif!important;font-size:10px;font-weight:normal;line-height:1.5;color:rgba(20,20,20,.86);text-align:center;white-space:nowrap;background:rgba(255,255,255,.34);border:1px solid rgba(255,255,255,.32);border-radius:7px;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);pointer-events:none;user-select:none;transition:opacity .35s ease,transform .35s ease}
+.section-three .independent-scratch-photo-frame.revealed .independent-scratch-hint{opacity:0;transform:translate(-50%,-50%) scale(.92)}
+.section-three .independent-photo-glass-layer{position:absolute;inset:0;z-index:6;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(255,255,255,.30) 0%,rgba(255,255,255,.12) 45%,rgba(255,255,255,.25) 100%);border:1px solid rgba(255,255,255,.34);box-shadow:inset 0 1px 0 rgba(255,255,255,.55),inset 0 -1px 0 rgba(255,255,255,.18);backdrop-filter:blur(2.5px);-webkit-backdrop-filter:blur(2.5px);opacity:0;pointer-events:none;transition:opacity .65s ease}
+.section-three .independent-scratch-photo-frame.revealed .independent-photo-glass-layer{opacity:1}
+.section-three .independent-noonmeem-overlay{position:relative;z-index:1;display:block;width:min(58%,175px);max-width:70%;max-height:65%;height:auto;object-fit:contain;opacity:0;transform:scale(.72) translateY(8px);filter:drop-shadow(0 8px 16px rgba(0,0,0,.20)) drop-shadow(0 0 10px rgba(255,255,255,.28));transition:opacity .55s ease,transform .65s cubic-bezier(.16,1,.3,1)}
+.section-three .independent-scratch-photo-frame.revealed .independent-noonmeem-overlay{opacity:1;transform:scale(1) translateY(0)}
+@media(max-width:600px){.section-three .independent-scratch-hint{font-size:9px;padding:4px 8px}.section-three .independent-noonmeem-overlay{width:min(62%,145px)}}
 </style>  <!-- این تگ حتماً باید اینجا بسته بشه -->
 
 </head>
@@ -2742,6 +2686,23 @@ margin: 0;
                 class="independent-scratch-flash"
                 id="independentScratchFlash"
               ></div>
+
+              <div class="independent-scratch-hint" id="independentScratchHint">
+                با انگشت روی تصویر بکشید
+              </div>
+
+              <div
+                class="independent-photo-glass-layer"
+                id="independentPhotoGlassLayer"
+                aria-hidden="true"
+              >
+                <img
+                  src="NOONMEEM.png"
+                  class="independent-noonmeem-overlay"
+                  alt="NOONMEEM"
+                />
+              </div>
+
 <!-- لایه خراش -->
               <canvas
                 class="independent-scratch-canvas"
@@ -3773,9 +3734,6 @@ document.addEventListener('keydown', function (event) {
   const independentPhotoGlassLayer =
     document.getElementById('independentPhotoGlassLayer');
 
-  const noonmeemRevealScreen =
-    document.getElementById('noonmeemRevealScreen');
-
   const independentScratchHint =
     document.getElementById('independentScratchHint');
 
@@ -4201,12 +4159,9 @@ document.addEventListener('keydown', function (event) {
     completed = true;
     scratching = false;
 
-    /* بلافاصله بعد از ریویل کامل، NOONMEEM را بزرگ روی صفحه نشان بده */
-    if (noonmeemRevealScreen) {
-      noonmeemRevealScreen.classList.remove('visible');
-      void noonmeemRevealScreen.offsetWidth;
-      noonmeemRevealScreen.classList.add('visible');
-      noonmeemRevealScreen.setAttribute('aria-hidden', 'false');
+    /* بلافاصله بعد از ریویل کامل، شیشه و NOONMEEM روی خود عکس ظاهر شوند */
+    if (independentPhotoGlassLayer) {
+      independentPhotoGlassLayer.setAttribute('aria-hidden', 'false');
     }
 
 
@@ -4602,13 +4557,5 @@ document.addEventListener('keydown', function (event) {
 
 })();
 </script>
-
-
-
-<!-- نمایش بزرگ NOONMEEM بعد از ریویل کامل عکس -->
-<div class="noonmeem-reveal-screen" id="noonmeemRevealScreen" aria-hidden="true">
-  <img src="NOONMEEM.png" alt="NOONMEEM" />
-</div>
-
 </body>
 </html>
