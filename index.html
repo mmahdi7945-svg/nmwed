@@ -888,6 +888,8 @@ body {
 }
 
 .countdown-title {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
   font-family: 'Yekan', Tahoma, sans-serif !important;
   font-size: 20pt;
   color: #424242;
@@ -907,6 +909,8 @@ body {
 
 
 .countdown-grid-inline {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
   display: flex;
   flex-direction: row-reverse; /* Days سمت راست */
   justify-content: center;
@@ -1114,6 +1118,8 @@ visibility 0.45s ease;
 }
 /* استایل تایمر درون سکشن ۲ */
 .countdown-grid-inline {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
   display: flex;
   flex-direction: row-reverse; /* برای اینکه Days سمت راست بیفتد */
   justify-content: center;
@@ -2518,128 +2524,62 @@ margin: 0;
 .section-four-invitation-footer {
   position: relative;
   width: 100%;
-  height: 185px;
-  margin-top: 18px;
-  flex: 0 0 185px;
+  height: 190px;
+  margin-top: 12px;
+  flex: 0 0 190px;
   overflow: visible;
-  direction: rtl;
-}
-
-.section-four-warm-text {
-  position: absolute;
-  z-index: 2;
-  right: 92px;
-  bottom: 72px;
-  width: 205px;
-
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  align-items: flex-end;
   justify-content: center;
-
-  font-family: 'Yekan', Tahoma, sans-serif !important;
-  font-size: 22px;
-  font-weight: normal;
-  line-height: 1.65;
-  letter-spacing: 0;
-  color: #000000 !important;
-  text-align: right;
   direction: rtl;
-
-  opacity: 0;
-  transform: translateY(18px);
-  transition:
-    opacity .75s cubic-bezier(.16,1,.3,1),
-    transform .75s cubic-bezier(.16,1,.3,1);
 }
 
-.section-four-warm-text span {
+.section-four-final-image {
   display: block;
-  white-space: nowrap;
-}
-
-.section-four-invitation-flower {
-  position: absolute;
-  z-index: 1;
-  right: 0;
-  bottom: -2px;
-
-  width: 128px;
+  width: min(100%, 390px);
+  max-width: 390px;
   height: 190px;
   object-fit: contain;
-  object-position: bottom right;
-
-  display: block;
+  object-position: center bottom;
   pointer-events: none;
   user-select: none;
   -webkit-user-drag: none;
-
   opacity: 0;
-  transform: translateY(18px) scale(.96);
-  transform-origin: bottom right;
-  transition:
-    opacity .85s cubic-bezier(.16,1,.3,1),
-    transform .9s cubic-bezier(.16,1,.3,1);
+  transform: translateY(20px) scale(.96);
+  transition: opacity .85s cubic-bezier(.16,1,.3,1), transform .9s cubic-bezier(.16,1,.3,1);
 }
 
-/* ورود هماهنگ متن و گل بعد از ورود سکشن */
-.section-four.visible .section-four-warm-text {
-  opacity: 1;
-  transform: translateY(0);
-  transition-delay: .78s;
-}
-
-.section-four.visible .section-four-invitation-flower {
+.section-four.visible .section-four-final-image {
   opacity: 1;
   transform: translateY(0) scale(1);
-  transition-delay: .68s;
+  transition-delay: .65s;
 }
 
 @media (max-width: 600px) {
   .section-four-invitation-footer {
-    height: 175px;
-    flex-basis: 175px;
-    margin-top: 12px;
+    height: 165px;
+    flex-basis: 165px;
+    margin-top: 8px;
   }
-
-  .section-four-invitation-flower {
-    right: -2px;
-    bottom: -4px;
-    width: 116px;
-    height: 178px;
-  }
-
-  .section-four-warm-text {
-    right: 78px;
-    bottom: 68px;
-    width: 185px;
-    font-size: 20px;
-    line-height: 1.7;
+  .section-four-final-image {
+    width: min(100%, 350px);
+    height: 165px;
   }
 }
 
 @media (max-width: 380px) {
   .section-four-invitation-footer {
-    height: 158px;
-    flex-basis: 158px;
+    height: 145px;
+    flex-basis: 145px;
   }
-
-  .section-four-invitation-flower {
-    width: 103px;
-    height: 163px;
-  }
-
-  .section-four-warm-text {
-    right: 68px;
-    bottom: 61px;
-    width: 170px;
-    font-size: 18px;
+  .section-four-final-image {
+    width: min(100%, 320px);
+    height: 145px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .section-four-warm-text,
-  .section-four-invitation-flower {
+  .section-four-final-image {
     transition-duration: .01ms !important;
   }
 }
@@ -2751,146 +2691,52 @@ margin: 0;
 
 
 /* =========================================================
-   گل‌باران شیشه‌ای نقره‌ای و پاستیلی — سکشن اول
-   نسخه واضح‌تر و قابل‌مشاهده روی پس‌زمینه روشن
+   گل‌باران شیشه‌ای نقره‌ای و پاستیلی — سراسر سایت
 ========================================================= */
-.hero-section .silver-flower-rain {
-  position: absolute;
+.silver-flower-rain-global {
+  position: fixed;
   inset: 0;
-  z-index: 4;
-  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+  z-index: 45;
   pointer-events: none;
+  overflow: hidden;
 }
 
-.hero-section .silver-flower {
-  --size: 18px;
+.silver-flower-global {
+  --size: 28px;
   --duration: 8s;
-  --delay: -3s;
-  --drift: -80px;
+  --delay: -2s;
+  --drift: -90px;
   --tilt: 0deg;
-
   position: absolute;
-  top: -45px;
+  top: -55px;
   right: var(--start-right, 5%);
   width: var(--size);
   height: var(--size);
-  display: block;
   opacity: 0;
-  transform: translate3d(0,-40px,0) rotate(var(--tilt)) scale(.7);
-  transform-origin: center;
-  will-change: transform, opacity;
-
-  /* گل شیشه‌ای پنج‌پر */
-  clip-path: polygon(
-    50% 0%, 62% 31%, 96% 20%, 72% 49%, 94% 79%,
-    59% 67%, 50% 100%, 40% 67%, 6% 79%, 28% 49%, 4% 20%, 38% 31%
-  );
-
-  background:
-    radial-gradient(circle at 38% 30%,
-      rgba(255,255,255,.98) 0 9%,
-      transparent 23%),
-    linear-gradient(135deg,
-      rgba(255,255,255,.98) 0%,
-      rgba(210,214,222,.96) 30%,
-      rgba(248,249,251,.98) 52%,
-      rgba(169,175,186,.88) 76%,
-      rgba(255,255,255,.96) 100%);
-
-  box-shadow:
-    inset 1px 1px 2px rgba(255,255,255,1),
-    inset -2px -2px 3px rgba(120,126,138,.32),
-    0 2px 7px rgba(80,86,98,.22),
-    0 0 12px rgba(255,255,255,.65);
-
-  border: 1px solid rgba(145,150,160,.42);
-  filter: saturate(.72) brightness(1.02);
-
-  animation: silverGlassFlowerFall
-    var(--duration)
-    var(--delay)
-    cubic-bezier(.35,.02,.25,1)
-    infinite;
+  display: block;
+  clip-path: polygon(50% 0%,62% 31%,96% 20%,72% 49%,94% 79%,59% 67%,50% 100%,40% 67%,6% 79%,28% 49%,4% 20%,38% 31%);
+  background: linear-gradient(135deg,rgba(255,255,255,.99),rgba(207,212,221,.96) 34%,rgba(249,250,252,.99) 54%,rgba(158,166,179,.9) 78%,rgba(255,255,255,.98));
+  box-shadow: inset 2px 2px 4px rgba(255,255,255,1), inset -3px -3px 5px rgba(110,118,132,.28), 0 3px 10px rgba(70,78,92,.24), 0 0 16px rgba(255,255,255,.75);
+  border: 1px solid rgba(145,150,160,.5);
+  filter: saturate(.7) brightness(1.05);
+  animation: globalGlassFlowerFall var(--duration) var(--delay) cubic-bezier(.35,.02,.25,1) infinite;
 }
-
-/* درخشش کوچک روی شیشه */
-.hero-section .silver-flower::after {
-  content: '';
-  position: absolute;
-  width: 26%;
-  height: 26%;
-  left: 37%;
-  top: 37%;
-  border-radius: 50%;
-  background: rgba(255,255,255,.98);
-  box-shadow: 0 0 7px rgba(255,255,255,.95);
+.silver-flower-global::after {
+  content:''; position:absolute; width:25%; height:25%; left:37.5%; top:37.5%; border-radius:50%; background:rgba(255,255,255,.98); box-shadow:0 0 9px rgba(255,255,255,.95);
 }
-
-/* گل‌ها از بالا سمت راست شروع می‌شوند */
-.hero-section .flower-1  { --start-right: 3%;  --size: 24px; --duration: 8.0s;  --delay: -1.0s;  --drift: -80px;  --tilt: 15deg; }
-.hero-section .flower-2  { --start-right: 9%;  --size: 15px; --duration: 7.0s;  --delay: -4.0s;  --drift: -125px; --tilt: -18deg; }
-.hero-section .flower-3  { --start-right: 15%; --size: 20px; --duration: 9.0s;  --delay: -6.0s;  --drift: -95px;  --tilt: 35deg; }
-.hero-section .flower-4  { --start-right: 21%; --size: 13px; --duration: 6.8s;  --delay: -2.2s;  --drift: -140px; --tilt: -30deg; }
-.hero-section .flower-5  { --start-right: 6%;  --size: 18px; --duration: 8.8s;  --delay: -7.0s;  --drift: -110px; --tilt: 48deg; }
-.hero-section .flower-6  { --start-right: 27%; --size: 11px; --duration: 10.0s; --delay: -3.0s;  --drift: -165px; --tilt: -42deg; }
-.hero-section .flower-7  { --start-right: 12%; --size: 25px; --duration: 9.5s;  --delay: -8.0s;  --drift: -75px;  --tilt: 20deg; }
-.hero-section .flower-8  { --start-right: 31%; --size: 14px; --duration: 7.6s;  --delay: -5.0s;  --drift: -145px; --tilt: -10deg; }
-.hero-section .flower-9  { --start-right: 18%; --size: 19px; --duration: 8.2s;  --delay: -9.0s;  --drift: -115px; --tilt: 58deg; }
-.hero-section .flower-10 { --start-right: 4%;  --size: 12px; --duration: 6.6s;  --delay: -1.8s;  --drift: -130px; --tilt: -55deg; }
-.hero-section .flower-11 { --start-right: 24%; --size: 16px; --duration: 9.2s;  --delay: -6.5s;  --drift: -175px; --tilt: 25deg; }
-.hero-section .flower-12 { --start-right: 10%; --size: 21px; --duration: 8.6s;  --delay: -10.0s; --drift: -95px;  --tilt: -25deg; }
-.hero-section .flower-13 { --start-right: 35%; --size: 10px; --duration: 10.5s; --delay: -4.8s;  --drift: -185px; --tilt: 40deg; }
-.hero-section .flower-14 { --start-right: 17%; --size: 15px; --duration: 7.4s;  --delay: -11.0s; --drift: -120px; --tilt: -65deg; }
-
-@keyframes silverGlassFlowerFall {
-  0% {
-    opacity: 0;
-    transform: translate3d(0,-45px,0) rotate(var(--tilt)) scale(.62);
-  }
-  8% {
-    opacity: .95;
-  }
-  25% {
-    opacity: .88;
-    transform: translate3d(calc(var(--drift) * .16),24vh,0) rotate(calc(var(--tilt) + 80deg)) scale(.92);
-  }
-  50% {
-    opacity: .76;
-    transform: translate3d(calc(var(--drift) * .62),53vh,0) rotate(calc(var(--tilt) + 170deg)) scale(.78);
-  }
-  76% {
-    opacity: .58;
-    transform: translate3d(calc(var(--drift) * .35),82vh,0) rotate(calc(var(--tilt) + 265deg)) scale(.62);
-  }
-  100% {
-    opacity: 0;
-    transform: translate3d(var(--drift),116vh,0) rotate(calc(var(--tilt) + 360deg)) scale(.50);
-  }
+@keyframes globalGlassFlowerFall {
+  0% { opacity:0; transform:translate3d(0,-50px,0) rotate(var(--tilt)) scale(.65); }
+  7% { opacity:.9; }
+  35% { opacity:.85; transform:translate3d(calc(var(--drift)*.35),35vh,0) rotate(calc(var(--tilt) + 110deg)) scale(1); }
+  68% { opacity:.78; transform:translate3d(calc(var(--drift)*-.25),70vh,0) rotate(calc(var(--tilt) + 230deg)) scale(.82); }
+  88% { opacity:.55; }
+  100% { opacity:0; transform:translate3d(var(--drift),118vh,0) rotate(calc(var(--tilt) + 390deg)) scale(.6); }
 }
-
-@media (max-width: 600px) {
-  .hero-section .silver-flower-rain {
-    z-index: 4;
-    opacity: 1;
-  }
-
-  .hero-section .silver-flower {
-    transform-origin: center;
-  }
-
-  .hero-section .flower-1  { --size: 20px; }
-  .hero-section .flower-3  { --size: 17px; }
-  .hero-section .flower-7  { --size: 21px; }
-  .hero-section .flower-9  { --size: 17px; }
-  .hero-section .flower-12 { --size: 18px; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero-section .silver-flower {
-    animation: none !important;
-    opacity: .24;
-    transform: none !important;
-  }
+.flower-g1{--size:34px;--duration:9s;--delay:-1s;--start-right:2%;--drift:-90px}.flower-g2{--size:24px;--duration:7s;--delay:-5s;--start-right:9%;--drift:-55px}.flower-g3{--size:30px;--duration:10s;--delay:-7s;--start-right:16%;--drift:-120px}.flower-g4{--size:21px;--duration:8s;--delay:-2s;--start-right:24%;--drift:-70px}.flower-g5{--size:38px;--duration:11s;--delay:-9s;--start-right:31%;--drift:-100px}.flower-g6{--size:26px;--duration:7.5s;--delay:-4s;--start-right:38%;--drift:-80px}.flower-g7{--size:32px;--duration:9.5s;--delay:-12s;--start-right:46%;--drift:-110px}.flower-g8{--size:22px;--duration:8.5s;--delay:-6s;--start-right:54%;--drift:-65px}.flower-g9{--size:36px;--duration:10.5s;--delay:-3s;--start-right:62%;--drift:-100px}.flower-g10{--size:25px;--duration:7.2s;--delay:-10s;--start-right:69%;--drift:-75px}.flower-g11{--size:31px;--duration:9s;--delay:-8s;--start-right:76%;--drift:-115px}.flower-g12{--size:23px;--duration:8s;--delay:-13s;--start-right:83%;--drift:-60px}.flower-g13{--size:35px;--duration:11.5s;--delay:-4s;--start-right:89%;--drift:-90px}.flower-g14{--size:27px;--duration:8.8s;--delay:-11s;--start-right:95%;--drift:-125px}.flower-g15{--size:20px;--duration:7.8s;--delay:-1s;--start-right:12%;--drift:-50px}.flower-g16{--size:33px;--duration:10s;--delay:-6s;--start-right:28%;--drift:-90px}.flower-g17{--size:25px;--duration:8.2s;--delay:-9s;--start-right:43%;--drift:-75px}.flower-g18{--size:37px;--duration:12s;--delay:-2s;--start-right:58%;--drift:-110px}.flower-g19{--size:22px;--duration:7.4s;--delay:-5s;--start-right:72%;--drift:-65px}.flower-g20{--size:29px;--duration:9.8s;--delay:-12s;--start-right:87%;--drift:-95px}.flower-g21{--size:24px;--duration:8.6s;--delay:-7s;--start-right:4%;--drift:-70px}.flower-g22{--size:35px;--duration:10.8s;--delay:-3s;--start-right:20%;--drift:-120px}.flower-g23{--size:27px;--duration:7.9s;--delay:-10s;--start-right:67%;--drift:-80px}.flower-g24{--size:30px;--duration:9.3s;--delay:-14s;--start-right:92%;--drift:-105px}
+@media (max-width:600px){.silver-flower-global{--size:24px}.flower-g1,.flower-g5,.flower-g7,.flower-g13,.flower-g18,.flower-g22{--size:29px}}
+@media(prefers-reduced-motion:reduce){.silver-flower-global{animation:none!important;opacity:.28;transform:none!important}}
 }
 
 </style>  <!-- این تگ حتماً باید اینجا بسته بشه -->
@@ -2944,6 +2790,33 @@ margin: 0;
 </div>
 
 
+<div class="silver-flower-rain-global" aria-hidden="true">
+  <span class="silver-flower-global flower-g1"></span>
+  <span class="silver-flower-global flower-g2"></span>
+  <span class="silver-flower-global flower-g3"></span>
+  <span class="silver-flower-global flower-g4"></span>
+  <span class="silver-flower-global flower-g5"></span>
+  <span class="silver-flower-global flower-g6"></span>
+  <span class="silver-flower-global flower-g7"></span>
+  <span class="silver-flower-global flower-g8"></span>
+  <span class="silver-flower-global flower-g9"></span>
+  <span class="silver-flower-global flower-g10"></span>
+  <span class="silver-flower-global flower-g11"></span>
+  <span class="silver-flower-global flower-g12"></span>
+  <span class="silver-flower-global flower-g13"></span>
+  <span class="silver-flower-global flower-g14"></span>
+  <span class="silver-flower-global flower-g15"></span>
+  <span class="silver-flower-global flower-g16"></span>
+  <span class="silver-flower-global flower-g17"></span>
+  <span class="silver-flower-global flower-g18"></span>
+  <span class="silver-flower-global flower-g19"></span>
+  <span class="silver-flower-global flower-g20"></span>
+  <span class="silver-flower-global flower-g21"></span>
+  <span class="silver-flower-global flower-g22"></span>
+  <span class="silver-flower-global flower-g23"></span>
+  <span class="silver-flower-global flower-g24"></span>
+</div>
+
 <main class="website-content" id="websiteContent">
 
    
@@ -2951,15 +2824,7 @@ margin: 0;
 <section class="scroll-section hero-section">
 
   <!-- گل‌باران مینیمال نقره‌ای -->
-  <div class="silver-flower-rain" aria-hidden="true">
-    <span class="silver-flower flower-1"></span><span class="silver-flower flower-2"></span>
-    <span class="silver-flower flower-3"></span><span class="silver-flower flower-4"></span>
-    <span class="silver-flower flower-5"></span><span class="silver-flower flower-6"></span>
-    <span class="silver-flower flower-7"></span><span class="silver-flower flower-8"></span>
-    <span class="silver-flower flower-9"></span><span class="silver-flower flower-10"></span>
-    <span class="silver-flower flower-11"></span><span class="silver-flower flower-12"></span>
-    <span class="silver-flower flower-13"></span><span class="silver-flower flower-14"></span>
-  </div>
+  
 
   <div class="hero-flip-card" id="heroFlipCard">
     <div class="hero-flip-inner">
@@ -3181,7 +3046,7 @@ margin: 0;
 
         <div class="section-four-map-block">
           <div class="map-card-wrapper section-four-map-card">
-            <div class="map-card-header">اراک ، مرزیجران ، باغ تالار ارم</div>
+            <div class="map-card-header">- اراک، جاده اراک - مرزیجران، ارم، تالارباغ ارم -</div>
             <div class="mini-map-frame" id="miniMapTrigger" role="button" tabindex="0" aria-label="مسیریابی به سمت تالار">
               <iframe
                 class="mini-map-iframe"
@@ -3212,14 +3077,10 @@ margin: 0;
           <!-- پایان سکشن ۴: پیام دعوت + گل کناری -->
           <div class="section-four-invitation-footer" aria-label="پیام دعوت">
             <img
-              src="flower.png"
-              alt="گل تزئینی"
-              class="section-four-invitation-flower"
+              src="FINAL.png"
+              alt="منتظر حضور گرمتان هستیم"
+              class="section-four-final-image"
             >
-            <div class="section-four-warm-text">
-              <span>منتظر حضور</span>
-              <span>گرمتان هستیم</span>
-            </div>
           </div>
         </div>
 
