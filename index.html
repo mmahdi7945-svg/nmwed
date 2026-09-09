@@ -2071,6 +2071,10 @@ margin: 0;
     0 18px 45px rgba(0, 0, 0, 0.22),
     0 4px 12px rgba(0, 0, 0, 0.12);
 
+  /* قاب سفید پولارویدی دور قلب */
+  background: #fff;
+  filter: drop-shadow(0 0 0 rgba(255,255,255,1)) drop-shadow(0 0 5px rgba(255,255,255,.95));
+
   cursor: crosshair;
 
   user-select: none;
@@ -2388,36 +2392,12 @@ margin: 0;
   touch-action: none;
 
   /* قلب نرم و متقارن */
-  clip-path: polygon(
-    50% 92%,
-    44% 87%,
-    35% 80%,
-    25% 72%,
-    16% 62%,
-    8% 52%,
-    3% 42%,
-    2% 32%,
-    5% 22%,
-    12% 14%,
-    21% 9%,
-    30% 9%,
-    39% 14%,
-    46% 22%,
-    50% 29%,
-    54% 22%,
-    61% 14%,
-    70% 9%,
-    79% 9%,
-    88% 14%,
-    95% 22%,
-    98% 32%,
-    97% 42%,
-    92% 52%,
-    84% 62%,
-    75% 72%,
-    65% 80%,
-    56% 87%
-  );
+  border-radius: 0;
+  clip-path: url("#smoothHeartClip");
+  filter:
+    drop-shadow(0 0 2px rgba(255,255,255,1))
+    drop-shadow(0 0 5px rgba(255,255,255,1))
+    drop-shadow(0 0 9px rgba(255,255,255,.72));
 
   opacity: 0;
   transform: translateY(32px) scale(0.86) rotate(-3deg);
@@ -2434,8 +2414,10 @@ margin: 0;
   inset: 0;
   z-index: 7;
   pointer-events: none;
-  border: 8px solid rgba(255, 255, 255, 0.94);
+  border: 0;
+  background: transparent;
   clip-path: inherit;
+  transform: scale(1.035);
 }
 
 /* ورود */
@@ -2666,7 +2648,15 @@ margin: 0;
 
                   <!-- سکشن ۳: روزشمار + مپ تعاملی و دکمه‌های مسیریابی -->
             <!-- سکشن ۳: روزشمار + مپ با قابلیت لمس و باز شدن پاپ‌آپ -->
-      <section class="scroll-section section-three">
+      <svg aria-hidden="true" width="0" height="0" style="position:absolute;overflow:hidden;pointer-events:none">
+  <defs>
+    <clipPath id="smoothHeartClip" clipPathUnits="objectBoundingBox">
+      <path d="M0.5,0.92 C0.43,0.86 0.08,0.63 0.04,0.39 C0.005,0.19 0.13,0.06 0.28,0.06 C0.39,0.06 0.47,0.12 0.5,0.22 C0.53,0.12 0.61,0.06 0.72,0.06 C0.87,0.06 0.995,0.19 0.96,0.39 C0.92,0.63 0.57,0.86 0.5,0.92 Z"/>
+    </clipPath>
+  </defs>
+</svg>
+
+<section class="scroll-section section-three">
         <div class="countdown-wrapper">
 
           <!-- ۱. عنوان تایمر -->
